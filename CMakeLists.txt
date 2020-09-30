@@ -14,6 +14,9 @@ endif()
 # Set macro directory
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/macros")
 
+# Set a debug flag
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+
 # Make use of CCache
 include(cmake/Ccache.cmake)
 

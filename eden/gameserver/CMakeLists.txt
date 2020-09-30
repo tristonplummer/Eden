@@ -13,5 +13,6 @@ add_executable(gameserver ${sources})
 target_link_libraries(gameserver
         PRIVATE
             common
+            pthread
             ${Boost_LIBRARIES}
             ${GLOG_LIBRARY})
