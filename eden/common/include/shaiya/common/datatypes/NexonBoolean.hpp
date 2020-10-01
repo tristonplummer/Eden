@@ -35,7 +35,7 @@ namespace shaiya
 
     private:
         /**
-         * The internal value. The default is 1, which as a non-zero value.
+         * The internal value. The default is 1, which is a non-zero value.
          */
         uint8_t data_{ 1 };
 

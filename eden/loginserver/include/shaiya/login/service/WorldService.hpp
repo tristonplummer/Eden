@@ -1,5 +1,6 @@
 #pragma once
 
+#include <shaiya/login/service/DatabaseService.hpp>
 #include <shaiya/login/service/world/WorldServer.hpp>
 
 #include <thread>
@@ -21,8 +22,9 @@ namespace shaiya::login
     public:
         /**
          * Initialises this world service.
+         * @param db    The database service.
          */
-        WorldService();
+        WorldService(DatabaseService& db);
 
         /**
          * Gets a world with a specified id. Returns a null pointer in the event that no world

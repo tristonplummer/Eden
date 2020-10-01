@@ -89,6 +89,10 @@ namespace shaiya::login
             return name_;
         }
 
+        /**
+         * Gets the ip address bytes of this world.
+         * @return  The ip address bytes.
+         */
         [[nodiscard]] const std::array<char, 4>& ipAddress() const
         {
             return ipAddressBytes_;

@@ -1,0 +1,1 @@
+find_library(PQ_LIB pq REQUIRED)

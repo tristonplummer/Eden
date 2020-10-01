@@ -17,9 +17,27 @@ constexpr auto PingInterval = 10;
 
 /**
  * Initialises this world service.
+ * @param db    The database service.
  */
-WorldService::WorldService()
+WorldService::WorldService(DatabaseService& db)
 {
+    // Get the world definitions from the database
+    auto connection = db.connection();
+    pqxx::work tx(*connection);
+    auto rows = tx.exec("SELECT id, playercapacity, name, ipaddress, version FROM gamedefs.worlds");
+
+    // Loop over the rows that were returned from the database
+    for (auto&& row: rows)
+    {
+        auto id         = row["id"].as<size_t>();
+        auto capacity   = row["playercapacity"].as<size_t>();
+        auto version    = row["version"].as<uint32_t>();
+        auto name       = row["name"].as<std::string>();
+        auto ipAddress  = row["ipaddress"].as<std::string>();
+
+        worlds_.emplace_back(id, name, ipAddress, version, capacity);
+    }
+
     // Start a thread to periodically update the world servers' data.
     thread_ = std::thread([this] {
         while (running_)

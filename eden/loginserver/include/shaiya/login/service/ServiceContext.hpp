@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/login/service/DatabaseService.hpp>
 #include <shaiya/login/service/EncryptionService.hpp>
 #include <shaiya/login/service/WorldService.hpp>
 
@@ -28,6 +29,12 @@ namespace shaiya::login
          */
         WorldService& getWorldService();
 
+        /**
+         * Gets the database service.
+         * @return  The database service.
+         */
+        DatabaseService& getDatabaseService();
+
     private:
         /**
          * The encryption service instance.
@@ -38,5 +45,10 @@ namespace shaiya::login
          * The world service instance.
          */
         WorldService* worldService_;
+
+        /**
+         * The database service instance.
+         */
+        DatabaseService* dbService_;
     };
 }

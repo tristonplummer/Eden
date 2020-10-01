@@ -2,6 +2,7 @@
 #include <shaiya/login/service/world/WorldServer.hpp>
 
 #include <boost/algorithm/string.hpp>
+#include <glog/logging.h>
 
 #include <sstream>
 #include <vector>
@@ -46,10 +47,11 @@ void WorldServer::update()
     // The endpoint to query for this world server.
     std::stringstream ss;
     ss << "http://" << ipAddress_ << ":" << HttpRequestPort << "/status/";
+    auto endpoint = ss.str();
 
     try
     {
-        auto request = http_client(ss.str())
+        auto request = http_client(endpoint)
                            .request(methods::GET)
                            .then([&](const http_response& response) {
                                online_ = response.status_code() == status_codes::OK;
@@ -60,6 +62,7 @@ void WorldServer::update()
     }
     catch (const std::exception& e)  // If an exception occurs, assume the server is offline
     {
+        LOG(INFO) << "Attempted to ping world server " << name_ << " at " << endpoint << ", but it was offline.";
         playerCount_ = 0;
         online_      = false;
     }

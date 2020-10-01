@@ -10,7 +10,8 @@ using namespace shaiya::login;
 ServiceContext::ServiceContext()
 {
     encryptionService_ = new EncryptionService();
-    worldService_      = new WorldService();
+    dbService_         = new DatabaseService("localhost", "shaiya", "cups", "password123");
+    worldService_      = new WorldService(*dbService_);
 }
 
 /**
@@ -31,4 +32,14 @@ WorldService& ServiceContext::getWorldService()
 {
     assert(worldService_);
     return *worldService_;
+}
+
+/**
+ * Gets the database service.
+ * @return  The database service.
+ */
+DatabaseService& ServiceContext::getDatabaseService()
+{
+    assert(dbService_);
+    return *dbService_;
 }
