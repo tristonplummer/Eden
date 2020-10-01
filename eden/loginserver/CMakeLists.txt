@@ -18,5 +18,6 @@ target_link_libraries(loginserver
             common
             pthread
             Boost
+            Cpprest
             ${CRYPTOPP_LIBRARY}
             ${GLOG_LIBRARY})

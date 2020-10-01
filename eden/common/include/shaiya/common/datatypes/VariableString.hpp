@@ -21,6 +21,15 @@ namespace shaiya
         VariableString() = default;
 
         /**
+         * Initialise this variable string from a C++ string.
+         * @param string    The input string.
+         */
+        VariableString(const std::string& string)
+        {
+            read(string.c_str());
+        }
+
+        /**
          * Initialise this variable string from a character array.
          * @param string    The input array.
          */

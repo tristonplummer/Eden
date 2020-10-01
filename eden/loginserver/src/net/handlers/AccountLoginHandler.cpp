@@ -13,9 +13,12 @@ void handleLogin(Session& session, const AccountLoginRequest& request)
     auto& login = dynamic_cast<LoginSession&>(session);
     LOG(INFO) << "[name=" << request.username.str() << ", pass=" << request.password.str() << ", ip=" << session.remoteAddress() << "]";
 
+    auto& world = login.context().getWorldService();
+    world.sendWorldList(login);
+
     // Dummy login response
     LoginResponse response;
-    response.status = 3;
+    response.status = 0;
     login.write(response);
 }
 

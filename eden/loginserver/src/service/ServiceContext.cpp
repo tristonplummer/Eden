@@ -10,6 +10,7 @@ using namespace shaiya::login;
 ServiceContext::ServiceContext()
 {
     encryptionService_ = new EncryptionService();
+    worldService_      = new WorldService();
 }
 
 /**
@@ -20,4 +21,14 @@ EncryptionService& ServiceContext::getEncryptionService()
 {
     assert(encryptionService_);
     return *encryptionService_;
+}
+
+/**
+ * Gets the world service.
+ * @return  The world service.
+ */
+WorldService& ServiceContext::getWorldService()
+{
+    assert(worldService_);
+    return *worldService_;
 }

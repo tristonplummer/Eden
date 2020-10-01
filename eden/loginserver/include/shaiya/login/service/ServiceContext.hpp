@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/login/service/EncryptionService.hpp>
+#include <shaiya/login/service/WorldService.hpp>
 
 namespace shaiya::login
 {
@@ -21,10 +22,21 @@ namespace shaiya::login
          */
         EncryptionService& getEncryptionService();
 
+        /**
+         * Gets the world service.
+         * @return  The world service.
+         */
+        WorldService& getWorldService();
+
     private:
         /**
          * The encryption service instance.
          */
         EncryptionService* encryptionService_;
+
+        /**
+         * The world service instance.
+         */
+        WorldService* worldService_;
     };
 }

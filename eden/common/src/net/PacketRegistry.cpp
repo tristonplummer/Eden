@@ -15,6 +15,7 @@ PacketRegistry::PacketRegistry()
     // Register the login server packets
     registerPacketHandler<LoginHandshakeOpcode>();
     registerPacketHandler<LoginRequestOpcode>();
+    registerPacketHandler<WorldSelectOpcode>();
 }
 
 /**

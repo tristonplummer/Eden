@@ -37,3 +37,5 @@ namespace shaiya::net
 // Include the login packets
 #include "login/AccountLoginRequest.hpp"
 #include "login/LoginHandshake.hpp"
+#include "login/WorldListPacket.hpp"
+#include "login/WorldSelectPacket.hpp"
