@@ -11,6 +11,9 @@ using namespace shaiya::net;
 LoginSession::LoginSession(boost::asio::io_context& ioContext, shaiya::login::ServiceContext& ctx)
     : Session(ioContext), ctx_(ctx)
 {
+    // Generate this session's identity
+    CryptoPP::AutoSeededRandomPool prng;
+    prng.GenerateBlock((byte*) identity_.data(), identity_.size());
 }
 
 /**

@@ -57,6 +57,15 @@ namespace shaiya::net
         void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv);
 
         /**
+         * Gets the identity of this session.
+         * @return  The identity.
+         */
+        [[nodiscard]] const std::array<char, 16> identity() const
+        {
+            return identity_;
+        }
+
+        /**
          * Gets the login service context.
          * @return  The context.
          */
@@ -88,6 +97,11 @@ namespace shaiya::net
          * The AES instance to use for incoming packets.
          */
         shaiya::crypto::Aes128Ctr decryption_;
+
+        /**
+         * The identity of this session.
+         */
+        std::array<char, 16> identity_{ 0 };
 
         /**
          * The encryption mode.
