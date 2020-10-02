@@ -1,6 +1,6 @@
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 #include <shaiya/login/service/world/WorldServer.hpp>
+
+#include <boost/algorithm/string.hpp>
 
 #include <sstream>
 #include <vector>
@@ -11,6 +11,11 @@ using namespace shaiya::login;
  * The port that the world server api is listening on.
  */
 constexpr auto ApiRequestPort = 8080;
+
+/**
+ * The maximum reconnect backoff, in milliseconds.
+ */
+constexpr auto MaxReconnectBackoff = 5000;
 
 /**
  * Initialises a representation of a remote world server.
@@ -33,9 +38,13 @@ WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, ui
     for (auto i = 0; i < bytes.size(); i++)
         ipAddressBytes_.at(i) = std::stoi(bytes.at(i));
 
+    // Configure the arguments, as we want a relatively low backoff
+    grpc::ChannelArguments args;
+    args.SetInt(GRPC_ARG_MAX_RECONNECT_BACKOFF_MS, MaxReconnectBackoff);
+
     // Initialise the channel
     auto endpoint = boost::format("%1%:%2%") % ipAddress_ % ApiRequestPort;
-    channel_      = grpc::CreateChannel(endpoint.str(), grpc::InsecureChannelCredentials());
+    channel_      = grpc::CreateCustomChannel(endpoint.str(), grpc::InsecureChannelCredentials(), args);
 
     // Initialise the client
     client_ = gameapi::GameService::NewStub(channel_);
