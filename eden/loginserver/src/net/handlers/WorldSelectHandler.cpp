@@ -13,14 +13,19 @@ void handleWorldSelect(Session& session, const WorldSelectRequest& request)
     auto& login        = dynamic_cast<LoginSession&>(session);
     auto& worldService = login.context().getWorldService();
 
-    /*
-     * Sends an error response to the session.
-     */
+    // Sends an error response to the session.
     auto sendError = [&](WorldSelectStatus status) {
         WorldSelectResponse response;
         response.status = status;
         login.write(response, 3);
     };
+
+    // If the session doesn't have a valid user id, just disconnect them.
+    if (!login.userId())
+    {
+        session.close();
+        return;
+    }
 
     auto* world = worldService.getWorld(request.id);  // Get the world with the specified id.
     if (!world)

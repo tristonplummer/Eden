@@ -57,6 +57,12 @@ namespace shaiya::net
         void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv);
 
         /**
+         * Sets the user id for this session.
+         * @param userId    The user id.
+         */
+        void setUserId(uint32_t userId);
+
+        /**
          * Gets the user id that this session was authenticated as.
          * @return  This session's user id
          */

@@ -58,6 +58,15 @@ void LoginSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16>
 }
 
 /**
+ * Sets the user id for this session.
+ * @param userId    The user id.
+ */
+void LoginSession::setUserId(uint32_t userId)
+{
+    userId_ = userId;
+}
+
+/**
  * Gets executed when data is read from this session.
  * @param opcode    The opcode of the packet.
  * @param length    The length of the packet.
