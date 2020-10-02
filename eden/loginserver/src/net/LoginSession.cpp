@@ -13,7 +13,7 @@ LoginSession::LoginSession(boost::asio::io_context& ioContext, shaiya::login::Se
 {
     // Generate this session's identity
     CryptoPP::AutoSeededRandomPool prng;
-    prng.GenerateBlock((byte*) identity_.data(), identity_.size());
+    prng.GenerateBlock((byte*)identity_.data(), identity_.size());
 }
 
 /**
@@ -47,6 +47,10 @@ void LoginSession::onAccept()
  */
 void LoginSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv)
 {
+    // Save the key and iv
+    key_ = key;
+    iv_  = iv;
+
     // Set the encryption mode
     encryptionMode_ = EncryptionMode::Encrypted;
     encryption_     = shaiya::crypto::Aes128Ctr(key, iv);

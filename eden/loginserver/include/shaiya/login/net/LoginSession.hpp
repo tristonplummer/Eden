@@ -57,12 +57,39 @@ namespace shaiya::net
         void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv);
 
         /**
+         * Gets the user id that this session was authenticated as.
+         * @return  This session's user id
+         */
+        [[nodiscard]] uint32_t userId() const
+        {
+            return userId_;
+        }
+
+        /**
          * Gets the identity of this session.
          * @return  The identity.
          */
-        [[nodiscard]] const std::array<char, 16> identity() const
+        [[nodiscard]] std::array<char, 16> identity() const
         {
             return identity_;
+        }
+
+        /**
+         * Gets the AES key for this session.
+         * @return  The key.
+         */
+        [[nodiscard]] std::array<uint8_t, 16> aesKey() const
+        {
+            return key_;
+        }
+
+        /**
+         * Gets the AES iv for this session.
+         * @return  The IV.
+         */
+        [[nodiscard]] std::array<uint8_t, 16> aesIv() const
+        {
+            return iv_;
         }
 
         /**
@@ -97,6 +124,21 @@ namespace shaiya::net
          * The AES instance to use for incoming packets.
          */
         shaiya::crypto::Aes128Ctr decryption_;
+
+        /**
+         * The user id that this session was authenticated as.
+         */
+        uint32_t userId_{ 0 };
+
+        /**
+         * The AES key
+         */
+        std::array<uint8_t, 16> key_{ 0 };
+
+        /**
+         * The AES iv
+         */
+        std::array<uint8_t, 16> iv_{ 0 };
 
         /**
          * The identity of this session.

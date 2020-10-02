@@ -63,6 +63,20 @@ bool WorldServer::submitTransferRequest(shaiya::net::LoginSession& session)
     gameapi::SessionTransferRequest request;
     gameapi::SessionTransferResponse response;
 
+    // The session's details
+    auto identity  = session.identity();
+    auto aesKey    = session.aesKey();
+    auto aesIv     = session.aesIv();
+    auto ipAddress = session.remoteAddress();
+
+    // Build the request
+    request.set_userid(session.userId());
+    request.set_identity(identity.data(), identity.size());
+    request.set_ipaddress(ipAddress);
+    request.set_key(aesKey.data(), aesKey.size());
+    request.set_iv(aesIv.data(), aesIv.size());
+
+    // Send the request and return the response
     auto status = client_->SubmitSessionTransfer(&context, request, &response);
     return status.ok() && response.status() == gameapi::SessionTransferStatus::SUCCESS;
 }
