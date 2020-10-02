@@ -110,7 +110,7 @@ boost::asio::ip::tcp::socket& Session::socket()
  * Gets the remote address of this session, in IPV4 format.
  * @return  The remote address.
  */
-std::string_view Session::remoteAddress()
+const std::string& Session::remoteAddress()
 {
     // The remote address should be lazily initialised, as the session
     // can be initialised without an active endpoint.

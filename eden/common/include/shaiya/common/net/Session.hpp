@@ -77,7 +77,7 @@ namespace shaiya::net
          * Gets the remote address of this session, in IPV4 format.
          * @return  The remote address.
          */
-        std::string_view remoteAddress();
+        const std::string& remoteAddress();
 
     private:
         /**
