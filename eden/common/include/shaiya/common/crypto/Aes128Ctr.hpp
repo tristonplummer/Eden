@@ -32,6 +32,12 @@ namespace shaiya::crypto
          */
         void processData(uint8_t* inout, size_t length);
 
+        /**
+         * "Expands" the AES key to by recursively computing a SHA256 hash of the key, storing that in
+         * an array, and then using that hash to generate the next key.
+         */
+        void expandKey();
+
     private:
         /**
          * The AES key.
@@ -42,6 +48,11 @@ namespace shaiya::crypto
          * The counter value.
          */
         std::array<uint8_t, 16> counter_{ 0 };
+
+        /**
+         * The expanded key value.
+         */
+        std::vector<uint8_t> expandedKey_;
 
         /**
          * The values used to XOR-encrypt the current block.
