@@ -32,6 +32,11 @@ void handleWorldSelect(Session& session, const WorldSelectRequest& request)
     if (request.version != world->revision())
         return sendError(WorldSelectStatus::VersionDoesntMatch);
 
+    // Request that the world accepts this session as a transfer
+    if (!world->submitTransferRequest(login))
+        return sendError(WorldSelectStatus::TryAgainLater);
+
+    // Send the successful connection response
     WorldSelectResponse response;
     response.status    = WorldSelectStatus::Success;
     response.ipAddress = world->ipAddress();

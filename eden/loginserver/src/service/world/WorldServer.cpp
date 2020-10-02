@@ -1,4 +1,4 @@
-#include <shaiya/login/service/world/WorldServer.hpp>
+#include <shaiya/login/net/LoginSession.hpp>
 
 #include <boost/algorithm/string.hpp>
 
@@ -48,6 +48,23 @@ WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, ui
 
     // Initialise the client
     client_ = gameapi::GameService::NewStub(channel_);
+}
+
+/**
+ * Submits a transfer request for a given session. This is sent just before the session disconnects from
+ * this login server, and should connect to this world server.
+ * @param session   The session that is being transferred
+ * @return          If the transfer request was accepted
+ */
+bool WorldServer::submitTransferRequest(shaiya::net::LoginSession& session)
+{
+    using namespace grpc;
+    ClientContext context;
+    gameapi::SessionTransferRequest request;
+    gameapi::SessionTransferResponse response;
+
+    auto status = client_->SubmitSessionTransfer(&context, request, &response);
+    return status.ok() && response.status() == gameapi::SessionTransferStatus::SUCCESS;
 }
 
 /**

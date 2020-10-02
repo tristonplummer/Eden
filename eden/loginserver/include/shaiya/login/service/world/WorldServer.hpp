@@ -8,6 +8,11 @@
 #include <grpc++/grpc++.h>
 #include <string>
 
+namespace shaiya::net
+{
+    class LoginSession;
+}
+
 namespace shaiya::login
 {
     /**
@@ -25,6 +30,14 @@ namespace shaiya::login
          * @param playerCapacity    The maximum capacity of online players.
          */
         WorldServer(uint8_t id, std::string name, std::string ipAddress, uint32_t revision, uint16_t playerCapacity);
+
+        /**
+         * Submits a transfer request for a given session. This is sent just before the session disconnects from
+         * this login server, and should connect to this world server.
+         * @param session   The session that is being transferred
+         * @return          If the transfer request was accepted
+         */
+        bool submitTransferRequest(shaiya::net::LoginSession& session);
 
         /**
          * Queries the remote world server, and updates our internal data.

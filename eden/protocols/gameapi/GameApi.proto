@@ -1,5 +1,5 @@
 syntax = "proto3";
-import "SessionTransferRequest.proto";
+import "SessionTransfer.proto";
 import "PlayerCount.proto";
 
 package gameapi;
@@ -8,6 +8,6 @@ message Void {
 }
 
 service GameService {
-  rpc SubmitSessionTransfer(SessionTransferRequest) returns (Void) {}
+  rpc SubmitSessionTransfer(SessionTransferRequest) returns (SessionTransferResponse) {}
   rpc GetPlayerCount(Void) returns (PlayerCount) {}
 }

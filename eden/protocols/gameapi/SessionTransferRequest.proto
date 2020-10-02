@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package gameapi;
-
-message SessionTransferRequest {
-  int32 userId = 1;
-}

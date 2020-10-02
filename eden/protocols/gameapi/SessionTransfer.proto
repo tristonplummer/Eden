@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package gameapi;
+
+enum SessionTransferStatus {
+  SUCCESS = 0;
+}
+
+message SessionTransferRequest {
+  int32 userId = 1;
+}
+
+message SessionTransferResponse {
+  SessionTransferStatus status = 1;
+}
