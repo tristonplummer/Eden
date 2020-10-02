@@ -1,9 +1,9 @@
 # Shaiya Eden
-Eden is designed to be a high performance Shaiya emulator, with a strong focus on being as flexible and user-friendly as possible. It is designed to run with a PostgreSQL database backend, and uses Lua for content scripting. 
+Eden is designed to be a high performance Shaiya emulator, with a strong focus on being as flexible and user-friendly as possible. It is designed to run with a PostgreSQL database backend, and uses Lua for content scripting. This is intended to be a successor to the learning project that was [Shaiya Genesis](https://github.com/TristonPlummer/ShaiyaGenesisLegacy).
 
 ## Troubleshooting
 - *Where can I get a client?*
-    - You can download the official Shaiya client from the AeriaGames website at https://shaiya.aeriagames.com/
+    - Eden is designed to run on the official Ep5.4 client, which may be downloaded from [Elitepvpers](https://www.elitepvpers.com/forum/shaiya-pserver-guides-releases/2257246-release-official-episode-5-4-client.html).
 
 ## FAQ
 #### I would like a feature added to the server
