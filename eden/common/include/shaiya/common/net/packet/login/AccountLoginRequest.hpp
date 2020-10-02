@@ -9,6 +9,18 @@ namespace shaiya::net
     constexpr auto LoginRequestOpcode = 0xA102;
 
     /**
+     * Represents the result of a login request
+     */
+    enum class LoginStatus : uint8_t
+    {
+        Success,
+        AccountDoesntExist,
+        CannotConnect,
+        InvalidCredentials,
+        AccountDisabled = 10
+    };
+
+    /**
      * Represents a request from the client to the login server, to process a login request
      * for an account with specified credentials.
      */
@@ -43,7 +55,7 @@ namespace shaiya::net
         /**
          * The status of a login request.
          */
-        uint8_t status{ 0 };
+        LoginStatus status{ LoginStatus::Success };
 
         /**
          * The user id of the player's account.
@@ -56,8 +68,8 @@ namespace shaiya::net
         uint8_t privilege{ 0 };
 
         /**
-         * The identity string of the account.
+         * The identity of the session.
          */
-        VariableString<16> identity;
+        std::array<char, 16> identity;
     } PACKED;
 }
