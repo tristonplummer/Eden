@@ -2,6 +2,6 @@ syntax = "proto3";
 
 package gameapi;
 
-message PlayerCount {
+message WorldStatus {
   int32 players = 1;
 }

@@ -89,9 +89,9 @@ void WorldServer::update()
     using namespace grpc;
     ClientContext context;
     gameapi::Void empty;
-    gameapi::PlayerCount players;
+    gameapi::WorldStatus worldStatus;
 
-    auto status = client_->GetPlayerCount(&context, empty, &players);
+    auto status = client_->GetWorldStatus(&context, empty, &worldStatus);
     if (!status.ok())
     {
         online_      = false;
@@ -100,5 +100,5 @@ void WorldServer::update()
     }
 
     online_      = true;
-    playerCount_ = players.players();
+    playerCount_ = worldStatus.players();
 }
