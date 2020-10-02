@@ -18,13 +18,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/macros")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 # Make use of CCache
-include(cmake/Ccache.cmake)
+include(cmake/CCache.cmake)
 
 # Enable compiler warnings
 include(cmake/CompilerWarnings.cmake)
-
-# Enable Doxygen
-include(cmake/Doxygen.cmake)
 
 # Set the language standard
 set(CMAKE_CXX_STANDARD 20)
