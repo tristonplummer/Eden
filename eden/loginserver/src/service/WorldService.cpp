@@ -19,7 +19,7 @@ constexpr auto PingInterval = 10;
  * Initialises this world service.
  * @param db    The database service.
  */
-WorldService::WorldService(DatabaseService& db)
+WorldService::WorldService(shaiya::database::DatabaseService& db)
 {
     // Get the world definitions from the database
     auto connection = db.connection();

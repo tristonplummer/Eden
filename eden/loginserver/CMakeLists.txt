@@ -22,5 +22,7 @@ target_link_libraries(loginserver
             gameapiprotocol
             Protobuf
             Grpc
+            ${PQXX_LIB}
+            ${PQ_LIB}
             ${CRYPTOPP_LIBRARY}
             ${GLOG_LIBRARY})

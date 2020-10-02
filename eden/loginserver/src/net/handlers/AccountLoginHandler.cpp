@@ -11,15 +11,10 @@ using namespace shaiya::net;
 void handleLogin(Session& session, const AccountLoginRequest& request)
 {
     auto& login = dynamic_cast<LoginSession&>(session);
-    LOG(INFO) << "[name=" << request.username.str() << ", pass=" << request.password.str() << ", ip=" << session.remoteAddress() << "]";
+    auto& auth  = login.context().getAuthService();
 
-    auto& world = login.context().getWorldService();
-    world.sendWorldList(login);
-
-    // Dummy login response
-    LoginResponse response;
-    response.status = 0;
-    login.write(response);
+    // Process the login request
+    auth.login(login, request.username.str(), request.password.str());
 }
 
 /**

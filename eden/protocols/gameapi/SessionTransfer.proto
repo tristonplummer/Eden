@@ -8,6 +8,10 @@ enum SessionTransferStatus {
 
 message SessionTransferRequest {
   int32 userId = 1;
+  string ipAddress = 2;
+  bytes identity = 3;
+  bytes key = 4;
+  bytes iv = 5;
 }
 
 message SessionTransferResponse {

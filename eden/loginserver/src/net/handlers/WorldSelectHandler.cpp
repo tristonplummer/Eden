@@ -13,7 +13,7 @@ void handleWorldSelect(Session& session, const WorldSelectRequest& request)
     auto& login        = dynamic_cast<LoginSession&>(session);
     auto& worldService = login.context().getWorldService();
 
-    /**
+    /*
      * Sends an error response to the session.
      */
     auto sendError = [&](WorldSelectStatus status) {

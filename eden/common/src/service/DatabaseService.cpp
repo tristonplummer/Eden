@@ -1,9 +1,9 @@
-#include <shaiya/login/service/DatabaseService.hpp>
+#include <shaiya/common/db/DatabaseService.hpp>
 
 #include <boost/format.hpp>
 #include <glog/logging.h>
 
-using namespace shaiya::login;
+using namespace shaiya::database;
 
 /**
  * The number of active connections in the connection pool.

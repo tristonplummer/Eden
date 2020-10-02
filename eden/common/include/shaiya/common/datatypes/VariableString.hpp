@@ -56,9 +56,9 @@ namespace shaiya
          * Reads this variable string as a C++ string view.
          * @return  The string.
          */
-        [[nodiscard]] std::string_view str() const
+        [[nodiscard]] std::string str() const
         {
-            return data_.data();
+            return std::string(data_.data());
         }
 
     private:

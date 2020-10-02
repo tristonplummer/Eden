@@ -6,7 +6,7 @@
 #include <queue>
 #include <string>
 
-namespace shaiya::login
+namespace shaiya::database
 {
     /**
      * The database service is a utility class which provides access to the PostgreSQL
