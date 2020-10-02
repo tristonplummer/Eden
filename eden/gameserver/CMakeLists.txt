@@ -18,5 +18,10 @@ target_link_libraries(gameserver
             common
             pthread
             Boost
+            gameapiprotocol
+            Protobuf
+            Grpc
+            ${PQXX_LIB}
+            ${PQ_LIB}
             ${CRYPTOPP_LIBRARY}
             ${GLOG_LIBRARY})

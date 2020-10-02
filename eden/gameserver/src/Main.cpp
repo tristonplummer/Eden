@@ -1,3 +1,6 @@
+#include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/net/GameTcpServer.hpp>
+
 #include <glog/logging.h>
 
 /**
@@ -9,5 +12,12 @@
 int main(int argc, char** argv)
 {
     google::InitGoogleLogging(argv[0]);
+
+    // The service context
+    shaiya::game::ServiceContext ctx;
+
+    // Initialise the tcp server to listen on a specific port with the service context.
+    shaiya::net::GameTcpServer server(30810, ctx);
+    server.start();
     return 0;
 }
