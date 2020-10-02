@@ -1,7 +1,6 @@
 add_subdirectory(boost)
 add_subdirectory(glog)
 add_subdirectory(crypto++)
-add_subdirectory(cpprestsdk)
 add_subdirectory(pq)
 add_subdirectory(pqxx)
 add_subdirectory(proto)

@@ -18,6 +18,5 @@ target_link_libraries(gameserver
             common
             pthread
             Boost
-            Cpprest
             ${CRYPTOPP_LIBRARY}
             ${GLOG_LIBRARY})

@@ -18,7 +18,6 @@ target_link_libraries(loginserver
             common
             pthread
             Boost
-            Cpprest
             gameapiprotocol
             Protobuf
             Grpc
