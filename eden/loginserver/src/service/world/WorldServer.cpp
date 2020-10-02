@@ -10,7 +10,7 @@ using namespace shaiya::login;
 /**
  * The port that the world server api is listening on.
  */
-constexpr auto ApiRequestPort = 8080;
+constexpr auto ApiRequestPort = 30811;
 
 /**
  * The maximum reconnect backoff, in milliseconds.
@@ -45,6 +45,7 @@ WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, ui
     // Initialise the channel
     auto endpoint = boost::format("%1%:%2%") % ipAddress_ % ApiRequestPort;
     channel_      = grpc::CreateCustomChannel(endpoint.str(), grpc::InsecureChannelCredentials(), args);
+    channel_->GetState(true);
 
     // Initialise the client
     client_ = gameapi::GameService::NewStub(channel_);
