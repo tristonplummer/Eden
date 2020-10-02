@@ -1,8 +1,6 @@
-#include <cpprest/http_client.h>
-#include <shaiya/login/service/world/WorldServer.hpp>
-
 #include <boost/algorithm/string.hpp>
-#include <glog/logging.h>
+#include <boost/format.hpp>
+#include <shaiya/login/service/world/WorldServer.hpp>
 
 #include <sstream>
 #include <vector>
@@ -12,7 +10,7 @@ using namespace shaiya::login;
 /**
  * The port that the world server api is listening on.
  */
-constexpr auto HttpRequestPort = 8080;
+constexpr auto ApiRequestPort = 8080;
 
 /**
  * Initialises a representation of a remote world server.
@@ -34,6 +32,13 @@ WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, ui
     // Store the ip address as an array of bytes
     for (auto i = 0; i < bytes.size(); i++)
         ipAddressBytes_.at(i) = std::stoi(bytes.at(i));
+
+    // Initialise the channel
+    auto endpoint = boost::format("%1%:%2%") % ipAddress_ % ApiRequestPort;
+    channel_      = grpc::CreateChannel(endpoint.str(), grpc::InsecureChannelCredentials());
+
+    // Initialise the client
+    client_ = gameapi::GameService::NewStub(channel_);
 }
 
 /**
@@ -41,29 +46,19 @@ WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, ui
  */
 void WorldServer::update()
 {
-    using namespace web::http;
-    using namespace web::http::client;
+    using namespace grpc;
+    ClientContext context;
+    gameapi::Void empty;
+    gameapi::PlayerCount players;
 
-    // The endpoint to query for this world server.
-    std::stringstream ss;
-    ss << "http://" << ipAddress_ << ":" << HttpRequestPort << "/status/";
-    auto endpoint = ss.str();
-
-    try
+    auto status = client_->GetPlayerCount(&context, empty, &players);
+    if (!status.ok())
     {
-        auto request = http_client(endpoint)
-                           .request(methods::GET)
-                           .then([&](const http_response& response) {
-                               online_ = response.status_code() == status_codes::OK;
-                               return response.extract_json();
-                           })
-                           .then([&](const web::json::value& value) { playerCount_ = value.at("players").as_integer(); });
-        request.wait();
-    }
-    catch (const std::exception& e)  // If an exception occurs, assume the server is offline
-    {
-        LOG(INFO) << "Attempted to ping world server " << name_ << " at " << endpoint << ", but it was offline.";
-        playerCount_ = 0;
         online_      = false;
+        playerCount_ = 0;
+        return;
     }
+
+    online_      = true;
+    playerCount_ = players.players();
 }

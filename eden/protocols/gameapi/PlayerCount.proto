@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package gameapi;
+
+message PlayerCount {
+  int32 players = 1;
+}

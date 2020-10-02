@@ -19,5 +19,8 @@ target_link_libraries(loginserver
             pthread
             Boost
             Cpprest
+            gameapiprotocol
+            Protobuf
+            Grpc
             ${CRYPTOPP_LIBRARY}
             ${GLOG_LIBRARY})

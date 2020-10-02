@@ -1,6 +1,11 @@
 #pragma once
 
+#include <proto/GameApi.grpc.pb.h>
+
+#include <boost/format.hpp>
+
 #include <array>
+#include <grpc++/grpc++.h>
 #include <string>
 
 namespace shaiya::login
@@ -138,5 +143,15 @@ namespace shaiya::login
          * The IPV4 address split into the 4 digits.
          */
         std::array<char, 4> ipAddressBytes_{ 0 };
+
+        /**
+         * The channel to the world server.
+         */
+        std::shared_ptr<grpc::Channel> channel_;
+
+        /**
+         * A client to this world's handshake service
+         */
+        std::unique_ptr<gameapi::GameService::Stub> client_;
     };
 }

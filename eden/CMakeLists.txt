@@ -1,3 +1,4 @@
 add_subdirectory(common)
+add_subdirectory(protocols)
 add_subdirectory(loginserver)
 add_subdirectory(gameserver)
