@@ -161,7 +161,7 @@ namespace shaiya::net
         /**
          * The name of the character
          */
-        std::array<char, 21> name { 0 };
+        VariableString<21> name;
 
         /**
          * The cloak data (emblems, colours, etc)
