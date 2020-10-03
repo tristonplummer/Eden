@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/DataTypes.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/common/net/packet/game/CharacterList.hpp>
 
 // Forward declaration of the game session.
 namespace shaiya::net
@@ -45,6 +46,13 @@ namespace shaiya::game
          * @return          The session's faction.
          */
         ShaiyaFaction getFaction(shaiya::net::GameSession& session);
+
+        /**
+         * Gets the list of characters for a session.
+         * @param session   The session instance.
+         * @return          The session's characters.
+         */
+        std::vector<shaiya::net::CharacterListEntry> getCharacters(shaiya::net::GameSession& session);
 
         /**
          * The database service.

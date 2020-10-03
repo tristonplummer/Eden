@@ -62,12 +62,27 @@ namespace shaiya::net
         void setUserId(uint32_t userId);
 
         /**
+         * Sets the faction for this ession.
+         * @param faction   The faction value.
+         */
+        void setFaction(ShaiyaFaction faction);
+
+        /**
          * Gets the user id that this session was authenticated as.
          * @return  This session's user id
          */
         [[nodiscard]] uint32_t userId() const
         {
             return userId_;
+        }
+
+        /**
+         * Gets the faction of this user.
+         * @return  The faction.
+         */
+        [[nodiscard]] ShaiyaFaction faction() const
+        {
+            return faction_;
         }
 
         /**
@@ -97,6 +112,11 @@ namespace shaiya::net
          * The user id that this session was authenticated as.
          */
         uint32_t userId_{ 0 };
+
+        /**
+         * The faction of this session.
+         */
+        ShaiyaFaction faction_{ ShaiyaFaction::Neither };
 
         /**
          * The AES key

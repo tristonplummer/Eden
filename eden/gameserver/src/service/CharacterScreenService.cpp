@@ -5,9 +5,14 @@ using namespace shaiya::game;
 using namespace shaiya::net;
 
 /**
+ * The number of character slots in the character list
+ */
+constexpr auto CHARACTER_LIST_SIZE = 5;
+
+/**
  * The number of bytes in an empty character list entry (opcode = 2, slot = 1, id = 4)
  */
-constexpr auto EMPTY_CHARCTER_LENGTH = 3;
+constexpr auto EMPTY_CHARCTER_LENGTH = 7;
 
 /**
  * The name of the query for fetching the faction for an account
@@ -28,9 +33,7 @@ CharacterScreenService::CharacterScreenService(shaiya::database::DatabaseService
     : db_(db), worldId_(worldId)
 {
     db.prepare(FETCH_ACCOUNT_FACTION, "SELECT faction FROM gamedata.factions WHERE userid = $1 and world = $2");
-    db.prepare(UPDATE_ACCOUNT_FACTION,
-               "INSERT INTO gamedata.factions (world, userid, faction) VALUES ($1, $2, $3) ON CONFLICT (userid) DO UPDATE "
-               "SET faction = $3");
+    db.prepare(UPDATE_ACCOUNT_FACTION, "SELECT gamedata.update_faction($1, $2, $3);");
 }
 
 /**
@@ -51,13 +54,31 @@ void CharacterScreenService::display(GameSession& session)
     if (faction == ShaiyaFaction::Neither)
         return;
 
-    // Send the empty character list
-    for (auto i = 0; i < 5; i++)
-    {
-        CharacterListEntry entry;
-        entry.slot = i;
-        session.write(entry, EMPTY_CHARCTER_LENGTH);
-    }
+    // Set the faction for the user
+    session.setFaction(faction);
+
+    // Get the list of characters for this session
+    auto characters = getCharacters(session);
+
+    // Send the character list
+    for (auto&& character: characters)
+        session.write(character, character.id ? sizeof(character) : EMPTY_CHARCTER_LENGTH);
+}
+
+/**
+ * Gets the list of characters for a session.
+ * @param session   The session instance.
+ * @return          The session's characters.
+ */
+std::vector<CharacterListEntry> CharacterScreenService::getCharacters(GameSession& session)
+{
+    // Prepare the packets
+    std::vector<CharacterListEntry> characters;
+    characters.resize(CHARACTER_LIST_SIZE);
+    for (auto i = 0; i < characters.size(); i++)
+        characters.at(i).slot = i;
+
+    return characters;
 }
 
 /**

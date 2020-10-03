@@ -81,4 +81,5 @@ void GameSession::onRead(size_t opcode, size_t length, const char* payload)
         PacketRegistry::the().execute(*this, opcode, length, payload);
         return;
     }
+    LOG(INFO) << "Opcode " << opcode << " should be queued and processed on the next tick.";
 }
