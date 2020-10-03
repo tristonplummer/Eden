@@ -60,6 +60,15 @@ void GameSession::setUserId(uint32_t userId)
 }
 
 /**
+ * Sets the faction for this session.
+ * @param faction   The faction value.
+ */
+void GameSession::setFaction(ShaiyaFaction faction)
+{
+    faction_ = faction;
+}
+
+/**
  * Gets executed when data is read from this session.
  * @param opcode    The opcode of the packet.
  * @param length    The length of the packet.

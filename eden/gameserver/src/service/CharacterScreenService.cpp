@@ -25,6 +25,11 @@ constexpr auto FETCH_ACCOUNT_FACTION = "fetch_account_faction";
 constexpr auto UPDATE_ACCOUNT_FACTION = "update_account_faction";
 
 /**
+ * The name of the query for fetching the character list
+ */
+constexpr auto FETCH_CHARACTERS = "fetch_characters";
+
+/**
  * Initialises the character screen service.
  * @param db        The database service to use.
  * @param worldId   The id of this world server.
@@ -34,6 +39,7 @@ CharacterScreenService::CharacterScreenService(shaiya::database::DatabaseService
 {
     db.prepare(FETCH_ACCOUNT_FACTION, "SELECT faction FROM gamedata.factions WHERE userid = $1 and world = $2");
     db.prepare(UPDATE_ACCOUNT_FACTION, "SELECT gamedata.update_faction($1, $2, $3);");
+    db.prepare(FETCH_CHARACTERS, "SELECT * FROM gamedata.get_characters($1, $2);");
 }
 
 /**
@@ -77,6 +83,42 @@ std::vector<CharacterListEntry> CharacterScreenService::getCharacters(GameSessio
     characters.resize(CHARACTER_LIST_SIZE);
     for (auto i = 0; i < characters.size(); i++)
         characters.at(i).slot = i;
+
+    // Attempt to get the character list from the database
+    try
+    {
+        // Create a new connection to the database
+        auto connection = db_.connection();
+        pqxx::work tx(*connection);
+
+        // Fetch the character rows
+        auto rows = tx.exec_prepared(FETCH_CHARACTERS, session.userId(), worldId_);
+
+        // Loop through the rows
+        for (auto&& row: rows)
+        {
+            auto slot = row["slot"].as<int>();
+            assert(slot <= CHARACTER_LIST_SIZE);
+
+            auto& character  = characters.at(slot);
+            character.id     = row["charid"].as<int>();
+            character.level  = row["level"].as<int>();
+            character.race   = static_cast<ShaiyaRace>(row["race"].as<int>());
+            character.mode   = static_cast<ShaiyaGameMode>(row["mode"].as<int>());
+            character.hair   = row["hair"].as<int>();
+            character.face   = row["face"].as<int>();
+            character.height = row["height"].as<int>();
+            character.job    = static_cast<ShaiyaClass>(row["class"].as<int>());
+            character.gender = row["gender"].as<int>();
+            character.map    = row["map"].as<int>();
+            character.name   = row["name"].as<std::string>();
+        }
+    }
+    catch (const std::exception& e)
+    {
+        LOG(ERROR) << "Exception occurred while fetching characters for user id " << session.userId() << " from ip address "
+                   << session.remoteAddress() << ": " << e.what();
+    }
 
     return characters;
 }

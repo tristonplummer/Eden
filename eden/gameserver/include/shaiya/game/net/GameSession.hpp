@@ -62,7 +62,7 @@ namespace shaiya::net
         void setUserId(uint32_t userId);
 
         /**
-         * Sets the faction for this ession.
+         * Sets the faction for this session.
          * @param faction   The faction value.
          */
         void setFaction(ShaiyaFaction faction);
