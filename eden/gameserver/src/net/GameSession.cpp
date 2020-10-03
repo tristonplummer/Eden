@@ -2,6 +2,7 @@
 #include <shaiya/game/net/GameSession.hpp>
 
 #include <crypto++/sha.h>
+#include <utility>
 
 using namespace shaiya::net;
 
@@ -69,6 +70,52 @@ void GameSession::setFaction(ShaiyaFaction faction)
 }
 
 /**
+ * Sets the character instance for this session.
+ * @param character The character.
+ */
+void GameSession::setCharacter(std::shared_ptr<shaiya::game::Character> character)
+{
+    character_ = std::move(character);
+}
+
+/**
+ * Gets executed when this session gets disconnected.
+ */
+void GameSession::onDisconnect()
+{
+    if (character_)
+    {
+        auto& world = context().getGameWorld();
+        world.unregisterCharacter(character_);
+    }
+
+    character_.reset();
+}
+
+/**
+ * Processes the queue of packets that are yet to be processed.
+ */
+void GameSession::processQueue()
+{
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Loop over the queued packets
+    while (!queuedPackets_.empty())
+    {
+        auto packet = queuedPackets_.front();
+        queuedPackets_.pop_front();
+
+        // The packet data and the opcode
+        auto* data  = packet.data();
+        auto opcode = *reinterpret_cast<uint16_t*>(data);
+
+        // Process the packet
+        PacketRegistry::the().execute(*this, opcode, packet.size(), data);
+    }
+}
+
+/**
  * Gets executed when data is read from this session.
  * @param opcode    The opcode of the packet.
  * @param length    The length of the packet.
@@ -77,7 +124,6 @@ void GameSession::setFaction(ShaiyaFaction faction)
 void GameSession::onRead(size_t opcode, size_t length, const char* payload)
 {
     using namespace shaiya::net;
-
     if (encryptionMode_ == EncryptionMode::Encrypted)
     {
         decryption_.processData((byte*)payload, length);  // Decrypt the inbound payload
@@ -90,5 +136,11 @@ void GameSession::onRead(size_t opcode, size_t length, const char* payload)
         PacketRegistry::the().execute(*this, opcode, length, payload);
         return;
     }
-    LOG(INFO) << "Opcode " << opcode << " should be queued and processed on the next tick.";
+
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Queue the packet
+    std::vector<char> packet(payload, payload + length);
+    queuedPackets_.push_back(packet);
 }

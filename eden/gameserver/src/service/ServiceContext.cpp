@@ -24,13 +24,19 @@ ServiceContext::ServiceContext(boost::property_tree::ptree& config)
     auto worldId = config.get<uint32_t>("World.Id");
 
     // Initialise the database service
-    dbService_  = new shaiya::database::DatabaseService(dbHost, dbName, dbUser, dbPass);
-    apiService_ = new WorldApiService();
-    charScreen_ = new CharacterScreenService(*dbService_, worldId);
+    dbService_   = new shaiya::database::DatabaseService(dbHost, dbName, dbUser, dbPass);
+    apiService_  = new WorldApiService();
+    charScreen_  = new CharacterScreenService(*dbService_, worldId);
+    gameService_ = new GameWorldService(*dbService_);
 
     // Run the api service on an external thread, as it blocks
     std::thread apiThread(&WorldApiService::start, apiService_, worldApiPort);
     apiThread.detach();
+
+    // The game tick should run on an external thread
+    auto tickRate = config.get<size_t>("World.TickRate");
+    std::thread worldThread(&GameWorldService::tick, gameService_, tickRate);
+    worldThread.detach();
 }
 
 /**
@@ -51,4 +57,14 @@ WorldApiService& ServiceContext::getApiService()
 {
     assert(apiService_);
     return *apiService_;
+}
+
+/**
+ * Gets the game world.
+ * @return  The game world.
+ */
+GameWorldService& ServiceContext::getGameWorld()
+{
+    assert(gameService_);
+    return *gameService_;
 }

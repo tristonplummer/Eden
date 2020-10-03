@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/service/CharacterScreenService.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/service/WorldApiService.hpp>
 
 #include <boost/property_tree/ptree.hpp>
@@ -32,6 +33,11 @@ namespace shaiya::game
          */
         WorldApiService& getApiService();
 
+        /**
+         * Gets the game world.
+         * @return  The game world.
+         */
+        GameWorldService& getGameWorld();
 
     private:
         /**
@@ -48,5 +54,10 @@ namespace shaiya::game
          * The api service, which is used by the login server.
          */
         WorldApiService* apiService_;
+
+        /**
+         * The game world service.
+         */
+        GameWorldService* gameService_;
     };
 }

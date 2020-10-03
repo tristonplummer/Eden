@@ -21,6 +21,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<GameHandshakeOpcode>();
     registerPacketHandler<AccountFactionOpcode>();
     registerPacketHandler<CharacterCreateOpcode>();
+    registerPacketHandler<CharacterSelectOpcode>();
 }
 
 /**

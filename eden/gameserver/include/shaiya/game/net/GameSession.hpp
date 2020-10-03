@@ -3,12 +3,16 @@
 #include <shaiya/common/net/Session.hpp>
 #include <shaiya/game/net/EncryptionMode.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
+#include <shaiya/game/world/model/character/Character.hpp>
 
 #include <glog/logging.h>
 
 #include <array>
 #include <crypto++/aes.h>
 #include <crypto++/modes.h>
+#include <deque>
+#include <mutex>
+#include <vector>
 
 namespace shaiya::net
 {
@@ -56,6 +60,11 @@ namespace shaiya::net
         void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv);
 
         /**
+         * Processes the queue of packets that are yet to be processed.
+         */
+        void processQueue();
+
+        /**
          * Sets the user id for this session.
          * @param userId    The user id.
          */
@@ -94,6 +103,26 @@ namespace shaiya::net
             return ctx_;
         }
 
+        /**
+         * Sets the character instance for this session.
+         * @param character The character.
+         */
+        void setCharacter(std::shared_ptr<shaiya::game::Character> character);
+
+        /**
+         * Gets executed when this session gets disconnected.
+         */
+        void onDisconnect() override;
+
+        /**
+         * Gets the character associated with this session.
+         * @return  The character instance.
+         */
+        std::shared_ptr<shaiya::game::Character> character()
+        {
+            return character_;
+        }
+
     private:
         /**
          * Gets executed when data is read from this session.
@@ -119,6 +148,11 @@ namespace shaiya::net
         ShaiyaFaction faction_{ ShaiyaFaction::Neither };
 
         /**
+         * The character associated with this session.
+         */
+        std::shared_ptr<shaiya::game::Character> character_{ nullptr };
+
+        /**
          * The AES key
          */
         std::array<uint8_t, 16> key_{ 0 };
@@ -142,5 +176,15 @@ namespace shaiya::net
          * The encryption mode.
          */
         EncryptionMode encryptionMode_{ EncryptionMode::Plaintext };
+
+        /**
+         * The mutex to be used for locking access to the packet queue.
+         */
+        std::mutex mutex_;
+
+        /**
+         * The queue of packets that are yet to be processed.
+         */
+        std::deque<std::vector<char>> queuedPackets_;
     };
 }
