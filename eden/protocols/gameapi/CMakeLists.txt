@@ -5,6 +5,9 @@ find_package(GRPC REQUIRED)
 # Collect the protocol files
 file(GLOB_RECURSE proto_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.proto)
 
+# Ensure the proto directory exists
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/proto)
+
 # Generate the message classes
 set(PROTOBUF_GENERATE_CPP_APPEND_PATH OFF)
 include_directories(${PROTOBUF_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
