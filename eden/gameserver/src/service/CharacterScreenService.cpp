@@ -30,6 +30,11 @@ constexpr auto UPDATE_ACCOUNT_FACTION = "update_account_faction";
 constexpr auto FETCH_CHARACTERS = "fetch_characters";
 
 /**
+ * The name of the query for creating a character
+ */
+constexpr auto CREATE_CHARACTER = "create_character";
+
+/**
  * Initialises the character screen service.
  * @param db        The database service to use.
  * @param worldId   The id of this world server.
@@ -40,6 +45,8 @@ CharacterScreenService::CharacterScreenService(shaiya::database::DatabaseService
     db.prepare(FETCH_ACCOUNT_FACTION, "SELECT faction FROM gamedata.factions WHERE userid = $1 and world = $2");
     db.prepare(UPDATE_ACCOUNT_FACTION, "SELECT gamedata.update_faction($1, $2, $3);");
     db.prepare(FETCH_CHARACTERS, "SELECT * FROM gamedata.get_characters($1, $2);");
+    db.prepare(CREATE_CHARACTER,
+               "SELECT status FROM gamedata.create_character($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);");
 }
 
 /**
@@ -69,6 +76,56 @@ void CharacterScreenService::display(GameSession& session)
     // Send the character list
     for (auto&& character: characters)
         session.write(character, character.id ? sizeof(character) : EMPTY_CHARCTER_LENGTH);
+}
+
+/**
+ * Attempts to create a new character for the session.
+ * @param session   The session instance
+ * @param slot      The slot to place the character in
+ * @param race      The race of the character
+ * @param mode      The game mode of the character
+ * @param hair      The hair of the character
+ * @param face      The face of the character
+ * @param height    The height of the character
+ * @param job       The class of the character
+ * @param gender    The gender of the character
+ * @param name      The name of the character
+ * @return          The result of the character creation
+ */
+CharacterCreateResult CharacterScreenService::createCharacter(GameSession& session, int slot, int race, int mode, int hair,
+                                                              int face, int height, int job, int gender, std::string name)
+{
+    // If the destination slot is greater than the maximum character slots
+    if (slot >= CHARACTER_LIST_SIZE)
+        return CharacterCreateResult::Error;
+
+    try
+    {
+        // Create a new connection to the database
+        auto connection = db_.connection();
+        pqxx::work tx(*connection);
+
+        // Attempt to create the character
+        auto response = tx.exec_prepared(CREATE_CHARACTER, worldId_, session.userId(), slot, race, mode, hair, face, height,
+                                         job, gender, name);
+
+        // If nothing was returned, treat it as an error
+        if (response.empty())
+            return CharacterCreateResult::Error;
+
+        // The table returned by the character creation
+        auto row    = response.front();
+        auto result = static_cast<CharacterCreateResult>(row.front().as<size_t>());
+        if (result == CharacterCreateResult::Success)
+            tx.commit();
+        return result;
+    }
+    catch (const std::exception& e)
+    {
+        LOG(ERROR) << "Exception occurred while creating character for user id " << session.userId() << " from ip address "
+                   << session.remoteAddress() << ": " << e.what();
+        return CharacterCreateResult::Error;
+    }
 }
 
 /**

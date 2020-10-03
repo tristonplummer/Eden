@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/DataTypes.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/common/net/packet/game/CharacterCreation.hpp>
 #include <shaiya/common/net/packet/game/CharacterList.hpp>
 
 // Forward declaration of the game session.
@@ -38,6 +39,24 @@ namespace shaiya::game
          * @return          If the faction select failed.
          */
         bool setFaction(shaiya::net::GameSession& session, ShaiyaFaction faction);
+
+        /**
+         * Attempts to create a new character for the session.
+         * @param session   The session instance
+         * @param slot      The slot to place the character in
+         * @param race      The race of the character
+         * @param mode      The game mode of the character
+         * @param hair      The hair of the character
+         * @param face      The face of the character
+         * @param height    The height of the character
+         * @param job       The class of the character
+         * @param gender    The gender of the character
+         * @param name      The name of the character
+         * @return          The result of the character creation
+         */
+        shaiya::net::CharacterCreateResult createCharacter(shaiya::net::GameSession& session, int slot, int race, int mode,
+                                                           int hair, int face, int height, int job, int gender,
+                                                           std::string name);
 
     private:
         /**

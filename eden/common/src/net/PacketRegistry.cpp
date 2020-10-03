@@ -20,6 +20,7 @@ PacketRegistry::PacketRegistry()
     // Register the game server packets
     registerPacketHandler<GameHandshakeOpcode>();
     registerPacketHandler<AccountFactionOpcode>();
+    registerPacketHandler<CharacterCreateOpcode>();
 }
 
 /**
