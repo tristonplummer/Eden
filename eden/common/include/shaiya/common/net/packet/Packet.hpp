@@ -1,4 +1,6 @@
 #pragma once
+#include <shaiya/common/net/packet/PacketType.hpp>
+
 #include <cassert>
 #include <cstdint>
 #include <cstring>
@@ -12,6 +14,28 @@ namespace shaiya::net
      * of incoming data.
      */
     constexpr auto MAX_PACKET_LEN = 256;
+
+    /**
+     * Gets the type of an opcode.
+     * @param opcode    The opcode.
+     * @return          The most significant byte.
+     */
+    inline size_t getOpcodeType(uint16_t opcode)
+    {
+        return opcode & 0xFF00u;
+    }
+
+    /**
+     * Checks if an opcode is an opcode is of a specific type. The opcode's type
+     * is denoted by the most significant (left) byte.
+     * @param opcode    The opcode to test
+     * @param type      The packet type.
+     * @return          If the opcode is of a specific type.
+     */
+    inline bool isType(uint16_t opcode, PacketType type)
+    {
+        return getOpcodeType(opcode) == type;
+    }
 
     /**
      * Constructs a packet structure instance from a source byte buffer.
@@ -41,6 +65,6 @@ namespace shaiya::net
 #include "login/WorldSelectPacket.hpp"
 
 // Include the game packets
-#include "game/GameHandshake.hpp"
 #include "game/AccountFaction.hpp"
 #include "game/CharacterList.hpp"
+#include "game/GameHandshake.hpp"

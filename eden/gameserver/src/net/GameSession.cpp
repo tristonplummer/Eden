@@ -67,11 +67,18 @@ void GameSession::setUserId(uint32_t userId)
  */
 void GameSession::onRead(size_t opcode, size_t length, const char* payload)
 {
+    using namespace shaiya::net;
+
     if (encryptionMode_ == EncryptionMode::Encrypted)
     {
         decryption_.processData((byte*)payload, length);  // Decrypt the inbound payload
         std::memcpy(&opcode, payload, sizeof(uint16_t));  // Copy the decrypted opcode
     }
 
-    PacketRegistry::the().execute(*this, opcode, length, payload);
+    // Only handshake and character-screen packets should be executed asynchronously
+    if (isType(opcode, PacketType::Handshake) || isType(opcode, PacketType::CharacterScreen))
+    {
+        PacketRegistry::the().execute(*this, opcode, length, payload);
+        return;
+    }
 }
