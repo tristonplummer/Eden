@@ -1,6 +1,8 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 
+#include <crypto++/sha.h>
+
 using namespace shaiya::net;
 
 /**
@@ -27,10 +29,25 @@ void GameSession::onAccept()
  */
 void GameSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv)
 {
+    using namespace CryptoPP;
+
+    // Save the key and iv
+    key_ = key;
+    iv_  = iv;
+
+    // Generate a hash based off the IV
+    std::vector<uint8_t> digest;
+    digest.resize(SHA256::DIGESTSIZE);
+    SHA256 sha256;
+    sha256.CalculateDigest(digest.data(), iv_.data(), iv_.size());
+
+    // Copy the first 16 bytes of the hash to the iv
+    std::memcpy(iv_.data(), digest.data(), iv_.size());
+
     // Set the encryption mode
     encryptionMode_ = EncryptionMode::Encrypted;
-    encryption_     = shaiya::crypto::Aes128Ctr(key, iv);
-    decryption_     = shaiya::crypto::Aes128Ctr(key, iv);
+    encryption_     = shaiya::crypto::Aes128Ctr(key_, iv_);
+    decryption_     = shaiya::crypto::Aes128Ctr(key_, iv_);
 }
 
 /**
@@ -38,6 +55,17 @@ void GameSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> 
  */
 void GameSession::showCharacterScreen()
 {
+    // Send the player their faction
+    shaiya::net::AccountFactionNotify faction;
+    write(faction);
+
+    // Send the empty character list
+    for (auto i = 0; i < 5; i++)
+    {
+        shaiya::net::CharacterListEntry entry;
+        entry.slot = i;
+        write(entry);
+    }
 }
 
 /**

@@ -42,3 +42,5 @@ namespace shaiya::net
 
 // Include the game packets
 #include "game/GameHandshake.hpp"
+#include "game/AccountFaction.hpp"
+#include "game/CharacterList.hpp"

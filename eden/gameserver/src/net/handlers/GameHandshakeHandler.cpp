@@ -34,14 +34,6 @@ void handleHandshake(Session& session, const GameHandshakeRequest& request)
         return;
     }
 
-    // Respond with the expanded key
-    GameHandshakeResponse response;
-
-    // Generate the expanded key to use for game world encryption and provide it to the client
-    CryptoPP::AutoSeededRandomPool prng;
-    prng.GenerateBlock((byte*) response.expandedKeySeed.data(), response.expandedKeySeed.size());
-    game.write(response);
-
     // The aes key and iv
     std::array<byte, 16> key{ 0 };
     std::array<byte, 16> iv{ 0 };
@@ -52,6 +44,14 @@ void handleHandshake(Session& session, const GameHandshakeRequest& request)
 
     // Initialise the encryption based on the previous AES keys.
     game.initEncryption(key, iv);
+
+    // Respond with the expanded key
+    GameHandshakeResponse response;
+
+    // Generate the expanded key to use for game world encryption and provide it to the client
+    CryptoPP::AutoSeededRandomPool prng;
+    prng.GenerateBlock((byte*) response.expandedKeySeed.data(), response.expandedKeySeed.size());
+    game.write(response);
 
     // Show the character selection screen
     game.showCharacterScreen();

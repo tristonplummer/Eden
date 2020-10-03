@@ -84,6 +84,16 @@ namespace shaiya::net
         shaiya::game::ServiceContext& ctx_;
 
         /**
+         * The AES key
+         */
+        std::array<uint8_t, 16> key_{ 0 };
+
+        /**
+         * The AES iv
+         */
+        std::array<uint8_t, 16> iv_{ 0 };
+
+        /**
          * The AES instance to use for outgoing packets.
          */
         shaiya::crypto::Aes128Ctr encryption_;
