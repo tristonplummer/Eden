@@ -51,24 +51,6 @@ void GameSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> 
 }
 
 /**
- * Shows the character screen data to this screen.
- */
-void GameSession::showCharacterScreen()
-{
-    // Send the player their faction
-    shaiya::net::AccountFactionNotify faction;
-    write(faction);
-
-    // Send the empty character list
-    for (auto i = 0; i < 5; i++)
-    {
-        shaiya::net::CharacterListEntry entry;
-        entry.slot = i;
-        write(entry);
-    }
-}
-
-/**
  * Gets executed when data is read from this session.
  * @param opcode    The opcode of the packet.
  * @param length    The length of the packet.

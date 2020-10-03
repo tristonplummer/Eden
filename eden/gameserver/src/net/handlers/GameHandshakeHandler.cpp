@@ -45,16 +45,15 @@ void handleHandshake(Session& session, const GameHandshakeRequest& request)
     // Initialise the encryption based on the previous AES keys.
     game.initEncryption(key, iv);
 
-    // Respond with the expanded key
-    GameHandshakeResponse response;
-
     // Generate the expanded key to use for game world encryption and provide it to the client
+    GameHandshakeResponse response;
     CryptoPP::AutoSeededRandomPool prng;
-    prng.GenerateBlock((byte*) response.expandedKeySeed.data(), response.expandedKeySeed.size());
+    prng.GenerateBlock((byte*)response.expandedKeySeed.data(), response.expandedKeySeed.size());
     game.write(response);
 
     // Show the character selection screen
-    game.showCharacterScreen();
+    auto& charScreen = game.context().getCharScreen();
+    charScreen.display(game);
 }
 
 /**

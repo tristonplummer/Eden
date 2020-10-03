@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/game/service/CharacterScreenService.hpp>
 #include <shaiya/game/service/WorldApiService.hpp>
 
 #include <boost/property_tree/ptree.hpp>
@@ -20,16 +21,28 @@ namespace shaiya::game
         explicit ServiceContext(boost::property_tree::ptree& config);
 
         /**
+         * Gets the character screen service.
+         * @return  The character screen.
+         */
+        CharacterScreenService& getCharScreen();
+
+        /**
          * Gets the api service.
          * @return  The api service.
          */
         WorldApiService& getApiService();
+
 
     private:
         /**
          * The database service instance.
          */
         shaiya::database::DatabaseService* dbService_;
+
+        /**
+         * The character screen service.
+         */
+        CharacterScreenService* charScreen_;
 
         /**
          * The api service, which is used by the login server.
