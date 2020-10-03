@@ -1,7 +1,7 @@
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/net/GameTcpServer.hpp>
 
-#include <glog/logging.h>
+#include <boost/property_tree/ini_parser.hpp>
 
 /**
  * The entry point for the game server.
@@ -12,6 +12,10 @@
 int main(int argc, char** argv)
 {
     google::InitGoogleLogging(argv[0]);
+
+    // Parse the configuration file
+    boost::property_tree::ptree config;
+    boost::property_tree::ini_parser::read_ini("./data/config/Game.ini", config);
 
     // The service context
     shaiya::game::ServiceContext ctx;
