@@ -3,7 +3,8 @@ syntax = "proto3";
 package gameapi;
 
 enum SessionTransferStatus {
-  SUCCESS = 0;
+  Success = 0;
+  AlreadyLoggedIn = 1;
 }
 
 message SessionTransferRequest {

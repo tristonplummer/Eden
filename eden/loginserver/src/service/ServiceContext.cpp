@@ -6,13 +6,24 @@ using namespace shaiya::login;
 
 /**
  * Initialises this context.
+ * @param config    The configuration tree
  */
-ServiceContext::ServiceContext()
+ServiceContext::ServiceContext(boost::property_tree::ptree& config)
 {
+    // The database credentials
+    auto dbHost = config.get<std::string>("Database.Host");
+    auto dbUser = config.get<std::string>("Database.Host");
+    auto dbPass = config.get<std::string>("Database.Host");
+    auto dbName = config.get<std::string>("Database.Host");
+
+    // The world api port
+    auto worldApiPort = config.get<uint16_t>("Network.WorldApiPort");
+
+    // Initialise the database service
+    dbService_         = new shaiya::database::DatabaseService(dbHost, dbName, dbUser, dbPass);
     encryptionService_ = new EncryptionService();
-    dbService_         = new shaiya::database::DatabaseService("localhost", "shaiya", "cups", "password123");
     authService_       = new AuthenticationService(*dbService_);
-    worldService_      = new WorldService(*dbService_);
+    worldService_      = new WorldService(*dbService_, worldApiPort);
 }
 
 /**

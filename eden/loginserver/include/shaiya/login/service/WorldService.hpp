@@ -22,9 +22,10 @@ namespace shaiya::login
     public:
         /**
          * Initialises this world service.
-         * @param db    The database service.
+         * @param db            The database service.
+         * @param worldApiPort  The port that the world api services are listening on.
          */
-        WorldService(shaiya::database::DatabaseService& db);
+        WorldService(shaiya::database::DatabaseService& db, uint16_t worldApiPort);
 
         /**
          * Gets a world with a specified id. Returns a null pointer in the event that no world

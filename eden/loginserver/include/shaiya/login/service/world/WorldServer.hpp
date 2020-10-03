@@ -26,10 +26,11 @@ namespace shaiya::login
          * @param id                The id of the server.
          * @param name              The name of the server.
          * @param ipAddress         The ip address of the server.
+         * @param apiPort           The port that the world server's api is listening on.
          * @param revision          The client revision to accept.
          * @param playerCapacity    The maximum capacity of online players.
          */
-        WorldServer(uint8_t id, std::string name, std::string ipAddress, uint32_t revision, uint16_t playerCapacity);
+        WorldServer(uint8_t id, std::string name, std::string ipAddress, uint16_t apiPort, uint32_t revision, uint16_t playerCapacity);
 
         /**
          * Submits a transfer request for a given session. This is sent just before the session disconnects from

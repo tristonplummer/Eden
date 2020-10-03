@@ -8,11 +8,6 @@
 using namespace shaiya::login;
 
 /**
- * The port that the world server api is listening on.
- */
-constexpr auto ApiRequestPort = 30811;
-
-/**
  * The maximum reconnect backoff, in milliseconds.
  */
 constexpr auto MaxReconnectBackoff = 5000;
@@ -22,10 +17,12 @@ constexpr auto MaxReconnectBackoff = 5000;
  * @param id                The id of the server.
  * @param name              The name of the server.
  * @param ipAddress         The ip address of the server.
+ * @param apiPort           The port that the world server's api is listening on.
  * @param revision          The client revision to accept.
  * @param playerCapacity    The maximum capacity of online players.
  */
-WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, uint32_t revision, uint16_t playerCapacity)
+WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, uint16_t apiPort, uint32_t revision,
+                         uint16_t playerCapacity)
     : id_(id), name_(std::move(name)), ipAddress_(std::move(ipAddress)), revision_(revision), playerCapacity_(playerCapacity)
 {
     // The individual bytes of the ip address string
@@ -43,7 +40,7 @@ WorldServer::WorldServer(uint8_t id, std::string name, std::string ipAddress, ui
     args.SetInt(GRPC_ARG_MAX_RECONNECT_BACKOFF_MS, MaxReconnectBackoff);
 
     // Initialise the channel
-    auto endpoint = boost::format("%1%:%2%") % ipAddress_ % ApiRequestPort;
+    auto endpoint = boost::format("%1%:%2%") % ipAddress_ % apiPort;
     channel_      = grpc::CreateCustomChannel(endpoint.str(), grpc::InsecureChannelCredentials(), args);
     channel_->GetState(true);
 
@@ -79,7 +76,7 @@ bool WorldServer::submitTransferRequest(shaiya::net::LoginSession& session)
 
     // Send the request and return the response
     auto status = client_->SubmitSessionTransfer(&context, request, &response);
-    return status.ok() && response.status() == gameapi::SessionTransferStatus::SUCCESS;
+    return status.ok() && response.status() == gameapi::SessionTransferStatus::Success;
 }
 
 /**

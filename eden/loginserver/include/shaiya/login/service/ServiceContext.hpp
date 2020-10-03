@@ -4,6 +4,8 @@
 #include <shaiya/login/service/EncryptionService.hpp>
 #include <shaiya/login/service/WorldService.hpp>
 
+#include <boost/property_tree/ptree.hpp>
+
 namespace shaiya::login
 {
     /**
@@ -15,8 +17,9 @@ namespace shaiya::login
     public:
         /**
          * Initialises this context.
+         * @param config    The configuration tree
          */
-        ServiceContext();
+        ServiceContext(boost::property_tree::ptree& config);
 
         /**
          * Gets the encryption service.

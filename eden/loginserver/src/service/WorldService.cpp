@@ -17,9 +17,10 @@ constexpr auto PingInterval = 10;
 
 /**
  * Initialises this world service.
- * @param db    The database service.
+ * @param db            The database service.
+ * @param worldApiPort  The port that the world api services are listening on.
  */
-WorldService::WorldService(shaiya::database::DatabaseService& db)
+WorldService::WorldService(shaiya::database::DatabaseService& db, uint16_t worldApiPort)
 {
     // Get the world definitions from the database
     auto connection = db.connection();
@@ -29,13 +30,13 @@ WorldService::WorldService(shaiya::database::DatabaseService& db)
     // Loop over the rows that were returned from the database
     for (auto&& row: rows)
     {
-        auto id         = row["id"].as<size_t>();
-        auto capacity   = row["playercapacity"].as<size_t>();
-        auto version    = row["version"].as<uint32_t>();
-        auto name       = row["name"].as<std::string>();
-        auto ipAddress  = row["ipaddress"].as<std::string>();
+        auto id        = row["id"].as<size_t>();
+        auto capacity  = row["playercapacity"].as<size_t>();
+        auto version   = row["version"].as<uint32_t>();
+        auto name      = row["name"].as<std::string>();
+        auto ipAddress = row["ipaddress"].as<std::string>();
 
-        worlds_.emplace_back(id, name, ipAddress, version, capacity);
+        worlds_.emplace_back(id, name, ipAddress, worldApiPort, version, capacity);
     }
 
     // Start a thread to periodically update the world servers' data.
