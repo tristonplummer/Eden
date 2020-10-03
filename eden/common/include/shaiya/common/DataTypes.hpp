@@ -3,4 +3,7 @@
 
 // Include the "Shaiya" data-types
 #include "datatypes/NexonBoolean.hpp"
+#include "datatypes/ShaiyaClass.hpp"
+#include "datatypes/ShaiyaGameMode.hpp"
+#include "datatypes/ShaiyaRace.hpp"
 #include "datatypes/VariableString.hpp"

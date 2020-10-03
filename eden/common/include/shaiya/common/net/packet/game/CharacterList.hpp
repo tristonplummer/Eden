@@ -43,12 +43,8 @@ namespace shaiya::net
 
         /**
          * The character's race.
-         * 0 = Human
-         * 1 = Elf
-         * 2 = Vail
-         * 3 = Nordein
          */
-        uint8_t race { 0 };
+        ShaiyaRace race { ShaiyaRace::Human };
 
         /**
          * The game mode of the character.
@@ -57,7 +53,7 @@ namespace shaiya::net
          * 2 = Hard
          * 3 = Ultimate
          */
-        uint8_t mode { 0 };
+        ShaiyaGameMode mode { ShaiyaGameMode::Easy };
 
         /**
          * The hair style value of the character
@@ -77,15 +73,8 @@ namespace shaiya::net
         /**
          * The class of the character. We use the name 'job' as that's how it is referred to in the
          * Ep4 files, and because 'class' is a reserved keyword.
-         *
-         * 0 = Fighter
-         * 1 = Defender
-         * 2 = Archer
-         * 3 = Ranger
-         * 4 = Mage
-         * 5 = Priest
          */
-        uint8_t job { 0 };
+        ShaiyaClass job { ShaiyaClass::Fighter };
 
         /**
          * The gender of the character
