@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     boost::property_tree::ini_parser::read_ini("./data/config/Game.ini", config);
 
     // The service context
-    shaiya::game::ServiceContext ctx;
+    shaiya::game::ServiceContext ctx(config);
 
     // Initialise the tcp server to listen on a specific port with the service context.
     shaiya::net::GameTcpServer server(30810, ctx);
