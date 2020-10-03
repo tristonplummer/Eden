@@ -56,6 +56,21 @@ namespace shaiya::net
         void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv);
 
         /**
+         * Sets the user id for this session.
+         * @param userId    The user id.
+         */
+        void setUserId(uint32_t userId);
+
+        /**
+         * Gets the user id that this session was authenticated as.
+         * @return  This session's user id
+         */
+        [[nodiscard]] uint32_t userId() const
+        {
+            return userId_;
+        }
+
+        /**
          * Gets the game service context.
          * @return  The context.
          */
@@ -77,6 +92,11 @@ namespace shaiya::net
          * The game service context.
          */
         shaiya::game::ServiceContext& ctx_;
+
+        /**
+         * The user id that this session was authenticated as.
+         */
+        uint32_t userId_{ 0 };
 
         /**
          * The AES key

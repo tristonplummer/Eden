@@ -23,7 +23,7 @@ ServiceContext::ServiceContext(boost::property_tree::ptree& config)
     // Initialise the database service
     dbService_  = new shaiya::database::DatabaseService(dbHost, dbName, dbUser, dbPass);
     apiService_ = new WorldApiService();
-    charScreen  = new CharacterScreenService(*dbService_);
+    charScreen_ = new CharacterScreenService(*dbService_);
 
     // Run the api service on an external thread, as it blocks
     std::thread apiThread(&WorldApiService::start, apiService_, worldApiPort);

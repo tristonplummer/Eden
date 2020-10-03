@@ -51,6 +51,9 @@ void handleHandshake(Session& session, const GameHandshakeRequest& request)
     prng.GenerateBlock((byte*)response.expandedKeySeed.data(), response.expandedKeySeed.size());
     game.write(response);
 
+    // Set the session's user id
+    game.setUserId(transfer->userid());
+
     // Show the character selection screen
     auto& charScreen = game.context().getCharScreen();
     charScreen.display(game);
