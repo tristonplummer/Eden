@@ -21,7 +21,8 @@ int main(int argc, char** argv)
     shaiya::game::ServiceContext ctx(config);
 
     // Initialise the tcp server to listen on a specific port with the service context.
-    shaiya::net::GameTcpServer server(30810, ctx);
+    auto port = config.get<uint16_t>("Network.Port");
+    shaiya::net::GameTcpServer server(port, ctx);
     server.start();
     return 0;
 }
