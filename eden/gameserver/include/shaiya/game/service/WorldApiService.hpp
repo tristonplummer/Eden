@@ -2,6 +2,7 @@
 #include <proto/GameApi.grpc.pb.h>
 
 #include <grpc++/grpc++.h>
+#include <vector>
 
 namespace shaiya::game
 {
@@ -38,5 +39,18 @@ namespace shaiya::game
          */
         grpc::Status SubmitSessionTransfer(grpc::ServerContext* context, const gameapi::SessionTransferRequest* request,
                                            gameapi::SessionTransferResponse* response) override;
+
+        /**
+         * Gets a transfer request for a given identity
+         * @param identity  The identity
+         * @return          The transfer request.
+         */
+        std::unique_ptr<gameapi::SessionTransferRequest> getTransferForIdentity(std::array<char, 16> identity);
+
+    private:
+        /**
+         * A vector containing the transfers that have been submitted but not yet handled.
+         */
+        std::vector<gameapi::SessionTransferRequest*> pendingTransfers_;
     };
 }

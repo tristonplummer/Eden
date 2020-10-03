@@ -1,5 +1,6 @@
 #include <shaiya/game/service/ServiceContext.hpp>
 
+#include <cassert>
 #include <thread>
 
 using namespace shaiya::game;
@@ -26,4 +27,14 @@ ServiceContext::ServiceContext(boost::property_tree::ptree& config)
     // Run the api service on an external thread, as it blocks
     std::thread apiThread(&WorldApiService::start, apiService_, worldApiPort);
     apiThread.detach();
+}
+
+/**
+ * Gets the api service.
+ * @return  The api service.
+ */
+WorldApiService& ServiceContext::getApiService()
+{
+    assert(apiService_);
+    return *apiService_;
 }

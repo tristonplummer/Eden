@@ -19,6 +19,12 @@ namespace shaiya::game
          */
         explicit ServiceContext(boost::property_tree::ptree& config);
 
+        /**
+         * Gets the api service.
+         * @return  The api service.
+         */
+        WorldApiService& getApiService();
+
     private:
         /**
          * The database service instance.
