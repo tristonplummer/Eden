@@ -27,6 +27,17 @@ void GameSession::onAccept()
  */
 void GameSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv)
 {
+    // Set the encryption mode
+    encryptionMode_ = EncryptionMode::Encrypted;
+    encryption_     = shaiya::crypto::Aes128Ctr(key, iv);
+    decryption_     = shaiya::crypto::Aes128Ctr(key, iv);
+}
+
+/**
+ * Shows the character screen data to this screen.
+ */
+void GameSession::showCharacterScreen()
+{
 }
 
 /**

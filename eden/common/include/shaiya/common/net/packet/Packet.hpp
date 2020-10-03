@@ -39,3 +39,6 @@ namespace shaiya::net
 #include "login/LoginHandshake.hpp"
 #include "login/WorldListPacket.hpp"
 #include "login/WorldSelectPacket.hpp"
+
+// Include the game packets
+#include "game/GameHandshake.hpp"

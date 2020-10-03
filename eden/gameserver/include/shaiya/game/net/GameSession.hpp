@@ -56,6 +56,11 @@ namespace shaiya::net
         void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv);
 
         /**
+         * Shows the character screen data to this screen.
+         */
+        void showCharacterScreen();
+
+        /**
          * Gets the game service context.
          * @return  The context.
          */

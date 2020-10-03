@@ -16,6 +16,9 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<LoginHandshakeOpcode>();
     registerPacketHandler<LoginRequestOpcode>();
     registerPacketHandler<WorldSelectOpcode>();
+
+    // Register the game server packets
+    registerPacketHandler<GameHandshakeOpcode>();
 }
 
 /**
