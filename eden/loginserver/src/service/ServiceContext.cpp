@@ -12,9 +12,9 @@ ServiceContext::ServiceContext(boost::property_tree::ptree& config)
 {
     // The database credentials
     auto dbHost = config.get<std::string>("Database.Host");
-    auto dbUser = config.get<std::string>("Database.Host");
-    auto dbPass = config.get<std::string>("Database.Host");
-    auto dbName = config.get<std::string>("Database.Host");
+    auto dbUser = config.get<std::string>("Database.User");
+    auto dbPass = config.get<std::string>("Database.Pass");
+    auto dbName = config.get<std::string>("Database.Database");
 
     // The world api port
     auto worldApiPort = config.get<uint16_t>("Network.WorldApiPort");
