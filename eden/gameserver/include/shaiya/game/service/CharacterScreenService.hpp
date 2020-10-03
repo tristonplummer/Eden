@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/common/DataTypes.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
 
 // Forward declaration of the game session.
@@ -18,9 +19,10 @@ namespace shaiya::game
     public:
         /**
          * Initialises the character screen service.
-         * @param db    The database service to use.
+         * @param db        The database service to use.
+         * @param worldId   The id of this world server.
          */
-        explicit CharacterScreenService(shaiya::database::DatabaseService& db);
+        explicit CharacterScreenService(shaiya::database::DatabaseService& db, uint32_t worldId);
 
         /**
          * Displays the character screen for a session.
@@ -28,10 +30,30 @@ namespace shaiya::game
          */
         void display(shaiya::net::GameSession& session);
 
+        /**
+         * Sets the faction for a session.
+         * @param session   The session.
+         * @param faction   The selected faction.
+         * @return          If the faction select failed.
+         */
+        bool setFaction(shaiya::net::GameSession& session, ShaiyaFaction faction);
+
     private:
+        /**
+         * Gets the faction for a given session.
+         * @param session   The session instance.
+         * @return          The session's faction.
+         */
+        ShaiyaFaction getFaction(shaiya::net::GameSession& session);
+
         /**
          * The database service.
          */
         shaiya::database::DatabaseService& db_;
+
+        /**
+         * The id of this world server.
+         */
+        uint32_t worldId_{ 0 };
     };
 }

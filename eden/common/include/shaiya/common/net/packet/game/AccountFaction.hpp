@@ -14,25 +14,34 @@ namespace shaiya::net
     struct AccountFactionNotify
     {
         /**
-         * The opcode for the game handshake.
+         * The opcode for the faction notification.
          */
         uint16_t opcode{ AccountFactionOpcode };
 
         /**
-         * 0 = Light
-         * 1 = Fury
-         * 2 = Undecided
+         * The faction of this account.
          */
-        uint8_t faction{ 2 };
+        ShaiyaFaction faction{ ShaiyaFaction::Neither };
 
         /**
          * The maximum game mode that can be used when creating a new character.
-         *
-         * 0 = Easy
-         * 1 = Normal
-         * 2 = Hard
-         * 3 = Ultimate
          */
-        uint8_t maxGameMode{ 3 };
+        ShaiyaGameMode maxGameMode{ ShaiyaGameMode::Ultimate };
+    } PACKED;
+
+    /**
+     * Represents a request for an account to select their faction.
+     */
+    struct AccountFactionSelectRequest
+    {
+        /**
+         * The opcode for the faction selection.
+         */
+        uint16_t opcode{ AccountFactionOpcode };
+
+        /**
+         * The selected faction value.
+         */
+        ShaiyaFaction faction{ ShaiyaFaction::Neither };
     } PACKED;
 }
