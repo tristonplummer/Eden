@@ -45,8 +45,8 @@ void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
     std::lock_guard lock{ mutex_ };
     characters_.push_back(character);
 
-    // Send the startup packets
-    character->sendStartup();
+    // Initialise the character
+    character->init();
 }
 
 /**

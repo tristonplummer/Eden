@@ -3,7 +3,7 @@
 #include <shaiya/common/net/Session.hpp>
 #include <shaiya/game/net/EncryptionMode.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
-#include <shaiya/game/world/model/character/Character.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
 
 #include <glog/logging.h>
 

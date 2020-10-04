@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/game/world/model/Entity.hpp>
+#include <shaiya/game/world/model/actor/StatSet.hpp>
 
 namespace shaiya::game
 {
@@ -10,7 +11,26 @@ namespace shaiya::game
     class Actor: public Entity
     {
     public:
+        /**
+         * Initialises this actor.
+         */
+        void init() override;
+
+        /**
+         * Gets the stats for this actor.
+         * @return  The actor's stats.
+         */
+        [[nodiscard]] StatSet& stats()
+        {
+            return stats_;
+        }
+
     protected:
+        /**
+         * The stats of the actor.
+         */
+        StatSet stats_;
+
         /**
          * The faction of this actor.
          */

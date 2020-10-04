@@ -5,12 +5,17 @@
 namespace shaiya::game
 {
     /**
-     * An entity can be thought of as any object in the game world that exist as a point in the world space.. Items that are
+     * An entity can be thought of as any object in the game world that exist as a point in the world space. Items that are
      * dropped on the ground, characters, mobs and invisible points are all examples of entities.
      */
     class Entity
     {
     public:
+        /**
+         * Initialises this entity.
+         */
+        virtual void init();
+
         /**
          * Get the position of this entity.
          * @return  The position
