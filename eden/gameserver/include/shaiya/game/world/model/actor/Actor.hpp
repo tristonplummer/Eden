@@ -31,6 +31,15 @@ namespace shaiya::game
             return stats_;
         }
 
+        /**
+         * Gets the faction of this actor.
+         * @return  The actor's faction.
+         */
+        [[nodiscard]] shaiya::ShaiyaFaction faction() const
+        {
+            return faction_;
+        }
+
     protected:
         /**
          * The stats of the actor.
