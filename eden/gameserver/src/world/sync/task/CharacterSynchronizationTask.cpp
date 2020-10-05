@@ -80,6 +80,14 @@ void CharacterSynchronizationTask::sync()
             }
         }
     }
+
+    // Loop over the observed characters and process their flagged updates.
+    for (auto&& observed: observedCharacters)
+    {
+        // Update movement
+        if (observed->hasUpdateFlag(UpdateMask::Movement))
+            updateMovement(*observed);
+    }
 }
 
 /**
@@ -130,6 +138,26 @@ void CharacterSynchronizationTask::updateAppearance(const Character& other)
     appearance.faction = other.faction();
     appearance.name    = "Cups";
     character_.session().write(appearance);
+}
+
+/**
+ * Updates the movement of a character, for the current character.
+ * @param other The character to update.
+ */
+void CharacterSynchronizationTask::updateMovement(const Character& other)
+{
+    // The character's position
+    auto& pos = other.position();
+
+    // Construct the movement packet
+    CharacterMovementUpdate update;
+    update.id        = other.id();
+    update.motion    = other.motion();
+    update.direction = other.direction();
+    update.x         = pos.x();
+    update.y         = pos.y();
+    update.z         = pos.z();
+    character_.session().write(update);
 }
 
 /**

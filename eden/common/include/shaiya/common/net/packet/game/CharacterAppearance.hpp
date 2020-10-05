@@ -46,7 +46,7 @@ namespace shaiya::net
         Sitting,
         Jumping,
         Backflip
-    } PACKED;
+    };
 
     /**
      * Represents a character appearance update.

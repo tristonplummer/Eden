@@ -2,6 +2,7 @@
 #include <shaiya/common/DataTypes.hpp>
 #include <shaiya/game/world/model/EntityType.hpp>
 #include <shaiya/game/world/model/Position.hpp>
+#include <shaiya/game/world/model/UpdateMask.hpp>
 
 #include <memory>
 
@@ -44,6 +45,39 @@ namespace shaiya::game
         void deactivate();
 
         /**
+         * Flags this entity for an update of a specific type.
+         * @param mask  The update type.
+         */
+        void flagUpdate(UpdateMask mask);
+
+        /**
+         * Resets the update flags.
+         */
+        void resetUpdateFlags();
+
+        /**
+         * Sets the direction this entity is facing.
+         * @param direction The direction to face.
+         */
+        void setDirection(uint16_t direction);
+
+        /**
+         * Sets the motion value of this entity.
+         * @param motion    The motion value.
+         */
+        void setMotion(uint8_t motion);
+
+        /**
+         * Checks if this entity is flagged for an update of a specific type.
+         * @param mask  The update type.
+         * @return      If the entity is flagged for this update.
+         */
+        bool hasUpdateFlag(UpdateMask mask) const
+        {
+            return updateMask_ & mask;
+        }
+
+        /**
          * Checks if this entity is active.
          * @return  If the entity is active.
          */
@@ -52,6 +86,23 @@ namespace shaiya::game
             return active_;
         }
 
+        /**
+         * Gets the direction that the entity is facing.
+         * @return  The direction.
+         */
+        uint16_t direction() const
+        {
+            return direction_;
+        }
+
+        /**
+         * Gets the motion value of the entity.
+         * @return  The motion.
+         */
+        uint8_t motion() const
+        {
+            return motion_;
+        }
         /**
          * Get the position of this entity.
          * @return  The position
@@ -106,13 +157,28 @@ namespace shaiya::game
         GameWorldService& world_;
 
         /**
+         * The position of this entity in the world.
+         */
+        Position position_;
+
+        /**
          * If this entity is active.
          */
         bool active_{ false };
 
         /**
-         * The position of this entity in the world.
+         * The update mask of this entity.
          */
-        Position position_;
+        uint32_t updateMask_{ 0 };
+
+        /**
+         * The motion value of this entity.
+         */
+        uint8_t motion_{ 0 };
+
+        /**
+         * The direction this entity is facing.
+         */
+        uint16_t direction_{ 0 };
     };
 }

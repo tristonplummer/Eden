@@ -9,15 +9,6 @@ namespace shaiya::net
     constexpr auto CharacterMovementOpcode = 0x0501;
 
     /**
-     * The motion type.
-     */
-    enum class MotionType : uint8_t
-    {
-        Stopped = 132,
-        Moving  = 129
-    };
-
-    /**
      * Represents an update from a character to the server, about their movement.
      */
     struct CharacterMovement
@@ -31,7 +22,7 @@ namespace shaiya::net
          * The motion, which indicates if the character has stopped moving, or if there
          * are more movements to follow.
          */
-        MotionType motion{ MotionType::Stopped };
+        uint8_t motion{ 0 };
 
         /**
          * The direction the character is facing.
@@ -72,7 +63,7 @@ namespace shaiya::net
         /**
          * The motion of the character.
          */
-        MotionType motionType{ MotionType::Stopped };
+        uint8_t motion{ 0 };
 
         /**
          * The direction the character is facing.

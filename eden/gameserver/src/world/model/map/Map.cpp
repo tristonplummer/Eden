@@ -18,7 +18,7 @@ constexpr auto CELL_SIZE = 16;
 /**
  * The observable radius from a center cell.
  */
-constexpr auto OBSERVABLE_CELL_RADIUS = 1;
+constexpr auto OBSERVABLE_CELL_RADIUS = 3;
 
 /**
  * The offset to read a map's size type from, if it is a field.

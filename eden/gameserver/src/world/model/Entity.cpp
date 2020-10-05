@@ -35,6 +35,47 @@ void Entity::deactivate()
 }
 
 /**
+ * Flags this entity for an update of a specific type.
+ * @param mask  The update type.
+ */
+void Entity::flagUpdate(UpdateMask mask)
+{
+    updateMask_ |= mask;
+}
+
+/**
+ * Resets the update flags.
+ */
+void Entity::resetUpdateFlags()
+{
+    updateMask_ = 0;
+}
+
+/**
+ * Sets the direction this entity is facing.
+ * @param direction The direction to face.
+ */
+void Entity::setDirection(uint16_t direction)
+{
+    if (direction_ == direction)
+        return;
+    direction_ = direction;
+    flagUpdate(UpdateMask::Movement);
+}
+
+/**
+ * Sets the motion value of this entity.
+ * @param motion    The motion value.
+ */
+void Entity::setMotion(uint8_t motion)
+{
+    if (motion_ == motion)
+        return;
+    motion_ = motion;
+    flagUpdate(UpdateMask::Movement);
+}
+
+/**
  * Sets the position of this entity.
  * @param position  The position.
  */
@@ -67,4 +108,7 @@ void Entity::setPosition(Position position)
     // Add the entity to the new map
     auto next = maps.forId(position_.map());
     next->add(entity);
+
+    // Flag this entity for a movement update
+    flagUpdate(UpdateMask::Movement);
 }

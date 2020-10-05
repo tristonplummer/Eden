@@ -20,6 +20,10 @@ void handleCharacterMovement(Session& session, const CharacterMovement& movement
     if (!character)
         return;
 
+    // Update the motion and direction
+    character->setDirection(movement.direction);
+    character->setMotion(movement.motion);
+
     // Update the character's position
     auto map = character->position().map();
     character->setPosition(Position(map, movement.x, movement.y, movement.z));
