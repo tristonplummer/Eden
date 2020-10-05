@@ -30,6 +30,12 @@ namespace shaiya::game
         void add(const std::shared_ptr<Entity>& entity) const;
 
         /**
+         * Removes an entity from this map.
+         * @param entity    The entity to remove.
+         */
+        void remove(const std::shared_ptr<Entity>& entity) const;
+
+        /**
          * Gets the cells in a neighbouring radius of a position.
          * @param position  The position.
          * @return          The neighbouring cells.

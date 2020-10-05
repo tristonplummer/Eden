@@ -56,11 +56,6 @@ void GameWorldService::registerCharacter(const std::shared_ptr<Character>& chara
 
     // Initialise the character
     character->init();
-
-    // Add the character to their map
-    auto& pos = character->position();
-    auto map  = mapRepository_.forId(pos.map());
-    map->add(character);
 }
 
 /**

@@ -10,6 +10,20 @@ namespace shaiya::game
     {
     public:
         /**
+         * Default initialise everything to 0.
+         */
+        Position() = default;
+
+        /**
+         * Creates a position from a set of coordinates.
+         * @param map   The map id.
+         * @param x     The x coordinate.
+         * @param y     The y coordinate.
+         * @param z     The z coordinate.
+         */
+        Position(uint16_t map, float x, float y, float z);
+
+        /**
          * Gets the map id.
          * @return  The map id.
          */
@@ -44,6 +58,13 @@ namespace shaiya::game
         {
             return z_;
         }
+
+        /**
+         * Checks if a position is equal to this one.
+         * @param other The other position.
+         * @return      If the two positions are equal.
+         */
+        bool operator==(const Position& other) const;
 
     private:
         /**

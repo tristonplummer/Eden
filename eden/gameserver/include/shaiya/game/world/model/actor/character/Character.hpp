@@ -29,12 +29,6 @@ namespace shaiya::game
         void init() override;
 
         /**
-         * Gets the game world service.
-         * @return  The game world.
-         */
-        [[nodiscard]] GameWorldService& world() const;
-
-        /**
          * Gets the session for this character.
          * @return  The session.
          */

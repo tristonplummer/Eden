@@ -8,7 +8,8 @@ using namespace shaiya::game;
  * @param session   The session instance.
  * @param id        The character id.
  */
-Character::Character(shaiya::net::GameSession& session, size_t id): session_(session)
+Character::Character(shaiya::net::GameSession& session, size_t id)
+    : session_(session), Actor(session.context().getGameWorld())
 {
     // Set the character id and faction
     id_      = id;
@@ -20,8 +21,13 @@ Character::Character(shaiya::net::GameSession& session, size_t id): session_(ses
  */
 void Character::init()
 {
+    // Set this entity type
+    type_ = EntityType::Character;
+
     // Initialise the base actor
     Actor::init();
+
+    setPosition(Position(0, 1200, 60, 1200));
 
     // Prepare the character details
     CharacterDetails details;
@@ -29,9 +35,9 @@ void Character::init()
     details.skillpoints = skillpoints_;
 
     // Write the character's position
-    details.x = position_.x();
-    details.y = position_.y();
-    details.z = position_.z();
+    details.x = position().x();
+    details.y = position().y();
+    details.z = position().z();
 
     // Write the maximum health, mana and stamina
     details.maxHitpoints = stats_.maxHitpoints();
@@ -44,13 +50,4 @@ void Character::init()
     details.victories = victories_;
     details.defeats   = defeats_;
     session_.write(details);  // Send the character details.
-}
-
-/**
- * Gets the game world service.
- * @return  The game world.
- */
-[[nodiscard]] GameWorldService& Character::world() const
-{
-    return session_.context().getGameWorld();
 }

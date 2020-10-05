@@ -110,6 +110,17 @@ void Map::add(const std::shared_ptr<Entity>& entity) const
 }
 
 /**
+ * Removes an entity from this map.
+ * @param entity    The entity to remove.
+ */
+void Map::remove(const std::shared_ptr<Entity>& entity) const
+{
+    auto cell = getCell(entity->position());
+    assert(cell);
+    cell->removeEntity(entity);
+}
+
+/**
  * Get a cell in the map based on a position.
  * @param position  The position.
  * @return          The map cell.

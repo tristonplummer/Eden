@@ -13,6 +13,12 @@ namespace shaiya::game
     public:
         /**
          * Initialises this actor.
+         * @param world The world instance.
+         */
+        explicit Actor(GameWorldService& world);
+
+        /**
+         * Initialises this actor.
          */
         void init() override;
 

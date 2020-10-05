@@ -20,6 +20,12 @@ namespace shaiya::game
         void addEntity(const std::shared_ptr<Entity>& entity);
 
         /**
+         * Removes an entity from this cell.
+         * @param entity    The entity to remove.
+         */
+        void removeEntity(const std::shared_ptr<Entity>& entity);
+
+        /**
          * Gets the entities in this cell.
          * @return  The entities.
          */
