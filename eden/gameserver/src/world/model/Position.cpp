@@ -1,13 +1,11 @@
 #include <shaiya/game/world/model/Position.hpp>
 
-#include <cmath>
-
 using namespace shaiya::game;
 
 /**
  * The viewport distance of a player.
  */
-constexpr auto VIEWPORT_DISTANCE = 90;
+constexpr auto VIEWPORT_DISTANCE = 60;
 
 /**
  * Creates a position from a set of coordinates.
@@ -18,18 +16,6 @@ constexpr auto VIEWPORT_DISTANCE = 90;
  */
 Position::Position(uint16_t map, float x, float y, float z): map_(map), x_(x), y_(y), z_(z)
 {
-}
-
-/**
- * Gets the longest horizontal or vertical delta between the two positions.
- * @param other The other position.
- * @return      The longest delta.
- */
-float Position::getLongestDelta(const Position& other) const
-{
-    auto deltaX = x_ - other.x_;
-    auto deltaZ = z_ - other.z_;
-    return std::max(deltaX, deltaZ);
 }
 
 /**
@@ -53,7 +39,7 @@ bool Position::isWithinDistance(const Position& other, float distance) const
  */
 bool Position::isWithinViewportDistance(const Position& other) const
 {
-    return getLongestDelta(other) > VIEWPORT_DISTANCE || isWithinDistance(other, VIEWPORT_DISTANCE);
+    return isWithinDistance(other, VIEWPORT_DISTANCE);
 }
 
 /**
