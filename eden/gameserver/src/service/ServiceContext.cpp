@@ -29,6 +29,9 @@ ServiceContext::ServiceContext(boost::property_tree::ptree& config)
     charScreen_  = new CharacterScreenService(*dbService_, worldId);
     gameService_ = new GameWorldService(*dbService_);
 
+    // Load the game world
+    gameService_->load(config);
+
     // Run the api service on an external thread, as it blocks
     std::thread apiThread(&WorldApiService::start, apiService_, worldApiPort);
     apiThread.detach();

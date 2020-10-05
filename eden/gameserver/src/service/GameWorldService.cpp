@@ -13,6 +13,15 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db): db_(d
 }
 
 /**
+ * Loads the game world service.
+ * @param config    The configuration instance.
+ */
+void GameWorldService::load(boost::property_tree::ptree& config)
+{
+    mapRepository_.load(config.get<std::string>("World.MapFilePath"));  // Load the game's maps.
+}
+
+/**
  * Handles the main tick of the world.
  * @param tickRate  The tick frequency
  */
@@ -39,7 +48,7 @@ void GameWorldService::tick(size_t tickRate)
  * Handles the registration of a character to this game world.
  * @param character The character to register.
  */
-void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
+void GameWorldService::registerCharacter(const std::shared_ptr<Character>& character)
 {
     // Lock the mutex and add the character to the vector
     std::lock_guard lock{ mutex_ };
@@ -47,6 +56,11 @@ void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
 
     // Initialise the character
     character->init();
+
+    // Add the character to their map
+    auto& pos = character->position();
+    auto map  = mapRepository_.forId(pos.map());
+    map->add(character);
 }
 
 /**

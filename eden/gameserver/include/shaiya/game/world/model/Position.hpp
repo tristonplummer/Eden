@@ -10,6 +10,15 @@ namespace shaiya::game
     {
     public:
         /**
+         * Gets the map id.
+         * @return  The map id.
+         */
+        [[nodiscard]] uint16_t map() const
+        {
+            return map_;
+        }
+
+        /**
          * Get the position along the x-axis.
          * @return  The x-coordinate
          */
