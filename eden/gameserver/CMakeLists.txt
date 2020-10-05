@@ -21,6 +21,7 @@ target_link_libraries(gameserver
             gameapiprotocol
             Protobuf
             Grpc
+            TBB
             ${PQXX_LIB}
             ${PQ_LIB}
             ${CRYPTOPP_LIBRARY}
