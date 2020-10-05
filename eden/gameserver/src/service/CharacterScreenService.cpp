@@ -149,7 +149,7 @@ std::vector<CharacterListEntry> CharacterScreenService::getCharacters(GameSessio
         pqxx::work tx(*connection);
 
         // Fetch the character rows
-        auto rows = tx.exec_prepared(FETCH_CHARACTERS, session.userId(), worldId_);
+        auto rows = tx.exec_prepared(FETCH_CHARACTERS, worldId_, session.userId());
 
         // Loop through the rows
         for (auto&& row: rows)
