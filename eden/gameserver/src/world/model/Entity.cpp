@@ -19,6 +19,22 @@ void Entity::init()
 }
 
 /**
+ * Marks this entity as active.
+ */
+void Entity::activate()
+{
+    active_ = true;
+}
+
+/**
+ * Marks this entity as inactive.
+ */
+void Entity::deactivate()
+{
+    active_ = false;
+}
+
+/**
  * Sets the position of this entity.
  * @param position  The position.
  */

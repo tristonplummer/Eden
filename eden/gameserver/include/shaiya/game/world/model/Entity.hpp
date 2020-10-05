@@ -34,6 +34,25 @@ namespace shaiya::game
         void setPosition(Position position);
 
         /**
+         * Marks this entity as active.
+         */
+        void activate();
+
+        /**
+         * Marks this entity as inactive.
+         */
+        void deactivate();
+
+        /**
+         * Checks if this entity is active.
+         * @return  If the entity is active.
+         */
+        bool active() const
+        {
+            return active_;
+        }
+
+        /**
          * Get the position of this entity.
          * @return  The position
          */
@@ -85,6 +104,11 @@ namespace shaiya::game
          * The game world instance.
          */
         GameWorldService& world_;
+
+        /**
+         * If this entity is active.
+         */
+        bool active_{ false };
 
         /**
          * The position of this entity in the world.
