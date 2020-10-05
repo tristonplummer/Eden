@@ -22,6 +22,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<AccountFactionOpcode>();
     registerPacketHandler<CharacterCreateOpcode>();
     registerPacketHandler<CharacterSelectOpcode>();
+    registerPacketHandler<CharacterMovementOpcode>();
 }
 
 /**
