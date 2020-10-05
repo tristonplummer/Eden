@@ -43,6 +43,15 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the game world service.
+         * @return  The world service.
+         */
+        [[nodiscard]] GameWorldService& world() const
+        {
+            return world_;
+        }
+
+        /**
          * Gets the type of this entity.
          * @return  The type.
          */
