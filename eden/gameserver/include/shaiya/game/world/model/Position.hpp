@@ -24,6 +24,28 @@ namespace shaiya::game
         Position(uint16_t map, float x, float y, float z);
 
         /**
+         * Gets the longest horizontal or vertical delta between the two positions.
+         * @param other The other position.
+         * @return      The longest delta.
+         */
+        [[nodiscard]] float getLongestDelta(const Position& other) const;
+
+        /**
+         * Checks if a position is within distance of another.
+         * @param other     The other position.
+         * @param distance  The distance.
+         * @return          If the other position is in distance of this position.
+         */
+        [[nodiscard]] bool isWithinDistance(const Position& other, float distance) const;
+
+        /**
+         * Checks if a position is within viewport distance of another.
+         * @param other     The other position.
+         * @return          If the other position is in viewport distance of this position.
+         */
+        [[nodiscard]] bool isWithinViewportDistance(const Position& other) const;
+
+        /**
          * Gets the map id.
          * @return  The map id.
          */
