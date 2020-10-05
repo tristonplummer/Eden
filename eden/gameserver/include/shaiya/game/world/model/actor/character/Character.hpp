@@ -8,6 +8,8 @@ namespace shaiya::net
 
 namespace shaiya::game
 {
+    class GameWorldService;
+
     /**
      * Represents a player character.
      */
@@ -25,6 +27,12 @@ namespace shaiya::game
          * Initialises this character.
          */
         void init() override;
+
+        /**
+         * Gets the game world service.
+         * @return  The game world.
+         */
+        [[nodiscard]] GameWorldService& world() const;
 
         /**
          * Gets the session for this character.

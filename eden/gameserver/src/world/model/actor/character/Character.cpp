@@ -25,7 +25,7 @@ void Character::init()
 
     // Prepare the character details
     CharacterDetails details;
-    details.statpoints = statpoints_;
+    details.statpoints  = statpoints_;
     details.skillpoints = skillpoints_;
 
     // Write the character's position
@@ -44,4 +44,13 @@ void Character::init()
     details.victories = victories_;
     details.defeats   = defeats_;
     session_.write(details);  // Send the character details.
+}
+
+/**
+ * Gets the game world service.
+ * @return  The game world.
+ */
+[[nodiscard]] GameWorldService& Character::world() const
+{
+    return session_.context().getGameWorld();
 }
