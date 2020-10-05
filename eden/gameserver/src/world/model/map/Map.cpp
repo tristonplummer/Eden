@@ -18,7 +18,7 @@ constexpr auto CELL_SIZE = 16;
 /**
  * The observable radius from a center cell.
  */
-constexpr auto OBSERVABLE_CELL_RADIUS = 3;
+constexpr auto OBSERVABLE_CELL_RADIUS = 1;
 
 /**
  * The offset to read a map's size type from, if it is a field.
@@ -102,7 +102,7 @@ void Map::parseDungeon(std::ifstream& stream)
  * Adds an entity to this map.
  * @param entity    The entity to add.
  */
-void Map::add(const std::shared_ptr<Entity>& entity) const
+void Map::add(std::shared_ptr<Entity> entity) const
 {
     auto cell = getCell(entity->position());
     assert(cell);

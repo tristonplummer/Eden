@@ -17,7 +17,7 @@ namespace shaiya::game
          * Adds an entity to this cell.
          * @param entity    The entity to add.
          */
-        void addEntity(const std::shared_ptr<Entity>& entity);
+        void addEntity(std::shared_ptr<Entity> entity);
 
         /**
          * Removes an entity from this cell.

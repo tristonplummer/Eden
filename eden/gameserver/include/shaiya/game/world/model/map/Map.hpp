@@ -27,7 +27,7 @@ namespace shaiya::game
          * Adds an entity to this map.
          * @param entity    The entity to add.
          */
-        void add(const std::shared_ptr<Entity>& entity) const;
+        void add(std::shared_ptr<Entity> entity) const;
 
         /**
          * Removes an entity from this map.

@@ -7,7 +7,7 @@ using namespace shaiya::game;
  * Adds an entity to this cell.
  * @param entity    The entity to add.
  */
-void MapCell::addEntity(const std::shared_ptr<Entity>& entity)
+void MapCell::addEntity(std::shared_ptr<Entity> entity)
 {
     entities_.push_back(entity);
 }
@@ -18,8 +18,10 @@ void MapCell::addEntity(const std::shared_ptr<Entity>& entity)
  */
 void MapCell::removeEntity(const std::shared_ptr<Entity>& entity)
 {
-    auto pred = [&](const std::shared_ptr<Entity>& element) { return element.get() == entity.get(); };
-    auto pos  = std::find_if(entities_.begin(), entities_.end(), pred);
+    auto pred = [&](const std::shared_ptr<Entity>& element) {
+        return element->type() == entity->type() && element->id() == entity->id();
+    };
+    auto pos = std::find_if(entities_.begin(), entities_.end(), pred);
     if (pos != entities_.end())
     {
         entities_.erase(pos);
