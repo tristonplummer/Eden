@@ -23,6 +23,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<CharacterCreateOpcode>();
     registerPacketHandler<CharacterSelectOpcode>();
     registerPacketHandler<CharacterMovementOpcode>();
+    registerPacketHandler<CharacterEnteredViewportOpcode>();
 }
 
 /**
