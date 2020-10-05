@@ -15,7 +15,8 @@ RUN apt-get install --yes   \
     protobuf-compiler       \
     protobuf-compiler-grpc  \
     libgrpc++-dev           \
-    libpqxx-dev
+    libpqxx-dev             \
+    libtbb-dev
 
 # Copy the source files
 COPY . /edensrc/
@@ -38,8 +39,9 @@ RUN apt-get install --yes   \
     libgoogle-glog0v5       \
     libpqxx-6.4             \
     libprotobuf17           \
-    libgrpc++1
-
+    libgrpc++1              \
+    libtbb2
+    
 # Create a new working directory
 WORKDIR /eden/
 
