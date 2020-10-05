@@ -1,6 +1,8 @@
 #pragma once
 #include <shaiya/game/world/model/actor/Actor.hpp>
 
+#include <vector>
+
 namespace shaiya::net
 {
     class GameSession;  // Forward declaration of the session.
@@ -27,6 +29,15 @@ namespace shaiya::game
          * Initialises this character.
          */
         void init() override;
+
+        /**
+         * Gets the vector of characters that are in this character's viewport.
+         * @return  The observed characters.
+         */
+        [[nodiscard]] std::vector<Character*>& observedCharacters()
+        {
+            return observedCharacters_;
+        }
 
         /**
          * Gets the session for this character.
@@ -72,5 +83,10 @@ namespace shaiya::game
          * The number of defeats the character has.
          */
         uint32_t defeats_{ 0 };
+
+        /**
+         * The vector of characters that are in this character's viewport.
+         */
+        std::vector<Character*> observedCharacters_;
     };
 }

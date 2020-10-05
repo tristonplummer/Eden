@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/world/model/map/MapRepository.hpp>
+#include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -36,7 +37,7 @@ namespace shaiya::game
          * Handles the registration of a character to this game world.
          * @param character The character to register.
          */
-        void registerCharacter(const std::shared_ptr<Character>& character);
+        void registerCharacter(std::shared_ptr<Character> character);
 
         /**
          * Removes a character from this game world.
@@ -48,7 +49,7 @@ namespace shaiya::game
          * Gets the map repository
          * @return  The map repository
          */
-        [[nodiscard]] MapRepository& maps()
+        [[nodiscard]] const MapRepository& maps() const
         {
             return mapRepository_;
         }
@@ -68,6 +69,11 @@ namespace shaiya::game
          * A vector containing the characters that are connected to this game world.
          */
         std::vector<std::shared_ptr<Character>> characters_;
+
+        /**
+         * The client synchronizer
+         */
+        std::unique_ptr<ClientSynchronizer> synchronizer_;
 
         /**
          * The map repository.

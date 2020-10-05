@@ -10,6 +10,8 @@ using namespace shaiya::game;
  */
 GameWorldService::GameWorldService(shaiya::database::DatabaseService& db): db_(db)
 {
+    // Specify the synchronizer
+    synchronizer_ = std::make_unique<ParallelClientSynchronizer>();
 }
 
 /**
@@ -39,6 +41,9 @@ void GameWorldService::tick(size_t tickRate)
         for (auto&& character: characters_)
             character->session().processQueue();
 
+        // Synchronize the characters with the world state
+        synchronizer_->synchronize(characters_);
+
         // Sleep until the next tick
         std::this_thread::sleep_until(nextTick);
     }
@@ -48,7 +53,7 @@ void GameWorldService::tick(size_t tickRate)
  * Handles the registration of a character to this game world.
  * @param character The character to register.
  */
-void GameWorldService::registerCharacter(const std::shared_ptr<Character>& character)
+void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
 {
     // Lock the mutex and add the character to the vector
     std::lock_guard lock{ mutex_ };
@@ -71,5 +76,10 @@ void GameWorldService::unregisterCharacter(std::shared_ptr<Character>& character
     auto predicate = [&](auto& element) { return element.get() == character.get(); };
     auto pos       = std::find_if(characters_.begin(), characters_.end(), predicate);
     if (pos != characters_.end())
+    {
         characters_.erase(pos);
+
+        auto map = mapRepository_.forId(character->position().map());
+        map->remove(character);
+    }
 }
