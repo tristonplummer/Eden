@@ -74,7 +74,7 @@ namespace shaiya::game
          */
         bool hasUpdateFlag(UpdateMask mask) const
         {
-            return updateMask_ & mask;
+            return updateMask_ & static_cast<uint32_t>(mask);
         }
 
         /**

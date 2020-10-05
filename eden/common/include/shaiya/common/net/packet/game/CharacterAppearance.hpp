@@ -1,6 +1,6 @@
 #pragma once
 #include <shaiya/common/DataTypes.hpp>
-#include <shaiya/common/net/packet/game/CharacterMovement.hpp>
+#include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
 
 #include <array>
 
@@ -36,17 +36,6 @@ namespace shaiya::net
          */
         uint8_t enchant{ 0 };
     } PACKED;
-
-    /**
-     * Represents a state of movement.
-     */
-    enum class MovementState : uint8_t
-    {
-        Standing,
-        Sitting,
-        Jumping,
-        Backflip
-    };
 
     /**
      * Represents a character appearance update.

@@ -51,3 +51,26 @@ void Character::init()
     details.defeats   = defeats_;
     session_.write(details);  // Send the character details.
 }
+
+/**
+ * Sets the movement state of a character.
+ * @param movementState The new movement state.
+ */
+void Character::setMovementState(MovementState movementState)
+{
+    // If the previous movement state is not jumping or performing a backflip, flag an update.
+    if (movementState_ != MovementState::Jumping && movementState_ != MovementState::Backflip)
+        flagUpdate(UpdateMask::MovementState);
+    movementState_ = movementState;  // Update the movement state
+}
+
+/**
+ * Resets the movement state of a character.
+ */
+void Character::resetMovementState()
+{
+    // If the current movement state is standing or sitting, do nothing
+    if (movementState_ == MovementState::Standing || movementState_ == MovementState::Sitting)
+        return;
+    movementState_ = MovementState::Standing;
+}

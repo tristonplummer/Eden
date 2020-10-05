@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
 
 #include <vector>
@@ -29,6 +30,26 @@ namespace shaiya::game
          * Initialises this character.
          */
         void init() override;
+
+        /**
+         * Sets the movement state of a character.
+         * @param movementState The new movement state.
+         */
+        void setMovementState(shaiya::net::MovementState movementState);
+
+        /**
+         * Resets the movement state of a character.
+         */
+        void resetMovementState();
+
+        /**
+         * Gets the movement state of this character.
+         * @return  The movement state.
+         */
+        shaiya::net::MovementState movementState() const
+        {
+            return movementState_;
+        }
 
         /**
          * Gets the vector of characters that are in this character's viewport.
@@ -83,6 +104,11 @@ namespace shaiya::game
          * The number of defeats the character has.
          */
         uint32_t defeats_{ 0 };
+
+        /**
+         * The movement state of this character.
+         */
+        shaiya::net::MovementState movementState_{ shaiya::net::MovementState::Standing };
 
         /**
          * The vector of characters that are in this character's viewport.

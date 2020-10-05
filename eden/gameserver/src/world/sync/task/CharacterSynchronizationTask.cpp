@@ -56,6 +56,10 @@ void CharacterSynchronizationTask::sync()
         // Loop through the entities in each cell.
         for (auto&& entity: cell->entities())
         {
+            // If the entity is not yet active, do nothing
+            if (!entity->active())
+                continue;
+
             // If the entity is another character, and they are observable, add them
             if (entity->type() == EntityType::Character)
             {
@@ -87,6 +91,10 @@ void CharacterSynchronizationTask::sync()
         // Update movement
         if (observed->hasUpdateFlag(UpdateMask::Movement))
             updateMovement(*observed);
+
+        // Update the movement state (standing, sitting, jumping...)
+        if (observed->hasUpdateFlag(UpdateMask::MovementState))
+            updateMovementState(*observed);
     }
 }
 
@@ -136,6 +144,7 @@ void CharacterSynchronizationTask::updateAppearance(const Character& other)
     CharacterAppearance appearance;
     appearance.id      = other.id();
     appearance.faction = other.faction();
+    appearance.state   = other.movementState();
     appearance.name    = "Cups";
     character_.session().write(appearance);
 }
@@ -157,6 +166,19 @@ void CharacterSynchronizationTask::updateMovement(const Character& other)
     update.x         = pos.x();
     update.y         = pos.y();
     update.z         = pos.z();
+    character_.session().write(update);
+}
+
+/**
+ * Updates the movement state of a character, for the current character.
+ * @param other The character to update.
+ */
+void CharacterSynchronizationTask::updateMovementState(const Character& other)
+{
+    // Construct the movement state notification
+    MovementStateNotification update;
+    update.id    = other.id();
+    update.state = other.movementState();
     character_.session().write(update);
 }
 

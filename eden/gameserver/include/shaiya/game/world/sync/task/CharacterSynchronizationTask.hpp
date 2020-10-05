@@ -48,6 +48,12 @@ namespace shaiya::game
         void updateMovement(const Character& other);
 
         /**
+         * Updates the movement state of a character, for the current character.
+         * @param other The character to update.
+         */
+        void updateMovementState(const Character& other);
+
+        /**
          * Checks if a character is observable to the current character.
          * @param other The other character.
          * @return      If the other character can be observed.

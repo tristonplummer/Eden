@@ -73,5 +73,6 @@ namespace shaiya::net
 #include "game/CharacterLeftViewport.hpp"
 #include "game/CharacterList.hpp"
 #include "game/CharacterMovement.hpp"
+#include "game/CharacterMovementState.hpp"
 #include "game/CharacterSelection.hpp"
 #include "game/GameHandshake.hpp"

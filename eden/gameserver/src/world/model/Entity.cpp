@@ -40,7 +40,7 @@ void Entity::deactivate()
  */
 void Entity::flagUpdate(UpdateMask mask)
 {
-    updateMask_ |= mask;
+    updateMask_ |= static_cast<uint32_t>(mask);
 }
 
 /**
