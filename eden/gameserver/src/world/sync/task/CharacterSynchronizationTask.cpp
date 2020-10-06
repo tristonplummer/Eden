@@ -162,7 +162,7 @@ void CharacterSynchronizationTask::updateAppearance(const Character& other)
     appearance.name    = "Cups";
 
     // The equipment of the character
-    auto& equipment = other.equipment().items();
+    auto equipment = other.equipment().visibleItems();
     for (auto i = 0; i < appearance.equipment.size(); i++)
     {
         auto& item = equipment.at(i);

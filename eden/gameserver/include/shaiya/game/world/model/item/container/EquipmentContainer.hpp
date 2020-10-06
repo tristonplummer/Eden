@@ -33,6 +33,12 @@ namespace shaiya::game
          */
         bool add(std::shared_ptr<Item> item, EquipmentSlot slot);
 
+        /**
+         * Gets the vector of items that are visible by other characters.
+         * @return  The visible items
+         */
+        [[nodiscard]] std::vector<std::shared_ptr<Item>> visibleItems() const;
+
     private:
         /**
          * The character that owns this equipment container.
