@@ -6,16 +6,16 @@ namespace shaiya::game
     class Character;
 
     /**
-     * A specialised container event listener, that listens for events on a character's equipment.
+     * A specialised container event listener, that listens for events on a character's inventory.
      */
-    class EquipmentEventListener: public ContainerEventListener
+    class InventoryEventListener: public ContainerEventListener
     {
     public:
         /**
          * Initialises this event listener for a character.
          * @param character The character that is listening to events.
          */
-        explicit EquipmentEventListener(Character& character);
+        explicit InventoryEventListener(Character& character);
 
         /**
          * Gets executed when an item is added to a container.

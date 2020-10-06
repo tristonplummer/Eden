@@ -82,6 +82,6 @@ namespace shaiya::net
         /**
          * The item units that are being updated.
          */
-        std::array<CharacterItemUnit, CharacterItemUpdateCapacity> items;
+        CharacterItemUnit items[CharacterItemUpdateCapacity];
     } PACKED;
 }

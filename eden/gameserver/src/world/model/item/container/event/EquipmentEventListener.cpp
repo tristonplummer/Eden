@@ -59,7 +59,7 @@ void EquipmentEventListener::sync(const ItemContainer& container)
         {
             unit.type   = item->type();
             unit.typeId = item->typeId();
-            unit.count  = 1;
+            unit.count  = item->count();
         }
 
         update.items[i] = unit;
