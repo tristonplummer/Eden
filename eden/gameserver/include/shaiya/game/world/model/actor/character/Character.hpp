@@ -1,7 +1,7 @@
 #pragma once
 #include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
-#include <shaiya/game/world/model/item/EquipmentContainer.hpp>
+#include <shaiya/game/world/model/item/container/EquipmentContainer.hpp>
 
 #include <vector>
 

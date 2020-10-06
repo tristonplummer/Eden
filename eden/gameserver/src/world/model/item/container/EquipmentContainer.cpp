@@ -1,5 +1,5 @@
 #include <shaiya/game/world/model/actor/character/Character.hpp>
-#include <shaiya/game/world/model/item/container/EquipmentEventListener.hpp>
+#include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
 
 using namespace shaiya::game;
 

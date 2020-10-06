@@ -1,4 +1,4 @@
-#include <shaiya/game/world/model/item/ItemContainer.hpp>
+#include <shaiya/game/world/model/item/container/ItemContainer.hpp>
 
 using namespace shaiya::game;
 

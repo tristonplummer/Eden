@@ -1,6 +1,6 @@
 #pragma once
-#include <shaiya/game/world/model/item/EquipmentSlot.hpp>
-#include <shaiya/game/world/model/item/ItemContainer.hpp>
+#include <shaiya/game/world/model/item/container/EquipmentSlot.hpp>
+#include <shaiya/game/world/model/item/container/ItemContainer.hpp>
 
 namespace shaiya::game
 {
