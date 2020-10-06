@@ -9,7 +9,7 @@ using namespace shaiya::game;
  * @param id        The character id.
  */
 Character::Character(shaiya::net::GameSession& session, size_t id)
-    : session_(session), equipment_(*this), inventory_(*this), Actor(session.context().getGameWorld())
+    : session_(session), equipment_(*this), inventory_(*this), actionBar_(*this), Actor(session.context().getGameWorld())
 {
     // Set this entity type
     type_ = EntityType::Character;

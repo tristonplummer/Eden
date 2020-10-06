@@ -25,16 +25,18 @@ void GameSession::onAccept()
 
 /**
  * Initialises the encryption for this session.
- * @param key   The AES key.
- * @param iv    The AES iv.
+ * @param key       The AES key.
+ * @param iv        The AES iv.
+ * @param xorKey    The XOR key to use in expanded encryption.
  */
-void GameSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv)
+void GameSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv, std::array<byte, 16> xorKey)
 {
     using namespace CryptoPP;
 
-    // Save the key and iv
-    key_ = key;
-    iv_  = iv;
+    // Save the keys and the iv
+    xorKey_ = xorKey;
+    key_    = key;
+    iv_     = iv;
 
     // Generate a hash based off the IV
     std::vector<uint8_t> digest;
@@ -49,6 +51,15 @@ void GameSession::initEncryption(std::array<byte, 16> key, std::array<byte, 16> 
     encryptionMode_ = EncryptionMode::Encrypted;
     encryption_     = shaiya::crypto::Aes128Ctr(key_, iv_);
     decryption_     = shaiya::crypto::Aes128Ctr(key_, iv_);
+}
+
+/**
+ * Initialises the XOR encryption for this session.
+ */
+void GameSession::initXorEncryption()
+{
+    encryption_ = shaiya::crypto::Aes128Ctr(xorKey_, iv_);
+    encryption_.expandKey();
 }
 
 /**

@@ -28,6 +28,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<CharacterMoveItemOpcode>();
     registerPacketHandler<PlayerChatMessageOpcode>();
     registerPacketHandler<AdminChatMessageOpcode>();
+    registerPacketHandler<XorEncryptionSignalOpcode>();
 }
 
 /**

@@ -54,10 +54,16 @@ namespace shaiya::net
 
         /**
          * Initialises the encryption for this session.
-         * @param key   The AES key.
-         * @param iv    The AES iv.
+         * @param key       The AES key.
+         * @param iv        The AES iv.
+         * @param xorKey    The XOR key to use in expanded encryption.
          */
-        void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv);
+        void initEncryption(std::array<byte, 16> key, std::array<byte, 16> iv, std::array<byte, 16> xorKey);
+
+        /**
+         * Initialises the XOR encryption for this session.
+         */
+        void initXorEncryption();
 
         /**
          * Processes the queue of packets that are yet to be processed.
@@ -151,6 +157,11 @@ namespace shaiya::net
          * The character associated with this session.
          */
         std::shared_ptr<shaiya::game::Character> character_{ nullptr };
+
+        /**
+         * The XOR key to use in expanded encryption.
+         */
+        std::array<uint8_t, 16> xorKey_{ 0 };
 
         /**
          * The AES key

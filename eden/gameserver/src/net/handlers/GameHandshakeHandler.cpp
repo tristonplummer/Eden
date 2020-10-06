@@ -34,21 +34,25 @@ void handleHandshake(Session& session, const GameHandshakeRequest& request)
         return;
     }
 
-    // The aes key and iv
+    // The aes key iv, and xor key
     std::array<byte, 16> key{ 0 };
     std::array<byte, 16> iv{ 0 };
+    std::array<byte, 16> xorKey{ 0 };
 
     // Populate the AES values
     std::memcpy(key.data(), transfer->key().data(), key.size());
     std::memcpy(iv.data(), transfer->iv().data(), iv.size());
 
+    // Generate the XOR key
+    CryptoPP::AutoSeededRandomPool prng;
+    prng.GenerateBlock((byte*)xorKey.data(), xorKey.size());
+
     // Initialise the encryption based on the previous AES keys.
-    game.initEncryption(key, iv);
+    game.initEncryption(key, iv, xorKey);
 
     // Generate the expanded key to use for game world encryption and provide it to the client
     GameHandshakeResponse response;
-    CryptoPP::AutoSeededRandomPool prng;
-    prng.GenerateBlock((byte*)response.expandedKeySeed.data(), response.expandedKeySeed.size());
+    std::memcpy(response.expandedKeySeed.data(), xorKey.data(), xorKey.size());
     game.write(response);
 
     // Set the session's user id

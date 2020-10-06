@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
+#include <shaiya/game/world/model/actor/character/ActionBar.hpp>
 #include <shaiya/game/world/model/item/container/EquipmentContainer.hpp>
 #include <shaiya/game/world/model/item/container/InventoryContainer.hpp>
 
@@ -81,6 +82,15 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the action bar for this character.
+         * @return  The character's action bar.
+         */
+        [[nodiscard]] ActionBar& actionBar()
+        {
+            return actionBar_;
+        }
+
+        /**
          * Gets the vector of characters that are in this character's viewport.
          * @return  The observed characters.
          */
@@ -153,5 +163,10 @@ namespace shaiya::game
          * The inventory of the character.
          */
         InventoryContainer inventory_;
+
+        /**
+         * This character's action bar.
+         */
+        ActionBar actionBar_;
     };
 }

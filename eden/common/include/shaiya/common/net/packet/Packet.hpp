@@ -66,7 +66,9 @@ namespace shaiya::net
 
 // Include the game packets
 #include "game/AccountFaction.hpp"
+#include "game/CharacterActionBar.hpp"
 #include "game/CharacterAppearance.hpp"
+#include "game/CharacterChatMessage.hpp"
 #include "game/CharacterCreation.hpp"
 #include "game/CharacterDetails.hpp"
 #include "game/CharacterEnteredViewport.hpp"
@@ -77,5 +79,5 @@ namespace shaiya::net
 #include "game/CharacterMovement.hpp"
 #include "game/CharacterMovementState.hpp"
 #include "game/CharacterSelection.hpp"
-#include "game/CharacterChatMessage.hpp"
 #include "game/GameHandshake.hpp"
+#include "game/XorEncryptionSignal.hpp"
