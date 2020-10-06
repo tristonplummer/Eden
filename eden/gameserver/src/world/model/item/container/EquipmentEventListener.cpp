@@ -40,7 +40,7 @@ void EquipmentEventListener::sync(const ItemContainer& container)
             unit.count  = 1;
         }
 
-        update.items.at(i) = unit;
+        update.items[i] = unit;
     }
 
     character_.session().write(update);  // Write the update

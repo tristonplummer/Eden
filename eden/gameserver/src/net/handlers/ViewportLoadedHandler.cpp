@@ -14,10 +14,7 @@ void handleViewportLoaded(Session& session, const ViewportLoadedNotification& re
     auto character = game.character();
 
     if (character)
-    {
         character->activate();
-        character->equipment().sync();
-    }
 }
 
 /**

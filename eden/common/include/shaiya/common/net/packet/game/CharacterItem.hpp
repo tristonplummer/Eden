@@ -62,7 +62,7 @@ namespace shaiya::net
          * An ASCII representation of the orange stats.
          */
         VariableString<21> craftname;
-    };
+    } PACKED;
 
     /**
      * Represents a message informing a character about the items in their inventory
