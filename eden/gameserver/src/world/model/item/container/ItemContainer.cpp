@@ -65,7 +65,7 @@ std::shared_ptr<Item> ItemContainer::remove(size_t slot)
     if (!item)
         return nullptr;
 
-    items_.erase(items_.begin() + slot);
+    items_.at(slot) = nullptr;
     for (auto&& listener: listeners_)
         listener->itemRemoved(*this, item, slot);
     return item;
