@@ -143,6 +143,10 @@ void CharacterSynchronizationTask::processUpdateFlags(const Character& other)
     if (other.hasUpdateFlag(UpdateMask::MovementState))
         updateMovementState(other);
 
+    // Update normal chat
+    if (other.hasUpdateFlag(UpdateMask::Chat))
+        updateChat(other);
+
     // Update movement for other characters (no reason to update for the current character).
     if (other.hasUpdateFlag(UpdateMask::Movement) && other.id() != character_.id())
         updateMovement(other);
@@ -205,6 +209,22 @@ void CharacterSynchronizationTask::updateMovementState(const Character& other)
     MovementStateNotification update;
     update.id    = other.id();
     update.state = other.movementState();
+    character_.session().write(update);
+}
+
+/**
+ * Updates the chat of a character, for the other character.
+ * @param other The character to update.
+ */
+void CharacterSynchronizationTask::updateChat(const Character& other)
+{
+    auto chatMessage = other.getAttribute<std::string>(Attribute::LastChatMessage);
+
+    // Send the update
+    CharacterChatMessageUpdate update;
+    update.sender  = other.id();
+    update.length  = chatMessage.length();
+    update.message = chatMessage;
     character_.session().write(update);
 }
 

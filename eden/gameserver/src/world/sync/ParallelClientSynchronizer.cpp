@@ -28,7 +28,11 @@ void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Charact
     {
         if (!character->active())
             continue;
+        // Reset the update flags
         character->resetUpdateFlags();
         character->resetMovementState();
+
+        // Clear the temporary attributes used in updating
+        character->clearAttribute(Attribute::LastChatMessage);
     }
 }

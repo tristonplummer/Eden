@@ -26,6 +26,8 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<CharacterMovementStateOpcode>();
     registerPacketHandler<CharacterEnteredViewportOpcode>();
     registerPacketHandler<CharacterMoveItemOpcode>();
+    registerPacketHandler<PlayerChatMessageOpcode>();
+    registerPacketHandler<AdminChatMessageOpcode>();
 }
 
 /**

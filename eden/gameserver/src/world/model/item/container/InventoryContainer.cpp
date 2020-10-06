@@ -1,4 +1,5 @@
 #include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
 using namespace shaiya::game;
 
@@ -19,4 +20,5 @@ constexpr auto InventoryPageSize = 24;
 InventoryContainer::InventoryContainer(Character& character)
     : ItemContainer(InventoryPageCount, InventoryPageSize), character_(character)
 {
+    addListener(std::make_shared<InventoryEventListener>(character));
 }

@@ -77,4 +77,5 @@ namespace shaiya::net
 #include "game/CharacterMovement.hpp"
 #include "game/CharacterMovementState.hpp"
 #include "game/CharacterSelection.hpp"
+#include "game/CharacterChatMessage.hpp"
 #include "game/GameHandshake.hpp"

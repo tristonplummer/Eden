@@ -60,6 +60,12 @@ namespace shaiya::game
         void updateMovementState(const Character& other);
 
         /**
+         * Updates the chat of a character, for the other character.
+         * @param other The character to update.
+         */
+        void updateChat(const Character& other);
+
+        /**
          * Checks if a entity is observable by the current character.
          * @param other The other entity.
          * @return      If the other entity can be observed.

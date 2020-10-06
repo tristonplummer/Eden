@@ -3,7 +3,9 @@
 #include <shaiya/game/world/model/EntityType.hpp>
 #include <shaiya/game/world/model/Position.hpp>
 #include <shaiya/game/world/model/UpdateMask.hpp>
-
+#include <shaiya/game/world/model/Attribute.hpp>
+#include <any>
+#include <map>
 #include <memory>
 
 namespace shaiya::game
@@ -103,6 +105,37 @@ namespace shaiya::game
         {
             return motion_;
         }
+
+        /**
+         * Sets an attribute.
+         * @param attribute The attribute key.
+         * @param value     The value to set.
+         */
+        void setAttribute(Attribute attribute, std::any value);
+
+        /**
+         * Clears an attribute.
+         * @param attribute The attribute key.
+         */
+        void clearAttribute(Attribute attribute);
+
+        /**
+         * Gets an attribute.
+         * @tparam T            The attribute type.
+         * @param key           The attribute key.
+         * @param defaultValue  The default value.
+         * @return              The attribute value.
+         */
+        template <typename T>
+        T getAttribute(Attribute key, T defaultValue = {}) const
+        {
+            if (attributes_.contains(key))
+            {
+                return std::any_cast<T>(attributes_.at(key));
+            }
+            return defaultValue;
+        }
+
         /**
          * Get the position of this entity.
          * @return  The position
@@ -180,5 +213,10 @@ namespace shaiya::game
          * The direction this entity is facing.
          */
         uint16_t direction_{ 0 };
+
+        /**
+         * The attributes of this entity. An attribute can be any temporary, not serialized state.
+         */
+        std::map<Attribute, std::any> attributes_;
     };
 }

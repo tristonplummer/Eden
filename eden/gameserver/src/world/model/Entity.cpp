@@ -1,6 +1,8 @@
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/world/model/Entity.hpp>
 
+#include <utility>
+
 using namespace shaiya::game;
 
 /**
@@ -111,4 +113,23 @@ void Entity::setPosition(Position position)
 
     // Flag this entity for a movement update
     flagUpdate(UpdateMask::Movement);
+}
+
+/**
+ * Sets an attribute.
+ * @param attribute The attribute key.
+ * @param value     The value to set.
+ */
+void Entity::setAttribute(Attribute attribute, std::any value)
+{
+    attributes_[attribute] = std::move(value);
+}
+
+/**
+ * Clears an attribute.
+ * @param attribute The attribute key.
+ */
+void Entity::clearAttribute(Attribute attribute)
+{
+    attributes_.erase(attribute);
 }
