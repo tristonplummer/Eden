@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
+#include <shaiya/game/world/model/item/EquipmentContainer.hpp>
 
 #include <vector>
 
@@ -41,6 +42,24 @@ namespace shaiya::game
          * Resets the movement state of a character.
          */
         void resetMovementState();
+
+        /**
+         * Gets the equipment for this actor.
+         * @return  The equipment.
+         */
+        [[nodiscard]] EquipmentContainer& equipment()
+        {
+            return equipment_;
+        }
+
+        /**
+         * Gets the equipment for this actor.
+         * @return  The equipment.
+         */
+        [[nodiscard]] const EquipmentContainer& equipment() const
+        {
+            return equipment_;
+        }
 
         /**
          * Gets the movement state of this character.
@@ -114,5 +133,10 @@ namespace shaiya::game
          * The vector of characters that are in this character's viewport.
          */
         std::vector<Character*> observedCharacters_;
+
+        /**
+         * The worn equipment of the actor.
+         */
+        EquipmentContainer equipment_;
     };
 }

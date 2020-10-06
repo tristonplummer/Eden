@@ -26,12 +26,6 @@ void handleMovementState(Session& session, const MovementStateUpdate& movement)
 
     // Update the character's movement state
     character->setMovementState(movement.state);
-
-    // Inform ourselves of our own movement state (required for sitting)
-    MovementStateNotification update;
-    update.id    = character->id();
-    update.state = movement.state;
-    game.write(update);
 }
 
 /**

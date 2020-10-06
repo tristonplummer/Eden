@@ -60,6 +60,10 @@ void CharacterSynchronizationTask::sync()
             if (!entity->active())
                 continue;
 
+            // If we can't see the other entity, skip them.
+            if (!observable(*entity))
+                continue;
+
             // If the entity is another character, and they are observable, add them
             if (entity->type() == EntityType::Character)
             {
@@ -74,10 +78,6 @@ void CharacterSynchronizationTask::sync()
                 if (std::find(observedCharacters.begin(), observedCharacters.end(), other) != observedCharacters.end())
                     continue;
 
-                // If we can't see the other character, skip them.
-                if (!observable(*other))
-                    continue;
-
                 // Add the character
                 addCharacter(*other);
                 observedCharacters.push_back(other);
@@ -85,17 +85,12 @@ void CharacterSynchronizationTask::sync()
         }
     }
 
+    // Process our own update flags
+    processUpdateFlags(character_);
+
     // Loop over the observed characters and process their flagged updates.
     for (auto&& observed: observedCharacters)
-    {
-        // Update movement
-        if (observed->hasUpdateFlag(UpdateMask::Movement))
-            updateMovement(*observed);
-
-        // Update the movement state (standing, sitting, jumping...)
-        if (observed->hasUpdateFlag(UpdateMask::MovementState))
-            updateMovementState(*observed);
-    }
+        processUpdateFlags(*observed);
 }
 
 /**
@@ -135,6 +130,25 @@ void CharacterSynchronizationTask::removeCharacter(const Character& other)
 }
 
 /**
+ * Process the update flags for a character.
+ * @param other The character to update for this character.
+ */
+void CharacterSynchronizationTask::processUpdateFlags(const Character& other)
+{
+    // Update appearance
+    if (other.hasUpdateFlag(UpdateMask::Appearance))
+        updateAppearance(other);
+
+    // Update the movement state (standing, sitting, jumping...)
+    if (other.hasUpdateFlag(UpdateMask::MovementState))
+        updateMovementState(other);
+
+    // Update movement for other characters (no reason to update for the current character).
+    if (other.hasUpdateFlag(UpdateMask::Movement) && other.id() != character_.id())
+        updateMovement(other);
+}
+
+/**
  * Update the appearance of a character, for the current character.
  * @param other The character to update.
  */
@@ -146,6 +160,18 @@ void CharacterSynchronizationTask::updateAppearance(const Character& other)
     appearance.faction = other.faction();
     appearance.state   = other.movementState();
     appearance.name    = "Cups";
+
+    // The equipment of the character
+    auto& equipment = other.equipment().items();
+    for (auto i = 0; i < appearance.equipment.size(); i++)
+    {
+        auto& item = equipment.at(i);
+        auto& slot = appearance.equipment.at(i);
+        if (!item)  // If no item exists at this slot, skip it.
+            continue;
+        slot.type   = item->type();
+        slot.typeId = item->typeId();
+    }
     character_.session().write(appearance);
 }
 
@@ -183,11 +209,11 @@ void CharacterSynchronizationTask::updateMovementState(const Character& other)
 }
 
 /**
- * Checks if a character is observable to the current character.
+ * Checks if an entity can be observed by the current character.
  * @param other The other character.
- * @return      If the other character can be observed.
+ * @return      If the other entity can be observed.
  */
-bool CharacterSynchronizationTask::observable(const Character& other)
+bool CharacterSynchronizationTask::observable(const Entity& other)
 {
     auto& charPos  = character_.position();
     auto& otherPos = other.position();

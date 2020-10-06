@@ -26,8 +26,9 @@ void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Charact
     // Finalise the update sequence for each character.
     for (auto&& character: characters)
     {
+        if (!character->active())
+            continue;
         character->resetUpdateFlags();
         character->resetMovementState();
     }
-
 }

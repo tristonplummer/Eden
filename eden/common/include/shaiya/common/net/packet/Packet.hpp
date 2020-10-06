@@ -70,6 +70,7 @@ namespace shaiya::net
 #include "game/CharacterCreation.hpp"
 #include "game/CharacterDetails.hpp"
 #include "game/CharacterEnteredViewport.hpp"
+#include "game/CharacterItem.hpp"
 #include "game/CharacterLeftViewport.hpp"
 #include "game/CharacterList.hpp"
 #include "game/CharacterMovement.hpp"

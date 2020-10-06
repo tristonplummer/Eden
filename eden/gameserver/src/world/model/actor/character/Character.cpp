@@ -9,7 +9,7 @@ using namespace shaiya::game;
  * @param id        The character id.
  */
 Character::Character(shaiya::net::GameSession& session, size_t id)
-    : session_(session), Actor(session.context().getGameWorld())
+    : session_(session), equipment_(*this), Actor(session.context().getGameWorld())
 {
     // Set the character id and faction
     id_      = id;
@@ -27,7 +27,8 @@ void Character::init()
     // Initialise the base actor
     Actor::init();
 
-    setPosition(Position(0, 1200, 60, 1200));
+    equipment().add(std::make_shared<Item>(6, 178), EquipmentSlot::Weapon);
+    setPosition(Position(0, 1200, 78, 1200));
 
     // Prepare the character details
     CharacterDetails details;
@@ -50,6 +51,9 @@ void Character::init()
     details.victories = victories_;
     details.defeats   = defeats_;
     session_.write(details);  // Send the character details.
+
+    // Synchronise the item containers
+    equipment().sync();
 }
 
 /**

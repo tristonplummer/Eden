@@ -36,6 +36,12 @@ namespace shaiya::game
         void removeCharacter(const Character& other);
 
         /**
+         * Process the update flags for a character.
+         * @param other The character to update for this character.
+         */
+        void processUpdateFlags(const Character& other);
+
+        /**
          * Update the appearance of a character, for the current character.
          * @param other The character to update.
          */
@@ -54,11 +60,11 @@ namespace shaiya::game
         void updateMovementState(const Character& other);
 
         /**
-         * Checks if a character is observable to the current character.
-         * @param other The other character.
-         * @return      If the other character can be observed.
+         * Checks if a entity is observable by the current character.
+         * @param other The other entity.
+         * @return      If the other entity can be observed.
          */
-        bool observable(const Character& other);
+        bool observable(const Entity& other);
 
         /**
          * The character we're currently synchronizing.
