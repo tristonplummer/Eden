@@ -24,6 +24,24 @@ namespace shaiya::game
         Item(uint8_t type, uint8_t typeId);
 
         /**
+         * Gets the item count.
+         * @return  The number of items in this stack.
+         */
+        [[nodiscard]] uint8_t count() const
+        {
+            return count_;
+        }
+
+        /**
+         * Gets the item durability.
+         * @return  The item durability.
+         */
+        [[nodiscard]] uint16_t durability() const
+        {
+            return durability_;
+        }
+
+        /**
          * Get the item id of this item.
          * @return  The id.
          */
@@ -55,5 +73,15 @@ namespace shaiya::game
          * The item id.
          */
         uint32_t id_{ 0 };
+
+        /**
+         * The item count.
+         */
+        uint32_t count_{ 1 };
+
+        /**
+         * The item durability
+         */
+        uint32_t durability_{ 0 };
     };
 }

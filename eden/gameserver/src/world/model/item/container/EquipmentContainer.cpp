@@ -24,12 +24,7 @@ EquipmentContainer::EquipmentContainer(Character& character): ItemContainer(Equi
  */
 bool EquipmentContainer::add(std::shared_ptr<Item> item)
 {
-    auto result = ItemContainer::add(item);
-    if (result)
-    {
-        character_.flagUpdate(UpdateMask::Appearance);
-    }
-    return result;
+    return ItemContainer::add(item);
 }
 
 /**
@@ -40,12 +35,7 @@ bool EquipmentContainer::add(std::shared_ptr<Item> item)
  */
 bool EquipmentContainer::add(std::shared_ptr<Item> item, EquipmentSlot slot)
 {
-    auto result = ItemContainer::add(std::move(item), static_cast<uint8_t>(slot));
-    if (result)
-    {
-        character_.flagUpdate(UpdateMask::Appearance);
-    }
-    return result;
+    return ItemContainer::add(std::move(item), static_cast<uint8_t>(slot));;
 }
 
 /**

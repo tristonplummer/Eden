@@ -9,8 +9,14 @@ using namespace shaiya::game;
  * @param id        The character id.
  */
 Character::Character(shaiya::net::GameSession& session, size_t id)
-    : session_(session), equipment_(*this), Actor(session.context().getGameWorld())
+    : session_(session),
+      equipment_(*this),
+      inventory_(*this),
+      Actor(session.context().getGameWorld())
 {
+    // Set this entity type
+    type_ = EntityType::Character;
+
     // Set the character id and faction
     id_      = id;
     faction_ = session.faction();
@@ -21,13 +27,10 @@ Character::Character(shaiya::net::GameSession& session, size_t id)
  */
 void Character::init()
 {
-    // Set this entity type
-    type_ = EntityType::Character;
-
     // Initialise the base actor
     Actor::init();
 
-    equipment().add(std::make_shared<Item>(6, 178), EquipmentSlot::Weapon);
+    equipment().add(std::make_shared<Item>(6, 203), EquipmentSlot::Weapon);
     setPosition(Position(0, 1200, 78, 1200));
 
     // Prepare the character details

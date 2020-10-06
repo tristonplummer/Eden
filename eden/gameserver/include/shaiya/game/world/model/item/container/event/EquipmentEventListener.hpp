@@ -18,6 +18,22 @@ namespace shaiya::game
         EquipmentEventListener(Character& character);
 
         /**
+         * Gets executed when an item is added to a container.
+         * @param container The container instance.
+         * @param item      The item that was added.
+         * @param slot      The slot of the new item.
+         */
+        void itemAdded(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot) override;
+
+        /**
+         * Gets executed when an item is removed from a container.
+         * @param container The container instance.
+         * @param item      The item that was removed.
+         * @param slot      The slot the item was removed from.
+         */
+        void itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot) override;
+
+        /**
          * Synchronises the container with this listener.
          * @param container The container that was updated.
          */

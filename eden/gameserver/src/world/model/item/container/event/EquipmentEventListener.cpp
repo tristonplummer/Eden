@@ -14,6 +14,28 @@ EquipmentEventListener::EquipmentEventListener(Character& character): character_
 }
 
 /**
+ * Gets executed when an item is added to a container.
+ * @param container The container instance.
+ * @param item      The item that was added.
+ * @param slot      The slot of the new item.
+ */
+void EquipmentEventListener::itemAdded(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot)
+{
+    character_.flagUpdate(UpdateMask::Appearance);
+}
+
+/**
+ * Gets executed when an item is removed from a container.
+ * @param container The container instance.
+ * @param item      The item that was removed.
+ * @param slot      The slot the item was removed from.
+ */
+void EquipmentEventListener::itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot)
+{
+    character_.flagUpdate(UpdateMask::Appearance);
+}
+
+/**
  * Synchronises the container with this listener.
  * @param container The container that was updated.
  */

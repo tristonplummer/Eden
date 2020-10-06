@@ -1,7 +1,9 @@
 #pragma once
+#include <memory>
 
 namespace shaiya::game
 {
+    class Item;
     class ItemContainer;
 
     /**
@@ -10,6 +12,21 @@ namespace shaiya::game
     class ContainerEventListener
     {
     public:
+        /**
+         * Gets executed when an item is added to a container.
+         * @param container The container instance.
+         * @param item      The item that was added.
+         * @param slot      The slot of the new item.
+         */
+        virtual void itemAdded(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot) = 0;
+
+        /**
+         * Gets executed when an item is removed from a container.
+         * @param container The container instance.
+         * @param item      The item that was removed.
+         * @param slot      The slot the item was removed from.
+         */
+        virtual void itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot) = 0;
 
         /**
          * Synchronises the container with this listener.

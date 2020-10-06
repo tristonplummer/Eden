@@ -29,13 +29,10 @@ ItemContainer::ItemContainer(size_t pages, size_t pageSize)
  */
 bool ItemContainer::add(std::shared_ptr<Item> item)
 {
-    for (auto&& dest: items_)  // Loop through the container items
+    for (auto i = 0; i < items_.size(); i++)
     {
-        if (!dest)  // If no item exists at this point
-        {
-            dest = std::move(item);
-            return true;
-        }
+        if (items_.at(i) == nullptr)
+            return add(std::move(item), i);
     }
     return false;
 }
@@ -52,7 +49,63 @@ bool ItemContainer::add(std::shared_ptr<Item> item, size_t slot)
     if (dest)
         return false;
     dest = std::move(item);
+    for (auto&& listener: listeners_)
+        listener->itemAdded(*this, dest, slot);
     return true;
+}
+
+/**
+ * Removes an item from the container at a specific slot.
+ * @param slot  The slot.
+ * @return      The item instance.
+ */
+std::shared_ptr<Item> ItemContainer::remove(size_t slot)
+{
+    auto item = items_.at(slot);
+    if (!item)
+        return nullptr;
+
+    items_.erase(items_.begin() + slot);
+    for (auto&& listener: listeners_)
+        listener->itemRemoved(*this, item, slot);
+    return item;
+}
+
+/**
+ * Transfers an item from this container to another.
+ * @param dest          The destination container.
+ * @param sourcePage    The source page.
+ * @param sourceSlot    The source slot.
+ * @param destPage      The destination page.
+ * @param destSlot      The destination slot.
+ * @param success       If the transfer was successful.
+ * @return              The item at the source position, and the item at the destination position.
+ */
+ItemPair ItemContainer::transferTo(ItemContainer& dest, size_t sourcePage, size_t sourceSlot, size_t destPage,
+                                   size_t destSlot, bool& success)
+{
+    auto sourcePos = pagePositionToIndex(sourcePage, sourceSlot);
+    auto destPos   = dest.pagePositionToIndex(destPage, destSlot);
+
+    // Remove the item from the source
+    auto sourceItem = remove(sourcePos);
+    if (!sourceItem)
+    {
+        success = false;
+        return { nullptr, nullptr };
+    }
+
+    // The item at the current destination
+    auto destItem = dest.remove(destPos);
+
+    // Add the item at the destination slot
+    dest.add(sourceItem, destPos);
+
+    // If there was an item at the destination slot, move it to the source slot
+    if (destItem)
+        add(destItem, sourcePos);
+    success = true;
+    return { sourceItem, destItem };
 }
 
 /**

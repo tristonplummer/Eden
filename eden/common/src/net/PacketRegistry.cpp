@@ -25,6 +25,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<CharacterMovementOpcode>();
     registerPacketHandler<CharacterMovementStateOpcode>();
     registerPacketHandler<CharacterEnteredViewportOpcode>();
+    registerPacketHandler<CharacterMoveItemOpcode>();
 }
 
 /**

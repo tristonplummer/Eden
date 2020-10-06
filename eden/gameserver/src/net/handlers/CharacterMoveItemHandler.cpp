@@ -1,0 +1,92 @@
+#include <shaiya/common/net/packet/PacketRegistry.hpp>
+#include <shaiya/game/net/GameSession.hpp>
+
+using namespace shaiya::net;
+using namespace shaiya::game;
+
+/**
+ * Equipment is always page 0.
+ */
+constexpr auto EquipmentPage = 0;
+
+/**
+ * Handles an incoming move item request.
+ * @param session   The session instance.
+ * @param request   The inbound move item request.
+ */
+void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
+{
+    auto& game     = dynamic_cast<GameSession&>(session);
+    auto character = game.character();
+
+    // Get the character's containers.
+    auto& inventory       = static_cast<ItemContainer&>(character->inventory());
+    auto& equipment       = static_cast<ItemContainer&>(character->equipment());
+    ItemContainer& source = request.sourcePage == EquipmentPage ? equipment : inventory;
+    ItemContainer& dest   = request.destPage == EquipmentPage ? equipment : inventory;
+
+    // Validate the slot and page
+    if (request.sourcePage > source.pageCount())
+        return;
+    if (request.sourceSlot >= source.pageSize())
+        return;
+    if (request.destPage > dest.pageCount())
+        return;
+    if (request.destSlot >= dest.pageSize())
+        return;
+
+    // The source and destination pages
+    auto sourcePage = request.sourcePage;
+    auto sourceSlot = request.sourceSlot;
+    auto destPage   = request.destPage;
+    auto destSlot   = request.destSlot;
+
+    // Decrement the pages if we're using the inventory
+    if (request.sourcePage != EquipmentPage)
+        sourcePage--;
+    if (request.destPage != EquipmentPage)
+        destPage--;
+
+    // Transfer the items
+    bool success                = false;
+    auto [destItem, sourceItem] = source.transferTo(dest, sourcePage, sourceSlot, destPage, destSlot, success);
+
+    // If the items weren't moved, do nothing
+    if (!success)
+        return;
+
+    // Write the source item
+    CharacterMoveItemUpdate update;
+    auto& srcUpdate = update.source;
+    srcUpdate.bag   = request.sourcePage;
+    srcUpdate.slot  = request.sourceSlot;
+    if (sourceItem)
+    {
+        srcUpdate.type       = sourceItem->type();
+        srcUpdate.typeId     = sourceItem->typeId();
+        srcUpdate.count      = sourceItem->count();
+        srcUpdate.durability = sourceItem->durability();
+    }
+
+    // Write the destination item
+    auto& destUpdate = update.destination;
+    destUpdate.bag   = request.destPage;
+    destUpdate.slot  = request.destSlot;
+    if (destItem)
+    {
+        destUpdate.type       = destItem->type();
+        destUpdate.typeId     = destItem->typeId();
+        destUpdate.count      = destItem->count();
+        destUpdate.durability = destItem->durability();
+    }
+    game.write(update);
+}
+
+/**
+ * A template specialization used for registering a move item handler.
+ */
+template<>
+void PacketRegistry::registerPacketHandler<CharacterMoveItemOpcode>()
+{
+    registerHandler<CharacterMoveItemOpcode, CharacterMoveItemRequest>(&handleItemMove);
+}

@@ -2,6 +2,7 @@
 #include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
 #include <shaiya/game/world/model/item/container/EquipmentContainer.hpp>
+#include <shaiya/game/world/model/item/container/InventoryContainer.hpp>
 
 #include <vector>
 
@@ -44,7 +45,7 @@ namespace shaiya::game
         void resetMovementState();
 
         /**
-         * Gets the equipment for this actor.
+         * Gets the equipment for this character.
          * @return  The equipment.
          */
         [[nodiscard]] EquipmentContainer& equipment()
@@ -53,12 +54,21 @@ namespace shaiya::game
         }
 
         /**
-         * Gets the equipment for this actor.
+         * Gets the equipment for this character.
          * @return  The equipment.
          */
         [[nodiscard]] const EquipmentContainer& equipment() const
         {
             return equipment_;
+        }
+
+        /**
+         * Gets the inventory for this character.
+         * @return  The inventory.
+         */
+        [[nodiscard]] InventoryContainer& inventory()
+        {
+            return inventory_;
         }
 
         /**
@@ -135,8 +145,13 @@ namespace shaiya::game
         std::vector<Character*> observedCharacters_;
 
         /**
-         * The worn equipment of the actor.
+         * The worn equipment of the character.
          */
         EquipmentContainer equipment_;
+
+        /**
+         * The inventory of the character.
+         */
+        InventoryContainer inventory_;
     };
 }
