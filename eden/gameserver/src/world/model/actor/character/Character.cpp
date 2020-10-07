@@ -81,11 +81,11 @@ void Character::activate()
 void Character::onStatSync(const StatSet& stats, StatUpdateType type)
 {
     // A status update is just an update about our current health
-    CharacterCurrentHitpoints update;
-    update.hitpoints = stats.currentHitpoints();
-    update.mana      = stats.currentMana();
-    update.stamina   = stats.currentStamina();
-    session_.write(update);
+    CharacterCurrentHitpoints status;
+    status.hitpoints = stats.currentHitpoints();
+    status.mana      = stats.currentMana();
+    status.stamina   = stats.currentStamina();
+    session_.write(status);
 
     // If it's just a status update, we can stop here
     if (type == StatUpdateType::Status)
@@ -102,6 +102,25 @@ void Character::onStatSync(const StatSet& stats, StatUpdateType type)
     updateMaxHealth(MaxHitpointType::Hitpoints, stats.maxHitpoints());
     updateMaxHealth(MaxHitpointType::Mana, stats.maxMana());
     updateMaxHealth(MaxHitpointType::Stamina, stats.maxStamina());
+
+    // If this character is an Archer
+    auto isArcher = job() == ShaiyaClass::Archer;
+
+    // Update the additional stats
+    CharacterAdditionalStats update;
+    update.strength       = stats.getAdditional(Stat::Strength);
+    update.dexterity      = stats.getAdditional(Stat::Dexterity);
+    update.reaction       = stats.getAdditional(Stat::Reaction);
+    update.intelligence   = stats.getAdditional(Stat::Intelligence);
+    update.wisdom         = stats.getAdditional(Stat::Wisdom);
+    update.luck           = stats.getAdditional(Stat::Luck);
+    update.minAttack      = isArcher ? stats.getTotal(Stat::MinRangedAttack) : stats.getTotal(Stat::MinPhysicalAttack);
+    update.maxAttack      = isArcher ? stats.getTotal(Stat::MaxRangedAttack) : stats.getTotal(Stat::MaxPhysicalAttack);
+    update.minMagicAttack = stats.getTotal(Stat::MinMagicalAttack);
+    update.maxMagicAttack = stats.getTotal(Stat::MaxMagicalAttack);
+    update.defense        = stats.getTotal(Stat::Defense);
+    update.resistance     = stats.getTotal(Stat::Resistance);
+    session_.write(update);
 }
 
 /**
