@@ -17,7 +17,7 @@ void handleCharacterSelect(Session& session, const CharacterSelectionRequest& re
     // Send a successful selection
     CharacterSelectionResponse response;
     response.success = true;
-    response.charId = request.charId;
+    response.charId  = request.charId;
     game.write(response);
 
     // The character instance
@@ -25,7 +25,8 @@ void handleCharacterSelect(Session& session, const CharacterSelectionRequest& re
     game.setCharacter(character);
 
     // Register the character
-    world.registerCharacter(game.character());
+    auto load = [&]() { world.registerCharacter(game.character()); };
+    ASYNC(load)
 }
 
 /**

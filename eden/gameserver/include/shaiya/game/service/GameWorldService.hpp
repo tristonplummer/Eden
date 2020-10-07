@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/game/io/CharacterSerializer.hpp>
 #include <shaiya/game/world/model/map/MapRepository.hpp>
 #include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 
@@ -74,6 +75,11 @@ namespace shaiya::game
          * The client synchronizer
          */
         std::unique_ptr<ClientSynchronizer> synchronizer_;
+
+        /**
+         * The character serializer
+         */
+        std::unique_ptr<CharacterSerializer> characterSerializer_;
 
         /**
          * The map repository.

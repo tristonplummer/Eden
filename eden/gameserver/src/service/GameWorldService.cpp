@@ -1,3 +1,4 @@
+#include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 
 #include <chrono>
@@ -10,8 +11,8 @@ using namespace shaiya::game;
  */
 GameWorldService::GameWorldService(shaiya::database::DatabaseService& db): db_(db)
 {
-    // Specify the synchronizer
-    synchronizer_ = std::make_unique<ParallelClientSynchronizer>();
+    synchronizer_        = std::make_unique<ParallelClientSynchronizer>();
+    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db);
 }
 
 /**
@@ -55,6 +56,9 @@ void GameWorldService::tick(size_t tickRate)
  */
 void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
 {
+    // Load the character
+    characterSerializer_->load(*character);
+
     // Lock the mutex and add the character to the vector
     std::lock_guard lock{ mutex_ };
     characters_.push_back(character);
@@ -77,8 +81,11 @@ void GameWorldService::unregisterCharacter(std::shared_ptr<Character>& character
     auto pos       = std::find_if(characters_.begin(), characters_.end(), predicate);
     if (pos != characters_.end())
     {
-        characters_.erase(pos);
+        // Save the character
+        characterSerializer_->save(*character);
 
+        // Remove the character
+        characters_.erase(pos);
         auto map = mapRepository_.forId(character->position().map());
         map->remove(character);
     }

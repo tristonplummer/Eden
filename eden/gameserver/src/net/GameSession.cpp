@@ -96,8 +96,11 @@ void GameSession::onDisconnect()
 {
     if (character_)
     {
-        auto& world = context().getGameWorld();
-        world.unregisterCharacter(character_);
+        auto unregister = [&]() {
+            auto& world = context().getGameWorld();
+            world.unregisterCharacter(character_);
+        };
+        ASYNC(unregister)
     }
 
     character_.reset();
