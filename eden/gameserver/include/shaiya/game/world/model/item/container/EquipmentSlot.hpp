@@ -20,6 +20,9 @@ namespace shaiya::game
         RightRing = 10,
         LeftLoop  = 11,
         RightLoop = 12,
-        Mount     = 13
+        Mount     = 13,
+        Costume   = 14,
+        Pet       = 15,
+        Wings     = 16,
     };
 }

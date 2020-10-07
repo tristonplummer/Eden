@@ -14,7 +14,7 @@ namespace shaiya::net
     /**
      * The number of equipment slots that are visible.
      */
-    constexpr auto VisibleEquipmentLength = 8;
+    constexpr auto VisibleEquipmentLength = 16;
 
     /**
      * Represents the appearance of an item slot.
@@ -118,8 +118,33 @@ namespace shaiya::net
         std::array<ItemAppearance, VisibleEquipmentLength> equipment;
 
         /**
+         * Defines whether each equipment slot is dyed.
+         */
+        std::array<bool, VisibleEquipmentLength> equipmentDyeFlags{ false };
+
+        /**
+         * TODO: Refactor this.
+         */
+        uint32_t unknown{ 0 };
+
+        /**
+         * The dye colours for each piece of equipment
+         */
+        std::array<uint32_t, VisibleEquipmentLength> equipmentDyes { 0 };
+
+        /**
+         * TODO: Refactor this, also
+         */
+        VariableString<459> unk;
+
+        /**
          * The name of the character.
          */
         VariableString<21> name;
+
+        /**
+         * The name of the guild that the character is in.
+         */
+        VariableString<31> guild;
     } PACKED;
 }

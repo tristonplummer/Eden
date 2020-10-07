@@ -6,7 +6,7 @@ using namespace shaiya::game;
 /**
  * The number of equipment slots.
  */
-constexpr auto EquipmentCapacity = 14;
+constexpr auto EquipmentCapacity = 17;
 
 /**
  * Initialises this equipment container.
@@ -42,6 +42,6 @@ bool EquipmentContainer::add(std::shared_ptr<Item> item, EquipmentSlot slot)
  */
 std::vector<std::shared_ptr<Item>> EquipmentContainer::visibleItems() const
 {
-    auto lastVisibleSlot = static_cast<uint8_t>(EquipmentSlot::Cape);
+    auto lastVisibleSlot = static_cast<uint8_t>(EquipmentSlot::Wings);
     return std::vector<std::shared_ptr<Item>>(items().begin(), items().begin() + lastVisibleSlot + 1);
 }
