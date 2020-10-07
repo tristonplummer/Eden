@@ -94,8 +94,8 @@ void StatSet::setHitpoints(int32_t hitpoints)
     currentHitpoints_ = hitpoints;
 
     // If an event listener was added, execute it
-    if (listener_)
-        listener_(*this, StatUpdateType::Status);
+    for (auto&& listener: listeners_)
+        listener(*this, StatUpdateType::Status);
 }
 
 /**
@@ -111,8 +111,8 @@ void StatSet::setMana(int32_t mana)
     currentMana_ = mana;
 
     // If an event listener was added, execute it
-    if (listener_)
-        listener_(*this, StatUpdateType::Status);
+    for (auto&& listener: listeners_)
+        listener(*this, StatUpdateType::Status);
 }
 
 /**
@@ -128,8 +128,8 @@ void StatSet::setStamina(int32_t stamina)
     currentStamina_ = stamina;
 
     // If an event listener was added, execute it
-    if (listener_)
-        listener_(*this, StatUpdateType::Status);
+    for (auto&& listener: listeners_)
+        listener(*this, StatUpdateType::Status);
 }
 
 /**
@@ -162,6 +162,14 @@ void StatSet::sync()
     maxMana_.total      = maxMana_.base + maxMana_.additional + (wisdom_.total * 5);
     maxStamina_.total   = maxStamina_.base + maxStamina_.additional + (dexterity_.total * 5);
 
+    // Make sure the current hp/mp/sp isnt greater than the new maximum
+    if (currentHitpoints_ > maxHitpoints_.total)
+        currentHitpoints_ = maxHitpoints_.total;
+    if (currentMana_ > maxMana_.total)
+        currentMana_ = maxMana_.total;
+    if (currentStamina_ > maxStamina_.total)
+        currentStamina_ = maxStamina_.total;
+
     // Calculate the physical attack bonus
     auto physicalAttackBonus = 0;
     physicalAttackBonus += std::floor(strength_.total * 1.3);    // Strength adds 1.3 Physical attack power per point
@@ -188,8 +196,8 @@ void StatSet::sync()
     maxMagicalAttack_.total  = maxMagicalAttack_.base + maxMagicalAttack_.additional + magicalAttackBonus;
 
     // If an event listener was added, execute it
-    if (listener_)
-        listener_(*this, StatUpdateType::Full);
+    for (auto&& listener: listeners_)
+        listener(*this, StatUpdateType::Full);
 }
 
 /**
@@ -198,7 +206,7 @@ void StatSet::sync()
  */
 void StatSet::onSync(const std::function<void(const StatSet&, StatUpdateType)>& listener)
 {
-    listener_ = listener;
+    listeners_.push_back(listener);
 }
 
 /**

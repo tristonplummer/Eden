@@ -81,15 +81,15 @@ void Character::activate()
 void Character::onStatSync(const StatSet& stats, StatUpdateType type)
 {
     // A status update is just an update about our current health
+    CharacterCurrentHitpoints update;
+    update.hitpoints = stats.currentHitpoints();
+    update.mana      = stats.currentMana();
+    update.stamina   = stats.currentStamina();
+    session_.write(update);
+
+    // If it's just a status update, we can stop here
     if (type == StatUpdateType::Status)
-    {
-        CharacterCurrentHitpoints update;
-        update.hitpoints = stats.currentHitpoints();
-        update.mana      = stats.currentMana();
-        update.stamina   = stats.currentStamina();
-        session_.write(update);
         return;
-    }
 
     // Update the max health, mana and stamina
     auto updateMaxHealth = [&](MaxHitpointType type, uint32_t value) {

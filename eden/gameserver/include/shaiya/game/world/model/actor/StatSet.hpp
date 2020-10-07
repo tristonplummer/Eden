@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <functional>
+#include <vector>
 
 namespace shaiya::game
 {
@@ -283,8 +284,8 @@ namespace shaiya::game
         StatTriple maxStamina_;
 
         /**
-         * The event listener for this stat set.
+         * The event listeners for this stat set.
          */
-        std::function<void(const StatSet&, StatUpdateType)> listener_;
+        std::vector<std::function<void(const StatSet&, StatUpdateType)>> listeners_;
     };
 }
