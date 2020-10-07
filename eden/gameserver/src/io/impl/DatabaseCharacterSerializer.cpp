@@ -107,8 +107,12 @@ bool DatabaseCharacterSerializer::loadInventory(Character& character)
             auto slot  = row["slot"].as<size_t>();
             auto count = row["count"].as<size_t>();
 
+            // The item instance
+            auto item = std::make_shared<Item>(id);
+            item->setCount(count);
+
             // Add the item
-            inventory.add(std::make_shared<Item>(id), slot);
+            inventory.add(std::move(item), slot);
         }
         return true;
     }

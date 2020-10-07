@@ -24,6 +24,12 @@ namespace shaiya::game
         Item(uint8_t type, uint8_t typeId);
 
         /**
+         * Set the item count.
+         * @param count The number in this stack.
+         */
+        void setCount(size_t count);
+
+        /**
          * Gets the item count.
          * @return  The number of items in this stack.
          */

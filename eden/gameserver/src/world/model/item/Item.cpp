@@ -18,3 +18,12 @@ Item::Item(uint32_t id): id_(id)
 Item::Item(uint8_t type, uint8_t typeId): id_((type * 1000) + typeId)
 {
 }
+
+/**
+ * Set the item count.
+ * @param count The number in this stack.
+ */
+void Item::setCount(size_t count)
+{
+    count_ = count;
+}
