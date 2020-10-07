@@ -91,6 +91,9 @@ void GameWorldService::unregisterCharacter(std::shared_ptr<Character>& character
         // The character instance
         auto deregisteredCharacter = *pos;
 
+        // Deactivate the character
+        deregisteredCharacter->deactivate();
+
         // Save the character
         characterSerializer_->save(*deregisteredCharacter);
 

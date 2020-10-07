@@ -22,8 +22,18 @@ void Actor::init()
 
     // Synchronise our stats
     syncStats();
+}
 
-    // Schedule a health normalization task
+/**
+ * Activates this actor.
+ */
+void Actor::activate()
+{
+    Entity::activate();
+
+    // Schedule a health normalization task.
+    // What do we do in the event that an actor is deactivated and re-activated before this task executes? Perhaps we need
+    // to separate the concept of "active" and "loaded into the map".
     world().schedule(std::make_shared<HealthNormalizationTask>(*this));
 }
 

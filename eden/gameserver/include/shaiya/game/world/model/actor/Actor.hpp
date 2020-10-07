@@ -25,6 +25,11 @@ namespace shaiya::game
         void init() override;
 
         /**
+         * Activates this actor.
+         */
+        void activate() override;
+
+        /**
          * Sets the name of this actor.
          * @param name  The name value.
          */

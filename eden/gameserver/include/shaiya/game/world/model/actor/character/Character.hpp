@@ -34,6 +34,11 @@ namespace shaiya::game
         void init() override;
 
         /**
+         * Marks this character as active.
+         */
+        void activate() override;
+
+        /**
          * Sets the movement state of a character.
          * @param movementState The new movement state.
          */

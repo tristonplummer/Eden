@@ -40,7 +40,7 @@ namespace shaiya::game
         /**
          * Marks this entity as active.
          */
-        void activate();
+        virtual void activate();
 
         /**
          * Marks this entity as inactive.

@@ -66,6 +66,14 @@ void Character::init()
 }
 
 /**
+ * Marks this character as active.
+ */
+void Character::activate()
+{
+    Actor::activate();
+}
+
+/**
  * Gets executed when the stats for this character are synchronized.
  * @param stats     The stats for this character.
  * @param type      The update type.
