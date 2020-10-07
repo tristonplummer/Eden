@@ -5,7 +5,7 @@ namespace shaiya::game
     /**
      * Represents the various types of updates that may be signalled for an entity.
      */
-    enum class UpdateMask: uint32_t
+    enum class UpdateFlag : uint32_t
     {
         Appearance    = (1u << 0u),
         Movement      = (1u << 1u),

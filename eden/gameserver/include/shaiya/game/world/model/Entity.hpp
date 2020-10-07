@@ -1,9 +1,10 @@
 #pragma once
 #include <shaiya/common/DataTypes.hpp>
+#include <shaiya/game/world/model/Attribute.hpp>
 #include <shaiya/game/world/model/EntityType.hpp>
 #include <shaiya/game/world/model/Position.hpp>
-#include <shaiya/game/world/model/UpdateMask.hpp>
-#include <shaiya/game/world/model/Attribute.hpp>
+#include <shaiya/game/world/model/UpdateFlag.hpp>
+
 #include <any>
 #include <map>
 #include <memory>
@@ -50,7 +51,7 @@ namespace shaiya::game
          * Flags this entity for an update of a specific type.
          * @param mask  The update type.
          */
-        void flagUpdate(UpdateMask mask);
+        void flagUpdate(UpdateFlag mask);
 
         /**
          * Resets the update flags.
@@ -74,7 +75,7 @@ namespace shaiya::game
          * @param mask  The update type.
          * @return      If the entity is flagged for this update.
          */
-        bool hasUpdateFlag(UpdateMask mask) const
+        bool hasUpdateFlag(UpdateFlag mask) const
         {
             return updateMask_ & static_cast<uint32_t>(mask);
         }

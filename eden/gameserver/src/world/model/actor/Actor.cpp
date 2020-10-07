@@ -28,7 +28,7 @@ void Actor::setName(const std::string& name)
     if (name_ == name)
         return;
     name_ = name;
-    flagUpdate(UpdateMask::Appearance);
+    flagUpdate(UpdateFlag::Appearance);
 }
 
 /**
@@ -40,5 +40,5 @@ void Actor::setJob(shaiya::ShaiyaClass job)
     if (class_ == job)
         return;
     class_ = job;
-    flagUpdate(UpdateMask::Appearance);
+    flagUpdate(UpdateFlag::Appearance);
 }

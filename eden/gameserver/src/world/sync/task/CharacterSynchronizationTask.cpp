@@ -136,19 +136,19 @@ void CharacterSynchronizationTask::removeCharacter(const Character& other)
 void CharacterSynchronizationTask::processUpdateFlags(const Character& other)
 {
     // Update appearance
-    if (other.hasUpdateFlag(UpdateMask::Appearance))
+    if (other.hasUpdateFlag(UpdateFlag::Appearance))
         updateAppearance(other);
 
     // Update the movement state (standing, sitting, jumping...)
-    if (other.hasUpdateFlag(UpdateMask::MovementState))
+    if (other.hasUpdateFlag(UpdateFlag::MovementState))
         updateMovementState(other);
 
     // Update normal chat
-    if (other.hasUpdateFlag(UpdateMask::Chat))
+    if (other.hasUpdateFlag(UpdateFlag::Chat))
         updateChat(other);
 
     // Update movement for other characters (no reason to update for the current character).
-    if (other.hasUpdateFlag(UpdateMask::Movement) && other.id() != character_.id())
+    if (other.hasUpdateFlag(UpdateFlag::Movement) && other.id() != character_.id())
         updateMovement(other);
 }
 

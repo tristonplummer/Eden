@@ -19,7 +19,7 @@ void handleNormalChat(Session& session, const CharacterChatMessage& request)
 
     // Flag the character for a chat update
     character->setAttribute(Attribute::LastChatMessage, message);
-    character->flagUpdate(UpdateMask::Chat);
+    character->flagUpdate(UpdateFlag::Chat);
 }
 
 /**

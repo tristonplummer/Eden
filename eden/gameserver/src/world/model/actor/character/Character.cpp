@@ -73,7 +73,7 @@ void Character::setMovementState(MovementState movementState)
 {
     // If the previous movement state is not jumping or performing a backflip, flag an update.
     if (movementState_ != MovementState::Jumping && movementState_ != MovementState::Backflip)
-        flagUpdate(UpdateMask::MovementState);
+        flagUpdate(UpdateFlag::MovementState);
     movementState_ = movementState;  // Update the movement state
 }
 
@@ -97,5 +97,5 @@ void Character::setRace(ShaiyaRace race)
     if (race_ == race)
         return;
     race_ = race;
-    flagUpdate(UpdateMask::Appearance);
+    flagUpdate(UpdateFlag::Appearance);
 }

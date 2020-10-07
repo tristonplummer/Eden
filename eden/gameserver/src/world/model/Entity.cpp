@@ -40,7 +40,7 @@ void Entity::deactivate()
  * Flags this entity for an update of a specific type.
  * @param mask  The update type.
  */
-void Entity::flagUpdate(UpdateMask mask)
+void Entity::flagUpdate(UpdateFlag mask)
 {
     updateMask_ |= static_cast<uint32_t>(mask);
 }
@@ -62,7 +62,7 @@ void Entity::setDirection(uint16_t direction)
     if (direction_ == direction)
         return;
     direction_ = direction;
-    flagUpdate(UpdateMask::Movement);
+    flagUpdate(UpdateFlag::Movement);
 }
 
 /**
@@ -74,7 +74,7 @@ void Entity::setMotion(uint8_t motion)
     if (motion_ == motion)
         return;
     motion_ = motion;
-    flagUpdate(UpdateMask::Movement);
+    flagUpdate(UpdateFlag::Movement);
 }
 
 /**
@@ -112,7 +112,7 @@ void Entity::setPosition(Position position)
     next->add(entity);
 
     // Flag this entity for a movement update
-    flagUpdate(UpdateMask::Movement);
+    flagUpdate(UpdateFlag::Movement);
 }
 
 /**
