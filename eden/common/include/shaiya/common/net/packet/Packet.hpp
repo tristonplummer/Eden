@@ -2,6 +2,7 @@
 #include <shaiya/common/net/packet/PacketType.hpp>
 
 #include <cassert>
+#include <cmath>
 #include <cstdint>
 #include <cstring>
 
@@ -53,7 +54,7 @@ namespace shaiya::net
         assert(MAX_PACKET_LEN >= length);  // Assert that the packet isn't too large.
 
         T packet;
-        std::memcpy(&packet, data, length);
+        std::memcpy(&packet, data, std::min(sizeof(T), length));
         return packet;
     }
 }
