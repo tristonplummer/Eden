@@ -40,5 +40,19 @@ namespace shaiya::game
          * The id of this world server.
          */
         size_t worldId_;
+
+        /**
+         * Loads the inventory of this character.
+         * @param character The character.
+         * @return          If the inventory was successfully loaded.
+         */
+        bool loadInventory(Character& character);
+
+        /**
+         * Loads the equipment of this character.
+         * @param character The character.
+         * @return          If the equipment was successfully loaded.
+         */
+        bool loadEquipment(Character& character);
     };
 }

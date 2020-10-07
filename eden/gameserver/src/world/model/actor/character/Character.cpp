@@ -33,9 +33,6 @@ void Character::init()
     // Initialise the base actor
     Actor::init();
 
-    inventory().add(std::make_shared<Item>(40, 255));
-    equipment().add(std::make_shared<Item>(6, 203), EquipmentSlot::Weapon);
-
     setPosition(Position(0, 1200, 78, 1200));
 
     // Prepare the character details

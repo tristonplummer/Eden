@@ -83,12 +83,17 @@ void GameWorldService::unregisterCharacter(std::shared_ptr<Character>& character
     auto pos       = std::find_if(characters_.begin(), characters_.end(), predicate);
     if (pos != characters_.end())
     {
+        // The character instance
+        auto deregisteredCharacter = *pos;
+
         // Save the character
-        characterSerializer_->save(*character);
+        characterSerializer_->save(*deregisteredCharacter);
+
+        // Remove the character from their map
+        auto map = mapRepository_.forId(deregisteredCharacter->position().map());
+        map->remove(deregisteredCharacter);
 
         // Remove the character
         characters_.erase(pos);
-        auto map = mapRepository_.forId(character->position().map());
-        map->remove(character);
     }
 }
