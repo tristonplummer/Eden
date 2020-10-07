@@ -2,6 +2,7 @@
 #include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
 #include <shaiya/game/world/model/actor/character/ActionBar.hpp>
+#include <shaiya/game/world/model/actor/character/Appearance.hpp>
 #include <shaiya/game/world/model/item/container/EquipmentContainer.hpp>
 #include <shaiya/game/world/model/item/container/InventoryContainer.hpp>
 
@@ -106,6 +107,24 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the appearance of this character.
+         * @return  The appearance.
+         */
+        [[nodiscard]] Appearance& appearance()
+        {
+            return appearance_;
+        }
+
+        /**
+         * Gets the appearance of this character.
+         * @return  The appearance.
+         */
+        [[nodiscard]] const Appearance& appearance() const
+        {
+            return appearance_;
+        }
+
+        /**
          * Gets the vector of characters that are in this character's viewport.
          * @return  The observed characters.
          */
@@ -188,5 +207,10 @@ namespace shaiya::game
          * The race of this character.
          */
         ShaiyaRace race_{ ShaiyaRace::Human };
+
+        /**
+         * The appearance of this character.
+         */
+        Appearance appearance_;
     };
 }

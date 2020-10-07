@@ -158,6 +158,9 @@ void CharacterSynchronizationTask::processUpdateFlags(const Character& other)
  */
 void CharacterSynchronizationTask::updateAppearance(const Character& other)
 {
+    // The appearance of the character
+    auto& app = other.appearance();
+
     // Construct the character appearance packet
     CharacterAppearance appearance;
     appearance.id      = other.id();
@@ -166,6 +169,10 @@ void CharacterSynchronizationTask::updateAppearance(const Character& other)
     appearance.job     = other.job();
     appearance.name    = other.name();
     appearance.race    = other.race();
+    appearance.face    = app.face();
+    appearance.hair    = app.hair();
+    appearance.height  = app.height();
+    appearance.gender  = app.gender();
 
     // The equipment of the character
     auto equipment = other.equipment().visibleItems();
