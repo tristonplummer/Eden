@@ -140,12 +140,22 @@ namespace shaiya::net
         /**
          * The item "types" for the character's worn equipment
          */
-        std::array<char, 8> equipmentTypes { 0 };
+        std::array<char, 17> equipmentTypes { 0 };
 
         /**
          * The item "type ids" for the character's worn equipment
          */
-        std::array<char, 8> equipmentTypeIds { 0 };
+        std::array<char, 17> equipmentTypeIds { 0 };
+
+        /**
+         * Flags that represent if an equipment slot has custom dye.
+         */
+        std::array<bool, 17> equipmentDyeFlags { false };
+
+        /**
+         * The data of the dyed items.
+         */
+        VariableString<523> dyeData;
 
         /**
          * The name of the character

@@ -102,3 +102,12 @@ void Actor::setJob(shaiya::ShaiyaClass job)
     class_ = job;
     flagUpdate(UpdateFlag::Appearance);
 }
+
+/**
+ * Sets the level of the actor.
+ * @param level The level value.
+ */
+void Actor::setLevel(uint16_t level)
+{
+    level_ = level;
+}

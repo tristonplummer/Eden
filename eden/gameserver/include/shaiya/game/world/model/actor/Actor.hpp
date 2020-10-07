@@ -42,6 +42,12 @@ namespace shaiya::game
         void setJob(shaiya::ShaiyaClass job);
 
         /**
+         * Sets the level of the actor.
+         * @param level The level value.
+         */
+        void setLevel(uint16_t level);
+
+        /**
          * Synchronises this actor's stats, by calculating the bonuses from their
          * active buffs and worn equipment.
          */
@@ -110,6 +116,15 @@ namespace shaiya::game
             return inventory_;
         }
 
+        /**
+         * Gets the level of this actor.
+         * @return  The level of the actor.
+         */
+        [[nodiscard]] uint16_t level() const
+        {
+            return level_;
+        }
+
     protected:
         /**
          * The name of this actor.
@@ -120,6 +135,11 @@ namespace shaiya::game
          * The stats of the actor.
          */
         StatSet stats_;
+
+        /**
+         * The level of this actor.
+         */
+        uint16_t level_{ 0 };
 
         /**
          * The faction of this actor.

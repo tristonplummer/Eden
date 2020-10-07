@@ -19,6 +19,36 @@ namespace shaiya::net
         uint16_t opcode{ CharacterDetailsOpcode };
 
         /**
+         * The base strength of the character
+         */
+        uint16_t strength{ 0 };
+
+        /**
+         * The base dexterity of the character
+         */
+        uint16_t dexterity{ 0 };
+
+        /**
+         * The base reaction of the character
+         */
+        uint16_t reaction{ 0 };
+
+        /**
+         * The base intelligence of the character
+         */
+        uint16_t intelligence{ 0 };
+
+        /**
+         * The base wisdom of the character
+         */
+        uint16_t wisdom{ 0 };
+
+        /**
+         * The base luck of the character
+         */
+        uint16_t luck{ 0 };
+
+        /**
          * The number of stat points that are available to the character.
          */
         uint16_t statpoints{ 0 };
