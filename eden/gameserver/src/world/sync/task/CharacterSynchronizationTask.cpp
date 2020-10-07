@@ -31,7 +31,7 @@ void CharacterSynchronizationTask::sync()
         auto& other = *(*charIter);
 
         // Remove the observed character if we can't see them
-        if (!observable(other))
+        if (!other.active() || !observable(other))
         {
             // Remove the other character from our viewport
             removeCharacter(other);
