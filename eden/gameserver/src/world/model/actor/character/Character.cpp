@@ -1,5 +1,6 @@
 #include <shaiya/game/net/GameSession.hpp>
 
+using namespace shaiya;
 using namespace shaiya::net;
 using namespace shaiya::game;
 
@@ -8,7 +9,7 @@ using namespace shaiya::game;
  * @param session   The session instance.
  * @param id        The character id.
  */
-Character::Character(shaiya::net::GameSession& session, size_t id)
+Character::Character(GameSession& session, size_t id)
     : session_(session), equipment_(*this), inventory_(*this), actionBar_(*this), Actor(session.context().getGameWorld())
 {
     // Set this entity type
@@ -80,4 +81,16 @@ void Character::resetMovementState()
     if (movementState_ == MovementState::Standing || movementState_ == MovementState::Sitting)
         return;
     movementState_ = MovementState::Standing;
+}
+
+/**
+ * Sets the race for this character.
+ * @param race  The race for this character.
+ */
+void Character::setRace(ShaiyaRace race)
+{
+    if (race_ == race)
+        return;
+    race_ = race;
+    flagUpdate(UpdateMask::Appearance);
 }

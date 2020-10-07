@@ -163,7 +163,9 @@ void CharacterSynchronizationTask::updateAppearance(const Character& other)
     appearance.id      = other.id();
     appearance.faction = other.faction();
     appearance.state   = other.movementState();
-    appearance.name    = "Cups";
+    appearance.job     = other.job();
+    appearance.name    = other.name();
+    appearance.race    = other.race();
 
     // The equipment of the character
     auto equipment = other.equipment().visibleItems();

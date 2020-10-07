@@ -23,12 +23,42 @@ namespace shaiya::game
         void init() override;
 
         /**
+         * Sets the name of this actor.
+         * @param name  The name value.
+         */
+        void setName(const std::string& name);
+
+        /**
+         * Sets the class of the actor.
+         * @param job   The class value.
+         */
+        void setJob(shaiya::ShaiyaClass job);
+
+        /**
          * Gets the stats for this actor.
          * @return  The actor's stats.
          */
         [[nodiscard]] StatSet& stats()
         {
             return stats_;
+        }
+
+        /**
+         * Gets the name of this actor.
+         * @return  The actor's name.
+         */
+        [[nodiscard]] const std::string& name() const
+        {
+            return name_;
+        }
+
+        /**
+         * Gets the class of this actor.
+         * @return  The actor's class.
+         */
+        [[nodiscard]] shaiya::ShaiyaClass job() const
+        {
+            return class_;
         }
 
         /**
@@ -42,6 +72,11 @@ namespace shaiya::game
 
     protected:
         /**
+         * The name of this actor.
+         */
+        std::string name_;
+
+        /**
          * The stats of the actor.
          */
         StatSet stats_;
@@ -50,5 +85,10 @@ namespace shaiya::game
          * The faction of this actor.
          */
         shaiya::ShaiyaFaction faction_{ ShaiyaFaction::Neither };
+
+        /**
+         * The class of this actor.
+         */
+        shaiya::ShaiyaClass class_{ ShaiyaClass::Fighter };
     };
 }

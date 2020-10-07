@@ -46,6 +46,21 @@ namespace shaiya::game
         void resetMovementState();
 
         /**
+         * Sets the race for this character.
+         * @param race  The race for this character.
+         */
+        void setRace(shaiya::ShaiyaRace race);
+
+        /**
+         * Gets the race of this character.
+         * @return  The character's race.
+         */
+        [[nodiscard]] shaiya::ShaiyaRace race() const
+        {
+            return race_;
+        }
+
+        /**
          * Gets the equipment for this character.
          * @return  The equipment.
          */
@@ -168,5 +183,10 @@ namespace shaiya::game
          * This character's action bar.
          */
         ActionBar actionBar_;
+
+        /**
+         * The race of this character.
+         */
+        ShaiyaRace race_{ ShaiyaRace::Human };
     };
 }
