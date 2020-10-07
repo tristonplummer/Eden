@@ -18,9 +18,10 @@ namespace shaiya::game
     public:
         /**
          * Initialise this game world service.
-         * @param db    The database service.
+         * @param db        The database service.
+         * @param worldId   The id of this world service.
          */
-        explicit GameWorldService(shaiya::database::DatabaseService& db);
+        explicit GameWorldService(shaiya::database::DatabaseService& db, size_t worldId);
 
         /**
          * Loads the game world service.

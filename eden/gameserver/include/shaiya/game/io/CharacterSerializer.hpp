@@ -12,8 +12,9 @@ namespace shaiya::game
         /**
          * Loads a player character.
          * @param character The character to load.
+         * @return          If the character was loaded successfully.
          */
-        virtual void load(Character& character) = 0;
+        virtual bool load(Character& character) = 0;
 
         /**
          * Saves a player character.

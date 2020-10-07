@@ -7,12 +7,13 @@ using namespace shaiya::game;
 
 /**
  * Initialise this game world service.
- * @param db    The database service.
+ * @param db        The database service.
+ * @param worldId   The id of this world service.
  */
-GameWorldService::GameWorldService(shaiya::database::DatabaseService& db): db_(db)
+GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t worldId): db_(db)
 {
     synchronizer_        = std::make_unique<ParallelClientSynchronizer>();
-    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db);
+    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db, worldId);
 }
 
 /**
@@ -57,7 +58,8 @@ void GameWorldService::tick(size_t tickRate)
 void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
 {
     // Load the character
-    characterSerializer_->load(*character);
+    if (!characterSerializer_->load(*character))
+        return character->session().close();
 
     // Lock the mutex and add the character to the vector
     std::lock_guard lock{ mutex_ };

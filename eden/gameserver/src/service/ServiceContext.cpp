@@ -27,7 +27,7 @@ ServiceContext::ServiceContext(boost::property_tree::ptree& config)
     dbService_   = new shaiya::database::DatabaseService(dbHost, dbName, dbUser, dbPass);
     apiService_  = new WorldApiService();
     charScreen_  = new CharacterScreenService(*dbService_, worldId);
-    gameService_ = new GameWorldService(*dbService_);
+    gameService_ = new GameWorldService(*dbService_, worldId);
 
     // Load the game world
     gameService_->load(config);

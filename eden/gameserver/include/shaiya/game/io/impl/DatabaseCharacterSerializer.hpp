@@ -12,15 +12,17 @@ namespace shaiya::game
     public:
         /**
          * Initialises this character serializer.
-         * @param db    The database service.
+         * @param db        The database service.
+         * @param worldId   The id of this world server.
          */
-        explicit DatabaseCharacterSerializer(shaiya::database::DatabaseService& db);
+        DatabaseCharacterSerializer(shaiya::database::DatabaseService& db, size_t worldId);
 
         /**
          * Loads a player character.
          * @param character The character to load.
+         * @return          If the character was loaded successfully.
          */
-        void load(Character& character) override;
+        bool load(Character& character) override;
 
         /**
          * Saves a player character.
@@ -33,5 +35,10 @@ namespace shaiya::game
          * The database service.
          */
         shaiya::database::DatabaseService& db_;
+
+        /**
+         * The id of this world server.
+         */
+        size_t worldId_;
     };
 }
