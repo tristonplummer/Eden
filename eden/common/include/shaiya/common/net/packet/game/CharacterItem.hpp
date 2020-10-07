@@ -49,9 +49,9 @@ namespace shaiya::net
         uint16_t durability{ 0 };
 
         /**
-         * The type ids of the lapis that are socketed into this item.
+         * The item ids of the lapis that are socketed into this item.
          */
-        std::array<uint8_t, LapisCapacity> lapis{ 0 };
+        std::array<uint32_t, LapisCapacity> lapis{ 0 };
 
         /**
          * The number of items in this stack.
@@ -62,6 +62,21 @@ namespace shaiya::net
          * An ASCII representation of the orange stats.
          */
         VariableString<21> craftname;
+
+        /**
+         * TODO: Refactor this
+         */
+        VariableString<23> unknown;
+
+        /**
+         * If this item has been dyed.
+         */
+        bool dyed { false };
+
+        /**
+         * TODO: Refactor this
+         */
+        VariableString<26> unk;
     } PACKED;
 
     /**

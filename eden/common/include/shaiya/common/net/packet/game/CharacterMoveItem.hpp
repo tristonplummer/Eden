@@ -45,9 +45,24 @@ namespace shaiya::net
         uint16_t durability{ 0 };
 
         /**
+         * TODO: Refactor this
+         */
+        VariableString<23> unknown;
+
+        /**
+         * If this item is dyed.
+         */
+        bool dyed{ false };
+
+        /**
+         * TODO: Refactor this.
+         */
+        VariableString<26> unk;
+
+        /**
          * The type ids of the lapis that are socketed into this item.
          */
-        std::array<uint8_t, LapisCapacity> lapis{ 0 };
+        std::array<uint32_t, LapisCapacity> lapis{ 0 };
 
         /**
          * An ASCII representation of the orange stats.
