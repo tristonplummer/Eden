@@ -33,8 +33,6 @@ void Character::init()
     // Initialise the base actor
     Actor::init();
 
-    setPosition(Position(0, 1200, 78, 1200));
-
     // Prepare the character details
     CharacterDetails details;
     details.statpoints  = statpoints_;

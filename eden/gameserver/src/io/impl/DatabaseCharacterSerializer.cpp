@@ -20,6 +20,11 @@ constexpr auto LOAD_CHARACTER_INVENTORY = "load_character_inventory";
 constexpr auto LOAD_CHARACTER_EQUIPMENT = "load_character_equipment";
 
 /**
+ * The name of the query for saving a character's details.
+ */
+constexpr auto SAVE_CHARACTER_DETAILS = "save_character_details";
+
+/**
  * Initialises this character serializer.
  * @param db        The database service.
  * @param worldId   The id of this world server.
@@ -30,6 +35,8 @@ DatabaseCharacterSerializer::DatabaseCharacterSerializer(shaiya::database::Datab
     db.prepare(LOAD_CHARACTER_DETAILS, "SELECT * FROM gamedata.characters WHERE world = $1 AND charid = $2;");
     db.prepare(LOAD_CHARACTER_INVENTORY, "SELECT * FROM gamedata.read_character_inventory($1, $2);");
     db.prepare(LOAD_CHARACTER_EQUIPMENT, "SELECT * FROM gamedata.read_character_equipment($1, $2);");
+    db.prepare(SAVE_CHARACTER_DETAILS,
+               "UPDATE gamedata.characters SET map = $3, posX = $4, posY = $5, posZ = $6 WHERE world = $1 AND charid = $2;");
 }
 
 /**
@@ -63,6 +70,13 @@ bool DatabaseCharacterSerializer::load(Character& character)
         appearance.setHair(row["hair"].as<size_t>());
         appearance.setHeight(row["height"].as<size_t>());
         appearance.setGender(static_cast<ShaiyaGender>(row["gender"].as<size_t>()));
+
+        // Build the position
+        auto map  = row["map"].as<size_t>();
+        auto posX = row["posx"].as<float>();
+        auto posY = row["posy"].as<float>();
+        auto posZ = row["posz"].as<float>();
+        character.setPosition({ static_cast<uint16_t>(map), posX, posY, posZ });
 
         if (!loadInventory(character))
             return false;
@@ -159,7 +173,7 @@ bool DatabaseCharacterSerializer::loadEquipment(Character& character)
     }
     catch (const std::exception& e)
     {
-        LOG(INFO) << "Exception occurred while loading equipment for character  with id " << character.id() << ": "
+        LOG(INFO) << "Exception occurred while loading equipment for character with id " << character.id() << ": "
                   << e.what();
     }
     return false;
@@ -171,4 +185,21 @@ bool DatabaseCharacterSerializer::loadEquipment(Character& character)
  */
 void DatabaseCharacterSerializer::save(Character& character)
 {
+    try
+    {
+        // Create a new connection to the database
+        auto connection = db_.connection();
+        pqxx::work tx(*connection);
+
+        // The character's position
+        auto& pos = character.position();
+
+        // Save the details
+        tx.exec_prepared(SAVE_CHARACTER_DETAILS, worldId_, character.id(), pos.map(), pos.x(), pos.y(), pos.z());
+        tx.commit();
+    }
+    catch (const std::exception& e)
+    {
+        LOG(INFO) << "Exception occured while saving character details for id " << character.id() << ": " << e.what();
+    }
 }
