@@ -12,6 +12,9 @@ Eden is designed to be a high performance Shaiya emulator, with a strong focus o
 - You can report bugs as issues on Github.
 
 ## Acknowledgments
+* #### Steimoni
+    - For helping me out with my first prototype by providing me with a starting point in removing the encryption algorithm.
+    
 * #### Nubness & JuuF
     - For helping me out with the many questions I had when I was first getting in to Shaiya development.
 
