@@ -2,6 +2,8 @@
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 
+#include <glog/logging.h>
+
 #include <chrono>
 
 using namespace shaiya::game;
@@ -55,6 +57,14 @@ void GameWorldService::tick(size_t tickRate)
 
         // Synchronize the characters with the world state
         synchronizer_->synchronize(characters_);
+
+        // The current time
+        auto now = steady_clock::now();
+        if (now >= nextTick)
+        {
+            auto difference = duration_cast<milliseconds>(now - nextTick);
+            LOG(INFO) << "Game tick took too long - went over " << tickRate << "ms tick rate by " << difference.count() << "ms.";
+        }
 
         // Sleep until the next tick
         std::this_thread::sleep_until(nextTick);
