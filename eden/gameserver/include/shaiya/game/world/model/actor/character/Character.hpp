@@ -50,6 +50,12 @@ namespace shaiya::game
         void resetMovementState();
 
         /**
+         * Sets the amount of statpoints for this character.
+         * @param statpoints    The character's statpoints.
+         */
+        void setStatpoints(size_t statpoints);
+
+        /**
          * Sets the race for this character.
          * @param race  The race for this character.
          */
@@ -118,6 +124,15 @@ namespace shaiya::game
             return session_;
         }
 
+        /**
+         * Gets the number of available stat points this character has.
+         * @return  The total available stat points.
+         */
+        [[nodiscard]] uint32_t statpoints() const
+        {
+            return statpoints_;
+        }
+
     private:
         /**
          * The game session instance.
@@ -184,6 +199,5 @@ namespace shaiya::game
          * @param stats     The stats for this character.
          */
         void onStatSync(const StatSet& stats, StatUpdateType type);
-
     };
 }

@@ -43,7 +43,7 @@ namespace shaiya::game
          * @param value The base value of the stat.
          * @param sync  If we should synchronise the stats after.
          */
-        void setBase(Stat stat, int32_t value, bool sync = true);
+        void setBase(Stat stat, int32_t value);
 
         /**
          * Sets an additional value for a stat. This is the stat value that is affected by buffs and equipment.

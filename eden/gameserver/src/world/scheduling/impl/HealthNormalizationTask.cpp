@@ -50,14 +50,14 @@ void HealthNormalizationTask::execute()
     auto maxStamina     = stats.maxStamina();
 
     // Normalize the current health
-    currentHealth += std::floor(maxHealth * NaturalRestorationValue);
+    currentHealth += std::ceil(maxHealth * NaturalRestorationValue);
     stats.setHitpoints(currentHealth);
 
     // Normalize the current mana
-    currentMana += std::floor(maxMana * NaturalRestorationValue);
+    currentMana += std::ceil(maxMana * NaturalRestorationValue);
     stats.setMana(currentMana);
 
     // Normalize the current stamina
-    currentStamina += std::floor(maxStamina * NaturalRestorationValue);
+    currentStamina += std::ceil(maxStamina * NaturalRestorationValue);
     stats.setStamina(currentStamina);
 }

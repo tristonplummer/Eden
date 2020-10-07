@@ -105,6 +105,15 @@ void Character::onStatSync(const StatSet& stats, StatUpdateType type)
 }
 
 /**
+ * Sets the amount of statpoints for this character.
+ * @param statpoints    The character's statpoints.
+ */
+void Character::setStatpoints(size_t statpoints)
+{
+    statpoints_ = statpoints;
+}
+
+/**
  * Sets the movement state of a character.
  * @param movementState The new movement state.
  */

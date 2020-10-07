@@ -81,5 +81,7 @@ namespace shaiya::net
 #include "game/CharacterMovement.hpp"
 #include "game/CharacterMovementState.hpp"
 #include "game/CharacterSelection.hpp"
+#include "game/CharacterStatAllocation.hpp"
+#include "game/CharacterStatReset.hpp"
 #include "game/GameHandshake.hpp"
 #include "game/XorEncryptionSignal.hpp"

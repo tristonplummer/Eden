@@ -29,6 +29,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<PlayerChatMessageOpcode>();
     registerPacketHandler<AdminChatMessageOpcode>();
     registerPacketHandler<XorEncryptionSignalOpcode>();
+    registerPacketHandler<CharacterStatAllocationOpcode>();
 }
 
 /**

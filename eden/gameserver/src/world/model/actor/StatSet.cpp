@@ -17,7 +17,7 @@ using namespace shaiya::game;
  * @param value The base value of the stat.
  * @param sync  If we should synchronise the stats after.
  */
-void StatSet::setBase(Stat stat, int32_t value, bool sync)
+void StatSet::setBase(Stat stat, int32_t value)
 {
     if (value == getBase(stat))  // No-op if we're not actually changing any values.
         return;
@@ -43,9 +43,6 @@ void StatSet::setBase(Stat stat, int32_t value, bool sync)
         case Stat::MaxMana: maxMana_.base = value; break;
         case Stat::MaxStamina: maxStamina_.base = value; break;
     }
-
-    if (sync)
-        this->sync();
 }
 
 /**
