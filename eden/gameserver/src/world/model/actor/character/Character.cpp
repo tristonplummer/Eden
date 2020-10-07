@@ -1,4 +1,6 @@
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
+#include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
 using namespace shaiya;
 using namespace shaiya::net;
@@ -10,12 +12,7 @@ using namespace shaiya::game;
  * @param id        The character id.
  */
 Character::Character(GameSession& session, size_t id)
-    : session_(session),
-      equipment_(*this),
-      inventory_(*this),
-      actionBar_(*this),
-      appearance_(*this),
-      Actor(session.context().getGameWorld())
+    : session_(session), actionBar_(*this), appearance_(*this), Actor(session.context().getGameWorld())
 {
     // Set this entity type
     type_ = EntityType::Character;
@@ -32,6 +29,10 @@ void Character::init()
 {
     // Initialise the base actor
     Actor::init();
+
+    // Add event listeners
+    inventory_.addListener(std::make_shared<InventoryEventListener>(*this));
+    equipment_.addListener(std::make_shared<EquipmentEventListener>(*this));
 
     // Prepare the character details
     CharacterDetails details;

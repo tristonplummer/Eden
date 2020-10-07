@@ -17,8 +17,6 @@ constexpr auto InventoryPageSize = 24;
  * Initialises this inventory container.
  * @param character The character that owns this inventory.
  */
-InventoryContainer::InventoryContainer(Character& character)
-    : ItemContainer(InventoryPageCount, InventoryPageSize), character_(character)
+InventoryContainer::InventoryContainer(): ItemContainer(InventoryPageCount, InventoryPageSize)
 {
-    addListener(std::make_shared<InventoryEventListener>(character));
 }

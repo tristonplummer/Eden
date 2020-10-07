@@ -22,6 +22,7 @@ EquipmentEventListener::EquipmentEventListener(Character& character): character_
 void EquipmentEventListener::itemAdded(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot)
 {
     character_.flagUpdate(UpdateFlag::Appearance);
+    character_.syncStats();
 }
 
 /**
@@ -33,6 +34,7 @@ void EquipmentEventListener::itemAdded(const ItemContainer& container, const std
 void EquipmentEventListener::itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot)
 {
     character_.flagUpdate(UpdateFlag::Appearance);
+    character_.syncStats();
 }
 
 /**

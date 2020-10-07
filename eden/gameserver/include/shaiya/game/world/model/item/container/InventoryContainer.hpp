@@ -6,21 +6,14 @@ namespace shaiya::game
     class Character;
 
     /**
-     * A specialised container that acts as a character's inventory.
+     * A specialised container that acts as an actor's inventory.
      */
     class InventoryContainer: public ItemContainer
     {
     public:
         /**
-         * Initialises this inventory. container.
-         * @param character The character that owns this inventory.
+         * Initialises this inventory container.
          */
-        explicit InventoryContainer(Character& character);
-
-    private:
-        /**
-         * The character that owns this inventory container.
-         */
-        Character& character_;
+        explicit InventoryContainer();
     };
 }

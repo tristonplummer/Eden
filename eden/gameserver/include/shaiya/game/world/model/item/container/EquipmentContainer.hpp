@@ -4,19 +4,16 @@
 
 namespace shaiya::game
 {
-    class Character;
-
     /**
-     * A specialised container that acts as a character's worn equipment.
+     * A specialised container that acts as a actor's worn equipment.
      */
     class EquipmentContainer: public ItemContainer
     {
     public:
         /**
          * Initialises this equipment container.
-         * @param character The character that owns this equipment.
          */
-        explicit EquipmentContainer(Character& character);
+        explicit EquipmentContainer();
 
         /**
          * Adds an item to this container.
@@ -38,11 +35,5 @@ namespace shaiya::game
          * @return  The visible items
          */
         [[nodiscard]] std::vector<std::shared_ptr<Item>> visibleItems() const;
-
-    private:
-        /**
-         * The character that owns this equipment container.
-         */
-        Character& character_;
     };
 }

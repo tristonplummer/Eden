@@ -10,11 +10,9 @@ constexpr auto EquipmentCapacity = 14;
 
 /**
  * Initialises this equipment container.
- * @param character The character that owns this equipment.
  */
-EquipmentContainer::EquipmentContainer(Character& character): ItemContainer(EquipmentCapacity), character_(character)
+EquipmentContainer::EquipmentContainer(): ItemContainer(EquipmentCapacity)
 {
-    addListener(std::make_shared<EquipmentEventListener>(character));
 }
 
 /**
@@ -35,7 +33,7 @@ bool EquipmentContainer::add(std::shared_ptr<Item> item)
  */
 bool EquipmentContainer::add(std::shared_ptr<Item> item, EquipmentSlot slot)
 {
-    return ItemContainer::add(std::move(item), static_cast<uint8_t>(slot));;
+    return ItemContainer::add(std::move(item), static_cast<uint8_t>(slot));
 }
 
 /**

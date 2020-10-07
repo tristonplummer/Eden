@@ -20,6 +20,14 @@ void Actor::init()
 }
 
 /**
+ * Synchronises this actor's stats, by calculating the bonuses from their
+ * active buffs and worn equipment.
+ */
+void Actor::syncStats()
+{
+}
+
+/**
  * Sets the name of this actor.
  * @param name  The name value.
  */

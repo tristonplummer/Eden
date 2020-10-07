@@ -1,6 +1,8 @@
 #pragma once
 #include <shaiya/game/world/model/Entity.hpp>
 #include <shaiya/game/world/model/actor/StatSet.hpp>
+#include <shaiya/game/world/model/item/container/EquipmentContainer.hpp>
+#include <shaiya/game/world/model/item/container/InventoryContainer.hpp>
 
 namespace shaiya::game
 {
@@ -33,6 +35,12 @@ namespace shaiya::game
          * @param job   The class value.
          */
         void setJob(shaiya::ShaiyaClass job);
+
+        /**
+         * Synchronises this actor's stats, by calculating the bonuses from their
+         * active buffs and worn equipment.
+         */
+        void syncStats();
 
         /**
          * Gets the stats for this actor.
@@ -70,6 +78,33 @@ namespace shaiya::game
             return faction_;
         }
 
+        /**
+         * Gets the equipment for this character.
+         * @return  The equipment.
+         */
+        [[nodiscard]] EquipmentContainer& equipment()
+        {
+            return equipment_;
+        }
+
+        /**
+         * Gets the equipment for this character.
+         * @return  The equipment.
+         */
+        [[nodiscard]] const EquipmentContainer& equipment() const
+        {
+            return equipment_;
+        }
+
+        /**
+         * Gets the inventory for this character.
+         * @return  The inventory.
+         */
+        [[nodiscard]] InventoryContainer& inventory()
+        {
+            return inventory_;
+        }
+
     protected:
         /**
          * The name of this actor.
@@ -90,5 +125,15 @@ namespace shaiya::game
          * The class of this actor.
          */
         shaiya::ShaiyaClass class_{ ShaiyaClass::Fighter };
+
+        /**
+         * The worn equipment of the actor.
+         */
+        EquipmentContainer equipment_;
+
+        /**
+         * The inventory of the actor.
+         */
+        InventoryContainer inventory_;
     };
 }
