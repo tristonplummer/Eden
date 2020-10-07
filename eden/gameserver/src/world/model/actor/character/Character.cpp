@@ -82,6 +82,18 @@ void Character::onStatSync(const StatSet& stats, StatUpdateType type)
         session_.write(update);
         return;
     }
+
+    // Update the max health, mana and stamina
+    auto updateMaxHealth = [&](MaxHitpointType type, uint32_t value) {
+        CharacterMaxHitpoints update;
+        update.id    = id();
+        update.type  = type;
+        update.value = value;
+        session_.write(update);
+    };
+    updateMaxHealth(MaxHitpointType::Hitpoints, stats.maxHitpoints());
+    updateMaxHealth(MaxHitpointType::Mana, stats.maxMana());
+    updateMaxHealth(MaxHitpointType::Stamina, stats.maxStamina());
 }
 
 /**

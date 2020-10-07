@@ -7,13 +7,15 @@ using namespace shaiya::game;
 
 /**
  * Initialise this game world service.
- * @param db        The database service.
- * @param worldId   The id of this world service.
+ * @param db            The database service.
+ * @param itemService   The item definition service.
+ * @param worldId       The id of this world service.
  */
-GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t worldId): db_(db)
+GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, ItemDefinitionService& itemService, size_t worldId)
+    : db_(db)
 {
     synchronizer_        = std::make_unique<ParallelClientSynchronizer>();
-    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db, worldId);
+    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db, itemService, worldId);
 }
 
 /**
@@ -42,6 +44,9 @@ void GameWorldService::tick(size_t tickRate)
         // Process all the queued incoming packets
         for (auto&& character: characters_)
             character->session().processQueue();
+
+        // Pulse the game world
+        scheduler_.pulse();
 
         // Synchronize the characters with the world state
         synchronizer_->synchronize(characters_);
@@ -96,4 +101,13 @@ void GameWorldService::unregisterCharacter(std::shared_ptr<Character>& character
         // Remove the character
         characters_.erase(pos);
     }
+}
+
+/**
+ * Schedules a task to be executed in the future.
+ * @param task  The task.
+ */
+void GameWorldService::schedule(std::shared_ptr<ScheduledTask> task)
+{
+    scheduler_.schedule(std::move(task));
 }

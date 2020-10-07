@@ -1,4 +1,6 @@
 #pragma once
+#include <shaiya/game/world/model/item/ItemDefinition.hpp>
+
 #include <cmath>
 #include <cstdint>
 
@@ -11,17 +13,10 @@ namespace shaiya::game
     {
     public:
         /**
-         * Initialises an item by an item id.
-         * @param id    The item id.
+         * Initialises an item by it's definition.
+         * @param id    The item definition
          */
-        explicit Item(uint32_t id);
-
-        /**
-         * Initialises an item by a type and type id.
-         * @param type      The item type.
-         * @param typeId    The type id.
-         */
-        Item(uint8_t type, uint8_t typeId);
+        explicit Item(const ItemDefinition& definition);
 
         /**
          * Set the item count.
@@ -53,7 +48,7 @@ namespace shaiya::game
          */
         [[nodiscard]] uint32_t itemId() const
         {
-            return id_;
+            return definition_.id;
         }
 
         /**
@@ -62,7 +57,7 @@ namespace shaiya::game
          */
         [[nodiscard]] uint8_t type() const
         {
-            return std::floor(id_ / 1000);
+            return std::floor(definition_.id / 1000);
         }
 
         /**
@@ -71,14 +66,23 @@ namespace shaiya::game
          */
         [[nodiscard]] uint8_t typeId() const
         {
-            return std::floor(id_ - (type() * 1000));
+            return std::floor(definition_.id - (type() * 1000));
+        }
+
+        /**
+         * Gets the definition of this item.
+         * @return  The item definition.
+         */
+        [[nodiscard]] const ItemDefinition& definition() const
+        {
+            return definition_;
         }
 
     private:
         /**
-         * The item id.
+         * The item definition
          */
-        uint32_t id_{ 0 };
+        const ItemDefinition& definition_;
 
         /**
          * The item count.

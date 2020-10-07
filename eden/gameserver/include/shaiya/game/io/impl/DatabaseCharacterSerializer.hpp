@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/CharacterSerializer.hpp>
+#include <shaiya/game/service/ItemDefinitionService.hpp>
 
 namespace shaiya::game
 {
@@ -12,10 +13,12 @@ namespace shaiya::game
     public:
         /**
          * Initialises this character serializer.
-         * @param db        The database service.
-         * @param worldId   The id of this world server.
+         * @param db            The database service.
+         * @param itemService   The item definition service.
+         * @param worldId       The id of this world server.
          */
-        DatabaseCharacterSerializer(shaiya::database::DatabaseService& db, size_t worldId);
+        DatabaseCharacterSerializer(shaiya::database::DatabaseService& db, ItemDefinitionService& itemService,
+                                    size_t worldId);
 
         /**
          * Loads a player character.
@@ -35,6 +38,11 @@ namespace shaiya::game
          * The database service.
          */
         shaiya::database::DatabaseService& db_;
+
+        /**
+         * The item definition service.
+         */
+        ItemDefinitionService& itemService_;
 
         /**
          * The id of this world server.

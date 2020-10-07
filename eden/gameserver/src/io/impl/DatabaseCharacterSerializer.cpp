@@ -2,6 +2,7 @@
 
 #include <glog/logging.h>
 
+using namespace shaiya::database;
 using namespace shaiya::game;
 
 /**
@@ -26,11 +27,13 @@ constexpr auto SAVE_CHARACTER_DETAILS = "save_character_details";
 
 /**
  * Initialises this character serializer.
- * @param db        The database service.
- * @param worldId   The id of this world server.
+ * @param db            The database service.
+ * @param itemService   The item definition service.
+ * @param worldId       The id of this world server.
  */
-DatabaseCharacterSerializer::DatabaseCharacterSerializer(shaiya::database::DatabaseService& db, size_t worldId)
-    : db_(db), worldId_(worldId)
+DatabaseCharacterSerializer::DatabaseCharacterSerializer(DatabaseService& db, ItemDefinitionService& itemService,
+                                                         size_t worldId)
+    : db_(db), itemService_(itemService), worldId_(worldId)
 {
     db.prepare(LOAD_CHARACTER_DETAILS, "SELECT * FROM gamedata.characters WHERE world = $1 AND charid = $2;");
     db.prepare(LOAD_CHARACTER_INVENTORY, "SELECT * FROM gamedata.read_character_inventory($1, $2);");
@@ -121,8 +124,13 @@ bool DatabaseCharacterSerializer::loadInventory(Character& character)
             auto slot  = row["slot"].as<size_t>();
             auto count = row["count"].as<size_t>();
 
+            // The item definition
+            auto* def = itemService_.forId(id);
+            if (!def)
+                continue;
+
             // The item instance
-            auto item = std::make_shared<Item>(id);
+            auto item = std::make_shared<Item>(*def);
             item->setCount(count);
 
             // Add the item
@@ -166,8 +174,13 @@ bool DatabaseCharacterSerializer::loadEquipment(Character& character)
             auto id   = row["itemid"].as<size_t>();
             auto slot = row["slot"].as<size_t>();
 
+            // The item definition
+            auto* def = itemService_.forId(id);
+            if (!def)
+                continue;
+
             // Add the item
-            equipment.add(std::make_shared<Item>(id), static_cast<EquipmentSlot>(slot));
+            equipment.add(std::make_shared<Item>(*def), static_cast<EquipmentSlot>(slot));
         }
         return true;
     }

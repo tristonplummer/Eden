@@ -9,7 +9,7 @@ namespace shaiya::net
     constexpr auto CurrentHitpointsOpcode = 0x0521;
 
     /**
-     * Represents an incoming normal chat message.
+     * Represents an update to the player's current hitpoints.
      */
     struct CharacterCurrentHitpoints
     {

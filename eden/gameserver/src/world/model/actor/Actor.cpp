@@ -1,4 +1,6 @@
+#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
+#include <shaiya/game/world/scheduling/impl/HealthNormalizationTask.hpp>
 
 using namespace shaiya::game;
 
@@ -20,6 +22,9 @@ void Actor::init()
 
     // Synchronise our stats
     syncStats();
+
+    // Schedule a health normalization task
+    world().schedule(std::make_shared<HealthNormalizationTask>(*this));
 }
 
 /**
@@ -41,6 +46,15 @@ void Actor::syncStats()
     {
         if (!item)
             continue;
+        auto& def = item->definition();
+
+        // Add the values for the item definition
+        strength += def.strength;
+        dexterity += def.dexterity;
+        reaction += def.reaction;
+        intelligence += def.intelligence;
+        wisdom += def.wisdom;
+        luck += def.luck;
     }
 
     // Set the additional values

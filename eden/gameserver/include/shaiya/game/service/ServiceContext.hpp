@@ -2,6 +2,7 @@
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/service/CharacterScreenService.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/game/service/ItemDefinitionService.hpp>
 #include <shaiya/game/service/WorldApiService.hpp>
 
 #include <boost/property_tree/ptree.hpp>
@@ -59,5 +60,10 @@ namespace shaiya::game
          * The game world service.
          */
         GameWorldService* gameService_;
+
+        /**
+         * The item definition service.
+         */
+        ItemDefinitionService* itemService_;
     };
 }

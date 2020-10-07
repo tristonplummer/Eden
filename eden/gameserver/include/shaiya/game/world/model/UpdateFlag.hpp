@@ -12,5 +12,6 @@ namespace shaiya::game
         MovementState = (1u << 2u),
         Chat          = (1u << 3u),
         Yell          = (1u << 4u),
+        MaxHitpoints  = (1u << 5u),
     };
 }

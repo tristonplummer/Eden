@@ -1,7 +1,9 @@
 #pragma once
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/CharacterSerializer.hpp>
+#include <shaiya/game/service/ItemDefinitionService.hpp>
 #include <shaiya/game/world/model/map/MapRepository.hpp>
+#include <shaiya/game/world/scheduling/Scheduler.hpp>
 #include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 
 #include <boost/property_tree/ptree.hpp>
@@ -18,10 +20,11 @@ namespace shaiya::game
     public:
         /**
          * Initialise this game world service.
-         * @param db        The database service.
-         * @param worldId   The id of this world service.
+         * @param db            The database service.
+         * @param itemService   The item definition service.
+         * @param worldId       The id of this world service.
          */
-        explicit GameWorldService(shaiya::database::DatabaseService& db, size_t worldId);
+        explicit GameWorldService(shaiya::database::DatabaseService& db, ItemDefinitionService& itemService, size_t worldId);
 
         /**
          * Loads the game world service.
@@ -46,6 +49,12 @@ namespace shaiya::game
          * @param character The character to remove.
          */
         void unregisterCharacter(std::shared_ptr<Character>& character);
+
+        /**
+         * Schedules a task to be executed in the future.
+         * @param task  The task.
+         */
+        void schedule(std::shared_ptr<ScheduledTask> task);
 
         /**
          * Gets the map repository
@@ -86,6 +95,11 @@ namespace shaiya::game
          * The map repository.
          */
         MapRepository mapRepository_;
+
+        /**
+         * The task scheduler
+         */
+        Scheduler scheduler_;
 
         /**
          * The mutex to be used for locking access to the actor vectors.
