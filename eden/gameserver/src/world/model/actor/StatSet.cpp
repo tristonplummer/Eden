@@ -52,9 +52,8 @@ void StatSet::setBase(Stat stat, int32_t value, bool sync)
  * Sets an additional value for a stat. This is the stat value that is affected by buffs and equipment.
  * @param stat  The stat.
  * @param value The value of the stat.
- * @param sync  If we should synchronise the stats after.
  */
-void StatSet::setAdditional(Stat stat, int32_t value, bool sync)
+void StatSet::setAdditional(Stat stat, int32_t value)
 {
     if (value == getAdditional(stat))  // No-op if we're not actually changing any values.
         return;
@@ -80,9 +79,6 @@ void StatSet::setAdditional(Stat stat, int32_t value, bool sync)
         case Stat::MaxMana: maxMana_.additional = value; break;
         case Stat::MaxStamina: maxStamina_.additional = value; break;
     }
-
-    if (sync)
-        this->sync();
 }
 
 /**
@@ -93,7 +89,13 @@ void StatSet::setHitpoints(int32_t hitpoints)
 {
     if (hitpoints < 0)
         hitpoints = 0;
+    if (hitpoints > maxHitpoints())
+        hitpoints = maxHitpoints();
     currentHitpoints_ = hitpoints;
+
+    // If an event listener was added, execute it
+    if (listener_)
+        listener_(*this, StatUpdateType::Status);
 }
 
 /**
@@ -104,7 +106,13 @@ void StatSet::setMana(int32_t mana)
 {
     if (mana < 0)
         mana = 0;
+    if (mana > maxMana())
+        mana = maxMana();
     currentMana_ = mana;
+
+    // If an event listener was added, execute it
+    if (listener_)
+        listener_(*this, StatUpdateType::Status);
 }
 
 /**
@@ -115,7 +123,13 @@ void StatSet::setStamina(int32_t stamina)
 {
     if (stamina < 0)
         stamina = 0;
+    if (stamina > maxStamina())
+        stamina = maxStamina();
     currentStamina_ = stamina;
+
+    // If an event listener was added, execute it
+    if (listener_)
+        listener_(*this, StatUpdateType::Status);
 }
 
 /**
@@ -172,6 +186,19 @@ void StatSet::sync()
     maxPhysicalAttack_.total = maxPhysicalAttack_.base + maxPhysicalAttack_.additional + physicalAttackBonus;
     maxRangedAttack_.total   = maxRangedAttack_.base + maxRangedAttack_.additional + rangedAttackBonus;
     maxMagicalAttack_.total  = maxMagicalAttack_.base + maxMagicalAttack_.additional + magicalAttackBonus;
+
+    // If an event listener was added, execute it
+    if (listener_)
+        listener_(*this, StatUpdateType::Full);
+}
+
+/**
+ * Adds an event listener for this stat set.
+ * @param listener  The listener to add.
+ */
+void StatSet::onSync(const std::function<void(const StatSet&, StatUpdateType)>& listener)
+{
+    listener_ = listener;
 }
 
 /**

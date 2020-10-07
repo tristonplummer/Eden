@@ -2,9 +2,26 @@
 #include <shaiya/game/world/model/actor/Stat.hpp>
 
 #include <cstdint>
+#include <functional>
 
 namespace shaiya::game
 {
+    /**
+     * The update type.
+     */
+    enum class StatUpdateType
+    {
+        /**
+         * A full update.
+         */
+        Full,
+
+        /**
+         * Only update the current health, mana and stamina.
+         */
+        Status
+    };
+
     /**
      * "Statistics" (stats) may be used by an actor to determine
      * combat values.
@@ -31,9 +48,8 @@ namespace shaiya::game
          * Sets an additional value for a stat. This is the stat value that is affected by buffs and equipment.
          * @param stat  The stat.
          * @param value The value of the stat.
-         * @param sync  If we should synchronise the stats after.
          */
-        void setAdditional(Stat stat, int32_t value, bool sync = true);
+        void setAdditional(Stat stat, int32_t value);
 
         /**
          * Sets the current hitpoints of the actor.
@@ -58,6 +74,12 @@ namespace shaiya::game
          * values accordingly. This is usually called when a stat value is modified.
          */
         void sync();
+
+        /**
+         * Adds an event listener for this stat set.
+         * @param listener  The listener to add.
+         */
+        void onSync(const std::function<void(const StatSet&, StatUpdateType)>& listener);
 
         /**
          * Gets the base value of a stat.
@@ -259,5 +281,10 @@ namespace shaiya::game
          * The maximum stamina value of an actor.
          */
         StatTriple maxStamina_;
+
+        /**
+         * The event listener for this stat set.
+         */
+        std::function<void(const StatSet&, StatUpdateType)> listener_;
     };
 }

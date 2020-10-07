@@ -33,6 +33,7 @@ void Character::init()
     // Add event listeners
     inventory_.addListener(std::make_shared<InventoryEventListener>(*this));
     equipment_.addListener(std::make_shared<EquipmentEventListener>(*this));
+    stats().onSync([&](const StatSet& stats, StatUpdateType type) { onStatSync(stats, type); });
 
     // Prepare the character details
     CharacterDetails details;
@@ -59,6 +60,28 @@ void Character::init()
     // Synchronise the item containers
     equipment().sync();
     inventory().sync();
+
+    // Cheat way to send our current health after loading the character
+    onStatSync(stats_, StatUpdateType::Status);
+}
+
+/**
+ * Gets executed when the stats for this character are synchronized.
+ * @param stats     The stats for this character.
+ * @param type      The update type.
+ */
+void Character::onStatSync(const StatSet& stats, StatUpdateType type)
+{
+    // A status update is just an update about our current health
+    if (type == StatUpdateType::Status)
+    {
+        CharacterCurrentHitpoints update;
+        update.hitpoints = stats.currentHitpoints();
+        update.mana      = stats.currentMana();
+        update.stamina   = stats.currentStamina();
+        session_.write(update);
+        return;
+    }
 }
 
 /**

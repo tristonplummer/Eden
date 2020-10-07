@@ -173,5 +173,12 @@ namespace shaiya::game
          * The appearance of this character.
          */
         Appearance appearance_;
+
+        /**
+         * Gets executed when the stats for this character are synchronized.
+         * @param stats     The stats for this character.
+         */
+        void onStatSync(const StatSet& stats, StatUpdateType type);
+
     };
 }
