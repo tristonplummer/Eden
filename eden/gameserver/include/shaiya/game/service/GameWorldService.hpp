@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <mutex>
+#include <queue>
 #include <vector>
 
 namespace shaiya::game
@@ -48,7 +49,17 @@ namespace shaiya::game
          * Removes a character from this game world.
          * @param character The character to remove.
          */
-        void unregisterCharacter(std::shared_ptr<Character>& character);
+        void unregisterCharacter(std::shared_ptr<Character> character);
+
+        /**
+         * Finalises the registration of characters that are queued to be registered.
+         */
+        void finaliseRegistrations();
+
+        /**
+         * Finalises the unregistration of characters that are queued to be unregistered.
+         */
+        void finaliseUnregistrations();
 
         /**
          * Schedules a task to be executed in the future.
@@ -80,6 +91,16 @@ namespace shaiya::game
          * A vector containing the characters that are connected to this game world.
          */
         std::vector<std::shared_ptr<Character>> characters_;
+
+        /**
+         * The characters that are pending registration
+         */
+        std::queue<std::shared_ptr<Character>> newCharacters_;
+
+        /**
+         * The characters that are pending unregistration
+         */
+        std::queue<std::shared_ptr<Character>> oldCharacters_;
 
         /**
          * The client synchronizer
