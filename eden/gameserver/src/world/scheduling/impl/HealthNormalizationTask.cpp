@@ -12,15 +12,10 @@ using namespace shaiya::game;
 constexpr auto NormalizationDelay = 60;
 
 /**
- * The amount of HP/MP/SP to restore per execution, represented as a whole number.
- * The value 3 represents 3%.
- */
-constexpr auto NaturalRestorationPercent = 3;
-
-/**
  * The restoration value, represented as a decimal.
+ * 0.03 = 3%
  */
-constexpr auto NaturalRestorationValue = NaturalRestorationPercent / 100;
+constexpr auto NaturalRestorationValue = 0.03;
 
 /**
  * Initialise this task.
@@ -35,6 +30,10 @@ HealthNormalizationTask::HealthNormalizationTask(Actor& actor): actor_(actor), S
  */
 void HealthNormalizationTask::execute()
 {
+    // If the actor is not active, stop this task
+    if (!actor_.active())
+        return stop();
+
     // The actor's stats
     auto& stats = actor_.stats();
 
@@ -48,7 +47,7 @@ void HealthNormalizationTask::execute()
 
     // The current and maximum stamina values of the actor
     auto currentStamina = stats.currentStamina();
-    auto maxStamina     = stats.currentStamina();
+    auto maxStamina     = stats.maxStamina();
 
     // Normalize the current health
     currentHealth += std::floor(maxHealth * NaturalRestorationValue);
