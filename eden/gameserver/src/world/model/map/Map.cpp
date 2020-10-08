@@ -104,6 +104,10 @@ void Map::parseDungeon(std::ifstream& stream)
  */
 void Map::add(std::shared_ptr<Entity> entity) const
 {
+    // Adjust the position where needed
+    adjustPosition(entity->position());
+
+    // Get the cell to place this entity into.
     auto cell = getCell(entity->position());
     assert(cell);
     cell->addEntity(entity);
@@ -113,8 +117,12 @@ void Map::add(std::shared_ptr<Entity> entity) const
  * Removes an entity from this map.
  * @param entity    The entity to remove.
  */
-void Map::remove(const std::shared_ptr<Entity>& entity) const
+void Map::remove(std::shared_ptr<Entity> entity) const
 {
+    // Adjust the position where needed
+    adjustPosition(entity->position());
+
+    // Get the cell to remove this entity from
     auto cell = getCell(entity->position());
     assert(cell);
     cell->removeEntity(entity);
@@ -125,8 +133,10 @@ void Map::remove(const std::shared_ptr<Entity>& entity) const
  * @param position  The position.
  * @return          The map cell.
  */
-std::shared_ptr<MapCell> Map::getCell(const Position& position) const
+std::shared_ptr<MapCell> Map::getCell(Position& position) const
 {
+    // Adjust the position where needed
+    adjustPosition(position);
     return cells_.at(getCellIndex(position));
 }
 
@@ -135,8 +145,11 @@ std::shared_ptr<MapCell> Map::getCell(const Position& position) const
  * @param position  The position.
  * @return          The map cell.
  */
-size_t Map::getCellIndex(const Position& position) const
+size_t Map::getCellIndex(Position& position) const
 {
+    // Adjust the position where needed
+    adjustPosition(position);
+
     // Set the rounding mode
     std::fesetround(FE_TOWARDZERO);
 
@@ -155,8 +168,11 @@ size_t Map::getCellIndex(const Position& position) const
  * @param position  The position.
  * @return          The neighbouring cells.
  */
-std::vector<std::shared_ptr<MapCell>> Map::getNeighbouringCells(const Position& position) const
+std::vector<std::shared_ptr<MapCell>> Map::getNeighbouringCells(Position& position) const
 {
+    // Adjust the position where needed
+    adjustPosition(position);
+
     // The vector of cells
     std::vector<std::shared_ptr<MapCell>> cells;
 
@@ -185,4 +201,25 @@ std::vector<std::shared_ptr<MapCell>> Map::getNeighbouringCells(const Position& 
         }
     }
     return cells;
+}
+
+/**
+ * Adjusts a position to fit into the boundaries of this map.
+ * @param position  The position to adjust.
+ */
+void Map::adjustPosition(Position& position) const
+{
+    // If the coordinates are less than 0, adjust them to 0.
+    if (position.x() < 0)
+        position.setX(0);
+    if (position.y() < 0)
+        position.setY(0);
+    if (position.z() < 0)
+        position.setZ(0);
+
+    // If the coordinates are greater than or equal to the map size, adjust them to the map size - 1
+    if (position.x() >= size_)
+        position.setX(size_ - 1);
+    if (position.z() >= size_)
+        position.setZ(size_ - 1);
 }

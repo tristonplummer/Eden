@@ -24,6 +24,24 @@ namespace shaiya::game
         Position(uint16_t map, float x, float y, float z);
 
         /**
+         * Sets the x coordinate for this position
+         * @param x     The x coordinate
+         */
+        void setX(float x);
+
+        /**
+         * Sets the y coordinate for this position
+         * @param y     The y coordinate
+         */
+        void setY(float y);
+
+        /**
+         * Sets the z coordinate for this position
+         * @param z
+         */
+        void setZ(float z);
+
+        /**
          * Checks if a position is within distance of another.
          * @param other     The other position.
          * @param distance  The distance.
@@ -73,6 +91,13 @@ namespace shaiya::game
         {
             return z_;
         }
+
+        /**
+         * Checks if these positions are not equal to each other.
+         * @param other The other position
+         * @return      If the two positions are not equal
+         */
+        bool operator!=(const Position& other) const;
 
         /**
          * Checks if a position is equal to this one.

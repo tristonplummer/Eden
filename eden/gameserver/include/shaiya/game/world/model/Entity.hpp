@@ -127,7 +127,7 @@ namespace shaiya::game
          * @param defaultValue  The default value.
          * @return              The attribute value.
          */
-        template <typename T>
+        template<typename T>
         T getAttribute(Attribute key, T defaultValue = {}) const
         {
             if (attributes_.contains(key))
@@ -135,6 +135,15 @@ namespace shaiya::game
                 return std::any_cast<T>(attributes_.at(key));
             }
             return defaultValue;
+        }
+
+        /**
+         * Get the position of this entity.
+         * @return  The position
+         */
+        [[nodiscard]] Position& position()
+        {
+            return position_;
         }
 
         /**

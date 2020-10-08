@@ -19,6 +19,33 @@ Position::Position(uint16_t map, float x, float y, float z): map_(map), x_(x), y
 }
 
 /**
+ * Sets the x coordinate for this position
+ * @param x     The x coordinate
+ */
+void Position::setX(float x)
+{
+    x_ = x;
+}
+
+/**
+ * Sets the y coordinate for this position
+ * @param y     The y coordinate
+ */
+void Position::setY(float y)
+{
+    y_ = y;
+}
+
+/**
+ * Sets the z coordinate for this position
+ * @param z
+ */
+void Position::setZ(float z)
+{
+    z_ = z;
+}
+
+/**
  * Checks if a position is within distance of another.
  * @param other     The other position.
  * @param distance  The distance.
@@ -40,6 +67,16 @@ bool Position::isWithinDistance(const Position& other, float distance) const
 bool Position::isWithinViewportDistance(const Position& other) const
 {
     return isWithinDistance(other, VIEWPORT_DISTANCE);
+}
+
+/**
+ * Checks if these positions are not equal to each other.
+ * @param other The other position
+ * @return      If the two positions are not equal
+ */
+bool Position::operator!=(const Position& other) const
+{
+    return !(*this == other);
 }
 
 /**

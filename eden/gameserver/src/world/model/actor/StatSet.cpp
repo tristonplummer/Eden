@@ -169,19 +169,19 @@ void StatSet::sync()
 
     // Calculate the physical attack bonus
     auto physicalAttackBonus = 0;
-    physicalAttackBonus += std::floor(strength_.total * 1.3);    // Strength adds 1.3 Physical attack power per point
-    physicalAttackBonus += std::floor(dexterity_.total * 0.25);  // Dexterity adds 0.25 Physical attack power per point.
+    physicalAttackBonus += std::ceil(strength_.total * 1.3);   // Strength adds 1.3 Physical attack power per point
+    physicalAttackBonus += std::ceil(dexterity_.total * 0.2);  // Dexterity adds 0.2 Physical attack power per point.
 
     // Calculate the ranged attack bonus
     auto rangedAttackBonus = 0;
-    rangedAttackBonus += strength_.total;                     // Strength adds 1 Ranged attack power per point.
-    rangedAttackBonus += std::floor(dexterity_.total * 0.2);  // Dexterity adds 0.2 Ranged attack power per point.
-    rangedAttackBonus += std::floor(luck_.total * 0.3);       // Luck adds 0.3 Ranged attack power per point.
+    rangedAttackBonus += strength_.total;                    // Strength adds 1 Ranged attack power per point.
+    rangedAttackBonus += std::ceil(dexterity_.total * 0.2);  // Dexterity adds 0.2 Ranged attack power per point.
+    rangedAttackBonus += std::ceil(luck_.total * 0.3);       // Luck adds 0.3 Ranged attack power per point.
 
     // Calculate the magical attack bonus
     auto magicalAttackBonus = 0;
-    magicalAttackBonus += std::floor(intelligence_.total * 1.3);  // Intelligence adds 1.3 Magical attack power per point.
-    magicalAttackBonus += std::floor(wisdom_.total * 0.2);        // Wisdom adds 0.2 Magical attack power per point.
+    magicalAttackBonus += std::ceil(intelligence_.total * 1.3);  // Intelligence adds 1.3 Magical attack power per point.
+    magicalAttackBonus += std::ceil(wisdom_.total * 0.3);        // Wisdom adds 0.3 Magical attack power per point.
 
     // Calculate the total minimum and maximum attack powers
     minPhysicalAttack_.total = minPhysicalAttack_.base + minPhysicalAttack_.additional + physicalAttackBonus;

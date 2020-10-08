@@ -33,21 +33,14 @@ namespace shaiya::game
          * Removes an entity from this map.
          * @param entity    The entity to remove.
          */
-        void remove(const std::shared_ptr<Entity>& entity) const;
+        void remove(std::shared_ptr<Entity> entity) const;
 
         /**
          * Gets the cells in a neighbouring radius of a position.
          * @param position  The position.
          * @return          The neighbouring cells.
          */
-        [[nodiscard]] std::vector<std::shared_ptr<MapCell>> getNeighbouringCells(const Position& position) const;
-
-        /**
-         * Get a cell in the map based on a position.
-         * @param position  The position.
-         * @return          The map cell.
-         */
-        [[nodiscard]] std::shared_ptr<MapCell> getCell(const Position& position) const;
+        [[nodiscard]] std::vector<std::shared_ptr<MapCell>> getNeighbouringCells(Position& position) const;
 
         /**
          * Gets the size of the map.
@@ -72,11 +65,24 @@ namespace shaiya::game
         void parseDungeon(std::ifstream& stream);
 
         /**
+         * Get a cell in the map based on a position.
+         * @param position  The position.
+         * @return          The map cell.
+         */
+        [[nodiscard]] std::shared_ptr<MapCell> getCell(Position& position) const;
+
+        /**
          * Get a cell index  based on a position.
          * @param position  The position.
          * @return          The map cell.
          */
-        [[nodiscard]] size_t getCellIndex(const Position& position) const;
+        [[nodiscard]] size_t getCellIndex(Position& position) const;
+
+        /**
+         * Adjusts a position to fit into the boundaries of this map.
+         * @param position  The position to adjust.
+         */
+        void adjustPosition(Position& position) const;
 
         /**
          * The size of the map.
