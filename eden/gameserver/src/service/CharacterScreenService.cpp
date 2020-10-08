@@ -157,18 +157,24 @@ std::vector<CharacterListEntry> CharacterScreenService::getCharacters(GameSessio
             auto slot = row["slot"].as<int>();
             assert(slot <= CHARACTER_LIST_SIZE);
 
-            auto& character  = characters.at(slot);
-            character.id     = row["charid"].as<int>();
-            character.level  = row["level"].as<int>();
-            character.race   = static_cast<ShaiyaRace>(row["race"].as<int>());
-            character.mode   = static_cast<ShaiyaGameMode>(row["mode"].as<int>());
-            character.hair   = row["hair"].as<int>();
-            character.face   = row["face"].as<int>();
-            character.height = row["height"].as<int>();
-            character.job    = static_cast<ShaiyaClass>(row["class"].as<int>());
-            character.gender = row["gender"].as<int>();
-            character.map    = row["map"].as<int>();
-            character.name   = row["name"].as<std::string>();
+            auto& character        = characters.at(slot);
+            character.id           = row["charid"].as<int>();
+            character.level        = row["level"].as<int>();
+            character.race         = static_cast<ShaiyaRace>(row["race"].as<int>());
+            character.mode         = static_cast<ShaiyaGameMode>(row["mode"].as<int>());
+            character.hair         = row["hair"].as<int>();
+            character.face         = row["face"].as<int>();
+            character.height       = row["height"].as<int>();
+            character.job          = static_cast<ShaiyaClass>(row["class"].as<int>());
+            character.gender       = row["gender"].as<int>();
+            character.map          = row["map"].as<int>();
+            character.strength     = row["strength"].as<int>();
+            character.dexterity    = row["dexterity"].as<int>();
+            character.reaction     = row["reaction"].as<int>();
+            character.intelligence = row["intelligence"].as<int>();
+            character.wisdom       = row["wisdom"].as<int>();
+            character.luck         = row["luck"].as<int>();
+            character.name         = row["name"].as<std::string>();
         }
     }
     catch (const std::exception& e)

@@ -39,7 +39,10 @@ DatabaseCharacterSerializer::DatabaseCharacterSerializer(DatabaseService& db, It
     db.prepare(LOAD_CHARACTER_INVENTORY, "SELECT * FROM gamedata.read_character_inventory($1, $2);");
     db.prepare(LOAD_CHARACTER_EQUIPMENT, "SELECT * FROM gamedata.read_character_equipment($1, $2);");
     db.prepare(SAVE_CHARACTER_DETAILS,
-               "UPDATE gamedata.characters SET map = $3, posX = $4, posY = $5, posZ = $6 WHERE world = $1 AND charid = $2;");
+               "UPDATE gamedata.characters SET map = $3, posX = $4, posY = $5, posZ = $6, statpoints = $7, strength = $8, "
+               "dexterity = $9, reaction = $10, intelligence = $11, wisdom = $12, luck = $13, hitpoints = $14, mana = $15, "
+               "stamina = $16 WHERE world = $1 "
+               "AND charid = $2;");
 }
 
 /**
@@ -66,6 +69,7 @@ bool DatabaseCharacterSerializer::load(Character& character)
         character.setName(row["name"].as<std::string>());
         character.setRace(static_cast<ShaiyaRace>(row["race"].as<size_t>()));
         character.setJob(static_cast<ShaiyaClass>(row["class"].as<size_t>()));
+        character.setStatpoints(row["statpoints"].as<size_t>());
 
         // Set the character appearance
         auto& appearance = character.appearance();
@@ -86,6 +90,19 @@ bool DatabaseCharacterSerializer::load(Character& character)
         if (!loadEquipment(character))
             return false;
 
+        // Set the base stats
+        auto& stats = character.stats();
+        stats.setBase(Stat::Strength, row["strength"].as<size_t>());
+        stats.setBase(Stat::Dexterity, row["dexterity"].as<size_t>());
+        stats.setBase(Stat::Reaction, row["reaction"].as<size_t>());
+        stats.setBase(Stat::Intelligence, row["intelligence"].as<size_t>());
+        stats.setBase(Stat::Wisdom, row["wisdom"].as<size_t>());
+        stats.setBase(Stat::Luck, row["luck"].as<size_t>());
+        stats.sync();
+        stats.setHitpoints(row["hitpoints"].as<size_t>());
+        stats.setMana(row["mana"].as<size_t>());
+        stats.setStamina(row["stamina"].as<size_t>());
+        
         return true;
     }
     catch (const std::exception& e)
@@ -207,8 +224,14 @@ void DatabaseCharacterSerializer::save(Character& character)
         // The character's position
         auto& pos = character.position();
 
+        // The character's stats
+        auto& stats = character.stats();
+
         // Save the details
-        tx.exec_prepared(SAVE_CHARACTER_DETAILS, worldId_, character.id(), pos.map(), pos.x(), pos.y(), pos.z());
+        tx.exec_prepared(SAVE_CHARACTER_DETAILS, worldId_, character.id(), pos.map(), pos.x(), pos.y(), pos.z(),
+                         character.statpoints(), stats.getBase(Stat::Strength), stats.getBase(Stat::Dexterity),
+                         stats.getBase(Stat::Reaction), stats.getBase(Stat::Intelligence), stats.getBase(Stat::Wisdom),
+                         stats.getBase(Stat::Luck), stats.currentHitpoints(), stats.currentMana(), stats.currentStamina());
         tx.commit();
     }
     catch (const std::exception& e)
