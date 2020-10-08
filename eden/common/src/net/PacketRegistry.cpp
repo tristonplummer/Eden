@@ -30,6 +30,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<AdminChatMessageOpcode>();
     registerPacketHandler<XorEncryptionSignalOpcode>();
     registerPacketHandler<CharacterStatAllocationOpcode>();
+    registerPacketHandler<CharacterRemoveItemRequestOpcode>();
 }
 
 /**

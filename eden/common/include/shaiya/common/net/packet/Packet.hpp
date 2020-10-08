@@ -82,6 +82,7 @@ namespace shaiya::net
 #include "game/CharacterMoveItem.hpp"
 #include "game/CharacterMovement.hpp"
 #include "game/CharacterMovementState.hpp"
+#include "game/CharacterRemoveItem.hpp"
 #include "game/CharacterSelection.hpp"
 #include "game/CharacterStatAllocation.hpp"
 #include "game/CharacterStatReset.hpp"

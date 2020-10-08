@@ -55,6 +55,29 @@ bool ItemContainer::add(std::shared_ptr<Item> item, size_t slot)
 }
 
 /**
+ * Gets the item at a specific page and slot
+ * @param page  The page
+ * @param slot  The slot
+ * @return      The item at the requested position
+ */
+std::shared_ptr<Item> ItemContainer::at(size_t page, size_t slot) const
+{
+    return at(pagePositionToIndex(page, slot));
+}
+
+/**
+ * Gets the item at a specific slot
+ * @param slot  The slot
+ * @return      The item at the requested position
+ */
+std::shared_ptr<Item> ItemContainer::at(size_t slot) const
+{
+    if (slot >= items_.size())
+        return nullptr;
+    return items_.at(slot);
+}
+
+/**
  * Removes an item from the container at a specific slot.
  * @param slot  The slot.
  * @return      The item instance.
@@ -67,7 +90,30 @@ std::shared_ptr<Item> ItemContainer::remove(size_t slot)
 
     items_.at(slot) = nullptr;
     for (auto&& listener: listeners_)
-        listener->itemRemoved(*this, item, slot);
+        listener->itemRemoved(*this, nullptr, slot);
+    return item;
+}
+
+/**
+ * Removes an item from the container at a specific slot.
+ * @param page  The page.
+ * @param slot  The slot.
+ * @param count The amount of the item to remove.
+ * @return      The item instance.
+ */
+std::shared_ptr<Item> ItemContainer::remove(size_t page, size_t slot, size_t count)
+{
+    auto idx = pagePositionToIndex(page, slot);
+    if (idx >= items_.size())
+        return nullptr;
+
+    auto item = at(idx);
+    if (count >= item->count())
+        return remove(idx);
+
+    item->setCount(item->count() - count);
+    for (auto&& listener: listeners_)
+        listener->itemRemoved(*this, item, idx);
     return item;
 }
 
@@ -88,22 +134,23 @@ ItemPair ItemContainer::transferTo(ItemContainer& dest, size_t sourcePage, size_
     auto destPos   = dest.pagePositionToIndex(destPage, destSlot);
 
     // Remove the item from the source
-    auto sourceItem = remove(sourcePos);
+    auto sourceItem = at(sourcePos);
     if (!sourceItem)
     {
         success = false;
         return { nullptr, nullptr };
     }
+    items_.at(sourcePos) = nullptr;
 
     // The item at the current destination
-    auto destItem = dest.remove(destPos);
+    auto destItem = dest.at(destPos);
 
     // Add the item at the destination slot
-    dest.add(sourceItem, destPos);
+    dest.items_.at(destPos) = sourceItem;
 
     // If there was an item at the destination slot, move it to the source slot
     if (destItem)
-        add(destItem, sourcePos);
+        items_.at(sourcePos) = destItem;
     success = true;
     return { sourceItem, destItem };
 }

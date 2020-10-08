@@ -31,6 +31,16 @@ void InventoryEventListener::itemAdded(const ItemContainer& container, const std
  */
 void InventoryEventListener::itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot)
 {
+    // Prepare the removed item request
+    CharacterRemoveItem update;
+
+    // Calculate the page and slot
+    update.page   = (slot / container.pageSize()) + 1;
+    update.slot   = slot % container.pageSize();
+    update.type   = item ? item->type() : 0;
+    update.typeId = item ? item->typeId() : 0;
+    update.count  = item ? item->count() : 0;
+    character_.session().write(update);
 }
 
 /**

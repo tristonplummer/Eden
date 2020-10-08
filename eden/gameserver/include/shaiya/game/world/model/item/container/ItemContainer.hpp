@@ -45,6 +45,21 @@ namespace shaiya::game
         virtual bool add(std::shared_ptr<Item> item, size_t slot);
 
         /**
+         * Gets the item at a specific page and slot
+         * @param page  The page
+         * @param slot  The slot
+         * @return      The item at the requested position
+         */
+        [[nodiscard]] virtual std::shared_ptr<Item> at(size_t page, size_t slot) const;
+
+        /**
+         * Gets the item at a specific slot
+         * @param slot  The slot
+         * @return      The item at the requested position
+         */
+        [[nodiscard]] virtual std::shared_ptr<Item> at(size_t slot) const;
+
+        /**
          * Removes an item from the container at a specific slot.
          * @param slot  The slot.
          * @return      The item instance.
@@ -52,15 +67,13 @@ namespace shaiya::game
         virtual std::shared_ptr<Item> remove(size_t slot);
 
         /**
-         * Gets the position in a page as a local index.
+         * Removes an item from the container at a specific slot.
          * @param page  The page.
          * @param slot  The slot.
-         * @return      The index.
+         * @param count The amount of the item to remove.
+         * @return      The item instance.
          */
-        [[nodiscard]] size_t pagePositionToIndex(size_t page, size_t slot) const
-        {
-            return (page * pageSize_) + slot;
-        }
+        virtual std::shared_ptr<Item> remove(size_t page, size_t slot, size_t count);
 
         /**
          * Transfers an item from this container to another.
@@ -72,8 +85,8 @@ namespace shaiya::game
          * @param success       If the transfer was successful.
          * @return              The item at the source position, and the item at the destination position.
          */
-        ItemPair transferTo(ItemContainer& dest, size_t sourcePage, size_t sourceSlot, size_t destPage,
-                                       size_t destSlot, bool& success);
+        ItemPair transferTo(ItemContainer& dest, size_t sourcePage, size_t sourceSlot, size_t destPage, size_t destSlot,
+                            bool& success);
 
         /**
          * Adds a listener to this container.
@@ -133,5 +146,16 @@ namespace shaiya::game
          * The size of each page.
          */
         size_t pageSize_{ 0 };
+
+        /**
+         * Gets the position in a page as a local index.
+         * @param page  The page.
+         * @param slot  The slot.
+         * @return      The index.
+         */
+        [[nodiscard]] size_t pagePositionToIndex(size_t page, size_t slot) const
+        {
+            return (page * pageSize_) + slot;
+        }
     };
 }
