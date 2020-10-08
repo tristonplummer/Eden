@@ -61,8 +61,8 @@ void Character::init()
     equipment().sync();
     inventory().sync();
 
-    // Cheat way to send our current health after loading the character
-    onStatSync(stats_, StatUpdateType::Status);
+    // Cheat way to send our current health and additional stats after loading the character
+    onStatSync(stats_, StatUpdateType::Full);
 }
 
 /**
