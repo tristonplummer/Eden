@@ -88,6 +88,8 @@ void StatSet::setHitpoints(int32_t hitpoints)
         hitpoints = 0;
     if (hitpoints > maxHitpoints())
         hitpoints = maxHitpoints();
+    if (currentHitpoints_ == hitpoints)
+        return;
     currentHitpoints_ = hitpoints;
 
     // If an event listener was added, execute it
@@ -105,6 +107,8 @@ void StatSet::setMana(int32_t mana)
         mana = 0;
     if (mana > maxMana())
         mana = maxMana();
+    if (currentMana_ == mana)
+        return;
     currentMana_ = mana;
 
     // If an event listener was added, execute it
@@ -122,6 +126,8 @@ void StatSet::setStamina(int32_t stamina)
         stamina = 0;
     if (stamina > maxStamina())
         stamina = maxStamina();
+    if (currentStamina_ == stamina)
+        return;
     currentStamina_ = stamina;
 
     // If an event listener was added, execute it
