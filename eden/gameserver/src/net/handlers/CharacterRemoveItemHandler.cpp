@@ -1,9 +1,9 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-
-#include <glog/logging.h>
+#include <shaiya/game/world/model/item/GroundItem.hpp>
 
 using namespace shaiya::net;
+using namespace shaiya::game;
 
 /**
  * Handles an incoming remove item request.
@@ -30,7 +30,13 @@ void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& reques
     if (!item)
         return;
 
-    inventory.remove(page, slot, request.count);
+    // The item that was removed
+    item = inventory.remove(page, slot, request.count);
+    item->setCount(request.count);
+
+    // Create a ground item instance at the player's position
+    auto groundItem = std::make_shared<GroundItem>(std::move(item));
+    groundItem->setPosition(character->position());
 }
 
 /**
