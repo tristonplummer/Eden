@@ -1,7 +1,9 @@
-#include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/common/net/packet/game/MapGroundItem.hpp>
+#include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/world/sync/task/MapSynchronizationTask.hpp>
 
 using namespace shaiya::game;
+using namespace shaiya::net;
 
 /**
  * Initialise the synchronization task.
@@ -12,13 +14,40 @@ MapSynchronizationTask::MapSynchronizationTask(Character& character): character_
 }
 
 /**
- * Synchronizes the character.
+ * Synchronizes the map.
  */
 void MapSynchronizationTask::sync()
 {
-    auto& world = character_.world();
-    auto& pos   = character_.position();
+}
 
-    auto map      = world.maps().forId(pos.map());   // The map that the player is currently on.
-    auto viewport = map->getNeighbouringCells(pos);  // The cells in the player's current viewport.
+/**
+ * Adds an item to the current character's viewport.
+ * @param groundItem The item to add.
+ */
+void MapSynchronizationTask::addItem(const GroundItem& groundItem)
+{
+    auto item = groundItem.item();
+    auto& pos = groundItem.position();
+
+    // Add the ground item to the player's viewport
+    GroundItemAdded update;
+    update.id     = groundItem.id();
+    update.x      = pos.x();
+    update.y      = pos.y();
+    update.z      = pos.z();
+    update.type   = item->type();
+    update.typeId = item->typeId();
+    character_.session().write(update);
+}
+
+/**
+ * Removes an item from the current character's viewport.
+ * @param item The item to remove.
+ */
+void MapSynchronizationTask::removeItem(const GroundItem& item)
+{
+    // Remove the item from the player's viewport
+    GroundItemRemoved update;
+    update.id = item.id();
+    character_.session().write(update);
 }

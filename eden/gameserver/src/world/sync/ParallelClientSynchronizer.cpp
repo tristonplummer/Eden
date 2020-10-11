@@ -57,18 +57,19 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
         auto entity = *itr;  // The current observed entity
 
         // If the entity is not active, or this character can't observe them, remove them.
-        if (!entity->active() || !entity->observable(character))
+        if (!entity->active())
         {
             if (entity->type() == EntityType::Character)
             {
-                auto other = dynamic_cast<Character*>(entity.get());
-                charsTask.removeCharacter(*other);
+                auto& other = dynamic_cast<Character&>(*entity);
+                if (!other.observable(character))
+                    charsTask.removeCharacter(dynamic_cast<Character&>(*entity));
             }
             else if (entity->type() == EntityType::Item)
             {
-                auto other = dynamic_cast<GroundItem*>(entity.get());
+                if (!entity->observable(character))
+                    mapTask.removeItem(dynamic_cast<GroundItem&>(*entity));
             }
-
             itr = observed.erase(itr);
             continue;
         }
@@ -107,6 +108,8 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
             // Inform the relevant task
             if (entity->type() == EntityType::Character)
                 charsTask.addCharacter(dynamic_cast<Character&>(*entity));
+            else if (entity->type() == EntityType::Item)
+                mapTask.addItem(dynamic_cast<GroundItem&>(*entity));
         }
     }
 

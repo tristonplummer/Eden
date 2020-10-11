@@ -35,8 +35,9 @@ void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& reques
     item->setCount(request.count);
 
     // Create a ground item instance at the player's position
-    auto groundItem = std::make_shared<GroundItem>(std::move(item));
+    auto groundItem = std::make_shared<GroundItem>(std::move(item), game.context().getGameWorld());
     groundItem->setPosition(character->position());
+    groundItem->activate();
 }
 
 /**
