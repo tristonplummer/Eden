@@ -21,76 +21,17 @@ CharacterSynchronizationTask::CharacterSynchronizationTask(Character& character)
 void CharacterSynchronizationTask::sync()
 {
     // The list of characters that were observed by our character.
-    auto& observedCharacters = character_.observedCharacters();
-
-    // Iterate over the observed characters
-    auto charIter = observedCharacters.begin();
-    while (charIter != observedCharacters.end())
-    {
-        // The other character
-        auto& other = *(*charIter);
-
-        // Remove the observed character if we can't see them
-        if (!other.active() || !observable(other))
-        {
-            // Remove the other character from our viewport
-            removeCharacter(other);
-
-            // Remove the character from the vector of observable character
-            charIter = observedCharacters.erase(charIter);
-            continue;
-        }
-        // Advance the iterator
-        ++charIter;
-    }
-
-    // Get the neighbouring cells of our character.
-    auto& pos   = character_.position();
-    auto& world = character_.world();
-    auto map    = world.maps().forId(pos.map());
-    auto cells  = map->getNeighbouringCells(pos);
-
-    // Loop through all the nearby cells
-    for (auto&& cell: cells)
-    {
-        // Loop through the entities in each cell.
-        for (auto&& entity: cell->entities())
-        {
-            // If the entity is not yet active, do nothing
-            if (!entity->active())
-                continue;
-
-            // If we can't see the other entity, skip them.
-            if (!observable(*entity))
-                continue;
-
-            // If the entity is another character, and they are observable, add them
-            if (entity->type() == EntityType::Character)
-            {
-                // The other character
-                auto* other = dynamic_cast<Character*>(entity.get());
-
-                // If the other character is us, skip them
-                if (character_.id() == other->id())
-                    continue;
-
-                // If the other character is already in our vector of observed characters
-                if (std::find(observedCharacters.begin(), observedCharacters.end(), other) != observedCharacters.end())
-                    continue;
-
-                // Add the character
-                addCharacter(*other);
-                observedCharacters.push_back(other);
-            }
-        }
-    }
+    auto& observedCharacters = character_.observedEntities();
 
     // Process our own update flags
     processUpdateFlags(character_);
 
     // Loop over the observed characters and process their flagged updates.
     for (auto&& observed: observedCharacters)
-        processUpdateFlags(*observed);
+    {
+        if (observed->type() == EntityType::Character)
+            processUpdateFlags(dynamic_cast<Character&>(*observed));
+    }
 }
 
 /**

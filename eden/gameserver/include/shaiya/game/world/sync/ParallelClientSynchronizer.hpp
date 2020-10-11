@@ -15,5 +15,13 @@ namespace shaiya::game
          * @param characters    The vector containing the player characters.
          */
         void synchronize(std::vector<std::shared_ptr<Character>> characters) override;
+
+    private:
+
+        /**
+         * Synchronizes a character.
+         * @param character     The character to synchronize
+         */
+        void syncCharacter(Character& character);
     };
 }

@@ -133,3 +133,13 @@ void Entity::clearAttribute(Attribute attribute)
 {
     attributes_.erase(attribute);
 }
+
+/**
+ * Checks if this entity can be observed by another.
+ * @param other The entity trying to observe this entity.
+ * @return      If the other entity can observe us.
+ */
+bool Entity::observable(Entity& other)
+{
+    return position_.isWithinViewportDistance(other.position());
+}

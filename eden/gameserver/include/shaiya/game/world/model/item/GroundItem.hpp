@@ -15,8 +15,9 @@ namespace shaiya::game
         /**
          * Creates an item that is to be dropped on the ground.
          * @param item  The item instance.
+         * @param world The world instance.
          */
-        explicit GroundItem(std::shared_ptr<Item> item);
+        GroundItem(std::shared_ptr<Item> item, GameWorldService& world);
 
         /**
          * Gets the item held by this ground item.

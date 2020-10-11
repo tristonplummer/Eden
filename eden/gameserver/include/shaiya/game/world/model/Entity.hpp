@@ -71,6 +71,13 @@ namespace shaiya::game
         void setMotion(uint8_t motion);
 
         /**
+         * Checks if this entity can be observed by another.
+         * @param other The entity trying to observe this entity.
+         * @return      If the other entity can observe us.
+         */
+        virtual bool observable(Entity& other);
+
+        /**
          * Checks if this entity is flagged for an update of a specific type.
          * @param mask  The update type.
          * @return      If the entity is flagged for this update.

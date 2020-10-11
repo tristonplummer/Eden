@@ -107,12 +107,12 @@ namespace shaiya::game
         }
 
         /**
-         * Gets the vector of characters that are in this character's viewport.
-         * @return  The observed characters.
+         * Gets the vector of entities that are in this character's viewport.
+         * @return  The observed entities.
          */
-        [[nodiscard]] std::vector<Character*>& observedCharacters()
+        [[nodiscard]] std::vector<std::shared_ptr<Entity>>& observedEntities()
         {
-            return observedCharacters_;
+            return observedEntities_;
         }
 
         /**
@@ -175,9 +175,9 @@ namespace shaiya::game
         shaiya::net::MovementState movementState_{ shaiya::net::MovementState::Standing };
 
         /**
-         * The vector of characters that are in this character's viewport.
+         * The vector of entities that are in this character's viewport.
          */
-        std::vector<Character*> observedCharacters_;
+        std::vector<std::shared_ptr<Entity>> observedEntities_;
 
         /**
          * This character's action bar.

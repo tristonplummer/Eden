@@ -22,7 +22,6 @@ namespace shaiya::game
          */
         void sync();
 
-    private:
         /**
          * Adds a character to the current character's viewport.
          * @param other The character to add.
@@ -35,6 +34,7 @@ namespace shaiya::game
          */
         void removeCharacter(const Character& other);
 
+    private:
         /**
          * Process the update flags for a character.
          * @param other The character to update for this character.
