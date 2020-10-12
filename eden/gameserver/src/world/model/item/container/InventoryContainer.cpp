@@ -20,3 +20,12 @@ constexpr auto InventoryPageSize = 24;
 InventoryContainer::InventoryContainer(): ItemContainer(InventoryPageCount, InventoryPageSize)
 {
 }
+
+/**
+ * Sets the amount of gold in the inventory.
+ * @param gold  The amount of gold.
+ */
+void InventoryContainer::setGold(size_t gold)
+{
+    gold_ = gold;
+}

@@ -55,6 +55,9 @@ void Character::init()
     details.deaths    = deaths_;
     details.victories = victories_;
     details.defeats   = defeats_;
+
+    // Write some miscellaneous data about the character.
+    details.gold = inventory_.gold();
     session_.write(details);  // Send the character details.
 
     // Synchronise the item containers
