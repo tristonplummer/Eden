@@ -15,7 +15,7 @@ using namespace shaiya::game;
  * @param worldId       The id of this world service.
  */
 GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, ItemDefinitionService& itemService, size_t worldId)
-    : db_(db)
+    : db_(db), itemDefs_(itemService)
 {
     synchronizer_        = std::make_unique<ParallelClientSynchronizer>();
     characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db, itemService, worldId);

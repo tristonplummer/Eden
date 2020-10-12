@@ -1,5 +1,6 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/commands/CommandManager.hpp>
 
 using namespace shaiya::net;
 using namespace shaiya::game;
@@ -16,6 +17,14 @@ void handleNormalChat(Session& session, const CharacterChatMessage& request)
 
     // The chat message
     auto message = request.message.str();
+
+    // Attempt to execute a command.
+    if (message.starts_with('.'))
+    {
+        auto& commands = character->world().commands();
+        commands.execute(*character, message);
+        return;
+    }
 
     // Flag the character for a chat update
     character->setAttribute(Attribute::LastChatMessage, message);

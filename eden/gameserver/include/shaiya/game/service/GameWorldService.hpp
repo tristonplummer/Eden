@@ -2,6 +2,7 @@
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/CharacterSerializer.hpp>
 #include <shaiya/game/service/ItemDefinitionService.hpp>
+#include <shaiya/game/world/model/commands/CommandManager.hpp>
 #include <shaiya/game/world/model/map/MapRepository.hpp>
 #include <shaiya/game/world/scheduling/Scheduler.hpp>
 #include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
@@ -76,6 +77,23 @@ namespace shaiya::game
             return mapRepository_;
         }
 
+        /**
+         * Gets the command manager.
+         * @return  The command manager.
+         */
+        [[nodiscard]] const CommandManager& commands() const
+        {
+            return commandManager_;
+        }
+
+        /**
+         * Gets the item definition service.
+         * @return  The item definition service.
+         */
+        [[nodiscard]] const ItemDefinitionService& items() const
+        {
+            return itemDefs_;
+        }
     private:
         /**
          * If this service is running.
@@ -86,6 +104,11 @@ namespace shaiya::game
          * The database service.
          */
         shaiya::database::DatabaseService& db_;
+
+        /**
+         * The item definition service.
+         */
+        ItemDefinitionService& itemDefs_;
 
         /**
          * A vector containing the characters that are connected to this game world.
@@ -121,6 +144,11 @@ namespace shaiya::game
          * The task scheduler
          */
         Scheduler scheduler_;
+
+        /**
+         * The command manager.
+         */
+        CommandManager commandManager_;
 
         /**
          * The mutex to be used for locking access to the actor vectors.
