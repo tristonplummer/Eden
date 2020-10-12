@@ -19,7 +19,7 @@ void handleNormalChat(Session& session, const CharacterChatMessage& request)
     auto message = request.message.str();
 
     // Attempt to execute a command.
-    if (message.starts_with('.'))
+    if (message.starts_with('/'))
     {
         auto& commands = character->world().commands();
         commands.execute(*character, message);
