@@ -79,6 +79,7 @@ namespace shaiya::net
 #include "game/CharacterItem.hpp"
 #include "game/CharacterLeftViewport.hpp"
 #include "game/CharacterList.hpp"
+#include "game/CharacterMapTeleport.hpp"
 #include "game/CharacterMaxHitpoints.hpp"
 #include "game/CharacterMoveItem.hpp"
 #include "game/CharacterMovement.hpp"

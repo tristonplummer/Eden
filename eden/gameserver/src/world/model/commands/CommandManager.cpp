@@ -1,5 +1,6 @@
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnItemCommand.hpp>
+#include <shaiya/game/world/model/commands/impl/TeleportCommand.hpp>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/tokenizer.hpp>
@@ -13,6 +14,7 @@ using namespace shaiya::game;
 CommandManager::CommandManager()
 {
     registerCommand(std::make_shared<SpawnItemCommand>());
+    registerCommand(std::make_shared<TeleportCommand>());
 }
 
 /**
