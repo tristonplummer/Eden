@@ -93,6 +93,10 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
             if (!entity->active())
                 continue;
 
+            // Skip ourselves
+            if (&character == entity.get())
+                continue;
+
             // If we can't see the other entity, skip them.
             if (!entity->observable(character))
                 continue;
