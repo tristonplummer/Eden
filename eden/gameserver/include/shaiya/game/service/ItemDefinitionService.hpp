@@ -25,6 +25,14 @@ namespace shaiya::game
          */
         [[nodiscard]] const ItemDefinition* forId(uint32_t id) const;
 
+        /**
+         * Gets the item definition for a given id.
+         * @param type      The item type.
+         * @param typeId    The item type id.
+         * @return          The item definition.
+         */
+        [[nodiscard]] const ItemDefinition* forId(uint8_t type, uint8_t typeId) const;
+
     private:
         /**
          * A map of item ids, to their item definitions.

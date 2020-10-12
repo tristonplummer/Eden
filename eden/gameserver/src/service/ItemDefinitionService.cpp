@@ -45,3 +45,14 @@ const ItemDefinition* ItemDefinitionService::forId(uint32_t id) const
         return nullptr;
     return definitions_.at(id);
 }
+
+/**
+ * Gets the item definition for a given id.
+ * @param type      The item type.
+ * @param typeId    The item type id.
+ * @return          The item definition.
+ */
+const ItemDefinition* ItemDefinitionService::forId(uint8_t type, uint8_t typeId) const
+{
+    return forId((type * 1000) + typeId);
+}
