@@ -38,6 +38,20 @@ void EquipmentEventListener::itemRemoved(const ItemContainer& container, const s
 }
 
 /**
+ * Gets executed when an item is transferred between containers.
+ * @param source        The source container.
+ * @param dest          The destination container
+ * @param sourceSlot    The source slot
+ * @param destSlot      The destination slot.
+ */
+void EquipmentEventListener::itemTransferred(const ItemContainer& source, const ItemContainer& dest, size_t sourceSlot,
+                                             size_t destSlot)
+{
+    character_.flagUpdate(UpdateFlag::Appearance);
+    character_.syncStats();
+}
+
+/**
  * Synchronises the container with this listener.
  * @param container The container that was updated.
  */

@@ -152,6 +152,11 @@ ItemPair ItemContainer::transferTo(ItemContainer& dest, size_t sourcePage, size_
     if (destItem)
         items_.at(sourcePos) = destItem;
     success = true;
+
+    for (auto&& listener: listeners_)
+        listener->itemTransferred(*this, dest, sourcePos, destPos);
+    for (auto&& listener: dest.listeners_)
+        listener->itemTransferred(*this, dest, sourcePos, destPos);
     return { sourceItem, destItem };
 }
 

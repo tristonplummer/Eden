@@ -34,6 +34,16 @@ namespace shaiya::game
         void itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot) override;
 
         /**
+         * Gets executed when an item is transferred between containers.
+         * @param source        The source container.
+         * @param dest          The destination container
+         * @param sourceSlot    The source slot
+         * @param destSlot      The destination slot.
+         */
+        void itemTransferred(const ItemContainer& source, const ItemContainer& dest, size_t sourceSlot,
+                             size_t destSlot) override;
+
+        /**
          * Synchronises the container with this listener.
          * @param container The container that was updated.
          */
