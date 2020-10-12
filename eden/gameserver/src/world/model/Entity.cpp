@@ -21,6 +21,15 @@ void Entity::init()
 }
 
 /**
+ * Sets the id for this entity.
+ * @param id    The new id.
+ */
+void Entity::setId(size_t id)
+{
+    id_ = id;
+}
+
+/**
  * Marks this entity as active.
  */
 void Entity::activate()

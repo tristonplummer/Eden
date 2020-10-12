@@ -129,6 +129,29 @@ void Map::remove(std::shared_ptr<Entity> entity) const
 }
 
 /**
+ * Attempts to get an entity with a specified id and type.
+ * @param pos   The position to start the search at.
+ * @param id    The entity id.
+ * @param type  The entity type to search for.
+ * @return      The entity instance.
+ */
+std::shared_ptr<Entity> Map::get(Position& pos, size_t id, EntityType type)
+{
+    auto neighbours = getNeighbouringCells(pos);
+    for (auto&& cell: neighbours)
+    {
+        for (auto&& entity: cell->entities())
+        {
+            if (entity->type() != type)
+                continue;
+            if (entity->id() == id)
+                return entity;
+        }
+    }
+    return nullptr;
+}
+
+/**
  * Get a cell in the map based on a position.
  * @param position  The position.
  * @return          The map cell.

@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/game/world/model/EntityType.hpp>
 #include <shaiya/game/world/model/Position.hpp>
 #include <shaiya/game/world/model/map/MapCell.hpp>
 
@@ -34,6 +35,15 @@ namespace shaiya::game
          * @param entity    The entity to remove.
          */
         void remove(std::shared_ptr<Entity> entity) const;
+
+        /**
+         * Attempts to get an entity with a specified id and type.
+         * @param pos   The position to start the search at.
+         * @param id    The entity id.
+         * @param type  The entity type to search for.
+         * @return      The entity instance.
+         */
+        std::shared_ptr<Entity> get(Position& pos, size_t id, EntityType type);
 
         /**
          * Gets the cells in a neighbouring radius of a position.

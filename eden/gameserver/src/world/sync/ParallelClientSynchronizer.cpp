@@ -57,19 +57,13 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
         auto entity = *itr;  // The current observed entity
 
         // If the entity is not active, or this character can't observe them, remove them.
-        if (!entity->active())
+        if (!entity->active() || !entity->observable(character))
         {
             if (entity->type() == EntityType::Character)
-            {
-                auto& other = dynamic_cast<Character&>(*entity);
-                if (!other.observable(character))
-                    charsTask.removeCharacter(dynamic_cast<Character&>(*entity));
-            }
+                charsTask.removeCharacter(dynamic_cast<Character&>(*entity));
             else if (entity->type() == EntityType::Item)
-            {
-                if (!entity->observable(character))
-                    mapTask.removeItem(dynamic_cast<GroundItem&>(*entity));
-            }
+                mapTask.removeItem(dynamic_cast<GroundItem&>(*entity));
+
             itr = observed.erase(itr);
             continue;
         }

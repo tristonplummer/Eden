@@ -17,6 +17,8 @@
 namespace shaiya::game
 {
     class Character;
+    class GroundItem;
+
     class GameWorldService
     {
     public:
@@ -51,6 +53,18 @@ namespace shaiya::game
          * @param character The character to remove.
          */
         void unregisterCharacter(std::shared_ptr<Character> character);
+
+        /**
+         * Registers a ground item to this world.
+         * @param item  The ground item instance.
+         */
+        void registerItem(std::shared_ptr<GroundItem> item);
+
+        /**
+         * Removes a ground item from this world.
+         * @param item  The ground item instance.
+         */
+        void unregisterItem(std::shared_ptr<GroundItem> item);
 
         /**
          * Finalises the registration of characters that are queued to be registered.
@@ -94,6 +108,7 @@ namespace shaiya::game
         {
             return itemDefs_;
         }
+
     private:
         /**
          * If this service is running.
@@ -124,6 +139,11 @@ namespace shaiya::game
          * The characters that are pending unregistration
          */
         std::queue<std::shared_ptr<Character>> oldCharacters_;
+
+        /**
+         * A vector containing the ground items that exist in the world.
+         */
+        std::vector<std::shared_ptr<GroundItem>> groundItems_;
 
         /**
          * The client synchronizer

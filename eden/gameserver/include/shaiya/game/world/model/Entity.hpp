@@ -78,6 +78,12 @@ namespace shaiya::game
         virtual bool observable(Entity& other);
 
         /**
+         * Sets the id for this entity.
+         * @param id    The new id.
+         */
+        void setId(size_t id);
+
+        /**
          * Checks if this entity is flagged for an update of a specific type.
          * @param mask  The update type.
          * @return      If the entity is flagged for this update.

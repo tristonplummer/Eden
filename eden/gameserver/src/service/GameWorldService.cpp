@@ -1,6 +1,7 @@
 #include <shaiya/common/util/Async.hpp>
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/item/GroundItem.hpp>
 
 #include <glog/logging.h>
 
@@ -63,7 +64,8 @@ void GameWorldService::tick(size_t tickRate)
         if (now >= nextTick)
         {
             auto difference = duration_cast<milliseconds>(now - nextTick);
-            LOG(INFO) << "Game tick took too long - went over " << tickRate << "ms tick rate by " << difference.count() << "ms.";
+            LOG(INFO) << "Game tick took too long - went over " << tickRate << "ms tick rate by " << difference.count()
+                      << "ms.";
         }
 
         // Sleep until the next tick
@@ -95,6 +97,46 @@ void GameWorldService::unregisterCharacter(std::shared_ptr<Character> character)
 
     // Adds the character to the queue of characters that need to be unregistered
     oldCharacters_.push(std::move(character));
+}
+
+/**
+ * Registers a ground item to this world.
+ * @param item  The ground item instance.
+ */
+void GameWorldService::registerItem(std::shared_ptr<GroundItem> item)
+{
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Add the item to the ground items vector
+    item->setId(groundItems_.size());
+    item->activate();
+    groundItems_.push_back(item);
+}
+
+/**
+ * Removes a ground item from this world.
+ * @param item  The ground item instance.
+ */
+void GameWorldService::unregisterItem(std::shared_ptr<GroundItem> item)
+{
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Find the item
+    auto predicate = [&](auto& element) { return element.get() == item.get(); };
+    auto pos       = std::find_if(groundItems_.begin(), groundItems_.end(), predicate);
+
+    // Deactivate the item
+    item->deactivate();
+
+    // Remove the entity from their map
+    auto map = mapRepository_.forId(item->position().map());
+    map->remove(item);
+
+    // Remove the item
+    if (pos != groundItems_.end())
+        groundItems_.erase(pos);
 }
 
 /**

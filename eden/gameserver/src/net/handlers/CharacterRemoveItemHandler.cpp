@@ -13,6 +13,7 @@ using namespace shaiya::game;
 void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& request)
 {
     auto& game     = dynamic_cast<GameSession&>(session);
+    auto& world    = game.context().getGameWorld();
     auto character = game.character();
 
     auto& inventory = character->inventory();
@@ -34,10 +35,12 @@ void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& reques
     item = inventory.remove(page, slot, request.count);
     item->setCount(request.count);
 
-    // Create a ground item instance at the player's position
-    auto groundItem = std::make_shared<GroundItem>(std::move(item), game.context().getGameWorld());
+    // Create a ground item instance and register it to the game world
+    auto groundItem = std::make_shared<GroundItem>(std::move(item), world);
+    world.registerItem(groundItem);
+
+    // Place the item at the character's feet.
     groundItem->setPosition(character->position());
-    groundItem->activate();
 }
 
 /**
