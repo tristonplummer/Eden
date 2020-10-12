@@ -20,6 +20,6 @@ namespace shaiya::game
          * Gets the identifier of the command.
          * @return  The identifier.
          */
-        const std::string identifier() override;
+        [[nodiscard]] const std::string identifier() const override;
     };
 }

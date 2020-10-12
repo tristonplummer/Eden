@@ -24,6 +24,6 @@ namespace shaiya::game
          * Gets the identifier of the command.
          * @return  The identifier.
          */
-        [[nodiscard]] virtual const std::string identifier() = 0;
+        [[nodiscard]] virtual const std::string identifier() const = 0;
     };
 }

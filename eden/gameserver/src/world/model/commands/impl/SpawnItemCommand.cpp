@@ -37,7 +37,7 @@ void SpawnItemCommand::execute(Character& character, const std::vector<std::stri
  * Gets the identifier of the command.
  * @return  The identifier.
  */
-const std::string SpawnItemCommand::identifier()
+const std::string SpawnItemCommand::identifier() const
 {
     return "item";
 }

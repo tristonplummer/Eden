@@ -42,7 +42,7 @@ void TeleportCommand::execute(Character& character, const std::vector<std::strin
  * Gets the identifier of the command.
  * @return  The identifier.
  */
-const std::string TeleportCommand::identifier()
+const std::string TeleportCommand::identifier() const
 {
     return "teleport";
 }
