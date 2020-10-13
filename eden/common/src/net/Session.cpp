@@ -44,12 +44,14 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytesTra
     size_t opcode;
     char* payload;
 
-    // Loop while there are still bytes remaining - this is so that we properly handle packets that are received as chunks together.
+    // Loop while there are still bytes remaining - this is so that we properly handle packets that are received as chunks
+    // together.
     while (bytesTransferred > 0)
     {
         // Read the packet header
-        length = *reinterpret_cast<uint16_t*>(&buf_[offset]);
-        opcode = *reinterpret_cast<uint16_t*>(&buf_[offset + 2]);
+        length  = *reinterpret_cast<uint16_t*>(&buf_[offset]);
+        length  = std::min(length, bytesTransferred);
+        opcode  = *reinterpret_cast<uint16_t*>(&buf_[offset + 2]);
         payload = &buf_[offset + 2];
 
         // Increment the offset
