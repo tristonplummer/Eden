@@ -2,6 +2,7 @@
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/CharacterSerializer.hpp>
 #include <shaiya/game/service/ItemDefinitionService.hpp>
+#include <shaiya/game/util/EntityContainer.hpp>
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
 #include <shaiya/game/world/model/map/MapRepository.hpp>
 #include <shaiya/game/world/scheduling/Scheduler.hpp>
@@ -141,9 +142,9 @@ namespace shaiya::game
         std::queue<std::shared_ptr<Character>> oldCharacters_;
 
         /**
-         * A vector containing the ground items that exist in the world.
+         * A container containing the ground items that exist in the world.
          */
-        std::vector<std::shared_ptr<GroundItem>> groundItems_;
+        EntityContainer<GroundItem> groundItems_;
 
         /**
          * The client synchronizer

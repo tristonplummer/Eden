@@ -108,10 +108,11 @@ void GameWorldService::registerItem(std::shared_ptr<GroundItem> item)
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
 
-    // Add the item to the ground items vector
-    item->setId(groundItems_.size());
-    item->activate();
-    groundItems_.push_back(item);
+    // Add the item to the ground items container
+    if (groundItems_.add(item))
+    {
+        item->activate();
+    }
 }
 
 /**
@@ -123,9 +124,8 @@ void GameWorldService::unregisterItem(std::shared_ptr<GroundItem> item)
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
 
-    // Find the item
-    auto predicate = [&](auto& element) { return element.get() == item.get(); };
-    auto pos       = std::find_if(groundItems_.begin(), groundItems_.end(), predicate);
+    // Remove the item
+    groundItems_.remove(item);
 
     // Deactivate the item
     item->deactivate();
@@ -133,10 +133,6 @@ void GameWorldService::unregisterItem(std::shared_ptr<GroundItem> item)
     // Remove the entity from their map
     auto map = mapRepository_.forId(item->position().map());
     map->remove(item);
-
-    // Remove the item
-    if (pos != groundItems_.end())
-        groundItems_.erase(pos);
 }
 
 /**
