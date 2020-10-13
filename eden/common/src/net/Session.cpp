@@ -36,22 +36,29 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytesTra
         return close();
     }
 
-    // Read the header of the packet
-    size_t length = *reinterpret_cast<uint16_t*>(&buf_);
-    size_t opcode = *reinterpret_cast<uint16_t*>(&buf_[2]);
-    char* payload = &buf_[2];
+    // The current packet offset
+    auto offset = 0;
 
-    // If the prefixed size doesn't match the number of bytes read, then either something went wrong in transport
-    // or the packet was incorrectly forged by a user.
-    if (length != bytesTransferred)
+    // The packet header
+    size_t length;
+    size_t opcode;
+    char* payload;
+
+    // Loop while there are still bytes remaining - this is so that we properly handle packets that are received as chunks together.
+    while (bytesTransferred > 0)
     {
-        LOG(INFO) << "Expected " << length << " bytes for the packet (opcode " << opcode << ") but received "
-                  << bytesTransferred << " bytes.";
-        return close();
-    }
+        // Read the packet header
+        length = *reinterpret_cast<uint16_t*>(&buf_[offset]);
+        opcode = *reinterpret_cast<uint16_t*>(&buf_[offset + 2]);
+        payload = &buf_[offset + 2];
 
-    // Execute the payload
-    onRead(opcode, length - 2, payload);
+        // Increment the offset
+        offset += length;
+        bytesTransferred -= length;
+
+        // Read the current packet chunk
+        onRead(opcode, length - 2, payload);
+    }
 
     // Start reading more data
     std::fill_n(buf_.begin(), bytesTransferred, 0);
