@@ -8,4 +8,5 @@
 #include "datatypes/ShaiyaGameMode.hpp"
 #include "datatypes/ShaiyaGender.hpp"
 #include "datatypes/ShaiyaRace.hpp"
+#include "datatypes/ShaiyaTime.hpp"
 #include "datatypes/VariableString.hpp"

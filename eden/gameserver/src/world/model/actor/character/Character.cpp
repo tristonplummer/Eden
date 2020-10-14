@@ -1,3 +1,4 @@
+#include <shaiya/common/net/packet/game/WorldTime.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
@@ -34,6 +35,9 @@ void Character::init()
     inventory_.addListener(std::make_shared<InventoryEventListener>(*this));
     equipment_.addListener(std::make_shared<EquipmentEventListener>(*this));
     stats().onSync([&](const StatSet& stats, StatUpdateType type) { onStatSync(stats, type); });
+
+    // Write the current time
+    session_.write(WorldTime{});
 
     // Prepare the character details
     CharacterDetails details;
