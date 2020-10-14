@@ -54,7 +54,7 @@ void Position::setZ(float z)
  */
 Position Position::translate(float x, float y, float z) const
 {
-    return Position(map_, x_ - x, y_ - y, z_ - z);
+    return Position(map_, x_ + x, y_ + y, z_ + z);
 }
 
 /**
