@@ -2,8 +2,6 @@
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/world/sync/task/CharacterSynchronizationTask.hpp>
 
-#include <thread>
-
 using namespace shaiya::game;
 using namespace shaiya::net;
 
@@ -176,16 +174,4 @@ void CharacterSynchronizationTask::updateChat(const Character& other)
     update.length  = chatMessage.length();
     update.message = chatMessage;
     character_.session().write(update);
-}
-
-/**
- * Checks if an entity can be observed by the current character.
- * @param other The other character.
- * @return      If the other entity can be observed.
- */
-bool CharacterSynchronizationTask::observable(const Entity& other)
-{
-    auto& charPos  = character_.position();
-    auto& otherPos = other.position();
-    return charPos.isWithinViewportDistance(otherPos);
 }

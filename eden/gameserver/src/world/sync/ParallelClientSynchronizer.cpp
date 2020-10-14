@@ -4,6 +4,7 @@
 #include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 #include <shaiya/game/world/sync/task/CharacterSynchronizationTask.hpp>
 #include <shaiya/game/world/sync/task/MapSynchronizationTask.hpp>
+#include <shaiya/game/world/sync/task/NpcSynchronizationTask.hpp>
 
 #include <execution>
 
@@ -46,6 +47,7 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
     // Prepare the synchronization tasks
     MapSynchronizationTask mapTask(character);
     CharacterSynchronizationTask charsTask(character);
+    NpcSynchronizationTask npcTask(character);
 
     // The vector of entities that are currently being observed
     auto& observed = character.observedEntities();
@@ -63,7 +65,8 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
                 charsTask.removeCharacter(dynamic_cast<Character&>(*entity));
             else if (entity->type() == EntityType::Item)
                 mapTask.removeItem(dynamic_cast<GroundItem&>(*entity));
-
+            else if (entity->type() == EntityType::Npc)
+                npcTask.removeNpc(dynamic_cast<Npc&>(*entity));
             itr = observed.erase(itr);
             continue;
         }
@@ -108,10 +111,13 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
                 charsTask.addCharacter(dynamic_cast<Character&>(*entity));
             else if (entity->type() == EntityType::Item)
                 mapTask.addItem(dynamic_cast<GroundItem&>(*entity));
+            else if (entity->type() == EntityType::Npc)
+                npcTask.addNpc(dynamic_cast<Npc&>(*entity));
         }
     }
 
     // Synchronise the actively observed entities
     mapTask.sync();
     charsTask.sync();
+    npcTask.sync();
 }

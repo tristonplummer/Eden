@@ -1,6 +1,7 @@
 #include <shaiya/common/util/Async.hpp>
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/actor/npc/Npc.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
 
 #include <glog/logging.h>
@@ -133,6 +134,42 @@ void GameWorldService::unregisterItem(std::shared_ptr<GroundItem> item)
     // Remove the entity from their map
     auto map = mapRepository_.forId(item->position().map());
     map->remove(item);
+}
+
+/**
+ * Registers an npc to this world.
+ * @param npc  The npc instance.
+ */
+void GameWorldService::registerNpc(std::shared_ptr<Npc> npc)
+{
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Add the item to the ground items container
+    if (npcs_.add(npc))
+    {
+        npc->activate();
+    }
+}
+
+/**
+ * Removes an npc from this world.
+ * @param item  The npc instance.
+ */
+void GameWorldService::unregisterNpc(std::shared_ptr<Npc> npc)
+{
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Remove the npc
+    npcs_.remove(npc);
+
+    // Deactivate the npc
+    npc->deactivate();
+
+    // Remove the entity from their map
+    auto map = mapRepository_.forId(npc->position().map());
+    map->remove(npc);
 }
 
 /**

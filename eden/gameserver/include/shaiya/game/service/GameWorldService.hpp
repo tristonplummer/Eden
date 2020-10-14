@@ -19,6 +19,7 @@ namespace shaiya::game
 {
     class Character;
     class GroundItem;
+    class Npc;
 
     class GameWorldService
     {
@@ -66,6 +67,18 @@ namespace shaiya::game
          * @param item  The ground item instance.
          */
         void unregisterItem(std::shared_ptr<GroundItem> item);
+
+        /**
+         * Registers an npc to this world.
+         * @param item  The npc instance.
+         */
+        void registerNpc(std::shared_ptr<Npc> item);
+
+        /**
+         * Removes an npc from this world.
+         * @param item  The npc instance.
+         */
+        void unregisterNpc(std::shared_ptr<Npc> item);
 
         /**
          * Finalises the registration of characters that are queued to be registered.
@@ -142,9 +155,14 @@ namespace shaiya::game
         std::queue<std::shared_ptr<Character>> oldCharacters_;
 
         /**
-         * A container containing the ground items that exist in the world.
+         * A container that holds all of the ground items that exist in the world.
          */
         EntityContainer<GroundItem> groundItems_;
+
+        /**
+         * A container that holds all of the npcs that exist in the world.
+         */
+        EntityContainer<Npc> npcs_;
 
         /**
          * The client synchronizer

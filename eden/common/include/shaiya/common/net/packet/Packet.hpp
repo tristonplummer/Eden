@@ -92,4 +92,6 @@ namespace shaiya::net
 #include "game/CharacterStatReset.hpp"
 #include "game/GameHandshake.hpp"
 #include "game/MapGroundItem.hpp"
+#include "game/NpcEnteredViewport.hpp"
+#include "game/NpcLeftViewport.hpp"
 #include "game/XorEncryptionSignal.hpp"

@@ -64,14 +64,7 @@ namespace shaiya::game
          * @param other The character to update.
          */
         void updateChat(const Character& other);
-
-        /**
-         * Checks if a entity is observable by the current character.
-         * @param other The other entity.
-         * @return      If the other entity can be observed.
-         */
-        bool observable(const Entity& other);
-
+        
         /**
          * The character we're currently synchronizing.
          */

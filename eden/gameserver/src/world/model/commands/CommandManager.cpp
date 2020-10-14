@@ -2,7 +2,7 @@
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnItemCommand.hpp>
 #include <shaiya/game/world/model/commands/impl/TeleportCommand.hpp>
-
+#include <shaiya/game/world/model/commands/impl/SpawnNpcCommand.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/tokenizer.hpp>
 #include <glog/logging.h>
@@ -16,6 +16,7 @@ CommandManager::CommandManager()
 {
     registerCommand(std::make_shared<SpawnItemCommand>());
     registerCommand(std::make_shared<TeleportCommand>());
+    registerCommand(std::make_shared<SpawnNpcCommand>());
 }
 
 /**
