@@ -12,6 +12,7 @@
 namespace shaiya::game
 {
     class GameWorldService;  // Forward declaration of the game service.
+    class Map;
 
     /**
      * An entity can be thought of as any object in the game world that exist as a point in the world space. Items that are
@@ -194,6 +195,12 @@ namespace shaiya::game
         {
             return id_;
         }
+
+        /**
+         * Gets the current map of this entity.
+         * @return  The current map.
+         */
+        [[nodiscard]] std::shared_ptr<Map> map() const;
 
     protected:
         /**

@@ -17,7 +17,7 @@ void handlePickupItem(Session& session, const CharacterPickupItemRequest& reques
     auto character = game.character();
     auto& pos      = character->position();
 
-    auto map    = world.maps().forId(pos.map());
+    auto map    = character->map();
     auto entity = map->get(pos, request.id, EntityType::Item);
     if (!entity)
         return;

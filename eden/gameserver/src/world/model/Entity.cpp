@@ -152,3 +152,12 @@ bool Entity::observable(Entity& other)
 {
     return position_.isWithinViewportDistance(other.position());
 }
+
+/**
+ * Gets the current map of this entity.
+ * @return  The current map.
+ */
+std::shared_ptr<Map> Entity::map() const
+{
+    return world_.maps().forId(position_.map());
+}
