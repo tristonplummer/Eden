@@ -20,6 +20,11 @@ namespace shaiya::game
         /**
          * An item
          */
-        Item
+        Item,
+
+        /**
+         * A non-player character
+         */
+        Npc,
     };
 }
