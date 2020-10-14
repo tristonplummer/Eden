@@ -46,6 +46,18 @@ void Position::setZ(float z)
 }
 
 /**
+ * Translates this position
+ * @param x The x offset
+ * @param y The y offset
+ * @param z The z offset
+ * @return  The translated position
+ */
+Position Position::translate(float x, float y, float z) const
+{
+    return Position(map_, x_ - x, y_ - y, z_ - z);
+}
+
+/**
  * Checks if a position is within distance of another.
  * @param other     The other position.
  * @param distance  The distance.
