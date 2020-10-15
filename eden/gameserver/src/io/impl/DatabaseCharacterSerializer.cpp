@@ -1,6 +1,6 @@
+#include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
-#include <shaiya/game/service/ItemDefinitionService.hpp>
 #include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 
@@ -35,9 +35,9 @@ constexpr auto SAVE_CHARACTER_DETAILS = "save_character_details";
  * @param itemService   The item definition service.
  * @param worldId       The id of this world server.
  */
-DatabaseCharacterSerializer::DatabaseCharacterSerializer(DatabaseService& db, ItemDefinitionService& itemService,
+DatabaseCharacterSerializer::DatabaseCharacterSerializer(DatabaseService& db, shaiya::client::ItemSData& itemDefs,
                                                          size_t worldId)
-    : db_(db), itemService_(itemService), worldId_(worldId)
+    : db_(db), itemDefs_(itemDefs), worldId_(worldId)
 {
     db.prepare(LOAD_CHARACTER_DETAILS, "SELECT * FROM gamedata.characters WHERE world = $1 AND charid = $2;");
     db.prepare(LOAD_CHARACTER_INVENTORY, "SELECT * FROM gamedata.read_character_inventory($1, $2);");
@@ -146,7 +146,7 @@ bool DatabaseCharacterSerializer::loadInventory(Character& character)
             auto count = row["count"].as<size_t>();
 
             // The item definition
-            auto* def = itemService_.forId(id);
+            auto* def = itemDefs_.forId(id);
             if (!def)
                 continue;
 
@@ -196,7 +196,7 @@ bool DatabaseCharacterSerializer::loadEquipment(Character& character)
             auto slot = row["slot"].as<size_t>();
 
             // The item definition
-            auto* def = itemService_.forId(id);
+            auto* def = itemDefs_.forId(id);
             if (!def)
                 continue;
 

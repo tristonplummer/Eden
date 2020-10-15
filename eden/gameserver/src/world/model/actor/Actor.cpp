@@ -51,6 +51,11 @@ void Actor::syncStats()
     auto intelligence = 0;
     auto wisdom       = 0;
     auto luck         = 0;
+    auto hitpoints    = 0;
+    auto stamina      = 0;
+    auto mana         = 0;
+    auto minAttack    = 0;
+    auto maxAttack    = 0;
 
     // Iterate through the actor's equipment
     for (auto&& item: equipment_.items())
@@ -66,6 +71,11 @@ void Actor::syncStats()
         intelligence += def.intelligence;
         wisdom += def.wisdom;
         luck += def.luck;
+        hitpoints += def.hitpoints;
+        stamina += def.stamina;
+        mana += def.mana;
+        minAttack += def.minAttack;
+        maxAttack += def.minAttack + def.attackBonus;
     }
 
     // Set the additional values
@@ -75,7 +85,16 @@ void Actor::syncStats()
     stats_.setAdditional(Stat::Intelligence, intelligence);
     stats_.setAdditional(Stat::Wisdom, wisdom);
     stats_.setAdditional(Stat::Luck, luck);
-
+    stats_.setAdditional(Stat::MaxHealth, hitpoints);
+    stats_.setAdditional(Stat::MaxStamina, stamina);
+    stats_.setAdditional(Stat::MaxMana, mana);
+    stats_.setAdditional(Stat::MinPhysicalAttack, minAttack);
+    stats_.setAdditional(Stat::MaxPhysicalAttack, maxAttack);
+    stats_.setAdditional(Stat::MinRangedAttack, minAttack);
+    stats_.setAdditional(Stat::MaxRangedAttack, maxAttack);
+    stats_.setAdditional(Stat::MinMagicalAttack, minAttack);
+    stats_.setAdditional(Stat::MaxMagicalAttack, maxAttack);
+    
     // Explicitly synchronise the stats
     stats_.sync();
 }

@@ -4,6 +4,11 @@
 #include <cstddef>
 #include <memory>
 
+namespace shaiya::client
+{
+    class ItemSData;
+}
+
 namespace shaiya::database
 {
     class DatabaseService;
@@ -71,6 +76,5 @@ namespace shaiya::game
     class ServiceContext;
     class CharacterScreenService;
     class GameWorldService;
-    class ItemDefinitionService;
     class WorldApiService;
 }

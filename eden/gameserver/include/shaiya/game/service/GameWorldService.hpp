@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/util/EntityContainer.hpp>
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
@@ -20,10 +21,9 @@ namespace shaiya::game
         /**
          * Initialise this game world service.
          * @param db            The database service.
-         * @param itemService   The item definition service.
          * @param worldId       The id of this world service.
          */
-        explicit GameWorldService(shaiya::database::DatabaseService& db, ItemDefinitionService& itemService, size_t worldId);
+        explicit GameWorldService(shaiya::database::DatabaseService& db, size_t worldId);
 
         /**
          * Loads the game world service.
@@ -108,10 +108,10 @@ namespace shaiya::game
         }
 
         /**
-         * Gets the item definition service.
-         * @return  The item definition service.
+         * Gets the item data.
+         * @return  The item data.
          */
-        [[nodiscard]] const ItemDefinitionService& items() const
+        [[nodiscard]] const shaiya::client::ItemSData& items() const
         {
             return itemDefs_;
         }
@@ -128,9 +128,9 @@ namespace shaiya::game
         shaiya::database::DatabaseService& db_;
 
         /**
-         * The item definition service.
+         * The item data.
          */
-        ItemDefinitionService& itemDefs_;
+        shaiya::client::ItemSData itemDefs_;
 
         /**
          * A vector containing the characters that are connected to this game world.

@@ -1,3 +1,4 @@
+#include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/common/util/Async.hpp>
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
@@ -8,9 +9,6 @@
 #include <shaiya/game/world/model/map/Map.hpp>
 #include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 
-#include <boost/property_tree/ptree.hpp>
-#include <glog/logging.h>
-
 #include <chrono>
 
 using namespace shaiya::game;
@@ -18,14 +16,13 @@ using namespace shaiya::game;
 /**
  * Initialise this game world service.
  * @param db            The database service.
- * @param itemService   The item definition service.
  * @param worldId       The id of this world service.
  */
-GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, ItemDefinitionService& itemService, size_t worldId)
-    : db_(db), itemDefs_(itemService)
+GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t worldId): db_(db)
 {
+    itemDefs_            = shaiya::client::ItemSData("./data/game/Item.SData");
     synchronizer_        = std::make_unique<ParallelClientSynchronizer>();
-    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db, itemService, worldId);
+    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db, itemDefs_, worldId);
 }
 
 /**

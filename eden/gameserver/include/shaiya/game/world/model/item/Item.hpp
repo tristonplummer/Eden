@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/game/world/model/item/ItemDefinition.hpp>
+#include <shaiya/common/client/item/ItemDefinition.hpp>
 
 #include <cmath>
 #include <cstdint>
@@ -16,7 +16,7 @@ namespace shaiya::game
          * Initialises an item by it's definition.
          * @param id    The item definition
          */
-        explicit Item(const ItemDefinition& definition);
+        explicit Item(const shaiya::client::ItemDefinition& definition);
 
         /**
          * Set the item count.
@@ -57,7 +57,7 @@ namespace shaiya::game
          */
         [[nodiscard]] uint8_t type() const
         {
-            return std::floor(definition_.id / 1000);
+            return definition_.type;
         }
 
         /**
@@ -66,14 +66,14 @@ namespace shaiya::game
          */
         [[nodiscard]] uint8_t typeId() const
         {
-            return std::floor(definition_.id - (type() * 1000));
+            return definition_.typeId;
         }
 
         /**
          * Gets the definition of this item.
          * @return  The item definition.
          */
-        [[nodiscard]] const ItemDefinition& definition() const
+        [[nodiscard]] const shaiya::client::ItemDefinition& definition() const
         {
             return definition_;
         }
@@ -82,7 +82,7 @@ namespace shaiya::game
         /**
          * The item definition
          */
-        const ItemDefinition& definition_;
+        const shaiya::client::ItemDefinition& definition_;
 
         /**
          * The item count.

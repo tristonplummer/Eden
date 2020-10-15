@@ -10,8 +10,8 @@ namespace shaiya
     {
         Fighter,
         Defender,
-        Archer,
         Ranger,
+        Archer,
         Mage,
         Priest
     };

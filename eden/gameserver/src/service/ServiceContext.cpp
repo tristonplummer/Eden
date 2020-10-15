@@ -1,7 +1,6 @@
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/service/CharacterScreenService.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/service/ItemDefinitionService.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
 #include <shaiya/game/service/WorldApiService.hpp>
 
@@ -31,9 +30,8 @@ ServiceContext::ServiceContext(boost::property_tree::ptree& config)
     // Initialise the database service
     dbService_   = new shaiya::database::DatabaseService(dbHost, dbName, dbUser, dbPass);
     apiService_  = new WorldApiService();
-    itemService_ = new ItemDefinitionService(*dbService_);
     charScreen_  = new CharacterScreenService(*dbService_, worldId);
-    gameService_ = new GameWorldService(*dbService_, *itemService_, worldId);
+    gameService_ = new GameWorldService(*dbService_, worldId);
 
     // Load the game world
     gameService_->load(config);

@@ -6,7 +6,7 @@ using namespace shaiya::game;
  * Initialises an item by it's definition.
  * @param id    The item definition
  */
-Item::Item(const ItemDefinition& definition): definition_(definition)
+Item::Item(const shaiya::client::ItemDefinition& definition): definition_(definition)
 {
 }
 

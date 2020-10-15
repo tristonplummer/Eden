@@ -56,10 +56,5 @@ namespace shaiya::game
          * The game world service.
          */
         GameWorldService* gameService_;
-
-        /**
-         * The item definition service.
-         */
-        ItemDefinitionService* itemService_;
     };
 }

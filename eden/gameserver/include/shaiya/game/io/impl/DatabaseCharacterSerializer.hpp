@@ -13,10 +13,10 @@ namespace shaiya::game
         /**
          * Initialises this character serializer.
          * @param db            The database service.
-         * @param itemService   The item definition service.
+         * @param itemDefs      The item definitions.
          * @param worldId       The id of this world server.
          */
-        DatabaseCharacterSerializer(shaiya::database::DatabaseService& db, ItemDefinitionService& itemService,
+        DatabaseCharacterSerializer(shaiya::database::DatabaseService& db, shaiya::client::ItemSData& itemDefs,
                                     size_t worldId);
 
         /**
@@ -39,9 +39,9 @@ namespace shaiya::game
         shaiya::database::DatabaseService& db_;
 
         /**
-         * The item definition service.
+         * The item definitions.
          */
-        ItemDefinitionService& itemService_;
+        shaiya::client::ItemSData& itemDefs_;
 
         /**
          * The id of this world server.
