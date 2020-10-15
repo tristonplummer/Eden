@@ -34,7 +34,7 @@ namespace shaiya
         [[nodiscard]] std::tm decode() const
         {
             std::tm time{};
-            time.tm_year = ((time_ >> 26u) & 0x3Fu) + 2000;
+            time.tm_year = ((time_ >> 26u) & 0x3Fu) - 1900;
             time.tm_mon  = (time_ >> 22u) & 0xFu;
             time.tm_mday = (time_ >> 17u) & 0x1Fu;
             time.tm_hour = (time_ >> 12u) & 0x1Fu;
@@ -52,7 +52,7 @@ namespace shaiya
         {
             time_ = time->tm_sec +
                     ((time->tm_min +
-                      ((time->tm_hour + 32 * (time->tm_mday + 32 * ((time->tm_mon + 1) + 16 * (time->tm_year - 16)))) << 6))
+                      ((time->tm_hour + 32 * (time->tm_mday + 32 * ((time->tm_mon + 1) + 16 * ((time->tm_year + 1900) - 16)))) << 6))
                      << 6);
         }
 

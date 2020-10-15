@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/game/world/model/map/Map.hpp>
+#include <shaiya/game/Forward.hpp>
 
 #include <map>
 #include <memory>

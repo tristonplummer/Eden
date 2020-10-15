@@ -1,6 +1,8 @@
 #include <shaiya/game/world/model/actor/Actor.hpp>
 #include <shaiya/game/world/scheduling/impl/HealthNormalizationTask.hpp>
 
+#include <cmath>
+
 using namespace shaiya::game;
 
 /**

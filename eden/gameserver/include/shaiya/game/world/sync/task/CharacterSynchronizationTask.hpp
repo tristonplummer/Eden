@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/Forward.hpp>
 
 namespace shaiya::game
 {
@@ -64,7 +64,7 @@ namespace shaiya::game
          * @param other The character to update.
          */
         void updateChat(const Character& other);
-        
+
         /**
          * The character we're currently synchronizing.
          */

@@ -1,5 +1,11 @@
+#include <shaiya/common/net/packet/game/CharacterAdditionalStats.hpp>
+#include <shaiya/common/net/packet/game/CharacterCurrentHitpoints.hpp>
+#include <shaiya/common/net/packet/game/CharacterDetails.hpp>
+#include <shaiya/common/net/packet/game/CharacterMaxHitpoints.hpp>
 #include <shaiya/common/net/packet/game/WorldTime.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/ServiceContext.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
@@ -37,7 +43,12 @@ void Character::init()
     stats().onSync([&](const StatSet& stats, StatUpdateType type) { onStatSync(stats, type); });
 
     // Write the current time
-    session_.write(WorldTime{});
+    WorldTime wTime{};
+    auto time     = wTime.time.decode();
+    auto currTime = std::mktime(&time);
+    LOG(INFO) << std::ctime(&currTime);
+    session_.write(wTime);
+    inventory_.setGold(250000000);
 
     // Prepare the character details
     CharacterDetails details;

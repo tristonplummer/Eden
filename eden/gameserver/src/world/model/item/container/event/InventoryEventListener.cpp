@@ -1,5 +1,9 @@
+#include <shaiya/common/net/packet/game/CharacterAddItem.hpp>
 #include <shaiya/common/net/packet/game/CharacterItem.hpp>
+#include <shaiya/common/net/packet/game/CharacterRemoveItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
 using namespace shaiya::game;

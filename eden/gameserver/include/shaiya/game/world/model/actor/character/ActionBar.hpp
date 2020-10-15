@@ -1,9 +1,8 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 
 namespace shaiya::game
 {
-    class Character;
-
     /**
      * Represents a character's action bar.
      */

@@ -1,20 +1,15 @@
 #pragma once
 #include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
+#include <shaiya/game/world/model/actor/StatSet.hpp>
 #include <shaiya/game/world/model/actor/character/ActionBar.hpp>
 #include <shaiya/game/world/model/actor/character/Appearance.hpp>
 
 #include <vector>
 
-namespace shaiya::net
-{
-    class GameSession;  // Forward declaration of the session.
-}
-
 namespace shaiya::game
 {
-    class GameWorldService;
-
     /**
      * Represents a player character.
      */

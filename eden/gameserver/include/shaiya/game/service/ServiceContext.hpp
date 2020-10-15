@@ -1,9 +1,5 @@
 #pragma once
-#include <shaiya/common/db/DatabaseService.hpp>
-#include <shaiya/game/service/CharacterScreenService.hpp>
-#include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/service/ItemDefinitionService.hpp>
-#include <shaiya/game/service/WorldApiService.hpp>
+#include <shaiya/game/Forward.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 

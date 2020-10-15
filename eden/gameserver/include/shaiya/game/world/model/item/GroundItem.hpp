@@ -1,6 +1,6 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/Entity.hpp>
-#include <shaiya/game/world/model/item/Item.hpp>
 
 #include <memory>
 

@@ -1,3 +1,4 @@
+#include <shaiya/common/net/packet/login/WorldListPacket.hpp>
 #include <shaiya/login/net/LoginSession.hpp>
 
 #include <chrono>

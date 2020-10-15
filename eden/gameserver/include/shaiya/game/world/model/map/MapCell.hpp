@@ -1,11 +1,11 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
+
 #include <memory>
 #include <vector>
 
 namespace shaiya::game
 {
-    class Entity;  // Forward declaration of an entity.
-
     /**
      * Represents a 16x16 cell of a map. This is so that when processing localised events, we only need to search
      * small areas to find players that can observe or be affected by such event.

@@ -1,5 +1,8 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
+#include <shaiya/common/net/packet/game/AccountFaction.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/CharacterScreenService.hpp>
+#include <shaiya/game/service/ServiceContext.hpp>
 
 using namespace shaiya::net;
 

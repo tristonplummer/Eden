@@ -1,5 +1,13 @@
 #include <shaiya/common/net/packet/Packet.hpp>
+#include <shaiya/common/net/packet/game/CharacterAppearance.hpp>
+#include <shaiya/common/net/packet/game/CharacterChatMessage.hpp>
+#include <shaiya/common/net/packet/game/CharacterEnteredViewport.hpp>
+#include <shaiya/common/net/packet/game/CharacterLeftViewport.hpp>
+#include <shaiya/common/net/packet/game/CharacterMovement.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/EntityType.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/sync/task/CharacterSynchronizationTask.hpp>
 
 using namespace shaiya::game;

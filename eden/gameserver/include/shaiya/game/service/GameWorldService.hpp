@@ -1,12 +1,9 @@
 #pragma once
-#include <shaiya/common/db/DatabaseService.hpp>
-#include <shaiya/game/io/CharacterSerializer.hpp>
-#include <shaiya/game/service/ItemDefinitionService.hpp>
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/util/EntityContainer.hpp>
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
 #include <shaiya/game/world/model/map/MapRepository.hpp>
 #include <shaiya/game/world/scheduling/Scheduler.hpp>
-#include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -17,10 +14,6 @@
 
 namespace shaiya::game
 {
-    class Character;
-    class GroundItem;
-    class Npc;
-
     class GameWorldService
     {
     public:

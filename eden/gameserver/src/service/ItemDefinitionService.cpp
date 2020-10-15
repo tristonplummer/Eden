@@ -1,3 +1,4 @@
+#include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/service/ItemDefinitionService.hpp>
 
 using namespace shaiya::game;

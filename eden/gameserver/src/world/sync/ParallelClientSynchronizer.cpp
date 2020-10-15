@@ -1,6 +1,9 @@
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/npc/Npc.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
+#include <shaiya/game/world/model/map/Map.hpp>
+#include <shaiya/game/world/model/map/MapCell.hpp>
 #include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 #include <shaiya/game/world/sync/task/CharacterSynchronizationTask.hpp>
 #include <shaiya/game/world/sync/task/MapSynchronizationTask.hpp>

@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/common/DataTypes.hpp>
 
 namespace shaiya::net
 {

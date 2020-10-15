@@ -1,4 +1,5 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
+#include <shaiya/common/net/packet/login/WorldSelectPacket.hpp>
 #include <shaiya/login/net/LoginSession.hpp>
 
 using namespace shaiya::net;

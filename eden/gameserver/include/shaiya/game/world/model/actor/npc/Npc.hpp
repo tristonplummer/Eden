@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
 #include <shaiya/game/world/model/actor/npc/NpcDefinition.hpp>
 

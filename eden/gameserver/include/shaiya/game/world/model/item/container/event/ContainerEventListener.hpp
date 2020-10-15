@@ -1,11 +1,10 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
+
 #include <memory>
 
 namespace shaiya::game
 {
-    class Item;
-    class ItemContainer;
-
     /**
      * A utility class that listens for events performed by a container.
      */

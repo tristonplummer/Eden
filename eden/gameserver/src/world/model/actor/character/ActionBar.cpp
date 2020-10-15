@@ -1,5 +1,6 @@
 #include <shaiya/common/net/packet/game/CharacterActionBar.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
 
 using namespace shaiya::game;
 using namespace shaiya::net;

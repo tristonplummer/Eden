@@ -1,4 +1,8 @@
+#include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
+#include <shaiya/game/service/ItemDefinitionService.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 
 #include <glog/logging.h>
 
@@ -102,7 +106,7 @@ bool DatabaseCharacterSerializer::load(Character& character)
         stats.setHitpoints(row["hitpoints"].as<size_t>());
         stats.setMana(row["mana"].as<size_t>());
         stats.setStamina(row["stamina"].as<size_t>());
-        
+
         return true;
     }
     catch (const std::exception& e)

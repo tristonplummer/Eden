@@ -1,7 +1,6 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/EntityType.hpp>
-#include <shaiya/game/world/model/Position.hpp>
-#include <shaiya/game/world/model/map/MapCell.hpp>
 
 #include <fstream>
 #include <memory>
@@ -9,8 +8,6 @@
 
 namespace shaiya::game
 {
-    class Entity;  // Forward declaration of the entity class.
-
     /**
      * Represents a map in the game world.
      */

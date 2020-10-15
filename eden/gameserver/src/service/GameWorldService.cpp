@@ -1,9 +1,14 @@
 #include <shaiya/common/util/Async.hpp>
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/actor/npc/Npc.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
+#include <shaiya/game/world/model/map/Map.hpp>
+#include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
 
+#include <boost/property_tree/ptree.hpp>
 #include <glog/logging.h>
 
 #include <chrono>

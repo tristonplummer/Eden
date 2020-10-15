@@ -3,12 +3,7 @@
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/common/net/packet/game/CharacterCreation.hpp>
 #include <shaiya/common/net/packet/game/CharacterList.hpp>
-
-// Forward declaration of the game session.
-namespace shaiya::net
-{
-    class GameSession;
-}
+#include <shaiya/game/Forward.hpp>
 
 namespace shaiya::game
 {

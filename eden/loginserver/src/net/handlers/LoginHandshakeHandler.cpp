@@ -1,4 +1,5 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
+#include <shaiya/common/net/packet/login/LoginHandshake.hpp>
 #include <shaiya/login/net/LoginSession.hpp>
 
 #include <crypto++/hmac.h>

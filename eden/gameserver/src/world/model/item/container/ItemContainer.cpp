@@ -1,4 +1,6 @@
+#include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/model/item/container/ItemContainer.hpp>
+#include <shaiya/game/world/model/item/container/event/ContainerEventListener.hpp>
 
 using namespace shaiya::game;
 

@@ -1,5 +1,8 @@
 #include <shaiya/common/net/packet/game/CharacterItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
+#include <shaiya/game/world/model/item/container/ItemContainer.hpp>
 #include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
 
 using namespace shaiya::game;

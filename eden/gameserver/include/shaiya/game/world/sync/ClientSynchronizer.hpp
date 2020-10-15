@@ -1,11 +1,10 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 
 #include <vector>
 
 namespace shaiya::game
 {
-    class Character;  // Forward declaration of player characters.
-
     /**
      * The client synchronizer manages the update sequence that keeps clients synchronized with the in-game world.
      */

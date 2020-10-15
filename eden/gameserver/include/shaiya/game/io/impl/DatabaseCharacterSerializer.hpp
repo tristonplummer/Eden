@@ -1,7 +1,6 @@
 #pragma once
-#include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/io/CharacterSerializer.hpp>
-#include <shaiya/game/service/ItemDefinitionService.hpp>
 
 namespace shaiya::game
 {

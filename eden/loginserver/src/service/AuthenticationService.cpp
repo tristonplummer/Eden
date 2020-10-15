@@ -1,3 +1,4 @@
+#include <shaiya/common/net/packet/login/AccountLoginRequest.hpp>
 #include <shaiya/login/net/LoginSession.hpp>
 
 #include <regex>

@@ -1,8 +1,9 @@
 #include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnItemCommand.hpp>
-#include <shaiya/game/world/model/commands/impl/TeleportCommand.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnNpcCommand.hpp>
+#include <shaiya/game/world/model/commands/impl/TeleportCommand.hpp>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/tokenizer.hpp>
 #include <glog/logging.h>

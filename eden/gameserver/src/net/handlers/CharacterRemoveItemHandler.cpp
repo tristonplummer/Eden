@@ -1,6 +1,11 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
+#include <shaiya/common/net/packet/game/CharacterRemoveItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/game/service/ServiceContext.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 
 using namespace shaiya::net;
 using namespace shaiya::game;

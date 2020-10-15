@@ -1,6 +1,8 @@
 #include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/game/service/ItemDefinitionService.hpp>
 #include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnItemCommand.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 
 #include <glog/logging.h>
 

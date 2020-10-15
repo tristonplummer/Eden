@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/Forward.hpp>
 
 namespace shaiya::game
 {

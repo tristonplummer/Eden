@@ -3,8 +3,6 @@
 
 namespace shaiya::game
 {
-    class Character;
-
     /**
      * A specialised container event listener, that listens for events on a character's inventory.
      */

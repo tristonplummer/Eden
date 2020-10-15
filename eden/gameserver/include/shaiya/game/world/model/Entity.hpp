@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/common/DataTypes.hpp>
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/Attribute.hpp>
 #include <shaiya/game/world/model/EntityType.hpp>
 #include <shaiya/game/world/model/Position.hpp>
@@ -11,9 +11,6 @@
 
 namespace shaiya::game
 {
-    class GameWorldService;  // Forward declaration of the game service.
-    class Map;
-
     /**
      * An entity can be thought of as any object in the game world that exist as a point in the world space. Items that are
      * dropped on the ground, characters, mobs and invisible points are all examples of entities.

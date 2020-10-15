@@ -1,4 +1,7 @@
+#include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/common/net/packet/game/AccountFaction.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/CharacterScreenService.hpp>
 
 using namespace shaiya;
 using namespace shaiya::game;

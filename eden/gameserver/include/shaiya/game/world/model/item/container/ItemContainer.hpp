@@ -1,6 +1,5 @@
 #pragma once
-#include <shaiya/game/world/model/item/Item.hpp>
-#include <shaiya/game/world/model/item/container/event/ContainerEventListener.hpp>
+#include <shaiya/game/Forward.hpp>
 
 #include <memory>
 #include <tuple>

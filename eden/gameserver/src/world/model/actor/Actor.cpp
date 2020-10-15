@@ -1,5 +1,6 @@
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/scheduling/impl/HealthNormalizationTask.hpp>
 
 using namespace shaiya::game;

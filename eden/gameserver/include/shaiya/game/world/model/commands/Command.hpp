@@ -1,12 +1,11 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 
 #include <string>
 #include <vector>
 
 namespace shaiya::game
 {
-    class Character;  // Forward declaration of a character.
-
     /**
      * Represents a command that can be executed by a player.
      */

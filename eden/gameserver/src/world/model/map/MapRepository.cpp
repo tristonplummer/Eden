@@ -1,3 +1,4 @@
+#include <shaiya/game/world/model/map/Map.hpp>
 #include <shaiya/game/world/model/map/MapRepository.hpp>
 
 #include <boost/filesystem.hpp>
@@ -44,7 +45,7 @@ void MapRepository::load(const std::string& mapPath)
         map->load(stream, size);
 
         // Store the map
-        auto id = idForPath(mapFilePath);
+        auto id      = idForPath(mapFilePath);
         maps_.at(id) = std::move(map);
     }
 }

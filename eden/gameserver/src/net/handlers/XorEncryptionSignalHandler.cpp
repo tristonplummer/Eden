@@ -1,5 +1,7 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
+#include <shaiya/common/net/packet/game/XorEncryptionSignal.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/world/model/actor/character/Character.hpp>
 
 using namespace shaiya::net;
 

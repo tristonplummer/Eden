@@ -1,4 +1,20 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
+#include <shaiya/common/net/packet/game/AccountFaction.hpp>
+#include <shaiya/common/net/packet/game/CharacterChatMessage.hpp>
+#include <shaiya/common/net/packet/game/CharacterCreation.hpp>
+#include <shaiya/common/net/packet/game/CharacterEnteredViewport.hpp>
+#include <shaiya/common/net/packet/game/CharacterMoveItem.hpp>
+#include <shaiya/common/net/packet/game/CharacterMovement.hpp>
+#include <shaiya/common/net/packet/game/CharacterMovementState.hpp>
+#include <shaiya/common/net/packet/game/CharacterPickupItem.hpp>
+#include <shaiya/common/net/packet/game/CharacterRemoveItem.hpp>
+#include <shaiya/common/net/packet/game/CharacterSelection.hpp>
+#include <shaiya/common/net/packet/game/CharacterStatAllocation.hpp>
+#include <shaiya/common/net/packet/game/GameHandshake.hpp>
+#include <shaiya/common/net/packet/game/XorEncryptionSignal.hpp>
+#include <shaiya/common/net/packet/login/AccountLoginRequest.hpp>
+#include <shaiya/common/net/packet/login/LoginHandshake.hpp>
+#include <shaiya/common/net/packet/login/WorldSelectPacket.hpp>
 
 #include <boost/format.hpp>
 #include <glog/logging.h>

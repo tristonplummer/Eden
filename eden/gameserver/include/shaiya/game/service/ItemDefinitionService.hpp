@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/item/ItemDefinition.hpp>
 
 #include <map>

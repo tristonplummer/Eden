@@ -1,10 +1,9 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/scheduling/ScheduledTask.hpp>
 
 namespace shaiya::game
 {
-    class Actor;
-
     /**
      * A task that periodically normalizes the health of an actor.
      */

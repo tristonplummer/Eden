@@ -3,8 +3,6 @@
 
 namespace shaiya::game
 {
-    class Character;
-
     /**
      * A specialised container that acts as an actor's inventory.
      */
@@ -30,6 +28,7 @@ namespace shaiya::game
         {
             return gold_;
         }
+
     private:
         /**
          * The amount of gold held by the actor.

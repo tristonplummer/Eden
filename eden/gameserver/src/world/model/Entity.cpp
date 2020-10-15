@@ -1,5 +1,6 @@
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/world/model/Entity.hpp>
+#include <shaiya/game/world/model/map/Map.hpp>
 
 #include <utility>
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/Entity.hpp>
 #include <shaiya/game/world/model/actor/StatSet.hpp>
 #include <shaiya/game/world/model/item/container/EquipmentContainer.hpp>

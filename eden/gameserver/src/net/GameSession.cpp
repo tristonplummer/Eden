@@ -1,8 +1,9 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/game/service/ServiceContext.hpp>
 
 #include <crypto++/sha.h>
-#include <utility>
 
 using namespace shaiya::net;
 
@@ -96,11 +97,8 @@ void GameSession::onDisconnect()
 {
     if (character_)
     {
-        auto unregister = [&]() {
-            auto& world = context().getGameWorld();
-            world.unregisterCharacter(character_);
-        };
-        ASYNC(unregister)
+        auto& world = context().getGameWorld();
+        world.unregisterCharacter(character_);
     }
 
     character_.reset();

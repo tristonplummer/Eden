@@ -1,10 +1,8 @@
 #pragma once
-#include <shaiya/common/DataTypes.hpp>
+#include <shaiya/game/Forward.hpp>
 
 namespace shaiya::game
 {
-    class Character;
-
     /**
      * Represents the appearance of a character.
      */

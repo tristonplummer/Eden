@@ -1,7 +1,7 @@
 #pragma once
 #include <shaiya/common/net/TcpServer.hpp>
+#include <shaiya/game/Forward.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/service/ServiceContext.hpp>
 
 namespace shaiya::net
 {
