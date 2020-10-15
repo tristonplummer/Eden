@@ -61,6 +61,38 @@ namespace shaiya
             return std::string(data_.data());
         }
 
+        /**
+         * Provides an implicit conversion to a string.
+         * @return  The string
+         */
+        [[nodiscard]] operator std::string() const
+        {
+            return str();
+        }
+
+        /**
+         * Provides an implicit conversion to const char*
+         * @return  The char array
+         */
+        [[nodiscard]] operator const char*() const
+        {
+            return data_.data();
+        }
+
+        /**
+         * Checks if another string contains the same data as this one.
+         * @param other The other string.
+         * @return      If the two strings match.
+         */
+        [[nodiscard]] bool operator==(const VariableString<MaxLen>& other) const
+        {
+            for (auto i = 0; i < MaxLen; i++)
+            {
+                if (data_.at(i) != other.data_.at(i))
+                    return false;
+            }
+            return true;
+        }
     private:
         /**
          * The internal character array of this string.
