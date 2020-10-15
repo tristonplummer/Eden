@@ -35,6 +35,18 @@ namespace shaiya::game
 
     private:
         /**
+         * Process the update flags for an NPC.
+         * @param other The NPC to update for this character.
+         */
+        void processUpdateFlags(const Npc& other);
+
+        /**
+         * Updates the movement of an NPC, for the current character.
+         * @param other The NPC to update.
+         */
+        void updateMovement(const Npc& other);
+
+        /**
          * The character we're currently synchronizing.
          */
         Character& character_;

@@ -20,6 +20,12 @@ namespace shaiya::game
         Npc(const NpcDefinition& def, GameWorldService& world);
 
         /**
+         * Sets the position of this entity.
+         * @param position  The position.
+         */
+        void setPosition(Position position) override;
+
+        /**
          * Gets the definition for this npc.
          * @return  The definition.
          */

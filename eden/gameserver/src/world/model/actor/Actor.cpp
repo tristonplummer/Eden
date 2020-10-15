@@ -81,6 +81,15 @@ void Actor::syncStats()
 }
 
 /**
+ * Sets the position of this entity.
+ * @param position  The position.
+ */
+void Actor::setPosition(Position position)
+{
+    Entity::setPosition(position);
+}
+
+/**
  * Sets the name of this actor.
  * @param name  The name value.
  */

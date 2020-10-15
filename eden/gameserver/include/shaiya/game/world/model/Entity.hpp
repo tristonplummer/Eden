@@ -33,7 +33,7 @@ namespace shaiya::game
          * Sets the position of this entity.
          * @param position  The position.
          */
-        void setPosition(Position position);
+        virtual void setPosition(Position position);
 
         /**
          * Marks this entity as active.

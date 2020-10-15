@@ -11,3 +11,12 @@ Npc::Npc(const NpcDefinition& def, GameWorldService& world): Actor(world), def_(
 {
     type_ = EntityType::Npc;
 }
+
+/**
+ * Sets the position of this entity.
+ * @param position  The position.
+ */
+void Npc::setPosition(Position position)
+{
+    Actor::setPosition(position.translate(0, -0.88, 0));
+}

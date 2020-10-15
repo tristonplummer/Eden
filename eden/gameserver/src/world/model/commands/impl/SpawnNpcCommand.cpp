@@ -29,7 +29,7 @@ void SpawnNpcCommand::execute(Character& character, const std::vector<std::strin
 
     auto& world = character.world();
     auto npc    = std::make_shared<Npc>(*def, world);
-    npc->setPosition(pos.translate(0, -0.80, 0));
+    npc->setPosition(pos);
 
     world.registerNpc(std::move(npc));
 }

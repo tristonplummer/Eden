@@ -31,6 +31,12 @@ namespace shaiya::game
         void activate() override;
 
         /**
+         * Sets the position of this entity.
+         * @param position  The position.
+         */
+        void setPosition(Position position) override;
+
+        /**
          * Sets the name of this actor.
          * @param name  The name value.
          */

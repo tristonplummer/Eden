@@ -1,5 +1,6 @@
 #include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
+#include <shaiya/game/world/model/commands/impl/MoveNpcCommand.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnItemCommand.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnNpcCommand.hpp>
 #include <shaiya/game/world/model/commands/impl/TeleportCommand.hpp>
@@ -18,6 +19,7 @@ CommandManager::CommandManager()
     registerCommand(std::make_shared<SpawnItemCommand>());
     registerCommand(std::make_shared<TeleportCommand>());
     registerCommand(std::make_shared<SpawnNpcCommand>());
+    registerCommand(std::make_shared<MoveNpcCommand>());
 }
 
 /**
