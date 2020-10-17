@@ -4,4 +4,4 @@ openssl genrsa -out ./data/cert/login.pem 1024
 
 # Run the servers
 ./loginserver &
-./gameserver &
+./gameserver
