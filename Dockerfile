@@ -24,7 +24,7 @@ COPY . /edensrc/
 # Build the servers
 RUN mkdir build
 WORKDIR /edensrc/build
-RUN cmake .. -DCMAKE_BUILD_TYPE=Release
+RUN cmake ..
 RUN make
 
 # Start with a clean image
