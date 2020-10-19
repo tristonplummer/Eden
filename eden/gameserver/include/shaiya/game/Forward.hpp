@@ -56,6 +56,10 @@ namespace shaiya::game
     class SpawnNpcCommand;
     class TeleportCommand;
 
+    // Requests
+    class RequestManager;
+    class TradeRequest;
+
     // Scheduling
     class Scheduler;
     class ScheduledTask;

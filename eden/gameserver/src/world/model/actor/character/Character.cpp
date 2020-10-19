@@ -19,7 +19,11 @@ using namespace shaiya::game;
  * @param id        The character id.
  */
 Character::Character(GameSession& session, size_t id)
-    : session_(session), actionBar_(*this), appearance_(*this), Actor(session.context().getGameWorld())
+    : session_(session),
+      actionBar_(*this),
+      appearance_(*this),
+      requestManager_(*this),
+      Actor(session.context().getGameWorld())
 {
     // Set this entity type
     type_ = EntityType::Character;
@@ -43,11 +47,7 @@ void Character::init()
     stats().onSync([&](const StatSet& stats, StatUpdateType type) { onStatSync(stats, type); });
 
     // Write the current time
-    WorldTime wTime{};
-    auto time     = wTime.time.decode();
-    auto currTime = std::mktime(&time);
-    LOG(INFO) << std::ctime(&currTime);
-    session_.write(wTime);
+    session_.write(WorldTime{});
     inventory_.setGold(250000000);
 
     // Prepare the character details

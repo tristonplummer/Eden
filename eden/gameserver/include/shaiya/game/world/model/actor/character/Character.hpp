@@ -5,6 +5,7 @@
 #include <shaiya/game/world/model/actor/StatSet.hpp>
 #include <shaiya/game/world/model/actor/character/ActionBar.hpp>
 #include <shaiya/game/world/model/actor/character/Appearance.hpp>
+#include <shaiya/game/world/model/actor/character/request/RequestManager.hpp>
 
 #include <vector>
 
@@ -128,6 +129,15 @@ namespace shaiya::game
             return statpoints_;
         }
 
+        /**
+         * Gets the request manager for this character.
+         * @return  The request manager.
+         */
+        [[nodiscard]] RequestManager& requests()
+        {
+            return requestManager_;
+        }
+
     private:
         /**
          * The game session instance.
@@ -188,6 +198,11 @@ namespace shaiya::game
          * The appearance of this character.
          */
         Appearance appearance_;
+
+        /**
+         * The request manager for this character.
+         */
+        RequestManager requestManager_;
 
         /**
          * Gets executed when the stats for this character are synchronized.
