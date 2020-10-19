@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/game/Forward.hpp>
+#include <shaiya/game/world/model/actor/character/request/RequestType.hpp>
 
 namespace shaiya::game
 {
@@ -26,6 +27,15 @@ namespace shaiya::game
          */
         virtual void close();
 
+        /**
+         * Gets the type of this request.
+         * @return  The type.
+         */
+        [[nodiscard]] RequestType type() const
+        {
+            return type_;
+        }
+
     protected:
         /**
          * The player who made the request.
@@ -36,5 +46,10 @@ namespace shaiya::game
          * The request partner.
          */
         std::shared_ptr<Character> partner_;
+
+        /**
+         * The type of this request.
+         */
+        RequestType type_{ RequestType::None };
     };
 }

@@ -74,7 +74,7 @@ void handleTradeFinalise(Session& session, const CharacterTradeFinaliseRequest& 
     auto character = game.character();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
-    if (!request)
+    if (!request || request->type() != RequestType::Trade)
         return;
 
     auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
@@ -94,7 +94,7 @@ void handleTradeConfirm(Session& session, const CharacterConfirmTrade& req)
     auto character = game.character();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
-    if (!request)
+    if (!request || request->type() != RequestType::Trade)
         return;
 
     auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
@@ -116,7 +116,7 @@ void handleTradeGoldOffer(Session& session, const CharacterTradeOfferGoldRequest
     auto character = game.character();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
-    if (!request)
+    if (!request || request->type() != RequestType::Trade)
         return;
 
     auto trade = std::dynamic_pointer_cast<TradeRequest>(request);

@@ -32,6 +32,8 @@ auto tradeRequest = [](const std::shared_ptr<Character>& character) -> std::shar
 TradeRequest::TradeRequest(std::shared_ptr<Character> player, std::shared_ptr<Character> partner)
     : Request(std::move(player), std::move(partner))
 {
+    type_ = RequestType::Trade;
+
     // Initialise the trade container
     container_ = std::make_unique<ItemContainer>(TradeWindowCapacity);
 }
