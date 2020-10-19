@@ -40,6 +40,19 @@ namespace shaiya::game
          * @param type  The entity type to search for.
          * @return      The entity instance.
          */
+        template<typename T>
+        std::shared_ptr<T> get(Position& pos, size_t id, EntityType type)
+        {
+            return std::dynamic_pointer_cast<T>(get(pos, id, type));
+        }
+
+        /**
+         * Attempts to get an entity with a specified id and type.
+         * @param pos   The position to start the search at.
+         * @param id    The entity id.
+         * @param type  The entity type to search for.
+         * @return      The entity instance.
+         */
         std::shared_ptr<Entity> get(Position& pos, size_t id, EntityType type);
 
         /**
