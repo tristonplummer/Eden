@@ -15,6 +15,12 @@ namespace shaiya::game
         explicit InventoryContainer();
 
         /**
+         * Initialises this inventory container.
+         * @param inventory The inventory to copy from.
+         */
+        InventoryContainer(const InventoryContainer& inventory);
+
+        /**
          * Sets the amount of gold in the inventory.
          * @param gold  The amount of gold.
          */

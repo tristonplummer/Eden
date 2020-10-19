@@ -28,7 +28,7 @@ namespace shaiya::game
          * Gets the item count.
          * @return  The number of items in this stack.
          */
-        [[nodiscard]] uint8_t count() const
+        [[nodiscard]] size_t count() const
         {
             return count_;
         }

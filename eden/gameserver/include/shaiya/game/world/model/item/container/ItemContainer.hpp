@@ -117,6 +117,17 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the position in a page as a local index.
+         * @param page  The page.
+         * @param slot  The slot.
+         * @return      The index.
+         */
+        [[nodiscard]] size_t pagePositionToIndex(size_t page, size_t slot) const
+        {
+            return (page * pageSize_) + slot;
+        }
+
+        /**
          * Get the vector of items in this container.
          * @return  The vector of items.
          */
@@ -125,7 +136,7 @@ namespace shaiya::game
             return items_;
         }
 
-    private:
+    protected:
         /**
          * The vector of items held by this container.
          */
@@ -136,6 +147,7 @@ namespace shaiya::game
          */
         std::vector<std::shared_ptr<ContainerEventListener>> listeners_;
 
+    private:
         /**
          * The number of virtual "pages" in this container.
          */
@@ -145,16 +157,5 @@ namespace shaiya::game
          * The size of each page.
          */
         size_t pageSize_{ 0 };
-
-        /**
-         * Gets the position in a page as a local index.
-         * @param page  The page.
-         * @param slot  The slot.
-         * @return      The index.
-         */
-        [[nodiscard]] size_t pagePositionToIndex(size_t page, size_t slot) const
-        {
-            return (page * pageSize_) + slot;
-        }
     };
 }
