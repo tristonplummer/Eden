@@ -29,6 +29,20 @@ namespace shaiya::game
         void offerGold(size_t offeredGold);
 
         /**
+         * Offers an item up for trade.
+         * @param slot      The slot.
+         * @param quantity  The quantity to offer.
+         * @param destSlot  The destination slot in the trade window.
+         * @return          If the item was added.
+         */
+        bool offerItem(size_t slot, size_t quantity, size_t destSlot);
+
+        /**
+         * Accepts the trade.
+         */
+        void accept();
+
+        /**
          * Cancels the trade.
          */
         void cancel();
@@ -50,6 +64,11 @@ namespace shaiya::game
         std::unique_ptr<ItemContainer> container_;
 
         /**
+         * A copy of the player's inventory.
+         */
+        std::unique_ptr<InventoryContainer> inventory_;
+
+        /**
          * The amount of gold our player has offered to trade.
          */
         size_t gold_{ 0 };
@@ -58,5 +77,11 @@ namespace shaiya::game
          * If our player has confirmed the current trade window.
          */
         bool confirmed_{ false };
+
+        /**
+         * If our player has accepted the current trade window. This is only available after both
+         * participants have confirmed the trade. When both players accept, the trade is deemed completed.
+         */
+        bool accepted_{ false };
     };
 }

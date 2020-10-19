@@ -33,7 +33,8 @@ namespace shaiya::net
      */
     enum class TradeFinaliseType : uint8_t
     {
-        Cancel = 2
+        Accepted = 0,
+        Cancel   = 2
     };
 
     /**

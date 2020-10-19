@@ -30,11 +30,6 @@ InventoryContainer::InventoryContainer(const InventoryContainer& inventory)
 {
     gold_ = inventory.gold();
 
-    for (auto&& listener: inventory.listeners_)
-    {
-        listeners_.push_back(listener);
-    }
-
     for (auto slot = 0; slot < items_.size(); slot++)
     {
         auto destItem = inventory.at(slot);

@@ -1,6 +1,7 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeConfirm.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeGold.hpp>
+#include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
@@ -28,12 +29,14 @@ void handleTradeRequest(Session& session, const CharacterTradeRequest& request)
 
     // If we can send a request to the target
     auto& requests = character->requests();
-    if (requests.request(target, RequestType::Trade))
+    if (!requests.request(target, RequestType::Trade))
     {
-        CharacterTradeRequest outgoingRequest;
-        outgoingRequest.target = character->id();
-        target->session().write(outgoingRequest);
+        return;
     }
+
+    CharacterTradeRequest outgoingRequest;
+    outgoingRequest.target = character->id();
+    target->session().write(outgoingRequest);
 }
 
 /**
@@ -79,7 +82,9 @@ void handleTradeFinalise(Session& session, const CharacterTradeFinaliseRequest& 
 
     auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
 
-    if (req.type == TradeFinaliseType::Cancel)
+    if (req.type == TradeFinaliseType::Accepted)
+        trade->accept();
+    else if (req.type == TradeFinaliseType::Cancel)
         trade->cancel();
 }
 
@@ -121,6 +126,34 @@ void handleTradeGoldOffer(Session& session, const CharacterTradeOfferGoldRequest
 
     auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
     trade->offerGold(offer.gold);
+}
+
+/**
+ * Handles an incoming offer to add an item to the trade window.
+ * @param session   The session instance.
+ * @param request   The inbound trade offer.
+ */
+void handleTradeItemOffer(Session& session, const CharacterTradeOfferItemRequest& offer)
+{
+    auto& game     = dynamic_cast<GameSession&>(session);
+    auto character = game.character();
+
+    auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
+    if (!request || request->type() != RequestType::Trade)
+        return;
+
+    auto& inventory = character->inventory();
+    auto trade      = std::dynamic_pointer_cast<TradeRequest>(request);
+    auto page       = offer.page;
+
+    if (page == 0 || page > inventory.pageCount())
+        return;
+    if (offer.slot >= inventory.pageSize())
+        return;
+    page--;
+
+    if (trade->offerItem(inventory.pagePositionToIndex(page, offer.slot), offer.quantity, offer.destSlot))
+        game.write(offer);
 }
 
 /**
@@ -166,4 +199,13 @@ template<>
 void PacketRegistry::registerPacketHandler<TradeAddGoldOpcode>()
 {
     registerHandler<TradeAddGoldOpcode, CharacterTradeOfferGoldRequest>(&handleTradeGoldOffer);
+}
+
+/**
+ * A template specialization used for registering a trade offer handler.
+ */
+template<>
+void PacketRegistry::registerPacketHandler<TradeOfferItemOpcode>()
+{
+    registerHandler<TradeOfferItemOpcode, CharacterTradeOfferItemRequest>(&handleTradeItemOffer);
 }

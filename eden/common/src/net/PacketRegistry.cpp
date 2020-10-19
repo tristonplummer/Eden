@@ -12,7 +12,7 @@
 #include <shaiya/common/net/packet/game/CharacterStatAllocation.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeConfirm.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeGold.hpp>
-#include <shaiya/common/net/packet/game/CharacterTradeRequest.hpp>
+#include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
 #include <shaiya/common/net/packet/game/GameHandshake.hpp>
 #include <shaiya/common/net/packet/game/XorEncryptionSignal.hpp>
 #include <shaiya/common/net/packet/login/AccountLoginRequest.hpp>
@@ -56,6 +56,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<TradeFinaliseOpcode>();
     registerPacketHandler<TradeConfirmOpcode>();
     registerPacketHandler<TradeAddGoldOpcode>();
+    registerPacketHandler<TradeOfferItemOpcode>();
 }
 
 /**
