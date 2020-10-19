@@ -42,11 +42,7 @@ bool RequestManager::canRequest(const std::shared_ptr<Character>& partner, Reque
         return false;
     if (!partner->active())  // We don't want to send requests to a player that hasn't loaded in yet.
         return false;
-
-    auto request = partner->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
-    if (request)
-        return false;
-    return true;
+    return !partner->hasAttribute(Attribute::Request);
 }
 
 /**
