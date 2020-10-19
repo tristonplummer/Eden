@@ -5,6 +5,8 @@
 #include <shaiya/game/world/model/Position.hpp>
 #include <shaiya/game/world/model/UpdateFlag.hpp>
 
+#include <glog/logging.h>
+
 #include <any>
 #include <map>
 #include <memory>
@@ -141,9 +143,16 @@ namespace shaiya::game
         template<typename T>
         T getAttribute(Attribute key, T defaultValue = {}) const
         {
-            if (attributes_.contains(key))
+            try
             {
-                return std::any_cast<T>(attributes_.at(key));
+                if (attributes_.contains(key))
+                {
+                    return std::any_cast<T>(attributes_.at(key));
+                }
+            }
+            catch (const std::exception& e)
+            {
+                LOG(ERROR) << "Exception while retrieving attribute " << (int) key << ": " << e.what();
             }
             return defaultValue;
         }
