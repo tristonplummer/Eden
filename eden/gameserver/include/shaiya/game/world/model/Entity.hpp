@@ -152,9 +152,19 @@ namespace shaiya::game
             }
             catch (const std::exception& e)
             {
-                LOG(ERROR) << "Exception while retrieving attribute " << (int) key << ": " << e.what();
+                LOG(ERROR) << "Exception while retrieving attribute " << (int)key << ": " << e.what();
             }
             return defaultValue;
+        }
+
+        /**
+         * Checks if an entity has an attribute.
+         * @param key   The attribute key.
+         * @return      If the entity has the attribute.
+         */
+        bool hasAttribute(Attribute key) const
+        {
+            return attributes_.contains(key);
         }
 
         /**
