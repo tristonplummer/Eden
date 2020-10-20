@@ -19,6 +19,12 @@ namespace shaiya::game
         explicit Item(const shaiya::client::ItemDefinition& definition);
 
         /**
+         * Copy constructor.
+         * @param item  The item to copy from.
+         */
+        Item(const Item& item);
+
+        /**
          * Set the item quantity.
          * @param quantity The number in this stack.
          */
