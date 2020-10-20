@@ -170,8 +170,17 @@ void TradeRequest::finalise()
     finalised_  = true;
 
     // Copy the temporary inventory back into the player's inventory
-    auto& inv = player_->inventory();
-    inv.setItems(inventory_->items());
+    auto& inv       = player_->inventory();
+    auto& copyItems = inventory_->items();
+
+    // Remove any items that no longer exist in the copy
+    for (auto i = 0; i < copyItems.size(); i++)
+    {
+        if (!copyItems.at(i))
+            inv.remove(i);
+    }
+
+    // Add the items from the partner's trade container
     for (auto&& traded: second->container_->items())
         inv.add(traded);
 
