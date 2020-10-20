@@ -38,6 +38,12 @@ namespace shaiya::game
         bool offerItem(size_t slot, size_t quantity, size_t destSlot);
 
         /**
+         * Removes an item from the trade window.
+         * @param slot  The slot.
+         */
+        void removeItem(size_t slot);
+
+        /**
          * Accepts the trade.
          */
         void accept();

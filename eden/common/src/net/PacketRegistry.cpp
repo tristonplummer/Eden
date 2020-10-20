@@ -57,6 +57,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<TradeConfirmOpcode>();
     registerPacketHandler<TradeAddGoldOpcode>();
     registerPacketHandler<TradeOfferItemOpcode>();
+    registerPacketHandler<TradeRemoveItemOpcode>();
 }
 
 /**

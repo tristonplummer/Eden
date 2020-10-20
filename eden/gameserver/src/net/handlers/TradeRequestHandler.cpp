@@ -157,6 +157,26 @@ void handleTradeItemOffer(Session& session, const CharacterTradeOfferItemRequest
 }
 
 /**
+ * Handles an incoming request to remove an item from the trade window.
+ * @param session   The session instance.
+ * @param request   The inbound removal request.
+ */
+void handleTradeItemRemove(Session& session, const CharacterTradeRemoveItemRequest& offer)
+{
+    auto& game     = dynamic_cast<GameSession&>(session);
+    auto character = game.character();
+
+    auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
+    if (!request || request->type() != RequestType::Trade)
+        return;
+
+    auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
+    trade->removeItem(offer.slot);
+
+    game.write(offer);
+}
+
+/**
  * A template specialization used for registering a trade request handler.
  */
 template<>
@@ -208,4 +228,13 @@ template<>
 void PacketRegistry::registerPacketHandler<TradeOfferItemOpcode>()
 {
     registerHandler<TradeOfferItemOpcode, CharacterTradeOfferItemRequest>(&handleTradeItemOffer);
+}
+
+/**
+ * A template specialization used for registering a trade item removal handler.
+ */
+template<>
+void PacketRegistry::registerPacketHandler<TradeRemoveItemOpcode>()
+{
+    registerHandler<TradeRemoveItemOpcode, CharacterTradeRemoveItemRequest>(&handleTradeItemRemove);
 }

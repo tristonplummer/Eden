@@ -10,6 +10,11 @@ namespace shaiya::net
     constexpr auto TradeOfferItemOpcode = 0x0A06;
 
     /**
+     * The opcode for an item being removed from the trade window.
+     */
+    constexpr auto TradeRemoveItemOpcode = 0x0A07;
+
+    /**
      * The opcode for a trade partner offering an item.
      */
     constexpr auto TradePartnerOfferItemOpcode = 0x0A09;
@@ -43,6 +48,22 @@ namespace shaiya::net
          * The destination slot in the trade window.
          */
         uint8_t destSlot{ 0 };
+    } PACKED;
+
+    /**
+     * Represents a request to remove an item from the player's trade screen.
+     */
+    struct CharacterTradeRemoveItemRequest
+    {
+        /**
+         * The opcode for removing an item.
+         */
+        uint16_t opcode{ TradeRemoveItemOpcode };
+
+        /**
+         * The slot to remove the item from.
+         */
+        uint8_t slot{ 0 };
     } PACKED;
 
     /**
@@ -104,7 +125,7 @@ namespace shaiya::net
          * TODO: Refactor this.
          */
         VariableString<26> unknown2;
-        
+
         /**
          * The item ids of the lapis that are socketed into this item.
          */

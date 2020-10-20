@@ -105,6 +105,22 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
 }
 
 /**
+ * Removes an item from the trade window.
+ * @param slot  The slot.
+ */
+void TradeRequest::removeItem(size_t slot)
+{
+    if (slot >= container_->pageSize())
+        return;
+
+    auto item = container_->remove(slot);
+    inventory_->add(std::move(item));
+
+    // Inform our partner
+    partner_->session().write(CharacterTradePartnerOfferItem{ .slot = static_cast<uint8_t>(slot) });
+}
+
+/**
  * Confirms the current trade window.
  */
 void TradeRequest::confirm()
