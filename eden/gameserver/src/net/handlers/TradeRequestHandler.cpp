@@ -173,7 +173,7 @@ void handleTradeItemRemove(Session& session, const CharacterTradeRemoveItemReque
     auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
     trade->removeItem(offer.slot);
 
-    game.write(offer);
+    game.write(CharacterTradeRemoveItem{ .slot = offer.slot });
 }
 
 /**

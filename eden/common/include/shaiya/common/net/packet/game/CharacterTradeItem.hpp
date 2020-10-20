@@ -67,6 +67,27 @@ namespace shaiya::net
     } PACKED;
 
     /**
+     * Represents an item being removed from the trade screen.
+     */
+    struct CharacterTradeRemoveItem
+    {
+        /**
+         * The opcode for removing an item.
+         */
+        uint16_t opcode{ TradeRemoveItemOpcode };
+
+        /**
+         * The participant in the trade.
+         */
+        Participant participant{ Participant::Self };
+
+        /**
+         * The slot to remove the item from.
+         */
+        uint8_t slot{ 0 };
+    } PACKED;
+
+    /**
      * Represents an update that the current trading partner has offered an item.
      */
     struct CharacterTradePartnerOfferItem
