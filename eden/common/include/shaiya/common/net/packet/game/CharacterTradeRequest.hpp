@@ -33,8 +33,9 @@ namespace shaiya::net
      */
     enum class TradeFinaliseType : uint8_t
     {
-        Accepted = 0,
-        Cancel   = 2
+        Accepted    = 0,
+        NotAccepted = 1,
+        Cancel      = 2
     };
 
     /**
@@ -111,6 +112,27 @@ namespace shaiya::net
     } PACKED;
 
     /**
+     * Represents a notification about a trade that is being finalised.
+     */
+    struct CharacterTradeFinalise
+    {
+        /**
+         * The opcode for the finalisation.
+         */
+        uint16_t opcode{ TradeFinaliseOpcode };
+
+        /**
+         * The participant that is finalising the trade.
+         */
+        Participant participant{ Participant::Self };
+
+        /**
+         * The finalisation reason.
+         */
+        TradeFinaliseType type{ TradeFinaliseType::Cancel };
+    } PACKED;
+
+    /**
      * Represents a notification that an open trade session was cancelled.
      */
     struct CharacterTradeCancelled
@@ -123,7 +145,7 @@ namespace shaiya::net
         /**
          * The player who closed the trade.
          */
-        Participant participant{ Participant::Partner };
+        TradeFinaliseType type{ TradeFinaliseType::Cancel };
     } PACKED;
 
 }

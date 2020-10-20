@@ -36,7 +36,9 @@ TradeRequest::TradeRequest(std::shared_ptr<Character> player, std::shared_ptr<Ch
 {
     type_ = RequestType::Trade;
 
-    // Copy the player's inventory
+    // Copy the player's inventory. This is so that we don't permanently make any changes to the player's current
+    // inventory until the trade has been finalised, otherwise if an issue occurred mid-trade then we'd potentially
+    // lose items.
     inventory_ = std::make_unique<InventoryContainer>(player_->inventory());
 
     // Initialise the trade container
@@ -108,12 +110,7 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
 void TradeRequest::confirm()
 {
     confirmed_ = true;
-
-    CharacterConfirmTradeUpdate update{ .confirmed = confirmed_ };
-    player_->session().write(update);
-
-    update.participant = Participant::Partner;
-    partner_->session().write(update);
+    notifyState();
 }
 
 /**
@@ -128,17 +125,7 @@ void TradeRequest::unconfirm()
     second->confirmed_ = false;
     second->accepted_  = false;
 
-    CharacterConfirmTradeUpdate playerConfirm{ .confirmed = confirmed_ };
-    CharacterConfirmTradeUpdate partnerConfirm{ .confirmed = second->confirmed_ };
-
-    player_->session().write(playerConfirm);
-    partner_->session().write(partnerConfirm);
-
-    playerConfirm.participant  = Participant::Partner;
-    partnerConfirm.participant = Participant::Partner;
-
-    player_->session().write(partnerConfirm);
-    partner_->session().write(playerConfirm);
+    notifyState();
 }
 
 /**
@@ -152,10 +139,73 @@ void TradeRequest::accept()
         return;
 
     accepted_ = true;
+    notifyState();
+
     if (second->accepted_)
-    {
-        // TODO: Finalise the trade.
-    }
+        finalise();
+}
+
+/**
+ * Finalises the trade.
+ */
+void TradeRequest::finalise()
+{
+    auto second = tradeRequest(partner_);
+    finalised_  = true;
+
+    // Copy the temporary inventory back into the player's inventory
+    auto& inv = player_->inventory();
+    inv.setItems(inventory_->items());
+    for (auto&& traded: second->container_->items())
+        inv.add(traded);
+
+    // Modify the gold
+    auto gold = (inv.gold() - gold_) + second->gold_;
+    inv.setGold(gold);
+
+    // Inform the player that the trade has ended
+    player_->session().write(CharacterTradeCancelled{ .type = TradeFinaliseType::Accepted });
+
+    // Finalise the partner's trade
+    if (!second->finalised_)
+        second->finalise();
+
+    close();
+}
+
+/**
+ * Notifies players about the state of the trade request (confirmation, accept)
+ */
+void TradeRequest::notifyState()
+{
+    auto second = tradeRequest(partner_);
+
+    // Inform players of the confirmation
+    CharacterConfirmTradeUpdate playerConfirm{ .confirmed = confirmed_ };
+    CharacterConfirmTradeUpdate partnerConfirm{ .confirmed = second->confirmed_ };
+
+    player_->session().write(playerConfirm);
+    partner_->session().write(partnerConfirm);
+
+    playerConfirm.participant  = Participant::Partner;
+    partnerConfirm.participant = Participant::Partner;
+
+    player_->session().write(partnerConfirm);
+    partner_->session().write(playerConfirm);
+
+    // Inform the players of the acceptance
+    CharacterTradeFinalise playerAccept{ .type = accepted_ ? TradeFinaliseType::Accepted : TradeFinaliseType::NotAccepted };
+    CharacterTradeFinalise partnerAccept{ .type = second->accepted_ ? TradeFinaliseType::Accepted
+                                                                    : TradeFinaliseType::NotAccepted };
+
+    player_->session().write(playerAccept);
+    partner_->session().write(partnerAccept);
+
+    playerAccept.participant  = Participant::Partner;
+    partnerAccept.participant = Participant::Partner;
+
+    player_->session().write(partnerAccept);
+    partner_->session().write(playerAccept);
 }
 
 /**

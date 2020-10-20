@@ -99,6 +99,12 @@ namespace shaiya::game
         virtual void sync();
 
         /**
+         * Sets the items of this container.
+         * @param items The items.
+         */
+        void setItems(const std::vector<std::shared_ptr<Item>>& items);
+
+        /**
          * Gets the number of pages in this container.
          * @return  The page count.
          */

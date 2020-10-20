@@ -179,3 +179,15 @@ void ItemContainer::sync()
     for (auto&& listener: listeners_)
         listener->sync(*this);
 }
+
+/**
+ * Sets the items of this container.
+ * @param items The items.
+ */
+void ItemContainer::setItems(const std::vector<std::shared_ptr<Item>>& items)
+{
+    for (auto i = 0; i < items_.size(); i++)
+    {
+        items_[i] = items.at(i);
+    }
+}

@@ -59,6 +59,16 @@ namespace shaiya::game
 
     private:
         /**
+         * Finalises the trade.
+         */
+        void finalise();
+
+        /**
+         * Notifies players about the state of the trade request (confirmation, accept)
+         */
+        void notifyState();
+
+        /**
          * A container of items our player has offered to trade.
          */
         std::unique_ptr<ItemContainer> container_;
@@ -83,5 +93,10 @@ namespace shaiya::game
          * participants have confirmed the trade. When both players accept, the trade is deemed completed.
          */
         bool accepted_{ false };
+
+        /**
+         * If the trade has been finalised.
+         */
+        bool finalised_{ false };
     };
 }
