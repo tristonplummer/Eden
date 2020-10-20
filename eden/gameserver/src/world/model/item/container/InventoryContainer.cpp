@@ -1,4 +1,5 @@
 #include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
 using namespace shaiya::game;
@@ -35,7 +36,8 @@ InventoryContainer::InventoryContainer(const InventoryContainer& inventory)
         auto destItem = inventory.at(slot);
         if (destItem)
         {
-            items_[slot] = destItem;
+            items_[slot] = std::make_shared<Item>(destItem->definition());
+            items_[slot]->setQuantity(destItem->quantity());
         }
     }
 }

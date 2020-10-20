@@ -91,6 +91,8 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
 
     quantity = std::min(item->quantity(), quantity);
     item     = inventory_->remove(slot, quantity);
+    item     = std::make_shared<Item>(item->definition());
+    item->setQuantity(quantity);
     container_->add(item, destSlot);
 
     // Inform our partner
