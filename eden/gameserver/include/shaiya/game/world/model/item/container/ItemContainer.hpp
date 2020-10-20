@@ -60,10 +60,11 @@ namespace shaiya::game
 
         /**
          * Removes an item from the container at a specific slot.
-         * @param slot  The slot.
-         * @return      The item instance.
+         * @param slot      The slot.
+         * @param quantity  The quantity to remove.
+         * @return          The item instance.
          */
-        virtual std::shared_ptr<Item> remove(size_t slot);
+        virtual std::shared_ptr<Item> remove(size_t slot, size_t quantity = 1);
 
         /**
          * Removes an item from the container at a specific slot.

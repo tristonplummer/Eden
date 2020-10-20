@@ -33,6 +33,27 @@ bool ItemContainer::add(std::shared_ptr<Item> item)
 {
     for (auto i = 0; i < items_.size(); i++)
     {
+        if (item->quantity() == 0)
+            return true;
+
+        auto& dest = items_.at(i);
+        if (dest && dest->itemId() == item->itemId())
+        {
+            auto& def      = item->definition();
+            auto freeSpace = def.maxStack - dest->quantity();
+            auto quantity  = std::min(freeSpace, item->quantity());
+
+            if (freeSpace > 0)
+            {
+                dest->setQuantity(dest->quantity() + quantity);
+                item->setQuantity(item->quantity() - quantity);
+
+                for (auto&& listener: listeners_)
+                    listener->itemAdded(*this, dest, i);
+            }
+            continue;
+        }
+
         if (items_.at(i) == nullptr)
             return add(std::move(item), i);
     }
@@ -81,16 +102,29 @@ std::shared_ptr<Item> ItemContainer::at(size_t slot) const
 
 /**
  * Removes an item from the container at a specific slot.
- * @param slot  The slot.
- * @return      The item instance.
+ * @param slot      The slot.
+ * @param quantity  The quantity to remove.
+ * @return          The item instance.
  */
-std::shared_ptr<Item> ItemContainer::remove(size_t slot)
+std::shared_ptr<Item> ItemContainer::remove(size_t slot, size_t quantity)
 {
+    if (slot >= items_.size())
+        return nullptr;
+
     auto item = items_.at(slot);
     if (!item)
         return nullptr;
 
-    items_.at(slot) = nullptr;
+    if (quantity >= item->quantity())
+    {
+        items_.at(slot) = nullptr;
+    }
+    else
+    {
+        item = std::make_shared<Item>(item->definition());
+        item->setQuantity(item->quantity() - quantity);
+    }
+
     for (auto&& listener: listeners_)
         listener->itemRemoved(*this, nullptr, slot);
     return item;
@@ -105,18 +139,7 @@ std::shared_ptr<Item> ItemContainer::remove(size_t slot)
  */
 std::shared_ptr<Item> ItemContainer::remove(size_t page, size_t slot, size_t count)
 {
-    auto idx = pagePositionToIndex(page, slot);
-    if (idx >= items_.size())
-        return nullptr;
-
-    auto item = at(idx);
-    if (count >= item->quantity())
-        return remove(idx);
-
-    item->setQuantity(item->quantity() - count);
-    for (auto&& listener: listeners_)
-        listener->itemRemoved(*this, item, idx);
-    return item;
+    return remove(pagePositionToIndex(page, slot), count);
 }
 
 /**

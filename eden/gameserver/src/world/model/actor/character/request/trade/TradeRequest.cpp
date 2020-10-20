@@ -90,7 +90,7 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
     unconfirm();  // We are modifying the current trade, so we should unconfirm for both participants.
 
     quantity = std::min(item->quantity(), quantity);
-    item     = inventory_->remove(slot);
+    item     = inventory_->remove(slot, quantity);
     container_->add(item, destSlot);
 
     // Inform our partner
@@ -100,7 +100,6 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
     offer.typeId   = item->typeId();
     offer.quantity = item->quantity();
     partner_->session().write(offer);
-
     return true;
 }
 
