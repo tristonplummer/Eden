@@ -196,7 +196,7 @@ void TradeRequest::finalise()
     if (!second->finalised_)
         second->finalise();
 
-    close();
+    Request::close();
 }
 
 /**
