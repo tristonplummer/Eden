@@ -58,6 +58,12 @@ namespace shaiya::game
         void setRace(shaiya::ShaiyaRace race);
 
         /**
+         * Sets the position of this entity.
+         * @param position  The position.
+         */
+        void setPosition(Position position) override;
+
+        /**
          * Gets the race of this character.
          * @return  The character's race.
          */

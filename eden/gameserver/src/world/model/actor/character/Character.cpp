@@ -6,6 +6,7 @@
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
 #include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
 #include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
@@ -183,4 +184,25 @@ void Character::setRace(ShaiyaRace race)
         return;
     race_ = race;
     flagUpdate(UpdateFlag::Appearance);
+}
+
+/**
+ * Sets the position of this entity.
+ * @param position  The position.
+ */
+void Character::setPosition(Position position)
+{
+    Actor::setPosition(position);
+
+    auto request = getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
+    if (request && request->type() == RequestType::Trade)
+    {
+        // If we're within interaction distance of our partner, then do nothing.
+        if (position.isWithinInteractionDistance(request->partner()->position()))
+            return;
+
+        // Cancel the trade, as we're now too far away.
+        auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
+        trade->close();
+    }
 }

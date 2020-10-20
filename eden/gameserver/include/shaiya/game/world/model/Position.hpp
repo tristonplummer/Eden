@@ -66,6 +66,13 @@ namespace shaiya::game
         [[nodiscard]] bool isWithinViewportDistance(const Position& other) const;
 
         /**
+         * Checks if a position is within interaction distance of another.
+         * @param other     The other position.
+         * @return          If the other position is in interaction distance of this position.
+         */
+        [[nodiscard]] bool isWithinInteractionDistance(const Position& other) const;
+
+        /**
          * Gets the map id.
          * @return  The map id.
          */

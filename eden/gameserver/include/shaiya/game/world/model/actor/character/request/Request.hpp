@@ -28,6 +28,15 @@ namespace shaiya::game
         virtual void close();
 
         /**
+         * Gets the partner of this request.
+         * @return  The partner.
+         */
+        [[nodiscard]] const std::shared_ptr<Character>& partner() const
+        {
+            return partner_;
+        }
+
+        /**
          * Gets the type of this request.
          * @return  The type.
          */

@@ -5,7 +5,12 @@ using namespace shaiya::game;
 /**
  * The viewport distance of a player.
  */
-constexpr auto VIEWPORT_DISTANCE = 60;
+constexpr auto VIEWPORT_DISTANCE = 90;
+
+/**
+ * The interaction distance of a player.
+ */
+constexpr auto INTERACTION_DISTANCE = 15;
 
 /**
  * Creates a position from a set of coordinates.
@@ -79,6 +84,16 @@ bool Position::isWithinDistance(const Position& other, float distance) const
 bool Position::isWithinViewportDistance(const Position& other) const
 {
     return isWithinDistance(other, VIEWPORT_DISTANCE);
+}
+
+/**
+ * Checks if a position is within interaction distance of another.
+ * @param other     The other position.
+ * @return          If the other position is in interaction distance of this position.
+ */
+bool Position::isWithinInteractionDistance(const Position& other) const
+{
+    return isWithinDistance(other, INTERACTION_DISTANCE);
 }
 
 /**
