@@ -118,15 +118,27 @@ std::shared_ptr<Item> ItemContainer::remove(size_t slot, size_t quantity)
     if (quantity >= item->quantity())
     {
         items_.at(slot) = nullptr;
+
+        for (auto&& listener: listeners_)
+            listener->itemRemoved(*this, nullptr, slot);
     }
     else
     {
-        item = std::make_shared<Item>(item->definition());
         item->setQuantity(item->quantity() - quantity);
+
+        if (item->quantity() >= 0)
+        {
+            for (auto&& listener: listeners_)
+                listener->itemRemoved(*this, item, slot);
+        }
+        else
+        {
+            items_.at(slot) = nullptr;
+            for (auto&& listener: listeners_)
+                listener->itemRemoved(*this, nullptr, slot);
+        }
     }
 
-    for (auto&& listener: listeners_)
-        listener->itemRemoved(*this, nullptr, slot);
     return item;
 }
 

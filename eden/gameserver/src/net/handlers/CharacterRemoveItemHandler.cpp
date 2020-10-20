@@ -38,6 +38,7 @@ void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& reques
 
     // The item that was removed
     item = inventory.remove(page, slot, request.quantity);
+    item = std::make_shared<Item>(item->definition());
     item->setQuantity(request.quantity);
 
     // Create a ground item instance and register it to the game world
