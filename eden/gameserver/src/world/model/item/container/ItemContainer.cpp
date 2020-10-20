@@ -31,6 +31,9 @@ ItemContainer::ItemContainer(size_t pages, size_t pageSize)
  */
 bool ItemContainer::add(std::shared_ptr<Item> item)
 {
+    if (!item)
+        return false;
+
     auto emptySlot = -1;
     for (auto i = 0; i < items_.size(); i++)
     {
