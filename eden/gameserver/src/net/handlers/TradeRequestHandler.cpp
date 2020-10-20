@@ -85,7 +85,7 @@ void handleTradeFinalise(Session& session, const CharacterTradeFinaliseRequest& 
     if (req.type == TradeFinaliseType::Accepted)
         trade->accept();
     else if (req.type == TradeFinaliseType::Cancel)
-        trade->cancel();
+        trade->close();
 }
 
 /**

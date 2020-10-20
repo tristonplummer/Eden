@@ -236,8 +236,8 @@ void TradeRequest::notifyState()
 /**
  * Cancels the trade.
  */
-void TradeRequest::cancel()
+void TradeRequest::close()
 {
     partner_->session().write(CharacterTradeCompleted{});
-    close();
+    Request::close();
 }

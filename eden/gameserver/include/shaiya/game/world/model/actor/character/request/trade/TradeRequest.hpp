@@ -51,7 +51,7 @@ namespace shaiya::game
         /**
          * Cancels the trade.
          */
-        void cancel();
+        void close() override;
 
         /**
          * Confirms the current trade window.
