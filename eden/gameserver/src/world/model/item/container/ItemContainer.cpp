@@ -31,13 +31,21 @@ ItemContainer::ItemContainer(size_t pages, size_t pageSize)
  */
 bool ItemContainer::add(std::shared_ptr<Item> item)
 {
+    auto emptySlot = -1;
     for (auto i = 0; i < items_.size(); i++)
     {
         if (item->quantity() == 0)
             return true;
 
         auto& dest = items_.at(i);
-        if (dest && dest->itemId() == item->itemId())
+        if (!dest)
+        {
+            if (emptySlot == -1)
+                emptySlot = i;
+            continue;
+        }
+
+        if (dest->itemId() == item->itemId())
         {
             auto& def      = item->definition();
             auto freeSpace = def.maxStack - dest->quantity();
@@ -53,10 +61,10 @@ bool ItemContainer::add(std::shared_ptr<Item> item)
             }
             continue;
         }
-
-        if (items_.at(i) == nullptr)
-            return add(std::move(item), i);
     }
+
+    if (emptySlot != -1)
+        return add(std::move(item), emptySlot);
     return false;
 }
 
