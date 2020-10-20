@@ -19,9 +19,9 @@ namespace shaiya::net
     constexpr auto TradeInitiateOpcode = 0x0A03;
 
     /**
-     * The opcode for cancelling a trade session.
+     * The opcode for completing a trade session.
      */
-    constexpr auto TradeCancelledOpcode = 0x0A04;
+    constexpr auto TradeCompletedOpcode = 0x0A04;
 
     /**
      * The opcode for finalising a trade.
@@ -133,17 +133,17 @@ namespace shaiya::net
     } PACKED;
 
     /**
-     * Represents a notification that an open trade session was cancelled.
+     * Represents a notification that an open trade session was completed.
      */
-    struct CharacterTradeCancelled
+    struct CharacterTradeCompleted
     {
         /**
-         * The opcode of the trade cancellation.
+         * The opcode of the trade completion.
          */
-        uint16_t opcode{ TradeCancelledOpcode };
+        uint16_t opcode{ TradeCompletedOpcode };
 
         /**
-         * The player who closed the trade.
+         * The completion type.
          */
         TradeFinaliseType type{ TradeFinaliseType::Cancel };
     } PACKED;

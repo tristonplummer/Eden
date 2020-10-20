@@ -189,7 +189,7 @@ void TradeRequest::finalise()
     inv.setGold(gold);
 
     // Inform the player that the trade has ended
-    player_->session().write(CharacterTradeCancelled{ .type = TradeFinaliseType::Accepted });
+    player_->session().write(CharacterTradeCompleted{ .type = TradeFinaliseType::Accepted });
 
     // Finalise the partner's trade
     if (!second->finalised_)
@@ -238,6 +238,6 @@ void TradeRequest::notifyState()
  */
 void TradeRequest::cancel()
 {
-    partner_->session().write(CharacterTradeCancelled{});
+    partner_->session().write(CharacterTradeCompleted{});
     close();
 }
