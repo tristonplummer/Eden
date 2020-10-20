@@ -35,10 +35,7 @@ InventoryContainer::InventoryContainer(const InventoryContainer& inventory)
     {
         auto destItem = inventory.at(slot);
         if (destItem)
-        {
-            items_[slot] = std::make_shared<Item>(destItem->definition());
-            items_[slot]->setQuantity(destItem->quantity());
-        }
+            items_[slot] = std::make_shared<Item>(*destItem);
     }
 }
 
