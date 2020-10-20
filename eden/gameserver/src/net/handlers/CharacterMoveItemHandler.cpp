@@ -67,7 +67,7 @@ void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
     {
         srcUpdate.type       = sourceItem->type();
         srcUpdate.typeId     = sourceItem->typeId();
-        srcUpdate.count      = sourceItem->count();
+        srcUpdate.quantity   = sourceItem->quantity();
         srcUpdate.durability = sourceItem->durability();
     }
 
@@ -79,7 +79,7 @@ void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
     {
         destUpdate.type       = destItem->type();
         destUpdate.typeId     = destItem->typeId();
-        destUpdate.count      = destItem->count();
+        destUpdate.quantity   = destItem->quantity();
         destUpdate.durability = destItem->durability();
     }
     game.write(update);

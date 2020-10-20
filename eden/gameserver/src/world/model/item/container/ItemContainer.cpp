@@ -110,10 +110,10 @@ std::shared_ptr<Item> ItemContainer::remove(size_t page, size_t slot, size_t cou
         return nullptr;
 
     auto item = at(idx);
-    if (count >= item->count())
+    if (count >= item->quantity())
         return remove(idx);
 
-    item->setCount(item->count() - count);
+    item->setQuantity(item->quantity() - count);
     for (auto&& listener: listeners_)
         listener->itemRemoved(*this, item, idx);
     return item;

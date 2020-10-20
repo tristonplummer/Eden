@@ -152,7 +152,7 @@ bool DatabaseCharacterSerializer::loadInventory(Character& character)
 
             // The item instance
             auto item = std::make_shared<Item>(*def);
-            item->setCount(count);
+            item->setQuantity(count);
 
             // Add the item
             inventory.add(std::move(item), slot);

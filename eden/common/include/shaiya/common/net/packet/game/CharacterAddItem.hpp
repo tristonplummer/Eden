@@ -41,7 +41,7 @@ namespace shaiya::game
         /**
          * The number of items in this stack.
          */
-        uint8_t count{ 0 };
+        uint8_t quantity{ 0 };
 
         /**
          * The endurance of the item.

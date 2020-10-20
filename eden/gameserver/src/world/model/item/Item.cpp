@@ -11,10 +11,10 @@ Item::Item(const shaiya::client::ItemDefinition& definition): definition_(defini
 }
 
 /**
- * Set the item count.
- * @param count The number in this stack.
+ * Set the item quantity.
+ * @param quantity The number in this stack.
  */
-void Item::setCount(size_t count)
+void Item::setQuantity(size_t quantity)
 {
-    count_ = count;
+    quantity_ = quantity;
 }

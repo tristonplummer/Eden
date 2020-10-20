@@ -37,8 +37,8 @@ void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& reques
         return;
 
     // The item that was removed
-    item = inventory.remove(page, slot, request.count);
-    item->setCount(request.count);
+    item = inventory.remove(page, slot, request.quantity);
+    item->setQuantity(request.quantity);
 
     // Create a ground item instance and register it to the game world
     auto groundItem = std::make_shared<GroundItem>(std::move(item), world);

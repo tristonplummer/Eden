@@ -62,7 +62,7 @@ void EquipmentEventListener::sync(const ItemContainer& container)
 {
     auto& items = container.items();  // The items in the container
     CharacterItemUpdate update;       // Prepare the update
-    update.count = items.size();
+    update.quantity = items.size();
 
     // Iterate over the items
     for (auto i = 0; i < items.size(); i++)
@@ -76,9 +76,9 @@ void EquipmentEventListener::sync(const ItemContainer& container)
         // If the item is valid, set the item details
         if (item)
         {
-            unit.type   = item->type();
-            unit.typeId = item->typeId();
-            unit.count  = item->count();
+            unit.type     = item->type();
+            unit.typeId   = item->typeId();
+            unit.quantity = item->quantity();
         }
 
         update.items[i] = unit;

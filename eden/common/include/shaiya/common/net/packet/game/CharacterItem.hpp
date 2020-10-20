@@ -56,7 +56,7 @@ namespace shaiya::net
         /**
          * The number of items in this stack.
          */
-        uint8_t count{ 0 };
+        uint8_t quantity{ 0 };
 
         /**
          * An ASCII representation of the orange stats.
@@ -92,7 +92,7 @@ namespace shaiya::net
         /**
          * The number of items in this update.
          */
-        uint8_t count{ 0 };
+        uint8_t quantity{ 0 };
 
         /**
          * The item units that are being updated.

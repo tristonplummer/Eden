@@ -31,7 +31,7 @@ namespace shaiya::net
         /**
          * The amount of the item to drop.
          */
-        uint8_t count{ 0 };
+        uint8_t quantity{ 0 };
     } PACKED;
 
     /**
@@ -67,6 +67,6 @@ namespace shaiya::net
         /**
          * The remaining amount of the item in this slot.
          */
-        uint8_t count{ 0 };
+        uint8_t quantity{ 0 };
     } PACKED;
 }
