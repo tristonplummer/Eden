@@ -178,7 +178,16 @@ void TradeRequest::finalise()
     for (auto i = 0; i < copyItems.size(); i++)
     {
         if (!copyItems.at(i))
+        {
             inv.remove(i);
+        }
+        else
+        {
+            auto item      = inv.at(i);
+            auto& copyItem = copyItems.at(i);
+            if (item && item->itemId() == copyItem->itemId())
+                inv.remove(i, item->quantity() - copyItem->quantity());
+        }
     }
 
     // Add the items from the partner's trade container
