@@ -11,6 +11,10 @@ Eden is designed to be a high performance Shaiya emulator, with a strong focus o
 #### I found a bug, where can I report it?
 - You can report bugs as issues on Github.
 
+## Media
+![Character screen](etc/charscreen.png)
+![Multiplayer](etc/multiplayer.jpg)
+
 ## Acknowledgments
 * #### Steimoni
     - For helping me out with my first prototype by providing me with a starting point in removing the encryption algorithm.
