@@ -13,7 +13,7 @@ Eden is designed to be a high performance Shaiya emulator, with a strong focus o
 
 ## Media
 ![Character screen](etc/charscreen.png)
-![Multiplayer](etc/multiplayer.jpg)
+![Multiplayer](etc/multiplayer.png)
 
 ## Acknowledgments
 * #### Steimoni
