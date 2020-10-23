@@ -292,6 +292,17 @@ void ItemContainer::addListener(std::shared_ptr<ContainerEventListener> listener
 }
 
 /**
+ * Removes a listener from this container.
+ * @param listener  The listener to remove.
+ */
+void ItemContainer::removeListener(const std::shared_ptr<ContainerEventListener>& listener)
+{
+    auto pos = std::find(listeners_.begin(), listeners_.end(), listener);
+    if (pos != listeners_.end())
+        listeners_.erase(pos);
+}
+
+/**
  * Synchronises this container for all listeners.
  */
 void ItemContainer::sync()
