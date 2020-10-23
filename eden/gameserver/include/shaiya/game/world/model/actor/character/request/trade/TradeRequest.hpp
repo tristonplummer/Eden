@@ -2,6 +2,8 @@
 #include <shaiya/common/net/packet/game/CharacterTradeRequest.hpp>
 #include <shaiya/game/world/model/actor/character/request/Request.hpp>
 
+#include <vector>
+
 namespace shaiya::game
 {
     /**
@@ -44,6 +46,12 @@ namespace shaiya::game
         void removeItem(size_t slot);
 
         /**
+         * Removes an item from the trade window.
+         * @param item  The item.
+         */
+        void itemMoved(size_t slot);
+
+        /**
          * Accepts the trade.
          */
         void accept();
@@ -80,11 +88,6 @@ namespace shaiya::game
         std::unique_ptr<ItemContainer> container_;
 
         /**
-         * A copy of the player's inventory.
-         */
-        std::unique_ptr<InventoryContainer> inventory_;
-
-        /**
          * The amount of gold our player has offered to trade.
          */
         size_t gold_{ 0 };
@@ -104,5 +107,41 @@ namespace shaiya::game
          * If the trade has been finalised.
          */
         bool finalised_{ false };
+
+        /**
+         * Represents an item that has been offered to trade.
+         */
+        struct OfferedItem
+        {
+            /**
+             * The slot in the inventory that this item is located.
+             */
+            size_t sourceSlot{ 0 };
+
+            /**
+             * The slot in the trade window.
+             */
+            size_t destSlot{ 0 };
+
+            /**
+             * The number of items offered for trade.
+             */
+            size_t quantity{ 0 };
+
+            /**
+             * The item instance.
+             */
+            std::shared_ptr<Item> item;
+        };
+
+        /**
+         * The vector of items being offered.
+         */
+        std::vector<std::shared_ptr<OfferedItem>> offeredItems_;
+
+        /**
+         * The inventory event listener for detecting when an item is moved around.
+         */
+        std::shared_ptr<ContainerEventListener> inventoryListener_;
     };
 }

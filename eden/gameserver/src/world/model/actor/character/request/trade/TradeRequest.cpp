@@ -1,3 +1,4 @@
+#include <shaiya/common/net/packet/game/CharacterRemoveItem.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeConfirm.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeGold.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
@@ -37,14 +38,15 @@ TradeRequest::TradeRequest(std::shared_ptr<Character> player, std::shared_ptr<Ch
 {
     type_ = RequestType::Trade;
 
-    // Copy the player's inventory. This is so that we don't permanently make any changes to the player's current
-    // inventory until the trade has been finalised, otherwise if an issue occurred mid-trade then we'd potentially
-    // lose items.
-    inventory_ = std::make_unique<InventoryContainer>(player_->inventory());
-
     // Initialise the trade container
     container_ = std::make_unique<ItemContainer>(TradeWindowCapacity);
-    container_->addListener(std::make_shared<TradeEventListener>(player_, partner_));
+
+    // Set up the inventory listener
+    inventoryListener_ = std::make_shared<TradeEventListener>(player_, *this);
+    player_->inventory().addListener(inventoryListener_);
+
+    // Initialise the vector of items that are pending trade
+    offeredItems_.resize(TradeWindowCapacity);
 }
 
 /**
@@ -63,7 +65,7 @@ void TradeRequest::open()
 void TradeRequest::offerGold(size_t offeredGold)
 {
     unconfirm();  // We are modifying the current trade, so we should unconfirm for both participants.
-    auto gold = std::min(inventory_->gold(), offeredGold);
+    auto gold = std::min(player_->inventory().gold(), offeredGold);
 
     gold_ = gold;
 
@@ -83,19 +85,33 @@ void TradeRequest::offerGold(size_t offeredGold)
  */
 bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
 {
-    if (container_->at(destSlot) != nullptr)
+    if (offeredItems_.at(destSlot) != nullptr)
         return false;
 
-    auto item = inventory_->at(slot);
+    auto& inv = player_->inventory();
+    auto item = inv.at(slot);
     if (!item)
         return false;
     unconfirm();  // We are modifying the current trade, so we should unconfirm for both participants.
 
-    bool success = false;
-    quantity     = std::min(item->quantity(), quantity);
+    quantity = std::min(item->quantity(), quantity);
 
-    inventory_->transferTo(*container_, slot, quantity, destSlot, success);
-    return success;
+    // The item to be traded
+    auto traded                = std::make_shared<OfferedItem>();
+    traded->item               = item;
+    traded->sourceSlot         = slot;
+    traded->destSlot           = destSlot;
+    traded->quantity           = quantity;
+    offeredItems_.at(destSlot) = std::move(traded);
+
+    // Inform our partner
+    CharacterTradePartnerOfferItem offer;
+    offer.slot     = destSlot;
+    offer.type     = item->type();
+    offer.typeId   = item->typeId();
+    offer.quantity = quantity;
+    partner_->session().write(offer);
+    return true;
 }
 
 /**
@@ -104,11 +120,29 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
  */
 void TradeRequest::removeItem(size_t slot)
 {
-    if (slot >= container_->pageSize())
+    if (slot >= offeredItems_.size())
         return;
 
-    auto item = container_->remove(slot);
-    inventory_->add(std::move(item));
+    offeredItems_.at(slot) = nullptr;
+
+    // Inform our partner
+    partner_->session().write(CharacterTradePartnerOfferItem{ .slot = static_cast<uint8_t>(slot) });
+}
+
+/**
+ * Removes an item from the trade window.
+ * @param item  The item.
+ */
+void TradeRequest::itemMoved(size_t slot)
+{
+    for (auto&& traded: offeredItems_)
+    {
+        if (traded && traded->sourceSlot == slot)
+        {
+            player_->session().write(CharacterTradeRemoveItem{ .slot = static_cast<uint8_t>(traded->destSlot) });
+            removeItem(traded->destSlot);
+        }
+    }
 }
 
 /**
@@ -157,27 +191,37 @@ void TradeRequest::accept()
  */
 void TradeRequest::finalise()
 {
+    // The player's inventory
+    auto& inv = player_->inventory();
+
+    // Mark this trade as finalised
     auto second = tradeRequest(partner_);
     finalised_  = true;
 
-    // Copy the temporary inventory back into the player's inventory
-    auto& inv       = player_->inventory();
-    auto& copyItems = inventory_->items();
+    // Remove the inventory listener
+    inv.removeListener(inventoryListener_);
 
-    // Remove any items that no longer exist in the copy
-    for (auto i = 0; i < copyItems.size(); i++)
+    // Loop over the items to be traded
+    for (auto&& traded: offeredItems_)
     {
-        if (!copyItems.at(i))
-        {
-            inv.remove(i);
-        }
-        else
-        {
-            auto item      = inv.at(i);
-            auto& copyItem = copyItems.at(i);
-            if (item && item->itemId() == copyItem->itemId())
-                inv.remove(i, item->quantity() - copyItem->quantity());
-        }
+        if (!traded)
+            continue;
+        bool success;
+        inv.transferTo(*container_, traded->sourceSlot, traded->quantity, traded->destSlot, success);
+
+        // The traded item
+        auto item = inv.at(traded->sourceSlot);
+
+        // Explicitly send the removed item packet
+        CharacterRemoveItem update;
+
+        // Calculate the page and slot
+        update.page     = (traded->sourceSlot / inv.pageSize()) + 1;
+        update.slot     = traded->sourceSlot % inv.pageSize();
+        update.type     = item ? item->type() : 0;
+        update.typeId   = item ? item->typeId() : 0;
+        update.quantity = item ? item->quantity() : 0;
+        player_->session().write(update);
     }
 
     // Add the items from the partner's trade container
@@ -238,6 +282,7 @@ void TradeRequest::notifyState()
  */
 void TradeRequest::close()
 {
-    partner_->session().write(CharacterTradeCompleted{});
+    if (!finalised_)
+        partner_->session().write(CharacterTradeCompleted{});
     Request::close();
 }
