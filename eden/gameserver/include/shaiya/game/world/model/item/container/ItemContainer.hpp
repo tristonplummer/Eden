@@ -61,10 +61,17 @@ namespace shaiya::game
         /**
          * Removes an item from the container at a specific slot.
          * @param slot      The slot.
+         * @return          The item instance.
+         */
+        virtual std::shared_ptr<Item> remove(size_t slot);
+
+        /**
+         * Removes an item from the container at a specific slot.
+         * @param slot      The slot.
          * @param quantity  The quantity to remove.
          * @return          The item instance.
          */
-        virtual std::shared_ptr<Item> remove(size_t slot, size_t quantity = 1);
+        virtual std::shared_ptr<Item> remove(size_t slot, size_t quantity);
 
         /**
          * Removes an item from the container at a specific slot.
@@ -78,14 +85,23 @@ namespace shaiya::game
         /**
          * Transfers an item from this container to another.
          * @param dest          The destination container.
-         * @param sourcePage    The source page.
          * @param sourceSlot    The source slot.
-         * @param destPage      The destination page.
          * @param destSlot      The destination slot.
          * @param success       If the transfer was successful.
          * @return              The item at the source position, and the item at the destination position.
          */
-        ItemPair transferTo(ItemContainer& dest, size_t sourcePage, size_t sourceSlot, size_t destPage, size_t destSlot,
+        ItemPair transferTo(ItemContainer& dest, size_t sourceSlot, size_t destSlot, bool& success);
+
+        /**
+         * Transfers an item from this container to another.
+         * @param dest          The destination container.
+         * @param sourceSlot    The source slot.
+         * @param sourceQty     The quantity of the source item to transfer.
+         * @param destSlot      The destination slot.
+         * @param success       If the transfer was successful.
+         * @return              The item at the source position, and the item at the destination position.
+         */
+        ItemPair transferTo(ItemContainer& dest, size_t sourceSlot, size_t sourceQty, size_t destQty,
                             bool& success);
 
         /**

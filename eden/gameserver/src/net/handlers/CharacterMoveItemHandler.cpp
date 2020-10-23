@@ -52,7 +52,8 @@ void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
 
     // Transfer the items
     bool success                = false;
-    auto [destItem, sourceItem] = source.transferTo(dest, sourcePage, sourceSlot, destPage, destSlot, success);
+    auto [destItem, sourceItem] = source.transferTo(dest, source.pagePositionToIndex(sourcePage, sourceSlot),
+                                                    dest.pagePositionToIndex(destPage, destSlot), success);
 
     // If the items weren't moved, do nothing
     if (!success)

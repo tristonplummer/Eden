@@ -56,6 +56,18 @@ void TradeEventListener::itemRemoved(const ItemContainer& container, const std::
 void TradeEventListener::itemTransferred(const ItemContainer& source, const ItemContainer& dest, size_t sourceSlot,
                                          size_t destSlot)
 {
+    // The item in the trade window
+    auto item = dest.at(destSlot);
+    if (!item)
+        return itemRemoved(dest, item, destSlot);
+
+    // Inform our partner
+    CharacterTradePartnerOfferItem offer;
+    offer.slot     = destSlot;
+    offer.type     = item->type();
+    offer.typeId   = item->typeId();
+    offer.quantity = item->quantity();
+    partner_->session().write(offer);
 }
 
 /**

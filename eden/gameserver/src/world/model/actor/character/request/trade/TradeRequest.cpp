@@ -91,12 +91,11 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
         return false;
     unconfirm();  // We are modifying the current trade, so we should unconfirm for both participants.
 
-    quantity = std::min(item->quantity(), quantity);
-    item     = inventory_->remove(slot, quantity);
-    item     = std::make_shared<Item>(*item);
-    item->setQuantity(quantity);
-    container_->add(item, destSlot);
-    return true;
+    bool success = false;
+    quantity     = std::min(item->quantity(), quantity);
+
+    inventory_->transferTo(*container_, slot, quantity, destSlot, success);
+    return success;
 }
 
 /**
