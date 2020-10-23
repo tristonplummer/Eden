@@ -101,14 +101,19 @@ namespace shaiya::game
          * @param success       If the transfer was successful.
          * @return              The item at the source position, and the item at the destination position.
          */
-        ItemPair transferTo(ItemContainer& dest, size_t sourceSlot, size_t sourceQty, size_t destQty,
-                            bool& success);
+        ItemPair transferTo(ItemContainer& dest, size_t sourceSlot, size_t sourceQty, size_t destSlot, bool& success);
 
         /**
          * Adds a listener to this container.
          * @param listener  The listener.
          */
         void addListener(std::shared_ptr<ContainerEventListener> listener);
+
+        /**
+         * Removes a listener from this container.
+         * @param listener  The listener to remove.
+         */
+        void removeListener(const std::shared_ptr<ContainerEventListener>& listener);
 
         /**
          * Synchronises this container for all listeners.
