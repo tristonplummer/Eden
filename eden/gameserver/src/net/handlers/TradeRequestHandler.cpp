@@ -3,9 +3,9 @@
 #include <shaiya/common/net/packet/game/CharacterTradeGold.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/player/Player.hpp>
-#include <shaiya/game/world/model/actor/player/request/trade/TradeRequest.hpp>
-#include <shaiya/game/world/model/map/Map.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
+#include <shaiya/game/model/actor/player/request/trade/TradeRequest.hpp>
+#include <shaiya/game/model/map/Map.hpp>
 
 using namespace shaiya::net;
 using namespace shaiya::game;

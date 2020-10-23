@@ -3,9 +3,9 @@
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
-#include <shaiya/game/world/model/actor/player/Player.hpp>
-#include <shaiya/game/world/model/item/GroundItem.hpp>
-#include <shaiya/game/world/model/map/Map.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
+#include <shaiya/game/model/item/GroundItem.hpp>
+#include <shaiya/game/model/map/Map.hpp>
 
 using namespace shaiya::net;
 using namespace shaiya::game;

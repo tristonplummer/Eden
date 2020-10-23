@@ -2,7 +2,7 @@
 #include <shaiya/common/net/packet/game/CharacterChatMessage.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/player/Player.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
 
 using namespace shaiya::net;
 using namespace shaiya::game;

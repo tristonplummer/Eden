@@ -3,11 +3,11 @@
 #include <shaiya/game/io/impl/DatabasePlayerSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/npc/Npc.hpp>
-#include <shaiya/game/world/model/actor/player/Player.hpp>
-#include <shaiya/game/world/model/item/GroundItem.hpp>
-#include <shaiya/game/world/model/map/Map.hpp>
-#include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
+#include <shaiya/game/model/actor/npc/Npc.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
+#include <shaiya/game/model/item/GroundItem.hpp>
+#include <shaiya/game/model/map/Map.hpp>
+#include <shaiya/game/sync/ParallelClientSynchronizer.hpp>
 
 #include <chrono>
 

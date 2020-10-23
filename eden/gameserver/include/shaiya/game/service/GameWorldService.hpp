@@ -2,9 +2,9 @@
 #include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/util/EntityContainer.hpp>
-#include <shaiya/game/world/model/commands/CommandManager.hpp>
-#include <shaiya/game/world/model/map/MapRepository.hpp>
-#include <shaiya/game/world/scheduling/Scheduler.hpp>
+#include <shaiya/game/model/commands/CommandManager.hpp>
+#include <shaiya/game/model/map/MapRepository.hpp>
+#include <shaiya/game/scheduling/Scheduler.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 

@@ -1,8 +1,8 @@
 #include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/impl/DatabasePlayerSerializer.hpp>
-#include <shaiya/game/world/model/actor/player/Player.hpp>
-#include <shaiya/game/world/model/item/Item.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
+#include <shaiya/game/model/item/Item.hpp>
 
 using namespace shaiya::database;
 using namespace shaiya::game;

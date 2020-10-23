@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/game/world/model/Entity.hpp>
+#include <shaiya/game/model/Entity.hpp>
 
 #include <vector>
 

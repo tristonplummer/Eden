@@ -1,8 +1,8 @@
 #include <shaiya/common/net/packet/PacketRegistry.hpp>
 #include <shaiya/common/net/packet/game/CharacterMoveItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/player/Player.hpp>
-#include <shaiya/game/world/model/item/Item.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
+#include <shaiya/game/model/item/Item.hpp>
 
 using namespace shaiya::net;
 using namespace shaiya::game;
