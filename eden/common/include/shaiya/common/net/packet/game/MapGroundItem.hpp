@@ -47,7 +47,7 @@ namespace shaiya::net
         /**
          * The number of the item in this ground item. We'll always set this to 0, as the client doesn't need to know.
          */
-        uint8_t count{ 0 };
+        uint8_t quantity{ 0 };
 
         /**
          * The x coordinate of the item.

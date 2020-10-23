@@ -1,4 +1,5 @@
 #include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
 using namespace shaiya::game;
@@ -19,6 +20,23 @@ constexpr auto InventoryPageSize = 24;
  */
 InventoryContainer::InventoryContainer(): ItemContainer(InventoryPageCount, InventoryPageSize)
 {
+}
+
+/**
+ * Initialises this inventory container.
+ * @param inventory The inventory to copy from.
+ */
+InventoryContainer::InventoryContainer(const InventoryContainer& inventory)
+    : ItemContainer(InventoryPageCount, InventoryPageSize)
+{
+    gold_ = inventory.gold();
+
+    for (auto slot = 0; slot < items_.size(); slot++)
+    {
+        auto destItem = inventory.at(slot);
+        if (destItem)
+            items_[slot] = std::make_shared<Item>(*destItem);
+    }
 }
 
 /**

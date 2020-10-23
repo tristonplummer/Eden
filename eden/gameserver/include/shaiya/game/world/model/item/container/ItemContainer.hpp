@@ -60,10 +60,18 @@ namespace shaiya::game
 
         /**
          * Removes an item from the container at a specific slot.
-         * @param slot  The slot.
-         * @return      The item instance.
+         * @param slot      The slot.
+         * @return          The item instance.
          */
         virtual std::shared_ptr<Item> remove(size_t slot);
+
+        /**
+         * Removes an item from the container at a specific slot.
+         * @param slot      The slot.
+         * @param quantity  The quantity to remove.
+         * @return          The item instance.
+         */
+        virtual std::shared_ptr<Item> remove(size_t slot, size_t quantity);
 
         /**
          * Removes an item from the container at a specific slot.
@@ -77,14 +85,23 @@ namespace shaiya::game
         /**
          * Transfers an item from this container to another.
          * @param dest          The destination container.
-         * @param sourcePage    The source page.
          * @param sourceSlot    The source slot.
-         * @param destPage      The destination page.
          * @param destSlot      The destination slot.
          * @param success       If the transfer was successful.
          * @return              The item at the source position, and the item at the destination position.
          */
-        ItemPair transferTo(ItemContainer& dest, size_t sourcePage, size_t sourceSlot, size_t destPage, size_t destSlot,
+        ItemPair transferTo(ItemContainer& dest, size_t sourceSlot, size_t destSlot, bool& success);
+
+        /**
+         * Transfers an item from this container to another.
+         * @param dest          The destination container.
+         * @param sourceSlot    The source slot.
+         * @param sourceQty     The quantity of the source item to transfer.
+         * @param destSlot      The destination slot.
+         * @param success       If the transfer was successful.
+         * @return              The item at the source position, and the item at the destination position.
+         */
+        ItemPair transferTo(ItemContainer& dest, size_t sourceSlot, size_t sourceQty, size_t destQty,
                             bool& success);
 
         /**
@@ -97,6 +114,12 @@ namespace shaiya::game
          * Synchronises this container for all listeners.
          */
         virtual void sync();
+
+        /**
+         * Sets the items of this container.
+         * @param items The items.
+         */
+        void setItems(const std::vector<std::shared_ptr<Item>>& items);
 
         /**
          * Gets the number of pages in this container.
@@ -117,6 +140,17 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the position in a page as a local index.
+         * @param page  The page.
+         * @param slot  The slot.
+         * @return      The index.
+         */
+        [[nodiscard]] size_t pagePositionToIndex(size_t page, size_t slot) const
+        {
+            return (page * pageSize_) + slot;
+        }
+
+        /**
          * Get the vector of items in this container.
          * @return  The vector of items.
          */
@@ -125,7 +159,7 @@ namespace shaiya::game
             return items_;
         }
 
-    private:
+    protected:
         /**
          * The vector of items held by this container.
          */
@@ -136,6 +170,7 @@ namespace shaiya::game
          */
         std::vector<std::shared_ptr<ContainerEventListener>> listeners_;
 
+    private:
         /**
          * The number of virtual "pages" in this container.
          */
@@ -145,16 +180,5 @@ namespace shaiya::game
          * The size of each page.
          */
         size_t pageSize_{ 0 };
-
-        /**
-         * Gets the position in a page as a local index.
-         * @param page  The page.
-         * @param slot  The slot.
-         * @return      The index.
-         */
-        [[nodiscard]] size_t pagePositionToIndex(size_t page, size_t slot) const
-        {
-            return (page * pageSize_) + slot;
-        }
     };
 }

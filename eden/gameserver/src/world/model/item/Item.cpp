@@ -11,10 +11,19 @@ Item::Item(const shaiya::client::ItemDefinition& definition): definition_(defini
 }
 
 /**
- * Set the item count.
- * @param count The number in this stack.
+ * Copy constructor.
+ * @param item  The item to copy from.
  */
-void Item::setCount(size_t count)
+Item::Item(const Item& item): definition_(item.definition())
 {
-    count_ = count;
+    quantity_ = item.quantity();
+}
+
+/**
+ * Set the item quantity.
+ * @param quantity The number in this stack.
+ */
+void Item::setQuantity(size_t quantity)
+{
+    quantity_ = quantity;
 }

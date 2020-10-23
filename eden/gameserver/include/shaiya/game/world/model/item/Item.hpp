@@ -19,18 +19,24 @@ namespace shaiya::game
         explicit Item(const shaiya::client::ItemDefinition& definition);
 
         /**
-         * Set the item count.
-         * @param count The number in this stack.
+         * Copy constructor.
+         * @param item  The item to copy from.
          */
-        void setCount(size_t count);
+        Item(const Item& item);
 
         /**
-         * Gets the item count.
+         * Set the item quantity.
+         * @param quantity The number in this stack.
+         */
+        void setQuantity(size_t quantity);
+
+        /**
+         * Gets the item quantity.
          * @return  The number of items in this stack.
          */
-        [[nodiscard]] uint8_t count() const
+        [[nodiscard]] size_t quantity() const
         {
-            return count_;
+            return quantity_;
         }
 
         /**
@@ -85,9 +91,9 @@ namespace shaiya::game
         const shaiya::client::ItemDefinition& definition_;
 
         /**
-         * The item count.
+         * The item quantity.
          */
-        uint32_t count_{ 1 };
+        uint32_t quantity_{ 1 };
 
         /**
          * The item durability

@@ -3,13 +3,17 @@ Eden is designed to be a high performance Shaiya emulator, with a strong focus o
 
 ## Troubleshooting
 - *Where can I get a client?*
-    - Eden is designed to run on the official Ep5.4 client, which may be downloaded from [Elitepvpers](https://www.elitepvpers.com/forum/shaiya-pserver-guides-releases/2257246-release-official-episode-5-4-client.html).
+    - Eden is designed to run on an Ep8 client, which may be downloaded from [Elitepvpers](https://www.elitepvpers.com/forum/shaiya-pserver-development/4528336-new-episode-8-unpack.html).
 
 ## FAQ
 #### I would like a feature added to the server
 - If you would like a new feature added, you can either create a new feature request issue and describe the feature in depth, or you can develop the feature yourself and submit the updated code as a pull request.
 #### I found a bug, where can I report it?
 - You can report bugs as issues on Github.
+
+## Media
+![Character screen](etc/charscreen.png)
+![Multiplayer](etc/multiplayer.png)
 
 ## Acknowledgments
 * #### Steimoni

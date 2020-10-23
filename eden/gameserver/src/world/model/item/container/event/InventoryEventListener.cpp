@@ -29,11 +29,11 @@ void InventoryEventListener::itemAdded(const ItemContainer& container, const std
     CharacterAddItem update;
 
     // Calculate the page and slot
-    update.page   = (slot / container.pageSize()) + 1;
-    update.slot   = slot % container.pageSize();
-    update.type   = item ? item->type() : 0;
-    update.typeId = item ? item->typeId() : 0;
-    update.count  = item ? item->count() : 0;
+    update.page     = (slot / container.pageSize()) + 1;
+    update.slot     = slot % container.pageSize();
+    update.type     = item ? item->type() : 0;
+    update.typeId   = item ? item->typeId() : 0;
+    update.quantity = item ? item->quantity() : 0;
     character_.session().write(update);
 }
 
@@ -49,11 +49,11 @@ void InventoryEventListener::itemRemoved(const ItemContainer& container, const s
     CharacterRemoveItem update;
 
     // Calculate the page and slot
-    update.page   = (slot / container.pageSize()) + 1;
-    update.slot   = slot % container.pageSize();
-    update.type   = item ? item->type() : 0;
-    update.typeId = item ? item->typeId() : 0;
-    update.count  = item ? item->count() : 0;
+    update.page     = (slot / container.pageSize()) + 1;
+    update.slot     = slot % container.pageSize();
+    update.type     = item ? item->type() : 0;
+    update.typeId   = item ? item->typeId() : 0;
+    update.quantity = item ? item->quantity() : 0;
     character_.session().write(update);
 }
 
@@ -70,7 +70,7 @@ void InventoryEventListener::sync(const ItemContainer& container)
     // Loop over the items in the container - we want to chunk the update into sets of 50.
     for (auto i = 0; i < items.size(); i++)
     {
-        if (update.count == CharacterItemUpdateCapacity)  // Write this chunk
+        if (update.quantity == CharacterItemUpdateCapacity)  // Write this chunk
         {
             session.write(update);
             update = {};
@@ -82,8 +82,8 @@ void InventoryEventListener::sync(const ItemContainer& container)
             continue;
 
         // The item slot to update
-        auto& itemUpdate = update.items[update.count];
-        update.count++;
+        auto& itemUpdate = update.items[update.quantity];
+        update.quantity++;
 
         // Calculate the page and slot
         itemUpdate.bag  = (i / container.pageSize()) + 1;
@@ -92,10 +92,10 @@ void InventoryEventListener::sync(const ItemContainer& container)
         // Write the item details
         itemUpdate.type       = item->type();
         itemUpdate.typeId     = item->typeId();
-        itemUpdate.count      = item->count();
+        itemUpdate.quantity   = item->quantity();
         itemUpdate.durability = item->durability();
     }
 
     // Write the left over items
-    session.write(update, 3 + (update.count * sizeof(CharacterItemUnit)));
+    session.write(update, 3 + (update.quantity * sizeof(CharacterItemUnit)));
 }

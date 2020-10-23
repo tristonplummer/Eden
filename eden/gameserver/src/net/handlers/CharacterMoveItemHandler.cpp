@@ -52,7 +52,8 @@ void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
 
     // Transfer the items
     bool success                = false;
-    auto [destItem, sourceItem] = source.transferTo(dest, sourcePage, sourceSlot, destPage, destSlot, success);
+    auto [destItem, sourceItem] = source.transferTo(dest, source.pagePositionToIndex(sourcePage, sourceSlot),
+                                                    dest.pagePositionToIndex(destPage, destSlot), success);
 
     // If the items weren't moved, do nothing
     if (!success)
@@ -67,7 +68,7 @@ void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
     {
         srcUpdate.type       = sourceItem->type();
         srcUpdate.typeId     = sourceItem->typeId();
-        srcUpdate.count      = sourceItem->count();
+        srcUpdate.quantity   = sourceItem->quantity();
         srcUpdate.durability = sourceItem->durability();
     }
 
@@ -79,7 +80,7 @@ void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
     {
         destUpdate.type       = destItem->type();
         destUpdate.typeId     = destItem->typeId();
-        destUpdate.count      = destItem->count();
+        destUpdate.quantity   = destItem->quantity();
         destUpdate.durability = destItem->durability();
     }
     game.write(update);

@@ -31,11 +31,43 @@ ItemContainer::ItemContainer(size_t pages, size_t pageSize)
  */
 bool ItemContainer::add(std::shared_ptr<Item> item)
 {
+    if (!item)
+        return false;
+
+    auto emptySlot = -1;
     for (auto i = 0; i < items_.size(); i++)
     {
-        if (items_.at(i) == nullptr)
-            return add(std::move(item), i);
+        if (item->quantity() == 0)
+            return true;
+
+        auto& dest = items_.at(i);
+        if (!dest)
+        {
+            if (emptySlot == -1)
+                emptySlot = i;
+            continue;
+        }
+
+        if (dest->itemId() == item->itemId())
+        {
+            auto& def      = item->definition();
+            auto freeSpace = def.maxStack - dest->quantity();
+            auto quantity  = std::min(freeSpace, item->quantity());
+
+            if (freeSpace > 0)
+            {
+                dest->setQuantity(dest->quantity() + quantity);
+                item->setQuantity(item->quantity() - quantity);
+
+                for (auto&& listener: listeners_)
+                    listener->itemAdded(*this, dest, i);
+            }
+            continue;
+        }
     }
+
+    if (emptySlot != -1)
+        return add(std::move(item), emptySlot);
     return false;
 }
 
@@ -81,18 +113,59 @@ std::shared_ptr<Item> ItemContainer::at(size_t slot) const
 
 /**
  * Removes an item from the container at a specific slot.
- * @param slot  The slot.
- * @return      The item instance.
+ * @param slot      The slot.
+ * @return          The item instance.
  */
 std::shared_ptr<Item> ItemContainer::remove(size_t slot)
 {
+    if (slot >= items_.size())
+        return nullptr;
+
+    auto item = items_.at(slot);
+    if (!item)
+        return nullptr;
+    return remove(slot, item->quantity());
+}
+
+/**
+ * Removes an item from the container at a specific slot.
+ * @param slot      The slot.
+ * @param quantity  The quantity to remove.
+ * @return          The item instance.
+ */
+std::shared_ptr<Item> ItemContainer::remove(size_t slot, size_t quantity)
+{
+    if (slot >= items_.size())
+        return nullptr;
+
     auto item = items_.at(slot);
     if (!item)
         return nullptr;
 
-    items_.at(slot) = nullptr;
-    for (auto&& listener: listeners_)
-        listener->itemRemoved(*this, nullptr, slot);
+    if (quantity >= item->quantity())
+    {
+        items_.at(slot) = nullptr;
+
+        for (auto&& listener: listeners_)
+            listener->itemRemoved(*this, nullptr, slot);
+    }
+    else
+    {
+        item->setQuantity(item->quantity() - quantity);
+
+        if (item->quantity() >= 0)
+        {
+            for (auto&& listener: listeners_)
+                listener->itemRemoved(*this, item, slot);
+        }
+        else
+        {
+            items_.at(slot) = nullptr;
+            for (auto&& listener: listeners_)
+                listener->itemRemoved(*this, nullptr, slot);
+        }
+    }
+
     return item;
 }
 
@@ -105,61 +178,108 @@ std::shared_ptr<Item> ItemContainer::remove(size_t slot)
  */
 std::shared_ptr<Item> ItemContainer::remove(size_t page, size_t slot, size_t count)
 {
-    auto idx = pagePositionToIndex(page, slot);
-    if (idx >= items_.size())
-        return nullptr;
-
-    auto item = at(idx);
-    if (count >= item->count())
-        return remove(idx);
-
-    item->setCount(item->count() - count);
-    for (auto&& listener: listeners_)
-        listener->itemRemoved(*this, item, idx);
-    return item;
+    return remove(pagePositionToIndex(page, slot), count);
 }
 
 /**
  * Transfers an item from this container to another.
  * @param dest          The destination container.
- * @param sourcePage    The source page.
  * @param sourceSlot    The source slot.
- * @param destPage      The destination page.
  * @param destSlot      The destination slot.
  * @param success       If the transfer was successful.
  * @return              The item at the source position, and the item at the destination position.
  */
-ItemPair ItemContainer::transferTo(ItemContainer& dest, size_t sourcePage, size_t sourceSlot, size_t destPage,
-                                   size_t destSlot, bool& success)
+ItemPair ItemContainer::transferTo(ItemContainer& dest, size_t sourceSlot, size_t destSlot, bool& success)
 {
-    auto sourcePos = pagePositionToIndex(sourcePage, sourceSlot);
-    auto destPos   = dest.pagePositionToIndex(destPage, destSlot);
+    auto sourceItem = at(sourceSlot);
+    auto sourceQty  = sourceItem ? sourceItem->quantity() : 1;
 
-    // Remove the item from the source
-    auto sourceItem = at(sourcePos);
-    if (!sourceItem)
-    {
+    return transferTo(dest, sourceSlot, sourceQty, destSlot, success);
+}
+
+/**
+ * Transfers an item from this container to another.
+ * @param dest          The destination container.
+ * @param sourceSlot    The source slot.
+ * @param sourceQty     The quantity of the source item to transfer.
+ * @param destSlot      The destination slot.
+ * @param success       If the transfer was successful.
+ * @return              The item at the source position, and the item at the destination position.
+ */
+ItemPair ItemContainer::transferTo(ItemContainer& dest, size_t sourceSlot, size_t sourceQty, size_t destSlot, bool& success)
+{
+    // The items at the specified positions
+    auto sourceItem = at(sourceSlot);
+    auto destItem   = dest.at(destSlot);
+
+    // A helper function to fail a transfer
+    auto fail = [&]() -> ItemPair {
         success = false;
         return { nullptr, nullptr };
-    }
-    items_.at(sourcePos) = nullptr;
+    };
 
-    // The item at the current destination
-    auto destItem = dest.at(destPos);
+    // A helper function for successfully executing a transfer
+    auto ok = [&]() -> ItemPair {
+        for (auto&& listener: listeners_)
+            listener->itemTransferred(*this, dest, sourceSlot, destSlot);
+        for (auto&& listener: dest.listeners_)
+            listener->itemTransferred(*this, dest, sourceSlot, destSlot);
 
-    // Add the item at the destination slot
-    dest.items_.at(destPos) = sourceItem;
+        success = true;
+        return { sourceItem, destItem };
+    };
 
-    // If there was an item at the destination slot, move it to the source slot
+    // If we're trying to move nothing, just fail early.
+    if (!sourceItem)
+        return fail();
+
+    // Adjust the source quantity
+    sourceQty = std::min(sourceItem->quantity(), sourceQty);
+
+    // If an item exists in the destination slot
     if (destItem)
-        items_.at(sourcePos) = destItem;
-    success = true;
+    {
+        // Attempt to merge the source stack to the destination
+        if (sourceItem->itemId() == destItem->itemId())
+        {
+            auto& def      = destItem->definition();
+            auto freeSpace = def.maxStack - destItem->quantity();
+            auto quantity  = std::min(freeSpace, sourceItem->quantity());
 
-    for (auto&& listener: listeners_)
-        listener->itemTransferred(*this, dest, sourcePos, destPos);
-    for (auto&& listener: dest.listeners_)
-        listener->itemTransferred(*this, dest, sourcePos, destPos);
-    return { sourceItem, destItem };
+            destItem->setQuantity(destItem->quantity() + quantity);
+            sourceItem->setQuantity(sourceItem->quantity() - quantity);
+            return ok();
+        }
+
+        // If we're trying to move a partial stack into an occupied slot, fail
+        if (sourceItem->quantity() != sourceQty)
+            return fail();
+
+        // Swap the items
+        items_.at(sourceSlot)    = destItem;
+        dest.items_.at(destSlot) = sourceItem;
+        return ok();
+    }
+
+    // If we're trying to move a partial stack, then we need to create a copy of the item and adjust the quantities
+    if (sourceItem->quantity() != sourceQty)
+    {
+        // Remove the quantity from the source item
+        sourceItem->setQuantity(sourceItem->quantity() - sourceQty);
+
+        // Create a new item with the split quantity
+        destItem = std::make_shared<Item>(*sourceItem);
+        destItem->setQuantity(sourceQty);
+
+        // Move the new item into the destination
+        dest.items_.at(destSlot) = destItem;
+        return ok();
+    }
+
+    // Swap the two items
+    items_.at(sourceSlot)    = destItem;
+    dest.items_.at(destSlot) = sourceItem;
+    return ok();
 }
 
 /**
@@ -178,4 +298,16 @@ void ItemContainer::sync()
 {
     for (auto&& listener: listeners_)
         listener->sync(*this);
+}
+
+/**
+ * Sets the items of this container.
+ * @param items The items.
+ */
+void ItemContainer::setItems(const std::vector<std::shared_ptr<Item>>& items)
+{
+    for (auto i = 0; i < items_.size(); i++)
+    {
+        items_[i] = items.at(i);
+    }
 }

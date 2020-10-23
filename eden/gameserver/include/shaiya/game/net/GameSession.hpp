@@ -37,12 +37,16 @@ namespace shaiya::net
         template<typename T>
         GameSession& write(const T& packet, size_t length = sizeof(T))
         {
+            auto data = new byte[length];
+            std::memcpy(data, &packet, length);
+
             if (encryptionMode_ == EncryptionMode::Encrypted)
             {
-                encryption_.processData((byte*)&packet, length);
+                encryption_.processData(data, length);
             }
 
-            Session::write((const char*)&packet, length);
+            Session::write((const char*)data, length);
+            delete[] data;
             return *this;
         }
 

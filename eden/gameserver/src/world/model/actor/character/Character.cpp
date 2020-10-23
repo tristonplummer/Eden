@@ -6,6 +6,7 @@
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
 #include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
 #include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
@@ -19,7 +20,11 @@ using namespace shaiya::game;
  * @param id        The character id.
  */
 Character::Character(GameSession& session, size_t id)
-    : session_(session), actionBar_(*this), appearance_(*this), Actor(session.context().getGameWorld())
+    : session_(session),
+      actionBar_(*this),
+      appearance_(*this),
+      requestManager_(*this),
+      Actor(session.context().getGameWorld())
 {
     // Set this entity type
     type_ = EntityType::Character;
@@ -43,11 +48,7 @@ void Character::init()
     stats().onSync([&](const StatSet& stats, StatUpdateType type) { onStatSync(stats, type); });
 
     // Write the current time
-    WorldTime wTime{};
-    auto time     = wTime.time.decode();
-    auto currTime = std::mktime(&time);
-    LOG(INFO) << std::ctime(&currTime);
-    session_.write(wTime);
+    session_.write(WorldTime{});
     inventory_.setGold(250000000);
 
     // Prepare the character details
@@ -183,4 +184,25 @@ void Character::setRace(ShaiyaRace race)
         return;
     race_ = race;
     flagUpdate(UpdateFlag::Appearance);
+}
+
+/**
+ * Sets the position of this entity.
+ * @param position  The position.
+ */
+void Character::setPosition(Position position)
+{
+    Actor::setPosition(position);
+
+    auto request = getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
+    if (request && request->type() == RequestType::Trade)
+    {
+        // If we're within interaction distance of our partner, then do nothing.
+        if (position.isWithinInteractionDistance(request->partner()->position()))
+            return;
+
+        // Cancel the trade, as we're now too far away.
+        auto trade = std::dynamic_pointer_cast<TradeRequest>(request);
+        trade->close();
+    }
 }

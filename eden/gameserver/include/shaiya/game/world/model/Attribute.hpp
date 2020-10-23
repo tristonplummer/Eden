@@ -11,6 +11,21 @@ namespace shaiya::game
         /**
          * The last chat message sent by a character.
          */
-        LastChatMessage
+        LastChatMessage,
+
+        /**
+         * The last request that was made by a character.
+         */
+        LastRequest,
+
+        /**
+         * The last character who requested something.
+         */
+        LastRequestingCharacter,
+
+        /**
+         * The currently active request instance.
+         */
+        Request
     };
 }
