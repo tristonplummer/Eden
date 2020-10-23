@@ -17,7 +17,7 @@ namespace shaiya::game
          * @param item      The item that was added.
          * @param slot      The slot of the new item.
          */
-        virtual void itemAdded(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot) = 0;
+        virtual void itemAdded(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot){};
 
         /**
          * Gets executed when an item is removed from a container.
@@ -25,7 +25,7 @@ namespace shaiya::game
          * @param item      The item that was removed.
          * @param slot      The slot the item was removed from.
          */
-        virtual void itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot) = 0;
+        virtual void itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot){};
 
         /**
          * Gets executed when an item is transferred between containers.
@@ -43,6 +43,6 @@ namespace shaiya::game
          * Synchronises the container with this listener.
          * @param container The container that was updated.
          */
-        virtual void sync(const ItemContainer& container) = 0;
+        virtual void sync(const ItemContainer& container){};
     };
 }
