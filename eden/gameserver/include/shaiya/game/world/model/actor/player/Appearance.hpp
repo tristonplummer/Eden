@@ -4,16 +4,16 @@
 namespace shaiya::game
 {
     /**
-     * Represents the appearance of a character.
+     * Represents the appearance of a player.
      */
     class Appearance
     {
     public:
         /**
-         * Initialise the appearance for a character.
-         * @param character The character instance.
+         * Initialise the appearance for a player.
+         * @param player The player instance.
          */
-        explicit Appearance(Player& character);
+        explicit Appearance(Player& player);
 
         /**
          * Sets the hair for this appearance.
@@ -77,9 +77,9 @@ namespace shaiya::game
 
     private:
         /**
-         * The character that owns this appearance.
+         * The player that owns this appearance.
          */
-        Player& character_;
+        Player& player_;
 
         /**
          * The hair of the character.

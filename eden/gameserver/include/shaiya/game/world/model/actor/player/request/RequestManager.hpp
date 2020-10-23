@@ -13,9 +13,9 @@ namespace shaiya::game
     public:
         /**
          * Initialises the request manager for a character.
-         * @param character The character to make requests for.
+         * @param player    The player to make requests for.
          */
-        explicit RequestManager(Player& character);
+        explicit RequestManager(Player& player);
 
         /**
          * Attempts to send a request to a partner.
@@ -53,9 +53,9 @@ namespace shaiya::game
                                                 std::shared_ptr<Player> partner);
 
         /**
-         * The character who we are managing requests for.
+         * The player who we are managing requests for.
          */
-        Player& character_;
+        Player& player_;
 
         /**
          * The current request partner.

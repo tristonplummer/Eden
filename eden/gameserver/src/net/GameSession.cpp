@@ -83,11 +83,11 @@ void GameSession::setFaction(ShaiyaFaction faction)
 
 /**
  * Sets the character instance for this session.
- * @param character The character.
+ * @param player The character.
  */
-void GameSession::setCharacter(std::shared_ptr<shaiya::game::Player> character)
+void GameSession::setPlayer(std::shared_ptr<shaiya::game::Player> player)
 {
-    character_ = std::move(character);
+    player_ = std::move(player);
 }
 
 /**
@@ -95,13 +95,13 @@ void GameSession::setCharacter(std::shared_ptr<shaiya::game::Player> character)
  */
 void GameSession::onDisconnect()
 {
-    if (character_)
+    if (player_)
     {
         auto& world = context().getGameWorld();
-        world.unregisterCharacter(character_);
+        world.unregisterPlayer(player_);
     }
 
-    character_.reset();
+    player_.reset();
 }
 
 /**

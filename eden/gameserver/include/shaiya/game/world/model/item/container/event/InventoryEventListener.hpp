@@ -4,16 +4,16 @@
 namespace shaiya::game
 {
     /**
-     * A specialised container event listener, that listens for events on a character's inventory.
+     * A specialised container event listener, that listens for events on a player's inventory.
      */
     class InventoryEventListener: public ContainerEventListener
     {
     public:
         /**
          * Initialises this event listener for a character.
-         * @param character The character that is listening to events.
+         * @param player The player that is listening to events.
          */
-        explicit InventoryEventListener(Player& character);
+        explicit InventoryEventListener(Player& player);
 
         /**
          * Gets executed when an item is added to a container.
@@ -39,8 +39,8 @@ namespace shaiya::game
 
     private:
         /**
-         * The character that is listening for these updates.
+         * The player that is listening for these updates.
          */
-        Player& character_;
+        Player& player_;
     };
 }

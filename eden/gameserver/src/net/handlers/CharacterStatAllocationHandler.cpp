@@ -13,19 +13,19 @@ using namespace shaiya::game;
  */
 void handleStatAllocation(Session& session, const CharacterStatAllocation& req)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto player = game.player();
 
     // The total number of allocated stats
     auto allocated = (req.strength + req.dexterity + req.reaction + req.intelligence + req.wisdom + req.luck);
-    if (allocated > character->statpoints())
+    if (allocated > player->statpoints())
         return;
 
     // Remove the statpoints from the character
-    character->setStatpoints(character->statpoints() - allocated);
+    player->setStatpoints(player->statpoints() - allocated);
 
     // Add to the character's base stats
-    auto& stats = character->stats();
+    auto& stats = player->stats();
     stats.setBase(Stat::Strength, stats.getBase(Stat::Strength) + req.strength);
     stats.setBase(Stat::Dexterity, stats.getBase(Stat::Dexterity) + req.dexterity);
     stats.setBase(Stat::Reaction, stats.getBase(Stat::Reaction) + req.reaction);

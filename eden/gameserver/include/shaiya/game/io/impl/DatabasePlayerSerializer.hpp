@@ -1,13 +1,13 @@
 #pragma once
 #include <shaiya/game/Forward.hpp>
-#include <shaiya/game/io/CharacterSerializer.hpp>
+#include <shaiya/game/io/PlayerSerializer.hpp>
 
 namespace shaiya::game
 {
     /**
      * Saves and loads player characters against a database.
      */
-    class DatabaseCharacterSerializer: public CharacterSerializer
+    class DatabasePlayerSerializer: public PlayerSerializer
     {
     public:
         /**
@@ -16,7 +16,7 @@ namespace shaiya::game
          * @param itemDefs      The item definitions.
          * @param worldId       The id of this world server.
          */
-        DatabaseCharacterSerializer(shaiya::database::DatabaseService& db, shaiya::client::ItemSData& itemDefs,
+        DatabasePlayerSerializer(shaiya::database::DatabaseService& db, shaiya::client::ItemSData& itemDefs,
                                     size_t worldId);
 
         /**
@@ -24,13 +24,13 @@ namespace shaiya::game
          * @param character The character to load.
          * @return          If the character was loaded successfully.
          */
-        bool load(Player& character) override;
+        bool load(Player& player) override;
 
         /**
          * Saves a player character.
          * @param character The character to save.
          */
-        void save(Player& character) override;
+        void save(Player& player) override;
 
     private:
         /**
@@ -53,13 +53,13 @@ namespace shaiya::game
          * @param character The character.
          * @return          If the inventory was successfully loaded.
          */
-        bool loadInventory(Player& character);
+        bool loadInventory(Player& player);
 
         /**
          * Loads the equipment of this character.
          * @param character The character.
          * @return          If the equipment was successfully loaded.
          */
-        bool loadEquipment(Player& character);
+        bool loadEquipment(Player& player);
     };
 }

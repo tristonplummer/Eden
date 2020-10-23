@@ -1,10 +1,8 @@
 #include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
-#include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
+#include <shaiya/game/io/impl/DatabasePlayerSerializer.hpp>
 #include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
-
-#include <glog/logging.h>
 
 using namespace shaiya::database;
 using namespace shaiya::game;
@@ -35,8 +33,7 @@ constexpr auto SAVE_CHARACTER_DETAILS = "save_character_details";
  * @param itemService   The item definition service.
  * @param worldId       The id of this world server.
  */
-DatabaseCharacterSerializer::DatabaseCharacterSerializer(DatabaseService& db, shaiya::client::ItemSData& itemDefs,
-                                                         size_t worldId)
+DatabasePlayerSerializer::DatabasePlayerSerializer(DatabaseService& db, shaiya::client::ItemSData& itemDefs, size_t worldId)
     : db_(db), itemDefs_(itemDefs), worldId_(worldId)
 {
     db.prepare(LOAD_CHARACTER_DETAILS, "SELECT * FROM gamedata.characters WHERE world = $1 AND charid = $2;");
@@ -53,7 +50,7 @@ DatabaseCharacterSerializer::DatabaseCharacterSerializer(DatabaseService& db, sh
  * Loads a player character.
  * @param character The character to load.
  */
-bool DatabaseCharacterSerializer::load(Player& character)
+bool DatabasePlayerSerializer::load(Player& player)
 {
     try
     {
@@ -62,7 +59,7 @@ bool DatabaseCharacterSerializer::load(Player& character)
         pqxx::work tx(*connection);
 
         // Fetch the character details
-        auto rows = tx.exec_prepared(LOAD_CHARACTER_DETAILS, worldId_, character.id());
+        auto rows = tx.exec_prepared(LOAD_CHARACTER_DETAILS, worldId_, player.id());
         if (rows.empty())
             return false;
 
@@ -70,13 +67,13 @@ bool DatabaseCharacterSerializer::load(Player& character)
         auto row = rows.front();
 
         // Set the character name, race and class
-        character.setName(row["name"].as<std::string>());
-        character.setRace(static_cast<ShaiyaRace>(row["race"].as<size_t>()));
-        character.setJob(static_cast<ShaiyaClass>(row["class"].as<size_t>()));
-        character.setStatpoints(row["statpoints"].as<size_t>());
+        player.setName(row["name"].as<std::string>());
+        player.setRace(static_cast<ShaiyaRace>(row["race"].as<size_t>()));
+        player.setJob(static_cast<ShaiyaClass>(row["class"].as<size_t>()));
+        player.setStatpoints(row["statpoints"].as<size_t>());
 
         // Set the character appearance
-        auto& appearance = character.appearance();
+        auto& appearance = player.appearance();
         appearance.setFace(row["face"].as<size_t>());
         appearance.setHair(row["hair"].as<size_t>());
         appearance.setHeight(row["height"].as<size_t>());
@@ -87,15 +84,15 @@ bool DatabaseCharacterSerializer::load(Player& character)
         auto posX = row["posx"].as<float>();
         auto posY = row["posy"].as<float>();
         auto posZ = row["posz"].as<float>();
-        character.setPosition({ static_cast<uint16_t>(map), posX, posY, posZ });
+        player.setPosition({ static_cast<uint16_t>(map), posX, posY, posZ });
 
-        if (!loadInventory(character))
+        if (!loadInventory(player))
             return false;
-        if (!loadEquipment(character))
+        if (!loadEquipment(player))
             return false;
 
         // Set the base stats
-        auto& stats = character.stats();
+        auto& stats = player.stats();
         stats.setBase(Stat::Strength, row["strength"].as<size_t>());
         stats.setBase(Stat::Dexterity, row["dexterity"].as<size_t>());
         stats.setBase(Stat::Reaction, row["reaction"].as<size_t>());
@@ -111,7 +108,7 @@ bool DatabaseCharacterSerializer::load(Player& character)
     }
     catch (const std::exception& e)
     {
-        LOG(INFO) << "Exception occurred while loading character with id " << character.id() << ": " << e.what();
+        LOG(INFO) << "Exception occurred while loading character with id " << player.id() << ": " << e.what();
     }
     return false;
 }
@@ -121,7 +118,7 @@ bool DatabaseCharacterSerializer::load(Player& character)
  * @param character The character.
  * @return          If the inventory was successfully loaded.
  */
-bool DatabaseCharacterSerializer::loadInventory(Player& character)
+bool DatabasePlayerSerializer::loadInventory(Player& player)
 {
     try
     {
@@ -130,10 +127,10 @@ bool DatabaseCharacterSerializer::loadInventory(Player& character)
         pqxx::work tx(*connection);
 
         // The character's inventory
-        auto& inventory = character.inventory();
+        auto& inventory = player.inventory();
 
         // Fetch the character inventory
-        auto rows = tx.exec_prepared(LOAD_CHARACTER_INVENTORY, worldId_, character.id());
+        auto rows = tx.exec_prepared(LOAD_CHARACTER_INVENTORY, worldId_, player.id());
         if (rows.empty())
             return true;
 
@@ -161,8 +158,7 @@ bool DatabaseCharacterSerializer::loadInventory(Player& character)
     }
     catch (const std::exception& e)
     {
-        LOG(INFO) << "Exception occurred while loading inventory for character  with id " << character.id() << ": "
-                  << e.what();
+        LOG(INFO) << "Exception occurred while loading inventory for character  with id " << player.id() << ": " << e.what();
     }
     return false;
 }
@@ -172,7 +168,7 @@ bool DatabaseCharacterSerializer::loadInventory(Player& character)
  * @param character The character.
  * @return          If the equipment was successfully loaded.
  */
-bool DatabaseCharacterSerializer::loadEquipment(Player& character)
+bool DatabasePlayerSerializer::loadEquipment(Player& player)
 {
     try
     {
@@ -181,10 +177,10 @@ bool DatabaseCharacterSerializer::loadEquipment(Player& character)
         pqxx::work tx(*connection);
 
         // The character's equipment
-        auto& equipment = character.equipment();
+        auto& equipment = player.equipment();
 
         // Fetch the character inventory
-        auto rows = tx.exec_prepared(LOAD_CHARACTER_EQUIPMENT, worldId_, character.id());
+        auto rows = tx.exec_prepared(LOAD_CHARACTER_EQUIPMENT, worldId_, player.id());
         if (rows.empty())
             return true;
 
@@ -207,8 +203,7 @@ bool DatabaseCharacterSerializer::loadEquipment(Player& character)
     }
     catch (const std::exception& e)
     {
-        LOG(INFO) << "Exception occurred while loading equipment for character with id " << character.id() << ": "
-                  << e.what();
+        LOG(INFO) << "Exception occurred while loading equipment for character with id " << player.id() << ": " << e.what();
     }
     return false;
 }
@@ -217,7 +212,7 @@ bool DatabaseCharacterSerializer::loadEquipment(Player& character)
  * Saves a player character.
  * @param character The character to save.
  */
-void DatabaseCharacterSerializer::save(Player& character)
+void DatabasePlayerSerializer::save(Player& player)
 {
     try
     {
@@ -226,20 +221,20 @@ void DatabaseCharacterSerializer::save(Player& character)
         pqxx::work tx(*connection);
 
         // The character's position
-        auto& pos = character.position();
+        auto& pos = player.position();
 
         // The character's stats
-        auto& stats = character.stats();
+        auto& stats = player.stats();
 
         // Save the details
-        tx.exec_prepared(SAVE_CHARACTER_DETAILS, worldId_, character.id(), pos.map(), pos.x(), pos.y(), pos.z(),
-                         character.statpoints(), stats.getBase(Stat::Strength), stats.getBase(Stat::Dexterity),
+        tx.exec_prepared(SAVE_CHARACTER_DETAILS, worldId_, player.id(), pos.map(), pos.x(), pos.y(), pos.z(),
+                         player.statpoints(), stats.getBase(Stat::Strength), stats.getBase(Stat::Dexterity),
                          stats.getBase(Stat::Reaction), stats.getBase(Stat::Intelligence), stats.getBase(Stat::Wisdom),
                          stats.getBase(Stat::Luck), stats.currentHitpoints(), stats.currentMana(), stats.currentStamina());
         tx.commit();
     }
     catch (const std::exception& e)
     {
-        LOG(INFO) << "Exception occured while saving character details for id " << character.id() << ": " << e.what();
+        LOG(INFO) << "Exception occured while saving character details for id " << player.id() << ": " << e.what();
     }
 }

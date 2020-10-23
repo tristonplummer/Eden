@@ -11,9 +11,9 @@ using namespace shaiya::net;
 
 /**
  * Initialises this event listener for a character.
- * @param character The character that is listening to events.
+ * @param player The character that is listening to events.
  */
-InventoryEventListener::InventoryEventListener(Player& character): character_(character)
+InventoryEventListener::InventoryEventListener(Player& player): player_(player)
 {
 }
 
@@ -34,7 +34,7 @@ void InventoryEventListener::itemAdded(const ItemContainer& container, const std
     update.type     = item ? item->type() : 0;
     update.typeId   = item ? item->typeId() : 0;
     update.quantity = item ? item->quantity() : 0;
-    character_.session().write(update);
+    player_.session().write(update);
 }
 
 /**
@@ -54,7 +54,7 @@ void InventoryEventListener::itemRemoved(const ItemContainer& container, const s
     update.type     = item ? item->type() : 0;
     update.typeId   = item ? item->typeId() : 0;
     update.quantity = item ? item->quantity() : 0;
-    character_.session().write(update);
+    player_.session().write(update);
 }
 
 /**
@@ -63,7 +63,7 @@ void InventoryEventListener::itemRemoved(const ItemContainer& container, const s
  */
 void InventoryEventListener::sync(const ItemContainer& container)
 {
-    auto& session = character_.session();
+    auto& session = player_.session();
     auto& items   = container.items();  // The items in the container
     CharacterItemUpdate update;         // The item update
 

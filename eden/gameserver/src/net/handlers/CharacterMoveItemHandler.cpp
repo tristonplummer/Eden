@@ -19,12 +19,12 @@ constexpr auto EquipmentPage = 0;
  */
 void handleItemMove(Session& session, const CharacterMoveItemRequest& request)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto player = game.player();
 
     // Get the character's containers.
-    auto& inventory       = static_cast<ItemContainer&>(character->inventory());
-    auto& equipment       = static_cast<ItemContainer&>(character->equipment());
+    auto& inventory       = static_cast<ItemContainer&>(player->inventory());
+    auto& equipment       = static_cast<ItemContainer&>(player->equipment());
     ItemContainer& source = request.sourcePage == EquipmentPage ? equipment : inventory;
     ItemContainer& dest   = request.destPage == EquipmentPage ? equipment : inventory;
 

@@ -15,7 +15,7 @@ namespace shaiya::game
         /**
          * A player character.
          */
-        Character,
+        Player,
 
         /**
          * An item

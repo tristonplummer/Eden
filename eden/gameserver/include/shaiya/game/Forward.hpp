@@ -73,8 +73,8 @@ namespace shaiya::game
     class NpcSynchronizationTask;
 
     // Serializers
-    class CharacterSerializer;
-    class DatabaseCharacterSerializer;
+    class PlayerSerializer;
+    class DatabasePlayerSerializer;
 
     // Services
     class ServiceContext;

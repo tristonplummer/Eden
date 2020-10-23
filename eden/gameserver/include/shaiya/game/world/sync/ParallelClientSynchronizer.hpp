@@ -12,16 +12,15 @@ namespace shaiya::game
     public:
         /**
          * Synchronizes the state of the clients with the stat of the server.
-         * @param characters    The vector containing the player characters.
+         * @param players    The vector containing the player characters.
          */
-        void synchronize(std::vector<std::shared_ptr<Player>> characters) override;
+        void synchronize(std::vector<std::shared_ptr<Player>> players) override;
 
     private:
-
         /**
-         * Synchronizes a character.
-         * @param character     The character to synchronize
+         * Synchronizes a player.
+         * @param player     The player to synchronize
          */
-        void syncCharacter(Player& character);
+        void syncCharacter(Player& player);
     };
 }

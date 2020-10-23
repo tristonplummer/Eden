@@ -18,19 +18,15 @@ void handleCharacterMovement(Session& session, const CharacterMovement& movement
 {
     auto& game  = dynamic_cast<GameSession&>(session);
     auto& world = game.context().getGameWorld();
-
-    // Get the character instance
-    auto character = game.character();
-    if (!character)
-        return;
+    auto player = game.player();
 
     // Update the motion and direction
-    character->setDirection(movement.direction);
-    character->setMotion(movement.motion);
+    player->setDirection(movement.direction);
+    player->setMotion(movement.motion);
 
     // Update the character's position
-    auto map = character->position().map();
-    character->setPosition(Position(map, movement.x, movement.y, movement.z));
+    auto map = player->position().map();
+    player->setPosition(Position(map, movement.x, movement.y, movement.z));
 }
 
 /**

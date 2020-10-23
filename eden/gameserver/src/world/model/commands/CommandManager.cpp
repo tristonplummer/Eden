@@ -24,10 +24,10 @@ CommandManager::CommandManager()
 
 /**
  * Attempts to execute a command.
- * @param character The character that is trying to execute a command.
+ * @param player The character that is trying to execute a command.
  * @param text      The command text.
  */
-void CommandManager::execute(Player& character, const std::string& text) const
+void CommandManager::execute(Player& player, const std::string& text) const
 {
     using namespace std;
     using namespace boost;
@@ -49,12 +49,12 @@ void CommandManager::execute(Player& character, const std::string& text) const
         if (commands_.contains(identifier))
         {
             auto command = commands_.at(identifier);
-            command->execute(character, args);
+            command->execute(player, args);
         }
     }
     catch (const std::exception& e)
     {
-        LOG(INFO) << "Command executed by \"" << character.name() << "\" with text: \"" << text
+        LOG(INFO) << "Command executed by \"" << player.name() << "\" with text: \"" << text
                   << "\" threw an exception: " << e.what();
     }
 }

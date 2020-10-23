@@ -26,11 +26,11 @@ void handleCharacterSelect(Session& session, const CharacterSelectionRequest& re
     game.write(response);
 
     // The character instance
-    auto character = std::make_shared<Player>(game, request.charId);
-    game.setCharacter(character);
+    auto player = std::make_shared<Player>(game, request.charId);
+    game.setPlayer(player);
 
     // Register the character
-    world.registerCharacter(game.character());
+    world.registerPlayer(game.player());
 }
 
 /**

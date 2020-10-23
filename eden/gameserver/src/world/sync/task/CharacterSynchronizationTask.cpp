@@ -35,7 +35,7 @@ void CharacterSynchronizationTask::sync()
     // Loop over the observed characters and process their flagged updates.
     for (auto&& observed: observedCharacters)
     {
-        if (observed->type() == EntityType::Character)
+        if (observed->type() == EntityType::Player)
             processUpdateFlags(dynamic_cast<Player&>(*observed));
     }
 }

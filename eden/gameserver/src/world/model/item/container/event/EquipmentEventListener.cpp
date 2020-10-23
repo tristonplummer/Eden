@@ -10,9 +10,9 @@ using namespace shaiya::net;
 
 /**
  * Initialises this event listener for a character.
- * @param character The character that is listening to events.
+ * @param player The character that is listening to events.
  */
-EquipmentEventListener::EquipmentEventListener(Player& character): character_(character)
+EquipmentEventListener::EquipmentEventListener(Player& player): player_(player)
 {
 }
 
@@ -24,8 +24,8 @@ EquipmentEventListener::EquipmentEventListener(Player& character): character_(ch
  */
 void EquipmentEventListener::itemAdded(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot)
 {
-    character_.flagUpdate(UpdateFlag::Appearance);
-    character_.syncStats();
+    player_.flagUpdate(UpdateFlag::Appearance);
+    player_.syncStats();
 }
 
 /**
@@ -36,8 +36,8 @@ void EquipmentEventListener::itemAdded(const ItemContainer& container, const std
  */
 void EquipmentEventListener::itemRemoved(const ItemContainer& container, const std::shared_ptr<Item>& item, size_t slot)
 {
-    character_.flagUpdate(UpdateFlag::Appearance);
-    character_.syncStats();
+    player_.flagUpdate(UpdateFlag::Appearance);
+    player_.syncStats();
 }
 
 /**
@@ -50,8 +50,8 @@ void EquipmentEventListener::itemRemoved(const ItemContainer& container, const s
 void EquipmentEventListener::itemTransferred(const ItemContainer& source, const ItemContainer& dest, size_t sourceSlot,
                                              size_t destSlot)
 {
-    character_.flagUpdate(UpdateFlag::Appearance);
-    character_.syncStats();
+    player_.flagUpdate(UpdateFlag::Appearance);
+    player_.syncStats();
 }
 
 /**
@@ -84,5 +84,5 @@ void EquipmentEventListener::sync(const ItemContainer& container)
         update.items[i] = unit;
     }
 
-    character_.session().write(update);  // Write the update
+    player_.session().write(update);  // Write the update
 }

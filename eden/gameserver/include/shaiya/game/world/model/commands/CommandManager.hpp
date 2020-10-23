@@ -19,10 +19,10 @@ namespace shaiya::game
 
         /**
          * Attempts to execute a command.
-         * @param character The character that is trying to execute a command.
+         * @param player    The character that is trying to execute a command.
          * @param text      The command text.
          */
-        void execute(Player& character, const std::string& text) const;
+        void execute(Player& player, const std::string& text) const;
 
     private:
         /**

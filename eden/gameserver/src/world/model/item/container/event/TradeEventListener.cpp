@@ -6,11 +6,11 @@ using namespace shaiya::game;
 
 /**
  * Initialises the trade event listener.
- * @param character The character to listen for.
+ * @param player The character to listen for.
  * @param trade     The trade session.
  */
-TradeEventListener::TradeEventListener(std::shared_ptr<Player> character, TradeRequest& trade)
-    : character_(std::move(character)), trade_(trade)
+TradeEventListener::TradeEventListener(std::shared_ptr<Player> player, TradeRequest& trade)
+    : player_(std::move(player)), trade_(trade)
 {
 }
 

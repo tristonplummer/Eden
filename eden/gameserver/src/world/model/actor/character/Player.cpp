@@ -27,7 +27,7 @@ Player::Player(GameSession& session, size_t id)
       Actor(session.context().getGameWorld())
 {
     // Set this entity type
-    type_ = EntityType::Character;
+    type_ = EntityType::Player;
 
     // Set the character id and faction
     id_      = id;

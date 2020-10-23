@@ -15,16 +15,16 @@ using namespace shaiya::game;
 
 /**
  * Synchronizes the state of the clients with the stat of the server.
- * @param characters    The vector containing the player characters.
+ * @param players    The vector containing the player characters.
  */
-void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> characters)
+void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> players)
 {
     // Run the synchroniser for each character, in parallel.
-    std::for_each(std::execution::par_unseq, characters.begin(), characters.end(),
+    std::for_each(std::execution::par_unseq, players.begin(), players.end(),
                   [&](std::shared_ptr<Player>& character) { syncCharacter(*character); });
 
     // Finalise the update sequence for each character.
-    for (auto&& character: characters)
+    for (auto&& character: players)
     {
         if (!character->active())
             continue;
@@ -40,20 +40,20 @@ void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>
 
 /**
  * Synchronizes a character.
- * @param character     The character to synchronize
+ * @param player     The character to synchronize
  */
-void ParallelClientSynchronizer::syncCharacter(Player& character)
+void ParallelClientSynchronizer::syncCharacter(Player& player)
 {
-    if (!character.active())
+    if (!player.active())
         return;
 
     // Prepare the synchronization tasks
-    MapSynchronizationTask mapTask(character);
-    CharacterSynchronizationTask charsTask(character);
-    NpcSynchronizationTask npcTask(character);
+    MapSynchronizationTask mapTask(player);
+    CharacterSynchronizationTask charsTask(player);
+    NpcSynchronizationTask npcTask(player);
 
     // The vector of entities that are currently being observed
-    auto& observed = character.observedEntities();
+    auto& observed = player.observedEntities();
 
     // Loop over the currently observed entities
     auto itr = observed.begin();
@@ -62,9 +62,9 @@ void ParallelClientSynchronizer::syncCharacter(Player& character)
         auto entity = *itr;  // The current observed entity
 
         // If the entity is not active, or this character can't observe them, remove them.
-        if (!entity->active() || !entity->observable(character))
+        if (!entity->active() || !entity->observable(player))
         {
-            if (entity->type() == EntityType::Character)
+            if (entity->type() == EntityType::Player)
                 charsTask.removeCharacter(dynamic_cast<Player&>(*entity));
             else if (entity->type() == EntityType::Item)
                 mapTask.removeItem(dynamic_cast<GroundItem&>(*entity));
@@ -78,8 +78,8 @@ void ParallelClientSynchronizer::syncCharacter(Player& character)
     }
 
     // Get the neighbouring cells of the character.
-    auto& pos   = character.position();
-    auto& world = character.world();
+    auto& pos   = player.position();
+    auto& world = player.world();
     auto map    = world.maps().forId(pos.map());
     auto cells  = map->getNeighbouringCells(pos);
 
@@ -94,11 +94,11 @@ void ParallelClientSynchronizer::syncCharacter(Player& character)
                 continue;
 
             // Skip ourselves
-            if (&character == entity.get())
+            if (&player == entity.get())
                 continue;
 
             // If we can't see the other entity, skip them.
-            if (!entity->observable(character))
+            if (!entity->observable(player))
                 continue;
 
             // If the entity is already being observed, skip them
@@ -110,7 +110,7 @@ void ParallelClientSynchronizer::syncCharacter(Player& character)
             observed.push_back(entity);
 
             // Inform the relevant task
-            if (entity->type() == EntityType::Character)
+            if (entity->type() == EntityType::Player)
                 charsTask.addCharacter(dynamic_cast<Player&>(*entity));
             else if (entity->type() == EntityType::Item)
                 mapTask.addItem(dynamic_cast<GroundItem&>(*entity));

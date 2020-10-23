@@ -6,9 +6,9 @@ using namespace shaiya::game;
 
 /**
  * Initialise the appearance for a character.
- * @param character The character instance.
+ * @param player The character instance.
  */
-Appearance::Appearance(Player& character): character_(character)
+Appearance::Appearance(Player& player): player_(player)
 {
 }
 
@@ -21,7 +21,7 @@ void Appearance::setHair(uint8_t hair)
     if (hair_ == hair)
         return;
     hair_ = hair;
-    character_.flagUpdate(UpdateFlag::Appearance);
+    player_.flagUpdate(UpdateFlag::Appearance);
 }
 
 /**
@@ -33,7 +33,7 @@ void Appearance::setFace(uint8_t face)
     if (face_ == face)
         return;
     face_ = face;
-    character_.flagUpdate(UpdateFlag::Appearance);
+    player_.flagUpdate(UpdateFlag::Appearance);
 }
 
 /**
@@ -45,7 +45,7 @@ void Appearance::setHeight(uint8_t height)
     if (height_ == height)
         return;
     height_ = height;
-    character_.flagUpdate(UpdateFlag::Appearance);
+    player_.flagUpdate(UpdateFlag::Appearance);
 }
 
 /**
@@ -57,5 +57,5 @@ void Appearance::setGender(ShaiyaGender gender)
     if (gender_ == gender)
         return;
     gender_ = gender;
-    character_.flagUpdate(UpdateFlag::Appearance);
+    player_.flagUpdate(UpdateFlag::Appearance);
 }

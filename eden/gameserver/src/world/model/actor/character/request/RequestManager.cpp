@@ -5,9 +5,9 @@ using namespace shaiya::game;
 
 /**
  * Initialises the request manager for a character.
- * @param character The character to make requests for.
+ * @param player The character to make requests for.
  */
-RequestManager::RequestManager(Player& character): character_(character)
+RequestManager::RequestManager(Player& player): player_(player)
 {
 }
 
@@ -24,9 +24,9 @@ bool RequestManager::request(std::shared_ptr<Player> partner, RequestType type)
     if (acceptExisting(partner, type))
         return false;
 
-    character_.setAttribute(Attribute::LastRequest, type);
+    player_.setAttribute(Attribute::LastRequest, type);
     partner_ = std::move(partner);
-    partner_->setAttribute(Attribute::LastRequestingCharacter, character_.id());
+    partner_->setAttribute(Attribute::LastRequestingCharacter, player_.id());
     return true;
 }
 
@@ -38,7 +38,7 @@ bool RequestManager::request(std::shared_ptr<Player> partner, RequestType type)
  */
 bool RequestManager::canRequest(const std::shared_ptr<Player>& partner, RequestType type)
 {
-    if (character_.id() == partner->id())  // We don't want players to be able to send requests to themselves.
+    if (player_.id() == partner->id())  // We don't want players to be able to send requests to themselves.
         return false;
     if (!partner->active())  // We don't want to send requests to a player that hasn't loaded in yet.
         return false;
@@ -57,7 +57,7 @@ bool RequestManager::acceptExisting(const std::shared_ptr<Player>& partner, Requ
     if (lastType == type)
     {
         auto player = partner->requests().partner_;     // The target of our target.
-        if (player && player->id() == character_.id())  // If the target of our target, is us.
+        if (player && player->id() == player_.id())  // If the target of our target, is us.
         {
             auto first  = forType(type, player, partner);
             auto second = forType(type, partner, player);

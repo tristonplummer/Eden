@@ -12,11 +12,10 @@ using namespace shaiya::net;
  */
 void handleViewportLoaded(Session& session, const ViewportLoadedNotification& request)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto player = game.player();
 
-    if (character)
-        character->activate();
+    player->activate();
 }
 
 /**

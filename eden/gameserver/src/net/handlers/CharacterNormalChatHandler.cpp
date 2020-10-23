@@ -14,8 +14,8 @@ using namespace shaiya::game;
  */
 void handleNormalChat(Session& session, const CharacterChatMessage& request)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto player = game.player();
 
     // The chat message
     auto message = request.message.str();
@@ -23,14 +23,14 @@ void handleNormalChat(Session& session, const CharacterChatMessage& request)
     // Attempt to execute a command.
     if (message.starts_with('/'))
     {
-        auto& commands = character->world().commands();
-        commands.execute(*character, message);
+        auto& commands = player->world().commands();
+        commands.execute(*player, message);
         return;
     }
 
     // Flag the character for a chat update
-    character->setAttribute(Attribute::LastChatMessage, message);
-    character->flagUpdate(UpdateFlag::Chat);
+    player->setAttribute(Attribute::LastChatMessage, message);
+    player->flagUpdate(UpdateFlag::Chat);
 }
 
 /**

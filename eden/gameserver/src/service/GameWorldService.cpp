@@ -1,10 +1,10 @@
 #include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/common/util/Async.hpp>
-#include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
+#include <shaiya/game/io/impl/DatabasePlayerSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/actor/npc/Npc.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
 #include <shaiya/game/world/model/map/Map.hpp>
 #include <shaiya/game/world/sync/ParallelClientSynchronizer.hpp>
@@ -22,7 +22,7 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t
 {
     itemDefs_            = shaiya::client::ItemSData("./data/game/Item.SData");
     synchronizer_        = std::make_unique<ParallelClientSynchronizer>();
-    characterSerializer_ = std::make_unique<DatabaseCharacterSerializer>(db, itemDefs_, worldId);
+    playerSerializer_    = std::make_unique<DatabasePlayerSerializer>(db, itemDefs_, worldId);
 }
 
 /**
@@ -53,14 +53,14 @@ void GameWorldService::tick(size_t tickRate)
         finaliseUnregistrations();
 
         // Process all the queued incoming packets
-        for (auto&& character: characters_)
-            character->session().processQueue();
+        for (auto&& player: players_)
+            player->session().processQueue();
 
         // Pulse the game world
         scheduler_.pulse();
 
         // Synchronize the characters with the world state
-        synchronizer_->synchronize(characters_);
+        synchronizer_->synchronize(players_);
 
         // The current time
         auto now = steady_clock::now();
@@ -80,26 +80,26 @@ void GameWorldService::tick(size_t tickRate)
  * Handles the registration of a character to this game world.
  * @param character The character to register.
  */
-void GameWorldService::registerCharacter(std::shared_ptr<Player> character)
+void GameWorldService::registerPlayer(std::shared_ptr<Player> character)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
 
     // Add the character to the queue of characters that need to be registered
-    newCharacters_.push(std::move(character));
+    newPlayers_.push(std::move(character));
 }
 
 /**
  * Removes a character from this game world.
  * @param character The character to remove.
  */
-void GameWorldService::unregisterCharacter(std::shared_ptr<Player> character)
+void GameWorldService::unregisterPlayer(std::shared_ptr<Player> character)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
 
     // Adds the character to the queue of characters that need to be unregistered
-    oldCharacters_.push(std::move(character));
+    oldPlayers_.push(std::move(character));
 }
 
 /**
@@ -183,14 +183,14 @@ void GameWorldService::finaliseRegistrations()
     std::lock_guard lock{ mutex_ };
 
     // Process the registrations
-    while (!newCharacters_.empty())
+    while (!newPlayers_.empty())
     {
-        auto character = newCharacters_.front();
-        newCharacters_.pop();
-        characters_.push_back(character);
+        auto character = newPlayers_.front();
+        newPlayers_.pop();
+        players_.push_back(character);
 
         auto load = [&, character]() {
-            characterSerializer_->load(*character);
+            playerSerializer_->load(*character);
             character->init();
         };
         ASYNC(load)
@@ -206,11 +206,11 @@ void GameWorldService::finaliseUnregistrations()
     std::lock_guard lock{ mutex_ };
 
     // Process the unregistrations
-    while (!oldCharacters_.empty())
+    while (!oldPlayers_.empty())
     {
         // Deactivate the character
-        auto character = oldCharacters_.front();
-        oldCharacters_.pop();
+        auto character = oldPlayers_.front();
+        oldPlayers_.pop();
         character->deactivate();
 
         // Remove the character from their map
@@ -218,15 +218,15 @@ void GameWorldService::finaliseUnregistrations()
         map->remove(character);
 
         auto finalise = [&, character = std::move(character)]() {
-            characterSerializer_->save(*character);
+            playerSerializer_->save(*character);
 
             // Find the character
             auto predicate = [&](auto& element) { return element.get() == character.get(); };
-            auto pos       = std::find_if(characters_.begin(), characters_.end(), predicate);
+            auto pos       = std::find_if(players_.begin(), players_.end(), predicate);
 
             // Remove the character
-            if (pos != characters_.end())
-                characters_.erase(pos);
+            if (pos != players_.end())
+                players_.erase(pos);
         };
         ASYNC(finalise)
     }

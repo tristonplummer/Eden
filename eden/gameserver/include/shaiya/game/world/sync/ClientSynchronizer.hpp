@@ -13,8 +13,8 @@ namespace shaiya::game
     public:
         /**
          * Synchronizes the state of the clients with the stat of the server.
-         * @param characters    The vector containing the player characters.
+         * @param players    The vector containing the player characters.
          */
-        virtual void synchronize(std::vector<std::shared_ptr<Player>> characters) = 0;
+        virtual void synchronize(std::vector<std::shared_ptr<Player>> players) = 0;
     };
 }

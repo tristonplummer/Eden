@@ -7,9 +7,9 @@ using namespace shaiya::net;
 
 /**
  * Initialise the action bar for a character.
- * @param character The character instance.
+ * @param player The character instance.
  */
-ActionBar::ActionBar(Player& character): character_(character)
+ActionBar::ActionBar(Player& player): player_(player)
 {
 }
 
@@ -19,5 +19,5 @@ ActionBar::ActionBar(Player& character): character_(character)
 void ActionBar::sync()
 {
     // Send an empty action bar, for now.
-    character_.session().write(CharacterActionBarUpdate{});
+    player_.session().write(CharacterActionBarUpdate{});
 }

@@ -38,16 +38,16 @@ namespace shaiya::game
         void tick(size_t tickRate);
 
         /**
-         * Handles the registration of a character to this game world.
-         * @param character The character to register.
+         * Handles the registration of a player to this game world.
+         * @param player    The player to register.
          */
-        void registerCharacter(std::shared_ptr<Player> character);
+        void registerPlayer(std::shared_ptr<Player> player);
 
         /**
-         * Removes a character from this game world.
-         * @param character The character to remove.
+         * Removes a player from this game world.
+         * @param player    The player to remove.
          */
-        void unregisterCharacter(std::shared_ptr<Player> character);
+        void unregisterPlayer(std::shared_ptr<Player> player);
 
         /**
          * Registers a ground item to this world.
@@ -74,12 +74,12 @@ namespace shaiya::game
         void unregisterNpc(std::shared_ptr<Npc> item);
 
         /**
-         * Finalises the registration of characters that are queued to be registered.
+         * Finalises the registration of players that are queued to be registered.
          */
         void finaliseRegistrations();
 
         /**
-         * Finalises the unregistration of characters that are queued to be unregistered.
+         * Finalises the unregistration of players that are queued to be unregistered.
          */
         void finaliseUnregistrations();
 
@@ -133,19 +133,19 @@ namespace shaiya::game
         shaiya::client::ItemSData itemDefs_;
 
         /**
-         * A vector containing the characters that are connected to this game world.
+         * A vector containing the players that are connected to this game world.
          */
-        std::vector<std::shared_ptr<Player>> characters_;
+        std::vector<std::shared_ptr<Player>> players_;
 
         /**
-         * The characters that are pending registration
+         * The players that are pending registration
          */
-        std::queue<std::shared_ptr<Player>> newCharacters_;
+        std::queue<std::shared_ptr<Player>> newPlayers_;
 
         /**
-         * The characters that are pending unregistration
+         * The players that are pending unregistration
          */
-        std::queue<std::shared_ptr<Player>> oldCharacters_;
+        std::queue<std::shared_ptr<Player>> oldPlayers_;
 
         /**
          * A container that holds all of the ground items that exist in the world.
@@ -163,9 +163,9 @@ namespace shaiya::game
         std::unique_ptr<ClientSynchronizer> synchronizer_;
 
         /**
-         * The character serializer
+         * The player serializer
          */
-        std::unique_ptr<CharacterSerializer> characterSerializer_;
+        std::unique_ptr<PlayerSerializer> playerSerializer_;
 
         /**
          * The map repository.

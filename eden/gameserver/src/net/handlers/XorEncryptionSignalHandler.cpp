@@ -12,11 +12,11 @@ using namespace shaiya::net;
  */
 void handleXorSignal(Session& session, const XorEncryptionSignal& request)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto player = game.player();
 
     // Send the character their action bar
-    character->actionBar().sync();
+    player->actionBar().sync();
     game.initXorEncryption();
 }
 

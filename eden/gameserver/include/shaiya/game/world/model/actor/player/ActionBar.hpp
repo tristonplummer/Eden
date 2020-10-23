@@ -4,16 +4,16 @@
 namespace shaiya::game
 {
     /**
-     * Represents a character's action bar.
+     * Represents a player's action bar.
      */
     class ActionBar
     {
     public:
         /**
-         * Initialise the action bar for a character.
-         * @param character The character instance.
+         * Initialise the action bar for a player.
+         * @param player The player instance.
          */
-        explicit ActionBar(Player& character);
+        explicit ActionBar(Player& player);
 
         /**
          * Informs the character about the state of their action bar.
@@ -22,8 +22,8 @@ namespace shaiya::game
 
     private:
         /**
-         * The character who owns this action bar.
+         * The player who owns this action bar.
          */
-        Player& character_;
+        Player& player_;
     };
 }

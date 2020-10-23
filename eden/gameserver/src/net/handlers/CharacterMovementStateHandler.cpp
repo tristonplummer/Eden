@@ -17,18 +17,14 @@ void handleMovementState(Session& session, const MovementStateUpdate& movement)
 {
     auto& game  = dynamic_cast<GameSession&>(session);
     auto& world = game.context().getGameWorld();
-
-    // Get the character instance
-    auto character = game.character();
-    if (!character)
-        return;
+    auto player = game.player();
 
     // Movement state value can't be higher than a backflip
     if (movement.state > MovementState::Backflip)
         return;
 
     // Update the character's movement state
-    character->setMovementState(movement.state);
+    player->setMovementState(movement.state);
 }
 
 /**

@@ -17,11 +17,11 @@ using namespace shaiya::game;
  */
 void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& request)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto& world    = game.context().getGameWorld();
-    auto character = game.character();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto& world = game.context().getGameWorld();
+    auto player = game.player();
 
-    auto& inventory = character->inventory();
+    auto& inventory = player->inventory();
 
     auto page = request.page;
     auto slot = request.slot;
@@ -46,7 +46,7 @@ void handleRemoveItem(Session& session, const CharacterRemoveItemRequest& reques
     world.registerItem(groundItem);
 
     // Place the item at the character's feet.
-    groundItem->setPosition(character->position());
+    groundItem->setPosition(player->position());
 }
 
 /**

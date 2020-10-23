@@ -17,19 +17,19 @@ using namespace shaiya::game;
  */
 void handlePickupItem(Session& session, const CharacterPickupItemRequest& request)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto& world    = game.context().getGameWorld();
-    auto character = game.character();
-    auto& pos      = character->position();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto& world = game.context().getGameWorld();
+    auto player = game.player();
+    auto& pos   = player->position();
 
-    auto map    = character->map();
+    auto map    = player->map();
     auto entity = map->get(pos, request.id, EntityType::Item);
     if (!entity)
         return;
 
     auto groundItem = std::dynamic_pointer_cast<GroundItem>(entity);
     auto item       = groundItem->item();
-    character->inventory().add(std::move(item));
+    player->inventory().add(std::move(item));
 
     world.unregisterItem(groundItem);
 }

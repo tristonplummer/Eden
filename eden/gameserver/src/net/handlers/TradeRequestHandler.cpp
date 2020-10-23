@@ -17,25 +17,25 @@ using namespace shaiya::game;
  */
 void handleTradeRequest(Session& session, const CharacterTradeRequest& request)
 {
-    auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto& game  = dynamic_cast<GameSession&>(session);
+    auto player = game.player();
 
-    auto& pos   = character->position();
-    auto map    = character->map();
-    auto target = map->get<Player>(pos, request.target, EntityType::Character);
+    auto& pos   = player->position();
+    auto map    = player->map();
+    auto target = map->get<Player>(pos, request.target, EntityType::Player);
 
     if (!target)
         return;
 
     // If we can send a request to the target
-    auto& requests = character->requests();
+    auto& requests = player->requests();
     if (!requests.request(target, RequestType::Trade))
     {
         return;
     }
 
     CharacterTradeRequest outgoingRequest;
-    outgoingRequest.target = character->id();
+    outgoingRequest.target = player->id();
     target->session().write(outgoingRequest);
 }
 
@@ -47,13 +47,13 @@ void handleTradeRequest(Session& session, const CharacterTradeRequest& request)
 void handleTradeResponse(Session& session, const CharacterTradeResponse& response)
 {
     auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto character = game.player();
 
     auto id        = character->getAttribute<size_t>(Attribute::LastRequestingCharacter, 0);
     auto& pos      = character->position();
     auto map       = character->map();
     auto& requests = character->requests();
-    auto target    = map->get<Player>(pos, id, EntityType::Character);
+    auto target    = map->get<Player>(pos, id, EntityType::Player);
 
     if (!target)
         return;
@@ -74,7 +74,7 @@ void handleTradeResponse(Session& session, const CharacterTradeResponse& respons
 void handleTradeFinalise(Session& session, const CharacterTradeFinaliseRequest& req)
 {
     auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto character = game.player();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
     if (!request || request->type() != RequestType::Trade)
@@ -96,7 +96,7 @@ void handleTradeFinalise(Session& session, const CharacterTradeFinaliseRequest& 
 void handleTradeConfirm(Session& session, const CharacterConfirmTrade& req)
 {
     auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto character = game.player();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
     if (!request || request->type() != RequestType::Trade)
@@ -118,7 +118,7 @@ void handleTradeConfirm(Session& session, const CharacterConfirmTrade& req)
 void handleTradeGoldOffer(Session& session, const CharacterTradeOfferGoldRequest& offer)
 {
     auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto character = game.player();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
     if (!request || request->type() != RequestType::Trade)
@@ -136,7 +136,7 @@ void handleTradeGoldOffer(Session& session, const CharacterTradeOfferGoldRequest
 void handleTradeItemOffer(Session& session, const CharacterTradeOfferItemRequest& offer)
 {
     auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto character = game.player();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
     if (!request || request->type() != RequestType::Trade)
@@ -164,7 +164,7 @@ void handleTradeItemOffer(Session& session, const CharacterTradeOfferItemRequest
 void handleTradeItemRemove(Session& session, const CharacterTradeRemoveItemRequest& offer)
 {
     auto& game     = dynamic_cast<GameSession&>(session);
-    auto character = game.character();
+    auto character = game.player();
 
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
     if (!request || request->type() != RequestType::Trade)
