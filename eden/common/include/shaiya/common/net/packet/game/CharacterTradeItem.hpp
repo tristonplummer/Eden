@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/common/DataTypes.hpp>
 #include <shaiya/common/net/packet/game/CharacterItem.hpp>
+#include <shaiya/common/net/packet/game/CharacterTradeRequest.hpp>
 
 namespace shaiya::net
 {

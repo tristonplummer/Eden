@@ -5,6 +5,7 @@
 #include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
+#include <shaiya/game/world/model/item/container/event/TradeEventListener.hpp>
 
 #include <utility>
 
@@ -43,6 +44,7 @@ TradeRequest::TradeRequest(std::shared_ptr<Character> player, std::shared_ptr<Ch
 
     // Initialise the trade container
     container_ = std::make_unique<ItemContainer>(TradeWindowCapacity);
+    container_->addListener(std::make_shared<TradeEventListener>(player_, partner_));
 }
 
 /**
@@ -94,14 +96,6 @@ bool TradeRequest::offerItem(size_t slot, size_t quantity, size_t destSlot)
     item     = std::make_shared<Item>(*item);
     item->setQuantity(quantity);
     container_->add(item, destSlot);
-
-    // Inform our partner
-    CharacterTradePartnerOfferItem offer;
-    offer.slot     = destSlot;
-    offer.type     = item->type();
-    offer.typeId   = item->typeId();
-    offer.quantity = item->quantity();
-    partner_->session().write(offer);
     return true;
 }
 
@@ -116,9 +110,6 @@ void TradeRequest::removeItem(size_t slot)
 
     auto item = container_->remove(slot);
     inventory_->add(std::move(item));
-
-    // Inform our partner
-    partner_->session().write(CharacterTradePartnerOfferItem{ .slot = static_cast<uint8_t>(slot) });
 }
 
 /**
