@@ -14,7 +14,7 @@ namespace shaiya::game
          * Initialise the synchronization task.
          * @param character The character we're currently synchronizing.
          */
-        explicit MapSynchronizationTask(Character& character);
+        explicit MapSynchronizationTask(Player& character);
 
         /**
          * Synchronizes the character.
@@ -37,6 +37,6 @@ namespace shaiya::game
         /**
          * The character we're currently synchronizing.
          */
-        Character& character_;
+        Player& character_;
     };
 }

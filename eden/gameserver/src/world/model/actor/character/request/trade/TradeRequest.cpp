@@ -3,8 +3,8 @@
 #include <shaiya/common/net/packet/game/CharacterTradeGold.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
-#include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
+#include <shaiya/game/world/model/actor/player/request/trade/TradeRequest.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/model/item/container/event/TradeEventListener.hpp>
 
@@ -23,7 +23,7 @@ constexpr auto TradeWindowCapacity = 8;
  * @param character The character to get the trade request for.
  * @return          The trade request.
  */
-auto tradeRequest = [](const std::shared_ptr<Character>& character) -> std::shared_ptr<TradeRequest> {
+auto tradeRequest = [](const std::shared_ptr<Player>& character) -> std::shared_ptr<TradeRequest> {
     auto request = character->getAttribute<std::shared_ptr<Request>>(Attribute::Request, nullptr);
     return std::dynamic_pointer_cast<TradeRequest>(request);
 };
@@ -33,7 +33,7 @@ auto tradeRequest = [](const std::shared_ptr<Character>& character) -> std::shar
  * @param player    The player who made the request.
  * @param partner   The request partner.
  */
-TradeRequest::TradeRequest(std::shared_ptr<Character> player, std::shared_ptr<Character> partner)
+TradeRequest::TradeRequest(std::shared_ptr<Player> player, std::shared_ptr<Player> partner)
     : Request(std::move(player), std::move(partner))
 {
     type_ = RequestType::Trade;

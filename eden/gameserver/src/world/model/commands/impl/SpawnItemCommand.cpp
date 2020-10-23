@@ -1,5 +1,5 @@
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnItemCommand.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 
@@ -14,7 +14,7 @@ using namespace shaiya::game;
  * @param character     The character that executed this command.
  * @param args          The command arguments
  */
-void SpawnItemCommand::execute(Character& character, const std::vector<std::string>& args)
+void SpawnItemCommand::execute(Player& character, const std::vector<std::string>& args)
 {
     if (args.size() < 2)
         return;

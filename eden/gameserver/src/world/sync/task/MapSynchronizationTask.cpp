@@ -1,6 +1,6 @@
 #include <shaiya/common/net/packet/game/MapGroundItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/sync/task/MapSynchronizationTask.hpp>
@@ -12,7 +12,7 @@ using namespace shaiya::net;
  * Initialise the synchronization task.
  * @param character The character we're currently synchronizing.
  */
-MapSynchronizationTask::MapSynchronizationTask(Character& character): character_(character)
+MapSynchronizationTask::MapSynchronizationTask(Player& character): character_(character)
 {
 }
 

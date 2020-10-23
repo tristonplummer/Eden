@@ -6,7 +6,7 @@
 #include <shaiya/common/net/packet/game/CharacterMovement.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/world/model/EntityType.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/sync/task/CharacterSynchronizationTask.hpp>
 
@@ -17,7 +17,7 @@ using namespace shaiya::net;
  * Initialise the synchronization task.
  * @param character The character we're currently synchronizing.
  */
-CharacterSynchronizationTask::CharacterSynchronizationTask(Character& character): character_(character)
+CharacterSynchronizationTask::CharacterSynchronizationTask(Player& character): character_(character)
 {
 }
 
@@ -36,7 +36,7 @@ void CharacterSynchronizationTask::sync()
     for (auto&& observed: observedCharacters)
     {
         if (observed->type() == EntityType::Character)
-            processUpdateFlags(dynamic_cast<Character&>(*observed));
+            processUpdateFlags(dynamic_cast<Player&>(*observed));
     }
 }
 
@@ -44,7 +44,7 @@ void CharacterSynchronizationTask::sync()
  * Adds a character to the current character's viewport.
  * @param other The character to add.
  */
-void CharacterSynchronizationTask::addCharacter(const Character& other)
+void CharacterSynchronizationTask::addCharacter(const Player& other)
 {
     // The character's session
     auto& session = character_.session();
@@ -68,7 +68,7 @@ void CharacterSynchronizationTask::addCharacter(const Character& other)
  * Removes a character from the current character's viewport.
  * @param other The character to remove.
  */
-void CharacterSynchronizationTask::removeCharacter(const Character& other)
+void CharacterSynchronizationTask::removeCharacter(const Player& other)
 {
     // Inform the character that the other character has left our viewport.
     CharacterLeftViewport notification;
@@ -80,7 +80,7 @@ void CharacterSynchronizationTask::removeCharacter(const Character& other)
  * Process the update flags for a character.
  * @param other The character to update for this character.
  */
-void CharacterSynchronizationTask::processUpdateFlags(const Character& other)
+void CharacterSynchronizationTask::processUpdateFlags(const Player& other)
 {
     // Update appearance
     if (other.hasUpdateFlag(UpdateFlag::Appearance))
@@ -103,7 +103,7 @@ void CharacterSynchronizationTask::processUpdateFlags(const Character& other)
  * Update the appearance of a character, for the current character.
  * @param other The character to update.
  */
-void CharacterSynchronizationTask::updateAppearance(const Character& other)
+void CharacterSynchronizationTask::updateAppearance(const Player& other)
 {
     // The appearance of the character
     auto& app = other.appearance();
@@ -139,7 +139,7 @@ void CharacterSynchronizationTask::updateAppearance(const Character& other)
  * Updates the movement of a character, for the current character.
  * @param other The character to update.
  */
-void CharacterSynchronizationTask::updateMovement(const Character& other)
+void CharacterSynchronizationTask::updateMovement(const Player& other)
 {
     // The character's position
     auto& pos = other.position();
@@ -159,7 +159,7 @@ void CharacterSynchronizationTask::updateMovement(const Character& other)
  * Updates the movement state of a character, for the current character.
  * @param other The character to update.
  */
-void CharacterSynchronizationTask::updateMovementState(const Character& other)
+void CharacterSynchronizationTask::updateMovementState(const Player& other)
 {
     // Construct the movement state notification
     MovementStateNotification update;
@@ -172,7 +172,7 @@ void CharacterSynchronizationTask::updateMovementState(const Character& other)
  * Updates the chat of a character, for the other character.
  * @param other The character to update.
  */
-void CharacterSynchronizationTask::updateChat(const Character& other)
+void CharacterSynchronizationTask::updateChat(const Player& other)
 {
     auto chatMessage = other.getAttribute<std::string>(Attribute::LastChatMessage);
 

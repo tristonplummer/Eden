@@ -1,7 +1,7 @@
 #include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 
 #include <glog/logging.h>
@@ -53,7 +53,7 @@ DatabaseCharacterSerializer::DatabaseCharacterSerializer(DatabaseService& db, sh
  * Loads a player character.
  * @param character The character to load.
  */
-bool DatabaseCharacterSerializer::load(Character& character)
+bool DatabaseCharacterSerializer::load(Player& character)
 {
     try
     {
@@ -121,7 +121,7 @@ bool DatabaseCharacterSerializer::load(Character& character)
  * @param character The character.
  * @return          If the inventory was successfully loaded.
  */
-bool DatabaseCharacterSerializer::loadInventory(Character& character)
+bool DatabaseCharacterSerializer::loadInventory(Player& character)
 {
     try
     {
@@ -172,7 +172,7 @@ bool DatabaseCharacterSerializer::loadInventory(Character& character)
  * @param character The character.
  * @return          If the equipment was successfully loaded.
  */
-bool DatabaseCharacterSerializer::loadEquipment(Character& character)
+bool DatabaseCharacterSerializer::loadEquipment(Player& character)
 {
     try
     {
@@ -217,7 +217,7 @@ bool DatabaseCharacterSerializer::loadEquipment(Character& character)
  * Saves a player character.
  * @param character The character to save.
  */
-void DatabaseCharacterSerializer::save(Character& character)
+void DatabaseCharacterSerializer::save(Player& character)
 {
     try
     {

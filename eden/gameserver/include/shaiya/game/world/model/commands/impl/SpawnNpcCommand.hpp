@@ -14,7 +14,7 @@ namespace shaiya::game
          * @param character     The character that executed this command.
          * @param args          The command arguments
          */
-        void execute(Character& character, const std::vector<std::string>& args) override;
+        void execute(Player& character, const std::vector<std::string>& args) override;
 
         /**
          * Gets the identifier of the command.

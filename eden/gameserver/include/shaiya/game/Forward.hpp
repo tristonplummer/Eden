@@ -30,7 +30,7 @@ namespace shaiya::game
     class Actor;
     class StatSet;
     class Npc;
-    class Character;
+    class Player;
     class Appearance;
     class ActionBar;
 

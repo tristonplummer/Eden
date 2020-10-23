@@ -3,8 +3,8 @@
 #include <shaiya/common/net/packet/game/CharacterTradeGold.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
-#include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
+#include <shaiya/game/world/model/actor/player/request/trade/TradeRequest.hpp>
 #include <shaiya/game/world/model/map/Map.hpp>
 
 using namespace shaiya::net;
@@ -22,7 +22,7 @@ void handleTradeRequest(Session& session, const CharacterTradeRequest& request)
 
     auto& pos   = character->position();
     auto map    = character->map();
-    auto target = map->get<Character>(pos, request.target, EntityType::Character);
+    auto target = map->get<Player>(pos, request.target, EntityType::Character);
 
     if (!target)
         return;
@@ -53,7 +53,7 @@ void handleTradeResponse(Session& session, const CharacterTradeResponse& respons
     auto& pos      = character->position();
     auto map       = character->map();
     auto& requests = character->requests();
-    auto target    = map->get<Character>(pos, id, EntityType::Character);
+    auto target    = map->get<Player>(pos, id, EntityType::Character);
 
     if (!target)
         return;

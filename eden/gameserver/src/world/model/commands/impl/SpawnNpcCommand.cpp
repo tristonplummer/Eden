@@ -1,5 +1,5 @@
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/actor/npc/Npc.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnNpcCommand.hpp>
 
@@ -14,7 +14,7 @@ using namespace shaiya::game;
  * @param character     The character that executed this command.
  * @param args          The command arguments
  */
-void SpawnNpcCommand::execute(Character& character, const std::vector<std::string>& args)
+void SpawnNpcCommand::execute(Player& character, const std::vector<std::string>& args)
 {
     if (args.size() != 2)
         return;

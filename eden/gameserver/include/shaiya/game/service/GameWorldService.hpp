@@ -41,13 +41,13 @@ namespace shaiya::game
          * Handles the registration of a character to this game world.
          * @param character The character to register.
          */
-        void registerCharacter(std::shared_ptr<Character> character);
+        void registerCharacter(std::shared_ptr<Player> character);
 
         /**
          * Removes a character from this game world.
          * @param character The character to remove.
          */
-        void unregisterCharacter(std::shared_ptr<Character> character);
+        void unregisterCharacter(std::shared_ptr<Player> character);
 
         /**
          * Registers a ground item to this world.
@@ -135,17 +135,17 @@ namespace shaiya::game
         /**
          * A vector containing the characters that are connected to this game world.
          */
-        std::vector<std::shared_ptr<Character>> characters_;
+        std::vector<std::shared_ptr<Player>> characters_;
 
         /**
          * The characters that are pending registration
          */
-        std::queue<std::shared_ptr<Character>> newCharacters_;
+        std::queue<std::shared_ptr<Player>> newCharacters_;
 
         /**
          * The characters that are pending unregistration
          */
-        std::queue<std::shared_ptr<Character>> oldCharacters_;
+        std::queue<std::shared_ptr<Player>> oldCharacters_;
 
         /**
          * A container that holds all of the ground items that exist in the world.

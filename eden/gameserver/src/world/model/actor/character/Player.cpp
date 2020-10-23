@@ -5,8 +5,8 @@
 #include <shaiya/common/net/packet/game/WorldTime.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
-#include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
+#include <shaiya/game/world/model/actor/player/request/trade/TradeRequest.hpp>
 #include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
@@ -19,7 +19,7 @@ using namespace shaiya::game;
  * @param session   The session instance.
  * @param id        The character id.
  */
-Character::Character(GameSession& session, size_t id)
+Player::Player(GameSession& session, size_t id)
     : session_(session),
       actionBar_(*this),
       appearance_(*this),
@@ -37,7 +37,7 @@ Character::Character(GameSession& session, size_t id)
 /**
  * Initialises this character.
  */
-void Character::init()
+void Player::init()
 {
     // Initialise the base actor
     Actor::init();
@@ -87,7 +87,7 @@ void Character::init()
 /**
  * Marks this character as active.
  */
-void Character::activate()
+void Player::activate()
 {
     Actor::activate();
 }
@@ -97,7 +97,7 @@ void Character::activate()
  * @param stats     The stats for this character.
  * @param type      The update type.
  */
-void Character::onStatSync(const StatSet& stats, StatUpdateType type)
+void Player::onStatSync(const StatSet& stats, StatUpdateType type)
 {
     // A status update is just an update about our current health
     CharacterCurrentHitpoints status;
@@ -146,7 +146,7 @@ void Character::onStatSync(const StatSet& stats, StatUpdateType type)
  * Sets the amount of statpoints for this character.
  * @param statpoints    The character's statpoints.
  */
-void Character::setStatpoints(size_t statpoints)
+void Player::setStatpoints(size_t statpoints)
 {
     statpoints_ = statpoints;
 }
@@ -155,7 +155,7 @@ void Character::setStatpoints(size_t statpoints)
  * Sets the movement state of a character.
  * @param movementState The new movement state.
  */
-void Character::setMovementState(MovementState movementState)
+void Player::setMovementState(MovementState movementState)
 {
     // If the previous movement state is not jumping or performing a backflip, flag an update.
     if (movementState_ != MovementState::Jumping && movementState_ != MovementState::Backflip)
@@ -166,7 +166,7 @@ void Character::setMovementState(MovementState movementState)
 /**
  * Resets the movement state of a character.
  */
-void Character::resetMovementState()
+void Player::resetMovementState()
 {
     // If the current movement state is standing or sitting, do nothing
     if (movementState_ == MovementState::Standing || movementState_ == MovementState::Sitting)
@@ -178,7 +178,7 @@ void Character::resetMovementState()
  * Sets the race for this character.
  * @param race  The race for this character.
  */
-void Character::setRace(ShaiyaRace race)
+void Player::setRace(ShaiyaRace race)
 {
     if (race_ == race)
         return;
@@ -190,7 +190,7 @@ void Character::setRace(ShaiyaRace race)
  * Sets the position of this entity.
  * @param position  The position.
  */
-void Character::setPosition(Position position)
+void Player::setPosition(Position position)
 {
     Actor::setPosition(position);
 

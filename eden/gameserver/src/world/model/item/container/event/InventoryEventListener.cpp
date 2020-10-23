@@ -2,7 +2,7 @@
 #include <shaiya/common/net/packet/game/CharacterItem.hpp>
 #include <shaiya/common/net/packet/game/CharacterRemoveItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/model/item/container/event/InventoryEventListener.hpp>
 
@@ -13,7 +13,7 @@ using namespace shaiya::net;
  * Initialises this event listener for a character.
  * @param character The character that is listening to events.
  */
-InventoryEventListener::InventoryEventListener(Character& character): character_(character)
+InventoryEventListener::InventoryEventListener(Player& character): character_(character)
 {
 }
 

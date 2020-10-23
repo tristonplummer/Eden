@@ -17,7 +17,7 @@ namespace shaiya::game
          * @param character     The character that executed this command.
          * @param args          The command arguments
          */
-        virtual void execute(Character& character, const std::vector<std::string>& args) = 0;
+        virtual void execute(Player& character, const std::vector<std::string>& args) = 0;
 
         /**
          * Gets the identifier of the command.

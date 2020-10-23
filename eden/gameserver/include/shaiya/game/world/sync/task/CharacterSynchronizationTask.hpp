@@ -15,7 +15,7 @@ namespace shaiya::game
          * Initialise the synchronization task.
          * @param character The character we're currently synchronizing.
          */
-        explicit CharacterSynchronizationTask(Character& character);
+        explicit CharacterSynchronizationTask(Player& character);
 
         /**
          * Synchronizes the character.
@@ -26,48 +26,48 @@ namespace shaiya::game
          * Adds a character to the current character's viewport.
          * @param other The character to add.
          */
-        void addCharacter(const Character& other);
+        void addCharacter(const Player& other);
 
         /**
          * Removes a character from the current character's viewport.
          * @param other The character to remove.
          */
-        void removeCharacter(const Character& other);
+        void removeCharacter(const Player& other);
 
     private:
         /**
          * Process the update flags for a character.
          * @param other The character to update for this character.
          */
-        void processUpdateFlags(const Character& other);
+        void processUpdateFlags(const Player& other);
 
         /**
          * Update the appearance of a character, for the current character.
          * @param other The character to update.
          */
-        void updateAppearance(const Character& other);
+        void updateAppearance(const Player& other);
 
         /**
          * Updates the movement of a character, for the current character.
          * @param other The character to update.
          */
-        void updateMovement(const Character& other);
+        void updateMovement(const Player& other);
 
         /**
          * Updates the movement state of a character, for the current character.
          * @param other The character to update.
          */
-        void updateMovementState(const Character& other);
+        void updateMovementState(const Player& other);
 
         /**
          * Updates the chat of a character, for the other character.
          * @param other The character to update.
          */
-        void updateChat(const Character& other);
+        void updateChat(const Player& other);
 
         /**
          * The character we're currently synchronizing.
          */
-        Character& character_;
+        Player& character_;
     };
 }

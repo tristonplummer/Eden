@@ -3,7 +3,7 @@
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 

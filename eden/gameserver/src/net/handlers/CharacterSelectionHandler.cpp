@@ -3,7 +3,7 @@
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/service/ServiceContext.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 
 using namespace shaiya;
 using namespace shaiya::net;
@@ -26,7 +26,7 @@ void handleCharacterSelect(Session& session, const CharacterSelectionRequest& re
     game.write(response);
 
     // The character instance
-    auto character = std::make_shared<Character>(game, request.charId);
+    auto character = std::make_shared<Player>(game, request.charId);
     game.setCharacter(character);
 
     // Register the character

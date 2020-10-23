@@ -3,7 +3,7 @@
 #include <shaiya/game/io/impl/DatabaseCharacterSerializer.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/actor/npc/Npc.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
 #include <shaiya/game/world/model/map/Map.hpp>
@@ -80,7 +80,7 @@ void GameWorldService::tick(size_t tickRate)
  * Handles the registration of a character to this game world.
  * @param character The character to register.
  */
-void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
+void GameWorldService::registerCharacter(std::shared_ptr<Player> character)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
@@ -93,7 +93,7 @@ void GameWorldService::registerCharacter(std::shared_ptr<Character> character)
  * Removes a character from this game world.
  * @param character The character to remove.
  */
-void GameWorldService::unregisterCharacter(std::shared_ptr<Character> character)
+void GameWorldService::unregisterCharacter(std::shared_ptr<Player> character)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };

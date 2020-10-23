@@ -1,4 +1,4 @@
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 
 using namespace shaiya::game;
 
@@ -7,7 +7,7 @@ using namespace shaiya::game;
  * @param player    The player who made the request.
  * @param partner   The request partner.
  */
-Request::Request(std::shared_ptr<Character> player, std::shared_ptr<Character> partner)
+Request::Request(std::shared_ptr<Player> player, std::shared_ptr<Player> partner)
     : player_(std::move(player)), partner_(std::move(partner))
 {
 }

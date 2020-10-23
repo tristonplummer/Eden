@@ -24,13 +24,13 @@ namespace shaiya::game
          * @param character The character to load.
          * @return          If the character was loaded successfully.
          */
-        bool load(Character& character) override;
+        bool load(Player& character) override;
 
         /**
          * Saves a player character.
          * @param character The character to save.
          */
-        void save(Character& character) override;
+        void save(Player& character) override;
 
     private:
         /**
@@ -53,13 +53,13 @@ namespace shaiya::game
          * @param character The character.
          * @return          If the inventory was successfully loaded.
          */
-        bool loadInventory(Character& character);
+        bool loadInventory(Player& character);
 
         /**
          * Loads the equipment of this character.
          * @param character The character.
          * @return          If the equipment was successfully loaded.
          */
-        bool loadEquipment(Character& character);
+        bool loadEquipment(Player& character);
     };
 }

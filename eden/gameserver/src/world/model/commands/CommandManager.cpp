@@ -1,4 +1,4 @@
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/commands/CommandManager.hpp>
 #include <shaiya/game/world/model/commands/impl/MoveNpcCommand.hpp>
 #include <shaiya/game/world/model/commands/impl/SpawnItemCommand.hpp>
@@ -27,7 +27,7 @@ CommandManager::CommandManager()
  * @param character The character that is trying to execute a command.
  * @param text      The command text.
  */
-void CommandManager::execute(Character& character, const std::string& text) const
+void CommandManager::execute(Player& character, const std::string& text) const
 {
     using namespace std;
     using namespace boost;

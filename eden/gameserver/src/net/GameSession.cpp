@@ -85,7 +85,7 @@ void GameSession::setFaction(ShaiyaFaction faction)
  * Sets the character instance for this session.
  * @param character The character.
  */
-void GameSession::setCharacter(std::shared_ptr<shaiya::game::Character> character)
+void GameSession::setCharacter(std::shared_ptr<shaiya::game::Player> character)
 {
     character_ = std::move(character);
 }

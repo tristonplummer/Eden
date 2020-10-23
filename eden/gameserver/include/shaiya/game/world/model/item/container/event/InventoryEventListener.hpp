@@ -13,7 +13,7 @@ namespace shaiya::game
          * Initialises this event listener for a character.
          * @param character The character that is listening to events.
          */
-        explicit InventoryEventListener(Character& character);
+        explicit InventoryEventListener(Player& character);
 
         /**
          * Gets executed when an item is added to a container.
@@ -41,6 +41,6 @@ namespace shaiya::game
         /**
          * The character that is listening for these updates.
          */
-        Character& character_;
+        Player& character_;
     };
 }

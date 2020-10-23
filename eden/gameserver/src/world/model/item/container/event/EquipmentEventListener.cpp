@@ -1,6 +1,6 @@
 #include <shaiya/common/net/packet/game/CharacterItem.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/item/Item.hpp>
 #include <shaiya/game/world/model/item/container/ItemContainer.hpp>
 #include <shaiya/game/world/model/item/container/event/EquipmentEventListener.hpp>
@@ -12,7 +12,7 @@ using namespace shaiya::net;
  * Initialises this event listener for a character.
  * @param character The character that is listening to events.
  */
-EquipmentEventListener::EquipmentEventListener(Character& character): character_(character)
+EquipmentEventListener::EquipmentEventListener(Player& character): character_(character)
 {
 }
 

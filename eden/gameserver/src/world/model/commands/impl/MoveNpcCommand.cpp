@@ -1,5 +1,5 @@
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/actor/npc/Npc.hpp>
 #include <shaiya/game/world/model/commands/impl/MoveNpcCommand.hpp>
 #include <shaiya/game/world/model/map/Map.hpp>
@@ -15,7 +15,7 @@ using namespace shaiya::game;
  * @param character     The character that executed this command.
  * @param args          The command arguments
  */
-void MoveNpcCommand::execute(Character& character, const std::vector<std::string>& args)
+void MoveNpcCommand::execute(Player& character, const std::vector<std::string>& args)
 {
     auto id          = std::stoi(args.at(0));
     auto operation   = args.at(1);

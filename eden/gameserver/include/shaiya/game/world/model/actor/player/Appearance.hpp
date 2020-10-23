@@ -13,7 +13,7 @@ namespace shaiya::game
          * Initialise the appearance for a character.
          * @param character The character instance.
          */
-        explicit Appearance(Character& character);
+        explicit Appearance(Player& character);
 
         /**
          * Sets the hair for this appearance.
@@ -79,7 +79,7 @@ namespace shaiya::game
         /**
          * The character that owns this appearance.
          */
-        Character& character_;
+        Player& character_;
 
         /**
          * The hair of the character.

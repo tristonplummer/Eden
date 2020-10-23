@@ -1,5 +1,5 @@
-#include <shaiya/game/world/model/actor/character/Character.hpp>
-#include <shaiya/game/world/model/actor/character/request/trade/TradeRequest.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
+#include <shaiya/game/world/model/actor/player/request/trade/TradeRequest.hpp>
 
 using namespace shaiya::game;
 
@@ -7,7 +7,7 @@ using namespace shaiya::game;
  * Initialises the request manager for a character.
  * @param character The character to make requests for.
  */
-RequestManager::RequestManager(Character& character): character_(character)
+RequestManager::RequestManager(Player& character): character_(character)
 {
 }
 
@@ -17,7 +17,7 @@ RequestManager::RequestManager(Character& character): character_(character)
  * @param type      The request type.
  * @return          If the request was made.
  */
-bool RequestManager::request(std::shared_ptr<Character> partner, RequestType type)
+bool RequestManager::request(std::shared_ptr<Player> partner, RequestType type)
 {
     if (!canRequest(partner, type))
         return false;
@@ -36,7 +36,7 @@ bool RequestManager::request(std::shared_ptr<Character> partner, RequestType typ
  * @param type      The request type.
  * @return          If the request can be made.
  */
-bool RequestManager::canRequest(const std::shared_ptr<Character>& partner, RequestType type)
+bool RequestManager::canRequest(const std::shared_ptr<Player>& partner, RequestType type)
 {
     if (character_.id() == partner->id())  // We don't want players to be able to send requests to themselves.
         return false;
@@ -51,7 +51,7 @@ bool RequestManager::canRequest(const std::shared_ptr<Character>& partner, Reque
  * @param type      The request type.
  * @return          If an existing request was accepted.
  */
-bool RequestManager::acceptExisting(const std::shared_ptr<Character>& partner, RequestType type)
+bool RequestManager::acceptExisting(const std::shared_ptr<Player>& partner, RequestType type)
 {
     auto lastType = partner->getAttribute(Attribute::LastRequest, RequestType::None);
     if (lastType == type)
@@ -80,8 +80,8 @@ bool RequestManager::acceptExisting(const std::shared_ptr<Character>& partner, R
  * @param partner   The partner in the request.
  * @return          The request.
  */
-std::shared_ptr<Request> RequestManager::forType(RequestType type, std::shared_ptr<Character> player,
-                                                 std::shared_ptr<Character> partner)
+std::shared_ptr<Request> RequestManager::forType(RequestType type, std::shared_ptr<Player> player,
+                                                 std::shared_ptr<Player> partner)
 {
     switch (type)
     {

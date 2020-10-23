@@ -1,5 +1,5 @@
-#include <shaiya/game/world/model/actor/character/Appearance.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Appearance.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 
 using namespace shaiya;
 using namespace shaiya::game;
@@ -8,7 +8,7 @@ using namespace shaiya::game;
  * Initialise the appearance for a character.
  * @param character The character instance.
  */
-Appearance::Appearance(Character& character): character_(character)
+Appearance::Appearance(Player& character): character_(character)
 {
 }
 

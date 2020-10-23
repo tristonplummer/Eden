@@ -1,5 +1,5 @@
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/actor/npc/Npc.hpp>
 #include <shaiya/game/world/model/item/GroundItem.hpp>
 #include <shaiya/game/world/model/map/Map.hpp>
@@ -17,11 +17,11 @@ using namespace shaiya::game;
  * Synchronizes the state of the clients with the stat of the server.
  * @param characters    The vector containing the player characters.
  */
-void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Character>> characters)
+void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> characters)
 {
     // Run the synchroniser for each character, in parallel.
     std::for_each(std::execution::par_unseq, characters.begin(), characters.end(),
-                  [&](std::shared_ptr<Character>& character) { syncCharacter(*character); });
+                  [&](std::shared_ptr<Player>& character) { syncCharacter(*character); });
 
     // Finalise the update sequence for each character.
     for (auto&& character: characters)
@@ -42,7 +42,7 @@ void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Charact
  * Synchronizes a character.
  * @param character     The character to synchronize
  */
-void ParallelClientSynchronizer::syncCharacter(Character& character)
+void ParallelClientSynchronizer::syncCharacter(Player& character)
 {
     if (!character.active())
         return;
@@ -65,7 +65,7 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
         if (!entity->active() || !entity->observable(character))
         {
             if (entity->type() == EntityType::Character)
-                charsTask.removeCharacter(dynamic_cast<Character&>(*entity));
+                charsTask.removeCharacter(dynamic_cast<Player&>(*entity));
             else if (entity->type() == EntityType::Item)
                 mapTask.removeItem(dynamic_cast<GroundItem&>(*entity));
             else if (entity->type() == EntityType::Npc)
@@ -111,7 +111,7 @@ void ParallelClientSynchronizer::syncCharacter(Character& character)
 
             // Inform the relevant task
             if (entity->type() == EntityType::Character)
-                charsTask.addCharacter(dynamic_cast<Character&>(*entity));
+                charsTask.addCharacter(dynamic_cast<Player&>(*entity));
             else if (entity->type() == EntityType::Item)
                 mapTask.addItem(dynamic_cast<GroundItem&>(*entity));
             else if (entity->type() == EntityType::Npc)

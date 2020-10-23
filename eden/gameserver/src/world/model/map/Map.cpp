@@ -1,4 +1,4 @@
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/map/Map.hpp>
 #include <shaiya/game/world/model/map/MapCell.hpp>
 

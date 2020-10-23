@@ -1,6 +1,6 @@
 #pragma once
 #include <shaiya/game/Forward.hpp>
-#include <shaiya/game/world/model/actor/character/request/RequestType.hpp>
+#include <shaiya/game/world/model/actor/player/request/RequestType.hpp>
 
 namespace shaiya::game
 {
@@ -15,7 +15,7 @@ namespace shaiya::game
          * @param player    The player who made the request.
          * @param partner   The request partner.
          */
-        Request(std::shared_ptr<Character> player, std::shared_ptr<Character> partner);
+        Request(std::shared_ptr<Player> player, std::shared_ptr<Player> partner);
 
         /**
          * Opens this request.
@@ -31,7 +31,7 @@ namespace shaiya::game
          * Gets the partner of this request.
          * @return  The partner.
          */
-        [[nodiscard]] const std::shared_ptr<Character>& partner() const
+        [[nodiscard]] const std::shared_ptr<Player>& partner() const
         {
             return partner_;
         }
@@ -49,12 +49,12 @@ namespace shaiya::game
         /**
          * The player who made the request.
          */
-        std::shared_ptr<Character> player_;
+        std::shared_ptr<Player> player_;
 
         /**
          * The request partner.
          */
-        std::shared_ptr<Character> partner_;
+        std::shared_ptr<Player> partner_;
 
         /**
          * The type of this request.

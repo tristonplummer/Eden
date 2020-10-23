@@ -116,7 +116,7 @@ namespace shaiya::net
          * Sets the character instance for this session.
          * @param character The character.
          */
-        void setCharacter(std::shared_ptr<shaiya::game::Character> character);
+        void setCharacter(std::shared_ptr<shaiya::game::Player> character);
 
         /**
          * Gets executed when this session gets disconnected.
@@ -127,7 +127,7 @@ namespace shaiya::net
          * Gets the character associated with this session.
          * @return  The character instance.
          */
-        std::shared_ptr<shaiya::game::Character> character()
+        std::shared_ptr<shaiya::game::Player> character()
         {
             return character_;
         }
@@ -159,7 +159,7 @@ namespace shaiya::net
         /**
          * The character associated with this session.
          */
-        std::shared_ptr<shaiya::game::Character> character_{ nullptr };
+        std::shared_ptr<shaiya::game::Player> character_{ nullptr };
 
         /**
          * The XOR key to use in expanded encryption.

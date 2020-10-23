@@ -1,6 +1,6 @@
 #pragma once
 #include <shaiya/common/net/packet/game/CharacterTradeRequest.hpp>
-#include <shaiya/game/world/model/actor/character/request/Request.hpp>
+#include <shaiya/game/world/model/actor/player/request/Request.hpp>
 
 #include <vector>
 
@@ -17,7 +17,7 @@ namespace shaiya::game
          * @param player    The player who made the request.
          * @param partner   The request partner.
          */
-        TradeRequest(std::shared_ptr<Character> player, std::shared_ptr<Character> partner);
+        TradeRequest(std::shared_ptr<Player> player, std::shared_ptr<Player> partner);
 
         /**
          * Opens this request.

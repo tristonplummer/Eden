@@ -1,7 +1,7 @@
 #include <shaiya/common/net/packet/game/CharacterMapTeleport.hpp>
 #include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/model/commands/impl/TeleportCommand.hpp>
 
 #include <glog/logging.h>
@@ -16,7 +16,7 @@ using namespace shaiya::net;
  * @param character     The character that executed this command.
  * @param args          The command arguments
  */
-void TeleportCommand::execute(Character& character, const std::vector<std::string>& args)
+void TeleportCommand::execute(Player& character, const std::vector<std::string>& args)
 {
     if (args.size() != 3)
         return;

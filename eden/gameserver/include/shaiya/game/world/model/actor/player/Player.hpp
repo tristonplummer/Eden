@@ -3,9 +3,9 @@
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/world/model/actor/Actor.hpp>
 #include <shaiya/game/world/model/actor/StatSet.hpp>
-#include <shaiya/game/world/model/actor/character/ActionBar.hpp>
-#include <shaiya/game/world/model/actor/character/Appearance.hpp>
-#include <shaiya/game/world/model/actor/character/request/RequestManager.hpp>
+#include <shaiya/game/world/model/actor/player/ActionBar.hpp>
+#include <shaiya/game/world/model/actor/player/Appearance.hpp>
+#include <shaiya/game/world/model/actor/player/request/RequestManager.hpp>
 
 #include <vector>
 
@@ -14,7 +14,7 @@ namespace shaiya::game
     /**
      * Represents a player character.
      */
-    class Character: public Actor
+    class Player: public Actor
     {
     public:
         /**
@@ -22,7 +22,7 @@ namespace shaiya::game
          * @param session   The session instance.
          * @param id        The character id.
          */
-        Character(shaiya::net::GameSession& session, size_t id);
+        Player(shaiya::net::GameSession& session, size_t id);
 
         /**
          * Initialises this character.

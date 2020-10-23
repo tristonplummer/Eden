@@ -3,8 +3,8 @@
 #include <shaiya/common/net/packet/game/NpcLeftViewport.hpp>
 #include <shaiya/common/net/packet/game/NpcMovement.hpp>
 #include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/world/model/actor/character/Character.hpp>
 #include <shaiya/game/world/model/actor/npc/Npc.hpp>
+#include <shaiya/game/world/model/actor/player/Player.hpp>
 #include <shaiya/game/world/sync/task/NpcSynchronizationTask.hpp>
 
 using namespace shaiya::game;
@@ -14,7 +14,7 @@ using namespace shaiya::net;
  * Initialise the synchronization task.
  * @param character The character we're currently synchronizing.
  */
-NpcSynchronizationTask::NpcSynchronizationTask(Character& character): character_(character)
+NpcSynchronizationTask::NpcSynchronizationTask(Player& character): character_(character)
 {
 }
 

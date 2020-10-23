@@ -13,7 +13,7 @@ namespace shaiya::game
          * Initialise the action bar for a character.
          * @param character The character instance.
          */
-        explicit ActionBar(Character& character);
+        explicit ActionBar(Player& character);
 
         /**
          * Informs the character about the state of their action bar.
@@ -24,6 +24,6 @@ namespace shaiya::game
         /**
          * The character who owns this action bar.
          */
-        Character& character_;
+        Player& character_;
     };
 }

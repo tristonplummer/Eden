@@ -14,7 +14,7 @@ namespace shaiya::game
          * @param character The character to listen for.
          * @param trade     The trade session.
          */
-        TradeEventListener(std::shared_ptr<Character> character, TradeRequest& trade);
+        TradeEventListener(std::shared_ptr<Player> character, TradeRequest& trade);
 
         /**
          * Gets executed when an item is moved from the inventory.
@@ -30,7 +30,7 @@ namespace shaiya::game
         /**
          * The character instance.
          */
-        std::shared_ptr<Character> character_;
+        std::shared_ptr<Player> character_;
 
         /**
          * The trade session.

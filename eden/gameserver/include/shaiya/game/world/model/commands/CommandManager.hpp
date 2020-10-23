@@ -22,7 +22,7 @@ namespace shaiya::game
          * @param character The character that is trying to execute a command.
          * @param text      The command text.
          */
-        void execute(Character& character, const std::string& text) const;
+        void execute(Player& character, const std::string& text) const;
 
     private:
         /**
