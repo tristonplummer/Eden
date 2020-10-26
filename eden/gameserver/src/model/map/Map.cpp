@@ -1,6 +1,10 @@
+#include <shaiya/common/util/Json.hpp>
+#include <shaiya/game/model/actor/npc/Npc.hpp>
+#include <shaiya/game/model/actor/npc/NpcDefinition.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapCell.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -23,6 +27,14 @@ constexpr auto CELL_SIZE = 16;
  * The observable radius from a center cell.
  */
 constexpr auto OBSERVABLE_CELL_RADIUS = 3;
+
+/**
+ * Initialises this map.
+ * @param world The world instance.
+ */
+Map::Map(GameWorldService& world): world_(world)
+{
+}
 
 /**
  * Loads this map by populating the cells, and parsing the heightmap and objects.
@@ -53,6 +65,47 @@ void Map::load(std::ifstream& stream)
     // Generate the cells
     for (auto i = 0; i < totalCells; i++)
         cells_.at(i) = std::make_shared<MapCell>();
+}
+
+/**
+ * Loads an initial npc spawn for this map.
+ * @param stream    The input stream.
+ */
+void Map::loadNpc(std::ifstream& stream)
+{
+    using namespace nlohmann;
+
+    struct NpcSpawn
+    {
+        uint8_t type;
+        uint8_t typeId;
+        // std::vector<Position> position;
+    };
+
+    auto json = json::parse(stream);
+    for (const auto& spawn: *json.find("npcs"))
+    {
+        uint8_t type   = spawn["type"];
+        uint8_t typeId = spawn["typeId"];
+
+        for (const auto& position: *spawn.find("positions"))
+        {
+            float x = position["x"];
+            float y = position["y"];
+            float z = position["z"];
+
+            auto pos = Position(id_, x, y, z);
+
+            auto* def   = new NpcDefinition();
+            def->type   = type;
+            def->typeId = typeId;
+
+            auto npc = std::make_shared<Npc>(*def, world_);
+            npc->setPosition(pos);
+
+            world_.registerNpc(std::move(npc));
+        }
+    }
 }
 
 /**

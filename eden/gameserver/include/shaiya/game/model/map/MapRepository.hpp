@@ -15,8 +15,9 @@ namespace shaiya::game
         /**
          * Loads the map repository.
          * @param path  The path to the world's map files.
+         * @param world The game world service.
          */
-        void load(const std::string& path);
+        void load(const std::string& path, GameWorldService& world);
 
         /**
          * Gets a map for a specified id.

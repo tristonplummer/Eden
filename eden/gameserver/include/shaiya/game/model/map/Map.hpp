@@ -15,10 +15,22 @@ namespace shaiya::game
     {
     public:
         /**
+         * Initialises this map.
+         * @param world The world instance.
+         */
+        Map(GameWorldService& world);
+
+        /**
          * Loads this map by populating the cells.
          * @param stream    The input stream.
          */
         void load(std::ifstream& stream);
+
+        /**
+         * Loads an initial npc spawn for this map.
+         * @param stream    The input stream.
+         */
+        void loadNpc(std::ifstream& stream);
 
         /**
          * Adds an entity to this map.
@@ -99,6 +111,11 @@ namespace shaiya::game
          * @param position  The position to adjust.
          */
         void adjustPosition(Position& position) const;
+
+        /**
+         * The world service.
+         */
+        GameWorldService& world_;
 
         /**
          * The id of this map.

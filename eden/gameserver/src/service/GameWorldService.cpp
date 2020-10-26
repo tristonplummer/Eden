@@ -31,7 +31,7 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t
  */
 void GameWorldService::load(boost::property_tree::ptree& config)
 {
-    mapRepository_.load(config.get<std::string>("World.MapFilePath"));  // Load the game's maps.
+    mapRepository_.load(config.get<std::string>("World.MapFilePath"), *this);  // Load the game's maps.
 }
 
 /**
