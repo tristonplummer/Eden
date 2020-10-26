@@ -3,7 +3,6 @@
 
 #include <map>
 #include <memory>
-#include <vector>
 
 namespace shaiya::game
 {
@@ -28,8 +27,8 @@ namespace shaiya::game
 
     private:
         /**
-         * The vector of maps.
+         * The map of maps.
          */
-        std::vector<std::shared_ptr<Map>> maps_;
+        std::map<uint16_t, std::shared_ptr<Map>> maps_;
     };
 }

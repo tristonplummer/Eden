@@ -15,11 +15,10 @@ namespace shaiya::game
     {
     public:
         /**
-         * Loads this map by populating the cells, and parsing the heightmap and objects.
+         * Loads this map by populating the cells.
          * @param stream    The input stream.
-         * @param length    The length of the stream.
          */
-        void load(std::ifstream& stream, size_t length);
+        void load(std::ifstream& stream);
 
         /**
          * Adds an entity to this map.
@@ -71,19 +70,16 @@ namespace shaiya::game
             return size_;
         }
 
+        /**
+         * Gets the id of this map.
+         * @return  The map id.
+         */
+        [[nodiscard]] uint16_t id() const
+        {
+            return id_;
+        }
+
     private:
-        /**
-         * Parses this map as a field.
-         * @param stream    The input stream.
-         */
-        void parseField(std::ifstream& stream);
-
-        /**
-         * Parses this map as a dungeon.
-         * @param stream    The input stream.
-         */
-        void parseDungeon(std::ifstream& stream);
-
         /**
          * Get a cell in the map based on a position.
          * @param position  The position.
@@ -103,6 +99,11 @@ namespace shaiya::game
          * @param position  The position to adjust.
          */
         void adjustPosition(Position& position) const;
+
+        /**
+         * The id of this map.
+         */
+        uint16_t id_{ 0 };
 
         /**
          * The size of the map.

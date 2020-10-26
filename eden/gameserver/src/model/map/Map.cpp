@@ -2,12 +2,15 @@
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapCell.hpp>
 
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include <glog/logging.h>
 
 #include <array>
 #include <cassert>
 #include <cfenv>
 #include <cmath>
+#include <iostream>
 
 using namespace shaiya::game;
 
@@ -22,44 +25,21 @@ constexpr auto CELL_SIZE = 16;
 constexpr auto OBSERVABLE_CELL_RADIUS = 3;
 
 /**
- * The offset to read a map's size type from, if it is a field.
- */
-constexpr auto FIELD_MAP_SIZE_OFFSET = 5;
-
-/**
- * This represents the size type in a field, which can either be 4 (standard size), or 8 (large size).
- */
-constexpr auto STANDARD_SIZE_TYPE = 4;
-
-/**
- * The size of a standard map.
- */
-constexpr auto STANDARD_MAP_SIZE = 1024;
-
-/**
- * The size of a large map.
- */
-constexpr auto LARGE_MAP_SIZE = 2048;
-
-/**
  * Loads this map by populating the cells, and parsing the heightmap and objects.
  * @param stream    The input stream.
- * @param length    The length of the stream.
  */
-void Map::load(std::ifstream& stream, size_t length)
+void Map::load(std::ifstream& stream)
 {
-    std::array<char, 3> header{ 0 };  // The map type (either FLD or DUN).
-    stream.read(header.data(), header.size());
-    std::string type(header.data(), header.size());
+    using boost::property_tree::ptree;
+    using boost::property_tree::read_json;
 
-    // Seek back to the beginning of the stream.
-    stream.seekg(std::ios::beg);
+    // Read the stream as a JSON file
+    ptree tree;
+    read_json(stream, tree);
 
-    // Parse the map depending on the type
-    if (type == "FLD")
-        parseField(stream);
-    else if (type == "DUN")
-        parseDungeon(stream);
+    // Read the id, and the size
+    id_   = tree.get<uint16_t>("id");
+    size_ = tree.get<size_t>("size");
 
     // Calculate the cell rows and columns
     // Cells always fit perfectly into a map, and map sizes are only ever 1024x1024 or 2048x2048.
@@ -73,30 +53,6 @@ void Map::load(std::ifstream& stream, size_t length)
     // Generate the cells
     for (auto i = 0; i < totalCells; i++)
         cells_.at(i) = std::make_shared<MapCell>();
-}
-
-/**
- * Parses this map as a field.
- * @param stream    The input stream.
- */
-void Map::parseField(std::ifstream& stream)
-{
-    // In a field type map, the size is the 5th byte.
-    char sizeType;
-    stream.seekg(FIELD_MAP_SIZE_OFFSET);
-    stream.read(&sizeType, sizeof(sizeType));
-
-    // Set the size  of the map based on the size type
-    size_ = sizeType == STANDARD_SIZE_TYPE ? STANDARD_MAP_SIZE : LARGE_MAP_SIZE;
-}
-
-/**
- * Parses this map as a dungeon.
- * @param stream    The input stream.
- */
-void Map::parseDungeon(std::ifstream& stream)
-{
-    size_ = STANDARD_MAP_SIZE;
 }
 
 /**
