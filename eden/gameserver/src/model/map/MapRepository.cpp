@@ -20,8 +20,11 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
     // Loop over all the directories in the map path
     for (auto& directory: boost::make_iterator_range(directory_iterator(p), {}))
     {
-        auto path     = directory.path();
-        auto metadata = path /= "/map.yaml";
+        auto getPath = [&](const std::string& path) {
+            auto p = directory.path();
+            return p /= path;
+        };
+        auto metadata = getPath("map.yaml");
 
         if (!exists(metadata))  // If the map metadata file doesn't exist, skip this directory.
             continue;
@@ -35,9 +38,7 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
         maps_[map->id()] = map;
 
         // Loop over the npc spawns
-        path      = directory.path();
-        auto npcs = path /= "/npcs";
-        for (auto& npc: boost::make_iterator_range(directory_iterator(npcs), {}))
+        for (auto& npc: boost::make_iterator_range(directory_iterator(getPath("/npcs")), {}))
         {
             std::ifstream stream(npc.path().c_str(), std::ios::in);
             map->loadNpc(stream);
