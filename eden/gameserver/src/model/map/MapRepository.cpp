@@ -31,6 +31,9 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
         auto map = std::make_shared<Map>(world);
         map->load(metastream);
 
+        // Store the map
+        maps_[map->id()] = map;
+
         // Loop over the npc spawns
         path      = directory.path();
         auto npcs = path /= "/npcs";
@@ -39,9 +42,6 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
             std::ifstream stream(npc.path().c_str(), std::ios::in);
             map->loadNpc(stream);
         }
-
-        // Store the map
-        maps_[map->id()] = std::move(map);
     }
 }
 

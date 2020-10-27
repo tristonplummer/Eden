@@ -112,14 +112,16 @@ void Entity::setPosition(Position position)
 
     // Remove the entity from the current map.
     auto current = maps.forId(position_.map());
-    current->remove(entity);
+    if (current != nullptr)
+        current->remove(entity);
 
     // Update the position
     position_ = position;
 
     // Add the entity to the new map
     auto next = maps.forId(position_.map());
-    next->add(entity);
+    if (next != nullptr)
+        next->add(entity);
 
     // Flag this entity for a movement update
     flagUpdate(UpdateFlag::Movement);
