@@ -21,7 +21,7 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
     for (auto& directory: boost::make_iterator_range(directory_iterator(p), {}))
     {
         auto path     = directory.path();
-        auto metadata = path /= "/map.json";
+        auto metadata = path /= "/map.yaml";
 
         if (!exists(metadata))  // If the map metadata file doesn't exist, skip this directory.
             continue;

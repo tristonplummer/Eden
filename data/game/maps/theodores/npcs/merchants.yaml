@@ -1,0 +1,7 @@
+npcs:
+
+  npc:
+    type: 2
+    typeid: 4
+    positions:
+      - {x: 1200, y: 8.34, z: 1200}

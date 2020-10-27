@@ -22,7 +22,9 @@ target_link_libraries(gameserver
             Protobuf
             Grpc
             TBB
+            YAML
             ${PQXX_LIB}
             ${PQ_LIB}
             ${CRYPTOPP_LIBRARY}
-            ${GLOG_LIBRARY})
+            ${GLOG_LIBRARY}
+            )

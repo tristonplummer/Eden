@@ -64,7 +64,7 @@ namespace shaiya::game
          * @param type  The entity type to search for.
          * @return      The entity instance.
          */
-        std::shared_ptr<Entity> get(Position& pos, size_t id, EntityType type);
+        std::shared_ptr<Entity> get(Position& pos, size_t id, EntityType type) const;
 
         /**
          * Gets the cells in a neighbouring radius of a position.

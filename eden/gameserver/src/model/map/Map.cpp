@@ -1,20 +1,14 @@
-#include <shaiya/common/util/Json.hpp>
 #include <shaiya/game/model/actor/npc/Npc.hpp>
-#include <shaiya/game/model/actor/npc/NpcDefinition.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapCell.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <glog/logging.h>
-
-#include <array>
 #include <cassert>
 #include <cfenv>
 #include <cmath>
 #include <iostream>
+#include <yaml-cpp/yaml.h>
 
 using namespace shaiya::game;
 
@@ -42,16 +36,11 @@ Map::Map(GameWorldService& world): world_(world)
  */
 void Map::load(std::ifstream& stream)
 {
-    using boost::property_tree::ptree;
-    using boost::property_tree::read_json;
-
-    // Read the stream as a JSON file
-    ptree tree;
-    read_json(stream, tree);
+    auto yaml = YAML::Load(stream);
 
     // Read the id, and the size
-    id_   = tree.get<uint16_t>("id");
-    size_ = tree.get<size_t>("size");
+    id_   = yaml["id"].as<uint16_t>();
+    size_ = yaml["size"].as<size_t>();
 
     // Calculate the cell rows and columns
     // Cells always fit perfectly into a map, and map sizes are only ever 1024x1024 or 2048x2048.
@@ -73,26 +62,21 @@ void Map::load(std::ifstream& stream)
  */
 void Map::loadNpc(std::ifstream& stream)
 {
-    using namespace nlohmann;
+    auto yaml   = YAML::Load(stream);
+    auto spawns = yaml["npcs"];
 
-    struct NpcSpawn
+    for (auto&& spawn: spawns)
     {
-        uint8_t type;
-        uint8_t typeId;
-        // std::vector<Position> position;
-    };
+        auto data      = spawn.second;
+        uint8_t type   = data["type"].as<int>();
+        uint8_t typeId = data["typeid"].as<int>();
 
-    auto json = json::parse(stream);
-    for (const auto& spawn: *json.find("npcs"))
-    {
-        uint8_t type   = spawn["type"];
-        uint8_t typeId = spawn["typeId"];
-
-        for (const auto& position: *spawn.find("positions"))
+        // Loop over the positions
+        for (auto&& position: data["positions"])
         {
-            float x = position["x"];
-            float y = position["y"];
-            float z = position["z"];
+            auto x = position["x"].as<float>();
+            auto y = position["y"].as<float>();
+            auto z = position["z"].as<float>();
 
             auto pos = Position(id_, x, y, z);
 
@@ -145,7 +129,7 @@ void Map::remove(std::shared_ptr<Entity> entity) const
  * @param type  The entity type to search for.
  * @return      The entity instance.
  */
-std::shared_ptr<Entity> Map::get(Position& pos, size_t id, EntityType type)
+std::shared_ptr<Entity> Map::get(Position& pos, size_t id, EntityType type) const
 {
     auto neighbours = getNeighbouringCells(pos);
     for (auto&& cell: neighbours)
