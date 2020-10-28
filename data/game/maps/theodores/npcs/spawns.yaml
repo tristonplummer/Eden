@@ -1,0 +1,1264 @@
+npcs:
+  - npc:
+      type: 1
+      typeid: 336
+      positions:
+        - {x: 1858.892, y: 1.022537, z: 185.6202, dir: 0.5026547}
+  - npc:
+      type: 1
+      typeid: 337
+      positions:
+        - {x: 1854.717, y: 1.392868, z: 187.6745, dir: 0.1117039}
+  - npc:
+      type: 1
+      typeid: 338
+      positions:
+        - {x: 1848.002, y: 1.464905, z: 189.5127, dir: 6.25526}
+  - npc:
+      type: 1
+      typeid: 339
+      positions:
+        - {x: 1842.934, y: 1.218277, z: 188.4078, dir: 5.864304}
+  - npc:
+      type: 2
+      typeid: 82
+      positions:
+        - {x: 1861.86, y: 1.709351, z: 161.9684, dir: 6.143559}
+  - npc:
+      type: 3
+      typeid: 56
+      positions:
+        - {x: 1857.62, y: 1.477432, z: 173.9499, dir: 4.705408}
+  - npc:
+      type: 7
+      typeid: 817
+      positions:
+        - {x: 1868.909, y: 0.906418, z: 180.3498, dir: 4.831068}
+  - npc:
+      type: 7
+      typeid: 818
+      positions:
+        - {x: 1873.283, y: 1.300584, z: 177.8856, dir: 3.378949}
+  - npc:
+      type: 7
+      typeid: 819
+      positions:
+        - {x: 1842.511, y: 1.817764, z: 176.393, dir: 1.605702}
+  - npc:
+      type: 7
+      typeid: 820
+      positions:
+        - {x: 1839.416, y: 1.452469, z: 185.9432, dir: 5.138251}
+  - npc:
+      type: 7
+      typeid: 821
+      positions:
+        - {x: 1841.793, y: 1.4862, z: 160.9076, dir: 6.199411}
+  - npc:
+      type: 1
+      typeid: 340
+      positions:
+        - {x: 642.8596, y: 33.49222, z: 520.5663, dir: 3.504616}
+  - npc:
+      type: 1
+      typeid: 341
+      positions:
+        - {x: 567.7004, y: 34.05582, z: 515.7417, dir: 2.611012}
+  - npc:
+      type: 1
+      typeid: 342
+      positions:
+        - {x: 597.1963, y: 33.25922, z: 527.8019, dir: 2.345722}
+  - npc:
+      type: 1
+      typeid: 343
+      positions:
+        - {x: 581.8339, y: 33.83354, z: 523.7805, dir: 2.722714}
+  - npc:
+      type: 1
+      typeid: 344
+      positions:
+        - {x: 609.954, y: 33.31798, z: 526.5722, dir: 3.741989}
+  - npc:
+      type: 1
+      typeid: 180
+      positions:
+        - {x: 618.0579, y: 34.3765, z: 477.3385, dir: 0}
+  - npc:
+      type: 2
+      typeid: 83
+      positions:
+        - {x: 582.9331, y: 35.43216, z: 497.3096, dir: 0.6003931}
+  - npc:
+      type: 3
+      typeid: 57
+      positions:
+        - {x: 604.051, y: 33.24091, z: 528.6633, dir: 3.239331}
+  - npc:
+      type: 6
+      typeid: 31
+      positions:
+        - {x: 624.9442, y: 34.29063, z: 477.4583, dir: 0.08377628}
+  - npc:
+      type: 7
+      typeid: 822
+      positions:
+        - {x: 606.4777, y: 35.28296, z: 479.1072, dir: 0.6702114}
+  - npc:
+      type: 7
+      typeid: 823
+      positions:
+        - {x: 576.0598, y: 33.99596, z: 521.701, dir: 3.21141}
+  - npc:
+      type: 7
+      typeid: 824
+      positions:
+        - {x: 572.019, y: 39.37164, z: 462.7318, dir: 0.6841683}
+  - npc:
+      type: 7
+      typeid: 825
+      positions:
+        - {x: 646.521, y: 33.98, z: 473.959, dir: 4.789181}
+  - npc:
+      type: 7
+      typeid: 826
+      positions:
+        - {x: 649.4381, y: 33.73714, z: 515.9391, dir: 4.761261}
+  - npc:
+      type: 7
+      typeid: 827
+      positions:
+        - {x: 574.1821, y: 39.38428, z: 474.7903, dir: 1.256637}
+  - npc:
+      type: 7
+      typeid: 828
+      positions:
+        - {x: 572.0735, y: 39.32733, z: 483.7221, dir: 1.410225}
+  - npc:
+      type: 7
+      typeid: 830
+      positions:
+        - {x: 593.0762, y: 39.37439, z: 462.9886, dir: 6.045824}
+  - npc:
+      type: 7
+      typeid: 831
+      positions:
+        - {x: 605.9615, y: 35.19994, z: 486.2504, dir: 0.6562445}
+  - npc:
+      type: 7
+      typeid: 832
+      positions:
+        - {x: 591.9752, y: 34.96341, z: 496.1481, dir: 0.6562445}
+  - npc:
+      type: 10
+      typeid: 86
+      positions:
+        - {x: 613.8341, y: 33.39915, z: 522.4753, dir: 3.015931}
+  - npc:
+      type: 10
+      typeid: 87
+      positions:
+        - {x: 646.6384, y: 33.98, z: 479.8936, dir: 4.775219}
+  - npc:
+      type: 10
+      typeid: 88
+      positions:
+        - {x: 631.0535, y: 34.09013, z: 470.1122, dir: 0.05585676}
+  - npc:
+      type: 1
+      typeid: 345
+      positions:
+        - {x: 726.3397, y: 5.340439, z: 1027.758, dir: 4.663526}
+  - npc:
+      type: 1
+      typeid: 346
+      positions:
+        - {x: 729.6253, y: 5.293533, z: 1018.896, dir: 4.789177}
+  - npc:
+      type: 7
+      typeid: 833
+      positions:
+        - {x: 700.2191, y: 5.582158, z: 1056.781, dir: 2.457423}
+  - npc:
+      type: 7
+      typeid: 834
+      positions:
+        - {x: 694.3556, y: 4.76265, z: 1000.688, dir: 1.619665}
+  - npc:
+      type: 7
+      typeid: 835
+      positions:
+        - {x: 695.2622, y: 4.91452, z: 994.6417, dir: 1.619665}
+  - npc:
+      type: 7
+      typeid: 836
+      positions:
+        - {x: 723.1617, y: 6.058168, z: 983.895, dir: 5.138254}
+  - npc:
+      type: 7
+      typeid: 837
+      positions:
+        - {x: 693.0536, y: 5.027568, z: 1034.892, dir: 2.471389}
+  - npc:
+      type: 7
+      typeid: 838
+      positions:
+        - {x: 724.4975, y: 5.075424, z: 1009.842, dir: 4.831071}
+  - npc:
+      type: 7
+      typeid: 840
+      positions:
+        - {x: 737.5037, y: 6.102859, z: 1049.866, dir: 4.132941}
+  - npc:
+      type: 7
+      typeid: 841
+      positions:
+        - {x: 705.5391, y: 4.576917, z: 1033.502, dir: 2.443464}
+  - npc:
+      type: 1
+      typeid: 347
+      positions:
+        - {x: 1310.415, y: 13.49, z: 1137.558, dir: 0.6422811}
+  - npc:
+      type: 1
+      typeid: 348
+      positions:
+        - {x: 1314.271, y: 13.46739, z: 1132.652, dir: 1.270602}
+  - npc:
+      type: 1
+      typeid: 349
+      positions:
+        - {x: 1327.088, y: 13.45, z: 1121.924, dir: 0.6283206}
+  - npc:
+      type: 1
+      typeid: 350
+      positions:
+        - {x: 1331.941, y: 13.45, z: 1118.733, dir: 0.5026569}
+  - npc:
+      type: 2
+      typeid: 84
+      positions:
+        - {x: 1354.883, y: 13.6, z: 1137.847, dir: 3.15556}
+  - npc:
+      type: 3
+      typeid: 58
+      positions:
+        - {x: 1386.11, y: 13.50495, z: 1102.178, dir: 3.923499}
+  - npc:
+      type: 7
+      typeid: 842
+      positions:
+        - {x: 1385.033, y: 13.45999, z: 1132.354, dir: 4.174823}
+  - npc:
+      type: 7
+      typeid: 843
+      positions:
+        - {x: 1378.075, y: 13.50152, z: 1122.662, dir: 0.5026511}
+  - npc:
+      type: 7
+      typeid: 844
+      positions:
+        - {x: 1385.508, y: 13.52543, z: 1113.836, dir: 5.473357}
+  - npc:
+      type: 7
+      typeid: 845
+      positions:
+        - {x: 1353.01, y: 14.5979, z: 1060.184, dir: 6.269223}
+  - npc:
+      type: 7
+      typeid: 846
+      positions:
+        - {x: 1361.188, y: 14.55806, z: 1060.844, dir: 5.626941}
+  - npc:
+      type: 7
+      typeid: 847
+      positions:
+        - {x: 1342.086, y: 14.5664, z: 1062.243, dir: 0.5585071}
+  - npc:
+      type: 7
+      typeid: 848
+      positions:
+        - {x: 1310.048, y: 13.44, z: 1173.545, dir: 2.178173}
+  - npc:
+      type: 7
+      typeid: 849
+      positions:
+        - {x: 1322.881, y: 13.49, z: 1181.604, dir: 2.415541}
+  - npc:
+      type: 7
+      typeid: 850
+      positions:
+        - {x: 1331.368, y: 13.39, z: 1194.609, dir: 2.666871}
+  - npc:
+      type: 7
+      typeid: 851
+      positions:
+        - {x: 1372.69, y: 13.44, z: 1192.947, dir: 3.672182}
+  - npc:
+      type: 10
+      typeid: 89
+      positions:
+        - {x: 1396.183, y: 13.52554, z: 1129.771, dir: 5.166192}
+  - npc:
+      type: 1
+      typeid: 351
+      positions:
+        - {x: 767.9828, y: 62.86874, z: 1720.74, dir: 2.778564}
+  - npc:
+      type: 1
+      typeid: 352
+      positions:
+        - {x: 773.9666, y: 62.77518, z: 1717.77, dir: 4.342373}
+  - npc:
+      type: 1
+      typeid: 353
+      positions:
+        - {x: 755.541, y: 62.81946, z: 1717.997, dir: 1.773255}
+  - npc:
+      type: 1
+      typeid: 354
+      positions:
+        - {x: 761.1476, y: 62.8475, z: 1720.468, dir: 3.378961}
+  - npc:
+      type: 2
+      typeid: 85
+      positions:
+        - {x: 788.9412, y: 62.66434, z: 1700.975, dir: 4.258606}
+  - npc:
+      type: 3
+      typeid: 59
+      positions:
+        - {x: 795.9773, y: 62.15797, z: 1681.859, dir: 4.677488}
+  - npc:
+      type: 7
+      typeid: 853
+      positions:
+        - {x: 736.9806, y: 70.34235, z: 1743.724, dir: 2.680833}
+  - npc:
+      type: 7
+      typeid: 854
+      positions:
+        - {x: 739.012, y: 70.25839, z: 1745.64, dir: 2.680833}
+  - npc:
+      type: 7
+      typeid: 855
+      positions:
+        - {x: 783.1819, y: 61.25696, z: 1680.907, dir: 5.696761}
+  - npc:
+      type: 7
+      typeid: 856
+      positions:
+        - {x: 786.2574, y: 62.95132, z: 1704.302, dir: 4.272576}
+  - npc:
+      type: 7
+      typeid: 857
+      positions:
+        - {x: 1457.671, y: 3.764725, z: 456.5989, dir: 2.75064}
+  - npc:
+      type: 7
+      typeid: 858
+      positions:
+        - {x: 190.1396, y: 11.85417, z: 185.2828, dir: 1.298527}
+  - npc:
+      type: 7
+      typeid: 859
+      positions:
+        - {x: 1373.81, y: 6.698624, z: 1450.412, dir: 3.295181}
+  - npc:
+      type: 7
+      typeid: 860
+      positions:
+        - {x: 366.9473, y: 20.23999, z: 890.4175, dir: 1.130974}
+  - npc:
+      type: 7
+      typeid: 861
+      positions:
+        - {x: 1678.053, y: 50.7762, z: 1822.84, dir: 4.063129}
+  - npc:
+      type: 7
+      typeid: 862
+      positions:
+        - {x: 1720.836, y: 53.31485, z: 1622.889, dir: 6.087715}
+  - npc:
+      type: 7
+      typeid: 863
+      positions:
+        - {x: 775.6274, y: 11.2261, z: 1511.532, dir: 3.239339}
+  - npc:
+      type: 7
+      typeid: 864
+      positions:
+        - {x: 556.9517, y: 49.92, z: 1699.546, dir: 2.094405}
+  - npc:
+      type: 12
+      typeid: 17
+      positions:
+        - {x: 483.9468, y: 17.17716, z: 666.3652, dir: 4.495965}
+  - npc:
+      type: 12
+      typeid: 18
+      positions:
+        - {x: 959.9863, y: 18.81234, z: 1251.036, dir: 0.181517}
+  - npc:
+      type: 12
+      typeid: 19
+      positions:
+        - {x: 1522.727, y: 15.97809, z: 1724.559, dir: 4.635596}
+  - npc:
+      type: 7
+      typeid: 839
+      positions:
+        - {x: 698.4892, y: 5.258667, z: 982.8411, dir: 2.527237}
+  - npc:
+      type: 7
+      typeid: 852
+      positions:
+        - {x: 1475.2, y: 9.673294, z: 1107.24, dir: 3.728027}
+  - npc:
+      type: 7
+      typeid: 881
+      positions:
+        - {x: 1842.356, y: 1.611191, z: 172.2732, dir: 1.59174}
+  - npc:
+      type: 7
+      typeid: 882
+      positions:
+        - {x: 1851.724, y: 1.584183, z: 181.7979, dir: 3.16952}
+  - npc:
+      type: 7
+      typeid: 883
+      positions:
+        - {x: 1870.99, y: 1.500061, z: 152.7978, dir: 0.335103}
+  - npc:
+      type: 7
+      typeid: 884
+      positions:
+        - {x: 1832.653, y: 1.111847, z: 170.9675, dir: 1.480035}
+  - npc:
+      type: 7
+      typeid: 885
+      positions:
+        - {x: 628.0311, y: 34.06, z: 456.9486, dir: 6.143564}
+  - npc:
+      type: 7
+      typeid: 886
+      positions:
+        - {x: 571.9661, y: 35.55382, z: 497.0869, dir: 0.02792538}
+  - npc:
+      type: 7
+      typeid: 887
+      positions:
+        - {x: 565.9775, y: 35.43826, z: 496.1908, dir: 6.129595}
+  - npc:
+      type: 7
+      typeid: 888
+      positions:
+        - {x: 557.5438, y: 35.45119, z: 492.896, dir: 5.668827}
+  - npc:
+      type: 7
+      typeid: 889
+      positions:
+        - {x: 698.317, y: 5.019058, z: 1049.522, dir: 1.898919}
+  - npc:
+      type: 7
+      typeid: 890
+      positions:
+        - {x: 734.8308, y: 6.024658, z: 1052.393, dir: 3.323109}
+  - npc:
+      type: 7
+      typeid: 891
+      positions:
+        - {x: 728.447, y: 5.423767, z: 1032.825, dir: 4.663526}
+  - npc:
+      type: 7
+      typeid: 892
+      positions:
+        - {x: 1481.575, y: 9.52298, z: 1108.094, dir: 1.843073}
+  - npc:
+      type: 7
+      typeid: 893
+      positions:
+        - {x: 1484.453, y: 9.602646, z: 1110.939, dir: 1.843073}
+  - npc:
+      type: 7
+      typeid: 894
+      positions:
+        - {x: 747.9547, y: 61.12848, z: 1690.144, dir: 7.376075e-07}
+  - npc:
+      type: 7
+      typeid: 895
+      positions:
+        - {x: 743.9464, y: 61.71783, z: 1694.341, dir: 0.9494594}
+  - npc:
+      type: 7
+      typeid: 896
+      positions:
+        - {x: 1291.196, y: 1.524826, z: 1564.884, dir: 4.384264}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1834.056, y: 1.208511, z: 195.3835, dir: 5.501283}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1831.371, y: 0.9968719, z: 191.3228, dir: 5.33373}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1830.395, y: 0.565094, z: 162.9158, dir: 4.328418}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1832.859, y: 0.5187073, z: 157.0522, dir: 4.28653}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1860.46, y: 0.3332367, z: 212.2495, dir: 0.2094454}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1869.319, y: 0.4742126, z: 206.7278, dir: 5.989974}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1875.208, y: 0.4749756, z: 203.18, dir: 0.1815205}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1855.85, y: 1.086166, z: 206.7325, dir: 0.05585673}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1850.865, y: 1.098312, z: 203.4966, dir: 0.05585673}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1843.845, y: 1.067764, z: 209.0296, dir: 5.459393}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1836.853, y: 1.372986, z: 208.5238, dir: 5.459393}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1825.99, y: 1.060486, z: 186.4632, dir: 5.459393}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1817.866, y: 0.9051056, z: 173.2163, dir: 4.607673}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1821.819, y: 0.7655182, z: 167.4414, dir: 4.607673}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1820.202, y: 0.6643829, z: 179.7055, dir: 5.012592}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1854.413, y: 1.28244, z: 140.3657, dir: 4.440121}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1857.796, y: 0.9228516, z: 133.9516, dir: 4.132941}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1836.314, y: 1.123367, z: 148.4386, dir: 4.579748}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1847.727, y: 1.58667, z: 141.4348, dir: 4.272569}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1835.016, y: 1.027924, z: 142.2114, dir: 4.272569}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 690.0879, y: 27.89749, z: 489.6854, dir: 1.60571}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 691.1136, y: 28.14783, z: 503.614, dir: 1.633635}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 659.6818, y: 32.75516, z: 447.1531, dir: 2.387619}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 653.25, y: 33.0845, z: 440.7092, dir: 2.331768}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 526.3685, y: 26.65744, z: 540.0262, dir: 5.403548}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 518.8312, y: 26.22775, z: 531.2894, dir: 5.403548}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 621.3315, y: 30.71646, z: 549.0948, dir: 0.3071851}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 634.8414, y: 31.52072, z: 547.3016, dir: 0.3071851}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 694.1249, y: 27.73105, z: 483.3262, dir: 1.480046}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 687.4269, y: 28.47931, z: 479.498, dir: 1.186831}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 701.7127, y: 26.71883, z: 508.2042, dir: 1.521934}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 697.1022, y: 28.51424, z: 514.4995, dir: 1.591747}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 690.5576, y: 29.36414, z: 515.9675, dir: 1.898925}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 694.7219, y: 28.69745, z: 528.812, dir: 1.466084}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 652.9184, y: 30.55428, z: 428.9401, dir: 2.317805}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 669.4899, y: 30.25414, z: 446.6716, dir: 2.220067}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 650.3922, y: 26.45538, z: 563.0559, dir: 0.5585124}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 619.9714, y: 27.92014, z: 559.4689, dir: 0.3351102}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 613.0119, y: 25.75819, z: 566.7612, dir: 0.3351102}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 524.3966, y: 25.03928, z: 548.831, dir: 5.277884}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 516.2999, y: 23.36336, z: 550.1835, dir: 5.277884}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 521.681, y: 22.61433, z: 557.8455, dir: 5.20807}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 508.5421, y: 24.52715, z: 530.2444, dir: 5.445437}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 501.2406, y: 23.91066, z: 528.207, dir: 5.403549}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 502.39, y: 26.80136, z: 510.0102, dir: 6.241311}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 512.6153, y: 26.33707, z: 518.3132, dir: 5.571105}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 714.0603, y: 5.174728, z: 965.5986, dir: 3.211415}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 706.371, y: 4.98671, z: 965.9718, dir: 3.211415}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 670.4728, y: 4.463516, z: 1006.621, dir: 4.733345}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 670.2093, y: 4.524002, z: 1015.285, dir: 4.635606}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 705.006, y: 4.85965, z: 1061.999, dir: 0.08378976}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 714.4467, y: 5.287735, z: 1062.692, dir: 6.255274}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 729.6288, y: 5.94455, z: 1080.707, dir: 6.255274}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 725.2278, y: 5.537628, z: 1080.466, dir: 6.255274}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 697.4436, y: 4.945862, z: 1077.925, dir: 6.255274}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 692.8832, y: 5.091476, z: 1078.356, dir: 6.255274}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 657.4731, y: 4.616516, z: 1023.681, dir: 4.70542}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 657.6024, y: 4.428787, z: 1020.414, dir: 4.70542}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 656.7234, y: 4.983322, z: 991.3788, dir: 4.789196}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 656.4905, y: 5.252731, z: 988.6587, dir: 4.831084}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 691.2654, y: 3.978195, z: 950.6852, dir: 3.141601}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 695.0075, y: 3.971481, z: 950.485, dir: 3.141601}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 725.2759, y: 4.846329, z: 948.9884, dir: 3.141601}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 729.6623, y: 5.229675, z: 948.7695, dir: 3.141601}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 698.5588, y: 4.737885, z: 1022.418, dir: 0.9634355}
+        - {x: 721.986, y: 5.365585, z: 1034.859, dir: 5.501293}
+        - {x: 703.8889, y: 5.063858, z: 1052.354, dir: 5.501297}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 721.235, y: 5.062866, z: 1011.162, dir: 4.160882}
+        - {x: 700.2647, y: 5.308624, z: 993.5118, dir: 2.48537}
+        - {x: 714.6118, y: 5.431595, z: 971.5149, dir: 2.48537}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 738.2834, y: 6.106903, z: 1042.819, dir: 4.775231}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 737.4514, y: 6.050751, z: 1033.644, dir: 4.775231}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 682.9112, y: 4.736908, z: 984.5029, dir: 1.494013}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 682.3396, y: 4.720001, z: 991.394, dir: 1.507975}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 600.838, y: 33.70979, z: 517.0378, dir: 4.035211}
+        - {x: 581.0054, y: 34.66463, z: 504.3966, dir: 0.9494687}
+        - {x: 545.2482, y: 33.52068, z: 508.9561, dir: 1.6476}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 653.9257, y: 33.98, z: 498.7848, dir: 4.160872}
+        - {x: 631.1622, y: 34.28746, z: 480.3243, dir: 0.9215436}
+        - {x: 647.9858, y: 33.82378, z: 454.0599, dir: 5.5711}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 627.2996, y: 32.70648, z: 533.8958, dir: 3.323115}
+        - {x: 623.5283, y: 34.19896, z: 498.7532, dir: 4.817114}
+        - {x: 596.051, y: 34.31133, z: 502.1653, dir: 1.633633}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 711.2386, y: 4.85379, z: 1011.985, dir: 4.74731}
+        - {x: 675.7299, y: 4.437531, z: 1012.375, dir: 1.563828}
+  - npc:
+      type: 7
+      typeid: 829
+      positions:
+        - {x: 588.0609, y: 39.35016, z: 461.9146, dir: 6.087712}
+  - npc:
+      type: 2
+      typeid: 87
+      positions:
+        - {x: 577.9948, y: 35.5016, z: 498.0069, dir: 6.283185}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1232.949, y: 7.425537, z: 1155.167, dir: 4.635606}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1233.325, y: 7.289017, z: 1146.449, dir: 4.635606}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1350.98, y: 6.149017, z: 1274.245, dir: 0.01397932}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1360.037, y: 6.013184, z: 1273.961, dir: 0.01397932}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1474.224, y: 7.769669, z: 1155.67, dir: 1.591757}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1474.258, y: 7.282532, z: 1146.467, dir: 1.591757}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 711.755, y: 24.17882, z: 1564.592, dir: 3.546528}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 725.7394, y: 23.79919, z: 1558.924, dir: 3.546528}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 724.8461, y: 29.2464, z: 1577.953, dir: 3.2952}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 742.5259, y: 33.0966, z: 1585.298, dir: 3.378976}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 736.9991, y: 40.16875, z: 1606.229, dir: 3.239349}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 750.4271, y: 45.20544, z: 1627.185, dir: 3.392939}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 742.9005, y: 47.63094, z: 1643.261, dir: 3.392939}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 762.7316, y: 55.90182, z: 1659.192, dir: 3.392939}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 750.2438, y: 56.25198, z: 1665.504, dir: 3.351051}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 693.2578, y: 71.87363, z: 1715.672, dir: 4.998646}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 689.4812, y: 74.00479, z: 1706.985, dir: 4.998646}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 694.8765, y: 71.96112, z: 1721.114, dir: 4.956758}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 697.1644, y: 72.06589, z: 1729.111, dir: 4.956758}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 699.2445, y: 72.88336, z: 1737.235, dir: 4.956758}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 701.4448, y: 80.15637, z: 1746.985, dir: 4.956758}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 678.6819, y: 58.056, z: 1654.023, dir: 4.859019}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 681.7336, y: 57.48877, z: 1641.979, dir: 4.691466}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 777.2626, y: 62.51791, z: 1715.511, dir: 2.848396}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 750.5395, y: 63.09689, z: 1713.602, dir: 3.351052}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 789.2935, y: 61.98703, z: 1695.171, dir: 4.258625}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 732.5483, y: 70.77731, z: 1738.852, dir: 2.638956}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 748.0761, y: 69.61536, z: 1751.305, dir: 2.820472}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 714.6901, y: 70.6102, z: 1699.53, dir: 1.368357}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 718.2249, y: 69.71518, z: 1690.828, dir: 0.7819268}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 726.1378, y: 66.44662, z: 1685.339, dir: 0.5166369}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 707.5012, y: 81.44479, z: 1768.985, dir: 4.956758}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 711.7859, y: 82.84008, z: 1773.881, dir: 4.956758}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 761.9907, y: 66.75577, z: 1747.083, dir: 4.188813}
+        - {x: 742.5858, y: 68.96445, z: 1740.275, dir: 3.672194}
+        - {x: 734.5063, y: 67.37473, z: 1723.356, dir: 0.7958904}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 726.2828, y: 71.97705, z: 1747, dir: 3.392941}
+        - {x: 718.5145, y: 71.17429, z: 1729.373, dir: 3.001987}
+        - {x: 723.1935, y: 68.77829, z: 1708.513, dir: 0.09775864}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 731.78, y: 66.04294, z: 1706.438, dir: 1.480058}
+        - {x: 766.9083, y: 62.21286, z: 1710.589, dir: 2.597068}
+        - {x: 779.3818, y: 60.5336, z: 1691.344, dir: 5.040528}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 802.0241, y: 62.34763, z: 1671.274, dir: 0.2094585}
+        - {x: 810.6903, y: 62.27435, z: 1696.234, dir: 5.934138}
+        - {x: 795.4951, y: 63.10477, z: 1727.296, dir: 2.70877}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 747.1721, y: 6.081787, z: 1015.446, dir: 4.719384}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 747.2964, y: 6.089294, z: 990.2239, dir: 4.900899}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 727.9893, y: 5.923355, z: 1055.418, dir: 3.267267}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 689.3281, y: 4.490234, z: 1025.996, dir: 2.513283}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 701.2034, y: 4.50209, z: 1035.705, dir: 2.415544}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 685.6397, y: 4.819992, z: 978.4111, dir: 0.9075801}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 683.9404, y: 4.959396, z: 1053.885, dir: 2.192142}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 601.7697, y: 31.52673, z: 548.1809, dir: 3.099712}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 583.9598, y: 33.4164, z: 543.9608, dir: 2.736682}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 563.5095, y: 33.05109, z: 532.9492, dir: 2.652906}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 537.2434, y: 33.40796, z: 500.3428, dir: 1.521932}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 538.5419, y: 35.12375, z: 487.3959, dir: 1.256642}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 623.084, y: 34.15538, z: 437.9743, dir: 0.05585609}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 656.8348, y: 34.04283, z: 461.9879, dir: 4.914852}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 656.8504, y: 33.54799, z: 529.1436, dir: 4.077091}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 706.4489, y: 50.40556, z: 1614.111, dir: 4.970721}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 713.6118, y: 50.92224, z: 1636.705, dir: 4.872982}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 786.3999, y: 61.63443, z: 1635.334, dir: 4.426175}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 760.3572, y: 39.11781, z: 1579.549, dir: 2.178191}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 849.564, y: 75.94875, z: 1671.485, dir: 4.300507}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 859.5706, y: 80.97644, z: 1694.285, dir: 4.747315}
+  - npc:
+      type: 2
+      typeid: 99
+      positions:
+        - {x: 586.9926, y: 35.29189, z: 493.5614, dir: 0.6003931}
+  - npc:
+      type: 1
+      typeid: 429
+      positions:
+        - {x: 1874.963, y: 1.191299, z: 164.3308, dir: 6.059775}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1340.275, y: 13.31999, z: 1134.911, dir: 1.089109}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1312.992, y: 14.55501, z: 1143.423, dir: 0.06983687}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1400.888, y: 13.58, z: 1142.361, dir: 0.1396503}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1368.105, y: 13.31999, z: 1168.185, dir: 3.672182}
+        - {x: 1364.343, y: 13.31999, z: 1185.234, dir: 3.672182}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1363.843, y: 13.23538, z: 1120.458, dir: 0.1396503}
+        - {x: 1371.938, y: 13.31999, z: 1139.232, dir: 0.1396503}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1346.044, y: 13.30354, z: 1103.702, dir: 1.340436}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1309.625, y: 14.20801, z: 1158.282, dir: 3.490681}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1386.21, y: 13.31999, z: 1172.351, dir: 3.337087}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1327.035, y: 13.31999, z: 1138.505, dir: 0.08379938}
+        - {x: 1340.023, y: 13.31999, z: 1122.346, dir: 0.08379938}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1327.911, y: 13.31999, z: 1171.179, dir: 1.089109}
+        - {x: 1340.735, y: 13.31999, z: 1168.662, dir: 1.089109}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1361.925, y: 13.58, z: 1216.601, dir: 4.146914}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1346.749, y: 13.29597, z: 1204.456, dir: 1.38231}
+  - npc:
+      type: 8
+      typeid: 155
+      positions:
+        - {x: 1401.515, y: 13.49871, z: 1160.688, dir: 2.946122}

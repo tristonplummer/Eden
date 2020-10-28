@@ -67,7 +67,7 @@ void Map::loadNpc(std::ifstream& stream)
 
     for (auto&& spawn: spawns)
     {
-        auto data      = spawn.second;
+        auto data      = spawn["npc"];
         uint8_t type   = data["type"].as<int>();
         uint8_t typeId = data["typeid"].as<int>();
 
