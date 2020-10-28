@@ -2,14 +2,16 @@
 
 #include <glog/logging.h>
 
+#include <fstream>
 #include <iostream>
 #include <yaml-cpp/yaml.h>
 
 /**
  * Converts the npc spawns.
  * @param map   The map.
+ * @param out   The output stream.
  */
-void convertNpcs(shaiya::client::ServerMap& map);
+void convertNpcs(shaiya::client::ServerMap& map, std::ofstream& out);
 
 /**
  * The entry point for the servermap conversion tool.
@@ -20,22 +22,27 @@ void convertNpcs(shaiya::client::ServerMap& map);
 int main(int argc, char** argv)
 {
     using namespace shaiya::client;
-    if (argc != 2)
+    if (argc != 3)
     {
-        LOG(ERROR) << "Please provide the path to a SVMap file.";
+        LOG(ERROR) << "Please provide the path to a SVMap file and an output file.";
         return 1;
     }
 
+    std::ofstream out(argv[2], std::ios::out);
+
     ServerMap map(argv[1]);
-    convertNpcs(map);
+    convertNpcs(map, out);
+
+    out.close();
     return 0;
 }
 
 /**
  * Converts the npc spawns.
  * @param map   The map.
+ * @param file  The output stream.
  */
-void convertNpcs(shaiya::client::ServerMap& map)
+void convertNpcs(shaiya::client::ServerMap& map, std::ofstream& file)
 {
     using namespace YAML;
     Emitter out;
@@ -71,5 +78,6 @@ void convertNpcs(shaiya::client::ServerMap& map)
         out << EndMap;
         out << EndMap;
     }
-    std::cout << out.c_str();
+
+    file.write(out.c_str(), out.size());
 }
