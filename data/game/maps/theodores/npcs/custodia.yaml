@@ -1,0 +1,77 @@
+npcs:
+
+  # Town Guards
+  npc:
+    type: 8
+    typeid: 155
+    positions:
+      # North Entrance
+      - {x: 1350.98, y: 6.15, z: 1274.25, dir: 0.01397932}
+      - {x: 1360.04, y: 6.01, z: 1273.96, dir: 0.01397932}
+
+      # East Entrance
+      - {x: 1474.22, y: 7.77, z: 1155.67, dir: 1.591757}
+      - {x: 1474.26, y: 7.28, z: 1146.47, dir: 1.591757}
+
+      # West Entrance
+      - {x: 1232.95, y: 7.43, z: 1155.17, dir: 4.635606}
+      - {x: 1233.33, y: 7.29, z: 1146.45, dir: 4.635606}
+
+  # Gatekeepers
+  npc:
+    type: 2
+    typeid: 84
+    positions:
+      - {x: 1354.88, y: 13.60, z: 1137.85, dir: 3.15556}
+
+  # Blacksmith
+  npc:
+    type: 3
+    typeid: 58
+    positions:
+      - {x: 1386.11, y: 13.50, z: 1102.18, dir: 3.923499}
+
+  # Merchants
+  npc:
+    type: 1
+    typeid: 347
+    positions:
+      - {x: 1310.42, y: 13.49, z: 1137.56, dir: 0.6422811}
+  npc:
+    type: 1
+    typeid: 348
+    positions:
+      - {x: 1314.27, y: 13.47, z: 1132.65, dir: 1.270602}
+  npc:
+    type: 1
+    typeid: 349
+    positions:
+      - {x: 1327.09, y: 13.45, z: 1121.92, dir: 0.6283206}
+  npc:
+    type: 1
+    typeid: 350
+    positions:
+      - {x: 1331.94, y: 13.45, z: 1118.73, dir: 0.5026569}
+
+  # Townsfolk
+  npc:
+    type: 7
+    typeid: 851
+    positions:
+      - {x: 1372.69, y: 13.44, z: 1192.95, dir: 3.672182}
+  npc:
+    type: 7
+    typeid: 842
+    positions:
+      - {x: 1385.03, y: 13.46, z: 1132.35, dir: 4.174823}
+  npc:
+    type: 10
+    typeid: 89
+    positions:
+      - {x: 1396.18, y: 13.53, z: 1129.77, dir: 5.166192}
+  npc:
+    type: 7
+    typeid: 844
+    positions:
+      - {x: 1385.51, y: 13.53, z: 1113.84, dir: 5.473357}
+    

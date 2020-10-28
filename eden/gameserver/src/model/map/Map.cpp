@@ -74,9 +74,10 @@ void Map::loadNpc(std::ifstream& stream)
         // Loop over the positions
         for (auto&& position: data["positions"])
         {
-            auto x = position["x"].as<float>();
-            auto y = position["y"].as<float>();
-            auto z = position["z"].as<float>();
+            auto x   = position["x"].as<float>();
+            auto y   = position["y"].as<float>();
+            auto z   = position["z"].as<float>();
+            auto dir = position["dir"].as<float>(0.00);
 
             auto pos = Position(id_, x, y, z);
 
@@ -86,6 +87,7 @@ void Map::loadNpc(std::ifstream& stream)
 
             auto npc = std::make_shared<Npc>(*def, world_);
             npc->setPosition(pos);
+            npc->setDirection(dir);
 
             world_.registerNpc(std::move(npc));
         }

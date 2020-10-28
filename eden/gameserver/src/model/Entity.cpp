@@ -1,7 +1,8 @@
-#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/model/Entity.hpp>
 #include <shaiya/game/model/map/Map.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
+#include <cmath>
 #include <utility>
 
 using namespace shaiya::game;
@@ -61,6 +62,16 @@ void Entity::flagUpdate(UpdateFlag mask)
 void Entity::resetUpdateFlags()
 {
     updateMask_ = 0;
+}
+
+/**
+ * Sets the direction this entity is facing.
+ * @param radians   The direction to face, in radians.
+ */
+void Entity::setDirection(float radians)
+{
+    uint16_t direction = -radians * (180.0 / M_PI);
+    setDirection(direction);
 }
 
 /**
