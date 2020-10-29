@@ -1,4 +1,6 @@
 #include <shaiya/game/model/actor/npc/Npc.hpp>
+#include <shaiya/game/model/map/Map.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
 using namespace shaiya::game;
 
@@ -18,5 +20,14 @@ Npc::Npc(const NpcDefinition& def, GameWorldService& world): Actor(world), def_(
  */
 void Npc::setPosition(Position position)
 {
-    Actor::setPosition(position.translate(0, -0.88, 0));
+    auto map = world().maps().forId(position.map());
+
+    if (map)
+    {
+        float y = map->heightmap().y(position.x(), position.z());
+        if (y > position.y())
+            position = Position(position.map(), position.x(), y, position.z());
+    }
+
+    Actor::setPosition(position);
 }
