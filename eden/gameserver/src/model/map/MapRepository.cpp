@@ -1,3 +1,4 @@
+#include <shaiya/common/client/map/Heightmap.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapRepository.hpp>
 
@@ -24,7 +25,8 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
             auto p = directory.path();
             return p /= path;
         };
-        auto metadata = getPath("map.yaml");
+        auto metadata  = getPath("map.yaml");
+        auto heightmap = getPath("heightmap.data");
 
         if (!exists(metadata))  // If the map metadata file doesn't exist, skip this directory.
             continue;
@@ -36,6 +38,9 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
 
         // Store the map
         maps_[map->id()] = map;
+
+        // Load the heightmap
+        map->loadHeightmap(heightmap.string());
 
         // Loop over the npc spawns
         for (auto& npc: boost::make_iterator_range(directory_iterator(getPath("/npcs")), {}))

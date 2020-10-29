@@ -95,6 +95,15 @@ void Map::loadNpc(std::ifstream& stream)
 }
 
 /**
+ * Loads the heightmap for the map.
+ * @param path  The path to the heightmap
+ */
+void Map::loadHeightmap(const std::string& path)
+{
+    heightmap_ = client::Heightmap(path, size_);
+}
+
+/**
  * Adds an entity to this map.
  * @param entity    The entity to add.
  */

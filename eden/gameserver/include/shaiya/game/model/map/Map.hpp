@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/common/client/map/Heightmap.hpp>
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/model/EntityType.hpp>
 
@@ -18,7 +19,7 @@ namespace shaiya::game
          * Initialises this map.
          * @param world The world instance.
          */
-        Map(GameWorldService& world);
+        explicit Map(GameWorldService& world);
 
         /**
          * Loads this map by populating the cells.
@@ -31,6 +32,12 @@ namespace shaiya::game
          * @param stream    The input stream.
          */
         void loadNpc(std::ifstream& stream);
+
+        /**
+         * Loads the heightmap for the map.
+         * @param path  The path to the heightmap
+         */
+        void loadHeightmap(const std::string& path);
 
         /**
          * Adds an entity to this map.
@@ -72,6 +79,15 @@ namespace shaiya::game
          * @return          The neighbouring cells.
          */
         [[nodiscard]] std::vector<std::shared_ptr<MapCell>> getNeighbouringCells(Position& position) const;
+
+        /**
+         * Gets the heightmap for this map.
+         * @return  The heightmap.
+         */
+        [[nodiscard]] const client::Heightmap& heightmap() const
+        {
+            return heightmap_;
+        }
 
         /**
          * Gets the size of the map.
@@ -141,5 +157,10 @@ namespace shaiya::game
          * The cells of this map.
          */
         std::vector<std::shared_ptr<MapCell>> cells_;
+
+        /**
+         * The heightmap of this map.
+         */
+        client::Heightmap heightmap_;
     };
 }
