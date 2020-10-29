@@ -1,13 +1,18 @@
-#include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/actor/npc/Npc.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/commands/impl/SpawnNpcCommand.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
 #include <glog/logging.h>
 
 #include <memory>
 
 using namespace shaiya::game;
+
+/**
+ * The height of the player character.
+ */
+constexpr auto PlayerHeightOffset = 0.88f;
 
 /**
  * Handles the execution of this command.
@@ -29,7 +34,7 @@ void SpawnNpcCommand::execute(Player& character, const std::vector<std::string>&
 
     auto& world = character.world();
     auto npc    = std::make_shared<Npc>(*def, world);
-    npc->setPosition(pos);
+    npc->setPosition(pos.translate(0, -PlayerHeightOffset, 0));
 
     world.registerNpc(std::move(npc));
 }
