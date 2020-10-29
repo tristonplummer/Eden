@@ -1,5 +1,5 @@
 #pragma once
-#include <shaiya/common/client/map/Heightmap.hpp>
+#include <shaiya/common/client/map/World.hpp>
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/model/EntityType.hpp>
 
@@ -34,10 +34,10 @@ namespace shaiya::game
         void loadNpc(std::ifstream& stream);
 
         /**
-         * Loads the heightmap for the map.
-         * @param path  The path to the heightmap
+         * Loads the world for the map.
+         * @param path  The path to the world
          */
-        void loadHeightmap(const std::string& path);
+        void loadWorld(const std::string& path);
 
         /**
          * Adds an entity to this map.
@@ -86,7 +86,7 @@ namespace shaiya::game
          */
         [[nodiscard]] const client::Heightmap& heightmap() const
         {
-            return heightmap_;
+            return worldFile_.heightmap();
         }
 
         /**
@@ -159,8 +159,8 @@ namespace shaiya::game
         std::vector<std::shared_ptr<MapCell>> cells_;
 
         /**
-         * The heightmap of this map.
+         * The world file for this map.
          */
-        client::Heightmap heightmap_;
+        client::World worldFile_;
     };
 }

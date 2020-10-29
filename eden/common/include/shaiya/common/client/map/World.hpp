@@ -18,10 +18,24 @@ namespace shaiya::client
     {
     public:
         /**
+         * The default constructor, which does nothing.
+         */
+        World() = default;
+
+        /**
          * Parses a client WLD file.
          * @param path  The path to the file.
          */
         explicit World(const std::string& path);
+
+        /**
+         * Gets the heightmap for this world.
+         * @return  The heightmap.
+         */
+        [[nodiscard]] const Heightmap& heightmap() const
+        {
+            return heightmap_;
+        }
 
         /**
          * Gets the texture at a specific point.

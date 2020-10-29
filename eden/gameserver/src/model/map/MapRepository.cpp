@@ -1,8 +1,10 @@
 #include <shaiya/common/client/map/Heightmap.hpp>
+#include <shaiya/common/client/map/World.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapRepository.hpp>
 
 #include <boost/filesystem.hpp>
+#include <boost/format.hpp>
 #include <boost/range/iterator_range.hpp>
 #include <glog/logging.h>
 
@@ -18,6 +20,9 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
     using namespace boost::filesystem;
     path p(mapPath);  // The path to the map files
 
+    // The format for getting a world file by id
+    auto worldFmt = boost::format("%1%.wld");
+
     // Loop over all the directories in the map path
     for (auto& directory: boost::make_iterator_range(directory_iterator(p), {}))
     {
@@ -25,8 +30,7 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
             auto p = directory.path();
             return p /= path;
         };
-        auto metadata  = getPath("map.yaml");
-        auto heightmap = getPath("heightmap.data");
+        auto metadata = getPath("map.yaml");
 
         if (!exists(metadata))  // If the map metadata file doesn't exist, skip this directory.
             continue;
@@ -39,8 +43,9 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
         // Store the map
         maps_[map->id()] = map;
 
-        // Load the heightmap
-        map->loadHeightmap(heightmap.string());
+        // Load the world
+        auto worldPath = getPath((worldFmt % map->id()).str());
+        map->loadWorld(worldPath.string());
 
         // Loop over the npc spawns
         for (auto& npc: boost::make_iterator_range(directory_iterator(getPath("/npcs")), {}))

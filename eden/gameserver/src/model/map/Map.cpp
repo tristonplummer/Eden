@@ -95,12 +95,12 @@ void Map::loadNpc(std::ifstream& stream)
 }
 
 /**
- * Loads the heightmap for the map.
- * @param path  The path to the heightmap
+ * Loads the world file for the map.
+ * @param path  The path to the world
  */
-void Map::loadHeightmap(const std::string& path)
+void Map::loadWorld(const std::string& path)
 {
-    heightmap_ = client::Heightmap(path, size_);
+    worldFile_ = client::World(path);
 }
 
 /**
