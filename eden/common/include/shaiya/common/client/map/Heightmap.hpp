@@ -23,7 +23,14 @@ namespace shaiya::client
          * @param path  The path to the heightmap file.
          * @param size  The size of the map.
          */
-        explicit Heightmap(const std::string& path, size_t size);
+        Heightmap(const std::string& path, size_t size);
+
+        /**
+         * Loads a heightmap with a specific size.
+         * @param stream    The stream to read from.
+         * @param size      The size of the map.
+         */
+        Heightmap(std::ifstream& stream, size_t size);
 
         /**
          * Gets the y height at a specific set of coordinates.

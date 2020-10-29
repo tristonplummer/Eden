@@ -28,6 +28,16 @@ Heightmap::Heightmap(const std::string& path, size_t size): size_(size)
 }
 
 /**
+ * Loads a heightmap with a specific size.
+ * @param stream    The stream to read from.
+ * @param size      The size of the map.
+ */
+Heightmap::Heightmap(std::ifstream& stream, size_t size): size_(size)
+{
+    parseRaw(stream);
+}
+
+/**
  * Parses the raw data.
  * @param stream    The file stream.
  */
