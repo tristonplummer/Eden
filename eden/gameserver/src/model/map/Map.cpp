@@ -1,3 +1,4 @@
+#include <shaiya/game/model/actor/mob/Mob.hpp>
 #include <shaiya/game/model/actor/npc/Npc.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/map/Map.hpp>
@@ -90,6 +91,49 @@ void Map::loadNpc(std::ifstream& stream)
             npc->setDirection(dir);
 
             world_.registerNpc(std::move(npc));
+        }
+    }
+}
+
+/**
+ * Loads an initial mob spawn for this map.
+ * @param stream    The input stream
+ */
+void Map::loadMob(std::ifstream& stream)
+{
+    auto yaml    = YAML::Load(stream);
+    auto entries = yaml["mobs"];
+
+    for (auto&& entry: entries)
+    {
+        auto spawn = entry["spawn"];
+
+        auto areas = spawn["area"];
+        auto area  = areas.begin();
+
+        auto first  = *area++;
+        auto second = *area;
+
+        Position bottomLeft(id_, first["x"].as<float>(), first["y"].as<float>(), first["z"].as<float>());
+        Position topRight(id_, second["x"].as<float>(), second["y"].as<float>(), second["z"].as<float>());
+        Area spawnArea(bottomLeft, topRight);
+
+        auto spawns = spawn["spawns"];
+        for (auto&& mobSpawn: spawns)
+        {
+            auto id       = mobSpawn["id"].as<int>();
+            auto quantity = mobSpawn["quantity"].as<int>();
+
+            auto* def = new client::MobDefinition();
+            def->id   = id;
+
+            for (auto i = 0; i < quantity; i++)
+            {
+                auto mob = std::make_shared<Mob>(*def, spawnArea, world_);
+                mob->setPosition(mob->spawnArea().randomPoint());
+
+                world_.registerMob(mob);
+            }
         }
     }
 }

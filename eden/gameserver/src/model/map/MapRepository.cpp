@@ -48,10 +48,35 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
         map->loadWorld(worldPath.string());
 
         // Loop over the npc spawns
-        for (auto& npc: boost::make_iterator_range(directory_iterator(getPath("/npcs")), {}))
+        auto npcPath = getPath("/npcs");
+        if (exists(npcPath))
         {
-            std::ifstream stream(npc.path().c_str(), std::ios::in);
-            map->loadNpc(stream);
+            for (auto& npc: boost::make_iterator_range(recursive_directory_iterator(npcPath), {}))
+            {
+                if (!is_regular_file(npc))
+                    continue;
+                if (npc.path().extension() == ".yaml")
+                {
+                    std::ifstream stream(npc.path().c_str(), std::ios::in);
+                    map->loadNpc(stream);
+                }
+            }
+        }
+
+        // Loop over the mob spawns
+        auto mobPath = getPath("/mobs");
+        if (exists(mobPath))
+        {
+            for (auto& mob: boost::make_iterator_range(recursive_directory_iterator(mobPath), {}))
+            {
+                if (!is_regular_file(mob))
+                    continue;
+                if (mob.path().extension() == ".yaml")
+                {
+                    std::ifstream stream(mob.path().c_str(), std::ios::in);
+                    map->loadMob(stream);
+                }
+            }
         }
     }
 }

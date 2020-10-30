@@ -34,6 +34,12 @@ namespace shaiya::game
         void loadNpc(std::ifstream& stream);
 
         /**
+         * Loads an initial mob spawn for this map.
+         * @param stream    The input stream
+         */
+        void loadMob(std::ifstream& stream);
+
+        /**
          * Loads the world for the map.
          * @param path  The path to the world
          */

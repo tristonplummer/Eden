@@ -26,5 +26,10 @@ namespace shaiya::game
          * A non-player character
          */
         Npc,
+
+        /**
+         * A monster
+         */
+        Mob
     };
 }

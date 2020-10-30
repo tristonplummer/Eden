@@ -1,10 +1,10 @@
 #pragma once
 #include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/game/Forward.hpp>
-#include <shaiya/game/util/EntityContainer.hpp>
 #include <shaiya/game/model/commands/CommandManager.hpp>
 #include <shaiya/game/model/map/MapRepository.hpp>
 #include <shaiya/game/scheduling/Scheduler.hpp>
+#include <shaiya/game/util/EntityContainer.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -63,15 +63,27 @@ namespace shaiya::game
 
         /**
          * Registers an npc to this world.
-         * @param item  The npc instance.
+         * @param npc  The npc instance.
          */
-        void registerNpc(std::shared_ptr<Npc> item);
+        void registerNpc(std::shared_ptr<Npc> npc);
 
         /**
          * Removes an npc from this world.
-         * @param item  The npc instance.
+         * @param npc  The npc instance.
          */
-        void unregisterNpc(std::shared_ptr<Npc> item);
+        void unregisterNpc(std::shared_ptr<Npc> npc);
+
+        /**
+         * Registers a mob to this world.
+         * @param mob   The mob instance.
+         */
+        void registerMob(std::shared_ptr<Mob> mob);
+
+        /**
+         * Removes a mob from this world.
+         * @param mob   The mob instance.
+         */
+        void unregisterMob(std::shared_ptr<Mob> mob);
 
         /**
          * Finalises the registration of players that are queued to be registered.
@@ -156,6 +168,11 @@ namespace shaiya::game
          * A container that holds all of the npcs that exist in the world.
          */
         EntityContainer<Npc> npcs_;
+
+        /**
+         * A container that holds all of the mobs that exist in the world.
+         */
+        EntityContainer<Mob> mobs_;
 
         /**
          * The client synchronizer

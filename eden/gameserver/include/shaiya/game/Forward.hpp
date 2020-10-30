@@ -25,11 +25,13 @@ namespace shaiya::game
     // Entity
     class Entity;
     class Position;
+    class Area;
 
     // Actors
     class Actor;
     class StatSet;
     class Npc;
+    class Mob;
     class Player;
     class Appearance;
     class ActionBar;
