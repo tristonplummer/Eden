@@ -9,7 +9,7 @@ using namespace shaiya::game;
  * @param bottomLeft    The bottom left position.
  * @param topRight      The top right position.
  */
-Area::Area(Position bottomLeft, Position topRight): bottomLeft_(bottomLeft), topRight_(topRight), prng_(rd_())
+Area::Area(Position bottomLeft, Position topRight): bottomLeft_(bottomLeft), topRight_(topRight)
 {
 }
 
@@ -19,10 +19,14 @@ Area::Area(Position bottomLeft, Position topRight): bottomLeft_(bottomLeft), top
  */
 Position Area::randomPoint() const
 {
+    // Initialise a PRNG
+    std::random_device rd;
+    std::mt19937 prng(rd());
+
     // The range of coordinates
     std::uniform_real_distribution<> xDist(bottomLeft_.x(), topRight_.x());
     std::uniform_real_distribution<> zDist(bottomLeft_.z(), topRight_.z());
 
     // Return a random point in this area
-    return Position(bottomLeft_.map(), xDist(prng_), bottomLeft_.y(), zDist(prng_));
+    return Position(bottomLeft_.map(), xDist(prng), bottomLeft_.y(), zDist(prng));
 }

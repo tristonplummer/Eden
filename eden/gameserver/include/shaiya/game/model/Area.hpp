@@ -34,15 +34,5 @@ namespace shaiya::game
          * The top right position.
          */
         Position topRight_;
-
-        /**
-         * The random device
-         */
-        std::random_device rd_;
-
-        /**
-         * The PRNG to use for random number generation
-         */
-        std::mt19937 prng_;
     };
 }
