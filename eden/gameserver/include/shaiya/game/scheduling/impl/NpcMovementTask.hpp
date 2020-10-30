@@ -5,26 +5,19 @@
 namespace shaiya::game
 {
     /**
-     * A task that periodically normalizes the health of an actor.
+     * A task that periodically moves an NPC or Mob.
      */
-    class HealthNormalizationTask: public ScheduledTask
+    class NpcMovementTask: public ScheduledTask
     {
     public:
         /**
          * Initialise this task.
-         * @param actor The actor to operate on.
          */
-        explicit HealthNormalizationTask(Actor& actor);
+        explicit NpcMovementTask();
 
         /**
          * Handle the execution of this task.
          */
         void execute(GameWorldService& world) override;
-
-    private:
-        /**
-         * The actor who this task is to operate on.
-         */
-        Actor& actor_;
     };
 }

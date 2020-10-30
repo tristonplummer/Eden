@@ -132,6 +132,15 @@ namespace shaiya::game
             return level_;
         }
 
+        /**
+         * If this actor is running.
+         * @return  If the movement is running.
+         */
+        [[nodiscard]] bool running() const
+        {
+            return running_;
+        }
+
     protected:
         /**
          * The name of this actor.
@@ -147,6 +156,11 @@ namespace shaiya::game
          * The level of this actor.
          */
         uint16_t level_{ 0 };
+
+        /**
+         * If this actor is running.
+         */
+        bool running_{ false };
 
         /**
          * The faction of this actor.

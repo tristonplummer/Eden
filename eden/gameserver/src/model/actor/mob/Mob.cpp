@@ -13,3 +13,13 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
 {
     type_ = EntityType::Mob;
 }
+
+/**
+ * Sets the position of this mob.
+ * @param position  The new position.
+ */
+void Mob::setPosition(Position position)
+{
+    running_ = this->position().getDistance(position) > 10;
+    Actor::setPosition(position);
+}

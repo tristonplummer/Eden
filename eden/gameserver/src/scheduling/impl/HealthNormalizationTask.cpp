@@ -30,7 +30,7 @@ HealthNormalizationTask::HealthNormalizationTask(Actor& actor): actor_(actor), S
 /**
  * Handle the execution of this task.
  */
-void HealthNormalizationTask::execute()
+void HealthNormalizationTask::execute(GameWorldService& world)
 {
     // If the actor is not active, stop this task
     if (!actor_.active())

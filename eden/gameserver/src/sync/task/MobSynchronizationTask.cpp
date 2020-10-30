@@ -1,6 +1,7 @@
 #include <shaiya/common/net/packet/Packet.hpp>
 #include <shaiya/common/net/packet/game/MobEnteredViewport.hpp>
 #include <shaiya/common/net/packet/game/MobLeftViewport.hpp>
+#include <shaiya/common/net/packet/game/MobMovement.hpp>
 #include <shaiya/game/model/actor/mob/Mob.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/net/GameSession.hpp>
@@ -75,4 +76,12 @@ void MobSynchronizationTask::processUpdateFlags(const Mob& other)
  */
 void MobSynchronizationTask::updateMovement(const Mob& other)
 {
+    auto& pos = other.position();
+
+    MobMovement movement;
+    movement.id      = other.id();
+    movement.running = other.running();
+    movement.x       = pos.x();
+    movement.z       = pos.z();
+    character_.session().write(movement);
 }

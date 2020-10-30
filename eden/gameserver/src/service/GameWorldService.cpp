@@ -7,6 +7,7 @@
 #include <shaiya/game/model/item/GroundItem.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/scheduling/impl/NpcMovementTask.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/sync/ParallelClientSynchronizer.hpp>
 
@@ -33,6 +34,9 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t
 void GameWorldService::load(boost::property_tree::ptree& config)
 {
     mapRepository_.load(config.get<std::string>("World.MapFilePath"), *this);  // Load the game's maps.
+
+    // Global tasks
+    schedule(std::make_shared<NpcMovementTask>());
 }
 
 /**
@@ -58,7 +62,7 @@ void GameWorldService::tick(size_t tickRate)
             player->session().processQueue();
 
         // Pulse the game world
-        scheduler_.pulse();
+        scheduler_.pulse(*this);
 
         // Synchronize the characters with the world state
         synchronizer_->synchronize(players_);

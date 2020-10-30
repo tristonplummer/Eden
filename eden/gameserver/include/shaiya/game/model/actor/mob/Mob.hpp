@@ -26,6 +26,12 @@ namespace shaiya::game
         Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world);
 
         /**
+         * Sets the position of this mob.
+         * @param position  The new position.
+         */
+        void setPosition(Position position) override;
+
+        /**
          * Gets the definition for this mob.
          * @return  The definition.
          */

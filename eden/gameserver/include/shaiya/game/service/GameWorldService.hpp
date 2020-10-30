@@ -128,6 +128,15 @@ namespace shaiya::game
             return itemDefs_;
         }
 
+        /**
+         * Gets the mobs that are active in the game world.
+         * @return  The mobs.
+         */
+        [[nodiscard]] const EntityContainer<Mob>& mobs() const
+        {
+            return mobs_;
+        }
+
     private:
         /**
          * If this service is running.

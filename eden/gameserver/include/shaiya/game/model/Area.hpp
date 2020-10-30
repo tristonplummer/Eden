@@ -24,6 +24,13 @@ namespace shaiya::game
          */
         [[nodiscard]] Position randomPoint() const;
 
+        /**
+         * Gets a random point with this area as the center.
+         * @param range The range around the area.
+         * @return      The random point.
+         */
+        [[nodiscard]] Position randomPoint(float range) const;
+
     private:
         /**
          * The bottom left position.

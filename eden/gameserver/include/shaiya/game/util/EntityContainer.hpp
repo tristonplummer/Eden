@@ -51,6 +51,33 @@ namespace shaiya::game
             elements_[element->id()] = nullptr;
         }
 
+        /**
+         * Gets the beginning element.
+         * @return  The first element
+         */
+        auto begin() const
+        {
+            return elements_.begin();
+        }
+
+        /**
+         * Gets the end element
+         * @return  The end element
+         */
+        auto end() const
+        {
+            return elements_.end();
+        }
+
+        /**
+         * Gets the number of elements
+         * @return  The number of elements
+         */
+        [[nodiscard]] size_t size() const
+        {
+            return elements_.size();
+        }
+
     private:
         /**
          * The vector of elements that are being stored here.

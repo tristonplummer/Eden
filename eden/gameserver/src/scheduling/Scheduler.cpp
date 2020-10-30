@@ -4,8 +4,9 @@ using namespace shaiya::game;
 
 /**
  * Pulses the active tasks, and removes those that are no longer running.
+ * @param world The world instance
  */
-void Scheduler::pulse()
+void Scheduler::pulse(GameWorldService& world)
 {
     // Add the pending tasks
     while (!pendingTasks_.empty())
@@ -19,7 +20,7 @@ void Scheduler::pulse()
     while (itr != activeTasks_.end())
     {
         auto task = *itr;
-        task->pulse();
+        task->pulse(world);
 
         if (!task->running())
         {
