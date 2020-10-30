@@ -9,7 +9,7 @@ using namespace shaiya::game;
  * @param bottomLeft    The bottom left position.
  * @param topRight      The top right position.
  */
-Area::Area(Position bottomLeft, Position topRight): bottomLeft_(bottomLeft), topRight_(topRight), prng_(rd_)
+Area::Area(Position bottomLeft, Position topRight): bottomLeft_(bottomLeft), topRight_(topRight), prng_(rd_())
 {
 }
 
