@@ -1,6 +1,5 @@
+#include <shaiya/common/util/Prng.hpp>
 #include <shaiya/game/model/Area.hpp>
-
-#include <random>
 
 using namespace shaiya::game;
 
@@ -19,16 +18,13 @@ Area::Area(Position bottomLeft, Position topRight): bottomLeft_(bottomLeft), top
  */
 Position Area::randomPoint() const
 {
-    // Initialise a PRNG
-    std::random_device rd;
-    std::mt19937 prng(rd());
+    auto& prng = shaiya::Prng::the();
 
-    // The range of coordinates
-    std::uniform_real_distribution<> xDist(bottomLeft_.x(), topRight_.x());
-    std::uniform_real_distribution<> zDist(bottomLeft_.z(), topRight_.z());
+    auto x = prng.random(bottomLeft_.x(), topRight_.x());
+    auto z = prng.random(bottomLeft_.z(), topRight_.z());
 
     // Return a random point in this area
-    return Position(bottomLeft_.map(), xDist(prng), bottomLeft_.y(), zDist(prng));
+    return Position(bottomLeft_.map(), x, bottomLeft_.y(), z);
 }
 
 /**
@@ -36,16 +32,14 @@ Position Area::randomPoint() const
  * @param range The range around the area.
  * @return      The random point.
  */
-[[nodiscard]] Position Area::randomPoint(float range) const
+Position Area::randomPoint(float range) const
 {
-    // Initialise a PRNG
-    std::random_device rd;
-    std::mt19937 prng(rd());
+    auto& prng = shaiya::Prng::the();
 
     // The range of coordinates
-    std::uniform_real_distribution<> xDist(bottomLeft_.x() - range, topRight_.x() + range);
-    std::uniform_real_distribution<> zDist(bottomLeft_.z() - range, topRight_.z() + range);
+    auto x = prng.random(bottomLeft_.x(), topRight_.x(), range);
+    auto z = prng.random(bottomLeft_.z(), topRight_.z(), range);
 
     // Return a random point in this area
-    return Position(bottomLeft_.map(), xDist(prng), bottomLeft_.y(), zDist(prng));
+    return Position(bottomLeft_.map(), x, bottomLeft_.y(), z);
 }

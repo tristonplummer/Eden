@@ -108,13 +108,6 @@ void Entity::setPosition(Position position)
     if (position_ == position)
         return;
 
-    // If the new position is just a height change, we wont bother finding a new cell.
-    if (position_.y() == position.y())
-    {
-        position_ = position;
-        return;
-    }
-
     // Get the world maps
     auto& maps = world_.maps();
 

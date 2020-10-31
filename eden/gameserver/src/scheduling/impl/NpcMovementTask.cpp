@@ -1,3 +1,4 @@
+#include <shaiya/common/util/Prng.hpp>
 #include <shaiya/game/model/actor/mob/Mob.hpp>
 #include <shaiya/game/scheduling/impl/NpcMovementTask.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
@@ -13,12 +14,12 @@ constexpr auto Delay = 200;
 /**
  * The chance for a mob to move.
  */
-constexpr auto MovementChance = 10;
+constexpr auto MovementChance = 25;
 
 /**
  * The range that a mob may wander from it's spawn point.
  */
-constexpr auto MovementRange = 2.0f;
+constexpr auto MovementRange = 3.5f;
 
 /**
  * Initialise this task.
@@ -32,16 +33,16 @@ NpcMovementTask::NpcMovementTask(): ScheduledTask(Delay)
  */
 void NpcMovementTask::execute(GameWorldService& world)
 {
+    auto& prng = shaiya::Prng::the();
     auto& mobs = world.mobs();
+
     for (auto&& mob: mobs)
     {
         if (!mob)
             continue;
 
-        auto move = (rand() % 100) < MovementChance;
+        auto move = prng.percentage(MovementChance);  //(rand() % 100) < MovementChance;
         if (move)
-        {
             mob->setPosition(mob->spawnArea().randomPoint(MovementRange));
-        }
     }
 }
