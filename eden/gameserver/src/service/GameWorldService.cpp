@@ -65,7 +65,7 @@ void GameWorldService::tick(size_t tickRate)
         scheduler_.pulse(*this);
 
         // Synchronize the characters with the world state
-        synchronizer_->synchronize(players_);
+        synchronizer_->synchronize(players_, npcs_, mobs_);
 
         // The current time
         auto now = steady_clock::now();

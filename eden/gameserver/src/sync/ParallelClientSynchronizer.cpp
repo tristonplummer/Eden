@@ -17,9 +17,12 @@ using namespace shaiya::game;
 
 /**
  * Synchronizes the state of the clients with the stat of the server.
- * @param players    The vector containing the player characters.
+ * @param players   The vector containing the player characters.
+ * @param npcs      The npc container.
+ * @param mobs      The mob container.
  */
-void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> players)
+void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> players, const EntityContainer<Npc>& npcs,
+                                             const EntityContainer<Mob>& mobs)
 {
     // Run the synchroniser for each character, in parallel.
     std::for_each(std::execution::par_unseq, players.begin(), players.end(),
@@ -38,6 +41,14 @@ void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>
         // Clear the temporary attributes used in updating
         character->clearAttribute(Attribute::LastChatMessage);
     }
+
+    // Finalise the update sequence for npcs and mobs
+    for (auto&& mob: mobs)
+        if (mob)
+            mob->resetUpdateFlags();
+    for (auto&& npc: npcs)
+        if (npc)
+            npc->resetUpdateFlags();
 }
 
 /**
