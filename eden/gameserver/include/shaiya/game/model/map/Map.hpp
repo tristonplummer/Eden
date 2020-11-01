@@ -87,6 +87,15 @@ namespace shaiya::game
         [[nodiscard]] std::vector<std::shared_ptr<MapCell>> getNeighbouringCells(Position& position) const;
 
         /**
+         * Gets the entities that are located in neighbouring cells.
+         * @param position  The position.
+         * @param type      The entity type to search for.
+         * @return          The neighbouring entities.
+         */
+        [[nodiscard]] std::vector<std::shared_ptr<Entity>> getNeighbouringEntities(Position& position,
+                                                                                   EntityType type) const;
+
+        /**
          * Gets the heightmap for this map.
          * @return  The heightmap.
          */

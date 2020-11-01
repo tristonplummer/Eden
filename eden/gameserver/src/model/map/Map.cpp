@@ -276,6 +276,28 @@ std::vector<std::shared_ptr<MapCell>> Map::getNeighbouringCells(Position& positi
 }
 
 /**
+ * Gets the entities that are located in neighbouring cells.
+ * @param position  The position.
+ * @param type      The entity type to search for.
+ * @return          The neighbouring entities.
+ */
+std::vector<std::shared_ptr<Entity>> Map::getNeighbouringEntities(Position& position, EntityType type) const
+{
+    std::vector<std::shared_ptr<Entity>> entities;
+    for (auto&& cell: getNeighbouringCells(position))
+    {
+        for (auto&& entity: entities)
+        {
+            if (entity->active() && entity->type() == type)
+            {
+                entities.push_back(entity);
+            }
+        }
+    }
+    return entities;
+}
+
+/**
  * Adjusts a position to fit into the boundaries of this map.
  * @param position  The position to adjust.
  */
