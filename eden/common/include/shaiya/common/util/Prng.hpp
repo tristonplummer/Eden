@@ -1,5 +1,7 @@
 #pragma once
+#include <array>
 #include <random>
+#include <vector>
 
 namespace shaiya
 {
@@ -28,19 +30,6 @@ namespace shaiya
         }
 
         /**
-         * Gets a random value between a minimum and maximum
-         * @tparam T    The type.
-         * @param min   The minimum value
-         * @param max   The maximum value (inclusive)
-         * @return      The random value
-         */
-        template<typename T>
-        T random(T min, T max)
-        {
-            return random(min, max, T{});
-        }
-
-        /**
          * Gets a random value between a minimum and maximum, with a provided range.
          * @tparam T        The type.
          * @param min       The minimum value.
@@ -49,10 +38,18 @@ namespace shaiya
          * @return          The random value.
          */
         template<typename T>
-        T random(T min, T max, T range)
+        T random(T min, T max, T range = T{})
         {
-            std::uniform_real_distribution<T> dist(min - range, max + range);
-            return dist(prng_);
+            if constexpr (std::is_floating_point_v<T>)
+            {
+                std::uniform_real_distribution<T> dist(min - range, max + range);
+                return dist(prng_);
+            }
+            else
+            {
+                std::uniform_int_distribution<T> dist(min - range, max + range);
+                return dist(prng_);
+            }
         }
 
         /**
@@ -64,6 +61,23 @@ namespace shaiya
         {
             std::uniform_int_distribution<> dist(0, 100);
             return dist(prng_) < percent;
+        }
+
+        /**
+         * Get an array of random values.
+         * @tparam T            The random type.
+         * @tparam Quantity     The number of values to produce.
+         * @param min           The minimum value.
+         * @param max           The maximum value.
+         * @return              The array of randomly generated values.
+         */
+        template<typename T, size_t Quantity>
+        std::array<T, Quantity> randoms(T min, T max)
+        {
+            std::array<T, Quantity> arr{};
+            for (auto& e: arr)
+                e = random(min, max);
+            return arr;
         }
 
     private:
