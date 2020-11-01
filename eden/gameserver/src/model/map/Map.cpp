@@ -286,7 +286,7 @@ std::vector<std::shared_ptr<Entity>> Map::getNeighbouringEntities(Position& posi
     std::vector<std::shared_ptr<Entity>> entities;
     for (auto&& cell: getNeighbouringCells(position))
     {
-        for (auto&& entity: entities)
+        for (auto&& entity: cell->entities())
         {
             if (entity->active() && entity->type() == type)
             {
