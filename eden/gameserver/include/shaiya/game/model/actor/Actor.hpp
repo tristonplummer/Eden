@@ -2,6 +2,7 @@
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/model/Entity.hpp>
 #include <shaiya/game/model/actor/StatSet.hpp>
+#include <shaiya/game/model/actor/combat/CombatBuilder.hpp>
 #include <shaiya/game/model/item/container/EquipmentContainer.hpp>
 #include <shaiya/game/model/item/container/InventoryContainer.hpp>
 
@@ -124,6 +125,15 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the combat builder of the actor.
+         * @return  The combat builder.
+         */
+        [[nodiscard]] CombatBuilder& combat()
+        {
+            return combat_;
+        }
+
+        /**
          * Gets the level of this actor.
          * @return  The level of the actor.
          */
@@ -181,5 +191,10 @@ namespace shaiya::game
          * The inventory of the actor.
          */
         InventoryContainer inventory_;
+
+        /**
+         * The combat builder of the actor.
+         */
+        CombatBuilder combat_;
     };
 }

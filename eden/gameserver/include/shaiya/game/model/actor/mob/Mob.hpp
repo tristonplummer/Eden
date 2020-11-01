@@ -26,6 +26,11 @@ namespace shaiya::game
         Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world);
 
         /**
+         * Activates this actor.
+         */
+        void activate() override;
+
+        /**
          * Sets the position of this mob.
          * @param position  The new position.
          */

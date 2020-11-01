@@ -1,7 +1,7 @@
-#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/model/actor/Actor.hpp>
 #include <shaiya/game/model/item/Item.hpp>
 #include <shaiya/game/scheduling/impl/HealthNormalizationTask.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
 using namespace shaiya::game;
 
@@ -9,7 +9,7 @@ using namespace shaiya::game;
  * Initialises this actor.
  * @param world The world instance.
  */
-Actor::Actor(GameWorldService& world): Entity(world)
+Actor::Actor(GameWorldService& world): Entity(world), combat_(*this)
 {
 }
 
@@ -94,7 +94,7 @@ void Actor::syncStats()
     stats_.setAdditional(Stat::MaxRangedAttack, maxAttack);
     stats_.setAdditional(Stat::MinMagicalAttack, minAttack);
     stats_.setAdditional(Stat::MaxMagicalAttack, maxAttack);
-    
+
     // Explicitly synchronise the stats
     stats_.sync();
 }

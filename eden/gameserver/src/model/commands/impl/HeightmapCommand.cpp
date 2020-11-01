@@ -18,6 +18,7 @@ void HeightmapCommand::execute(Player& character, const std::vector<std::string>
     auto& pos       = character.position();
 
     LOG(INFO) << "X: " << pos.x() << ", Z: " << pos.z() << ", Floor Y: " << heightmap.y(pos.x(), pos.z());
+    std::exit(0);
 }
 
 /**

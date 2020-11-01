@@ -1,4 +1,6 @@
 #include <shaiya/game/model/actor/mob/Mob.hpp>
+#include <shaiya/game/scheduling/impl/MobAggressionTask.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
 using namespace shaiya::game;
 
@@ -12,6 +14,16 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
     : Actor(world), def_(def), spawnArea_(spawnArea)
 {
     type_ = EntityType::Mob;
+}
+
+/**
+ * Activates this actor.
+ */
+void Mob::activate()
+{
+    world().schedule(std::make_shared<MobAggressionTask>(*this));
+
+    Actor::activate();
 }
 
 /**
