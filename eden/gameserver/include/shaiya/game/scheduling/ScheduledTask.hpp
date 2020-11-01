@@ -1,4 +1,6 @@
 #pragma once
+#include <shaiya/game/Forward.hpp>
+
 #include <cstddef>
 #include <cstdint>
 
@@ -19,12 +21,12 @@ namespace shaiya::game
         /**
          * Executes this task.
          */
-        virtual void execute() = 0;
+        virtual void execute(GameWorldService& world) = 0;
 
         /**
          * Pulses this task, updating the delay and calling ScheduledTask#execute if necessary.
          */
-        void pulse();
+        void pulse(GameWorldService& world);
 
         /**
          * Stops this task.

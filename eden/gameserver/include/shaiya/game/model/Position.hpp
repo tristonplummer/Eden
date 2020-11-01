@@ -73,6 +73,13 @@ namespace shaiya::game
         [[nodiscard]] bool isWithinInteractionDistance(const Position& other) const;
 
         /**
+         * Gets the distance between this position and another position.
+         * @param other The other position.
+         * @return      The distance between the two.
+         */
+        float getDistance(const Position& other) const;
+
+        /**
          * Gets the map id.
          * @return  The map id.
          */

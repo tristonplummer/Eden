@@ -1,12 +1,14 @@
-#include <shaiya/game/service/GameWorldService.hpp>
-#include <shaiya/game/model/actor/player/Player.hpp>
+#include <shaiya/game/model/actor/mob/Mob.hpp>
 #include <shaiya/game/model/actor/npc/Npc.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/item/GroundItem.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapCell.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/sync/ParallelClientSynchronizer.hpp>
 #include <shaiya/game/sync/task/CharacterSynchronizationTask.hpp>
 #include <shaiya/game/sync/task/MapSynchronizationTask.hpp>
+#include <shaiya/game/sync/task/MobSynchronizationTask.hpp>
 #include <shaiya/game/sync/task/NpcSynchronizationTask.hpp>
 
 #include <execution>
@@ -15,9 +17,12 @@ using namespace shaiya::game;
 
 /**
  * Synchronizes the state of the clients with the stat of the server.
- * @param players    The vector containing the player characters.
+ * @param players   The vector containing the player characters.
+ * @param npcs      The npc container.
+ * @param mobs      The mob container.
  */
-void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> players)
+void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> players, const EntityContainer<Npc>& npcs,
+                                             const EntityContainer<Mob>& mobs)
 {
     // Run the synchroniser for each character, in parallel.
     std::for_each(std::execution::par_unseq, players.begin(), players.end(),
@@ -36,6 +41,14 @@ void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>
         // Clear the temporary attributes used in updating
         character->clearAttribute(Attribute::LastChatMessage);
     }
+
+    // Finalise the update sequence for npcs and mobs
+    for (auto&& mob: mobs)
+        if (mob)
+            mob->resetUpdateFlags();
+    for (auto&& npc: npcs)
+        if (npc)
+            npc->resetUpdateFlags();
 }
 
 /**
@@ -51,6 +64,7 @@ void ParallelClientSynchronizer::syncCharacter(Player& player)
     MapSynchronizationTask mapTask(player);
     CharacterSynchronizationTask charsTask(player);
     NpcSynchronizationTask npcTask(player);
+    MobSynchronizationTask mobTask(player);
 
     // The vector of entities that are currently being observed
     auto& observed = player.observedEntities();
@@ -70,6 +84,8 @@ void ParallelClientSynchronizer::syncCharacter(Player& player)
                 mapTask.removeItem(dynamic_cast<GroundItem&>(*entity));
             else if (entity->type() == EntityType::Npc)
                 npcTask.removeNpc(dynamic_cast<Npc&>(*entity));
+            else if (entity->type() == EntityType::Mob)
+                mobTask.removeMob(dynamic_cast<Mob&>(*entity));
             itr = observed.erase(itr);
             continue;
         }
@@ -116,6 +132,8 @@ void ParallelClientSynchronizer::syncCharacter(Player& player)
                 mapTask.addItem(dynamic_cast<GroundItem&>(*entity));
             else if (entity->type() == EntityType::Npc)
                 npcTask.addNpc(dynamic_cast<Npc&>(*entity));
+            else if (entity->type() == EntityType::Mob)
+                mobTask.addMob(dynamic_cast<Mob&>(*entity));
         }
     }
 
@@ -123,4 +141,5 @@ void ParallelClientSynchronizer::syncCharacter(Player& player)
     mapTask.sync();
     charsTask.sync();
     npcTask.sync();
+    mobTask.sync();
 }

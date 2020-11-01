@@ -1,5 +1,7 @@
 #include <shaiya/game/model/Position.hpp>
 
+#include <cmath>
+
 using namespace shaiya::game;
 
 /**
@@ -94,6 +96,18 @@ bool Position::isWithinViewportDistance(const Position& other) const
 bool Position::isWithinInteractionDistance(const Position& other) const
 {
     return isWithinDistance(other, INTERACTION_DISTANCE);
+}
+
+/**
+ * Gets the distance between this position and another position.
+ * @param other The other position.
+ * @return      The distance between the two.
+ */
+float Position::getDistance(const Position& other) const
+{
+    auto deltaX = x() - other.x();
+    auto deltaZ = z() - other.z();
+    return std::sqrt(deltaX * deltaX + deltaZ * deltaZ);
 }
 
 /**

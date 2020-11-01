@@ -16,7 +16,8 @@ RUN apt-get install --yes   \
     protobuf-compiler-grpc  \
     libgrpc++-dev           \
     libpqxx-dev             \
-    libtbb-dev
+    libtbb-dev              \
+    libyaml-cpp-dev
 
 # Copy the source files
 COPY . /edensrc/

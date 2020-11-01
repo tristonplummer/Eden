@@ -1,13 +1,15 @@
+#include <shaiya/game/model/actor/mob/Mob.hpp>
+#include <shaiya/game/model/actor/npc/Npc.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapCell.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
-#include <glog/logging.h>
-
-#include <array>
 #include <cassert>
 #include <cfenv>
 #include <cmath>
+#include <iostream>
+#include <yaml-cpp/yaml.h>
 
 using namespace shaiya::game;
 
@@ -22,44 +24,24 @@ constexpr auto CELL_SIZE = 16;
 constexpr auto OBSERVABLE_CELL_RADIUS = 3;
 
 /**
- * The offset to read a map's size type from, if it is a field.
+ * Initialises this map.
+ * @param world The world instance.
  */
-constexpr auto FIELD_MAP_SIZE_OFFSET = 5;
-
-/**
- * This represents the size type in a field, which can either be 4 (standard size), or 8 (large size).
- */
-constexpr auto STANDARD_SIZE_TYPE = 4;
-
-/**
- * The size of a standard map.
- */
-constexpr auto STANDARD_MAP_SIZE = 1024;
-
-/**
- * The size of a large map.
- */
-constexpr auto LARGE_MAP_SIZE = 2048;
+Map::Map(GameWorldService& world): world_(world)
+{
+}
 
 /**
  * Loads this map by populating the cells, and parsing the heightmap and objects.
  * @param stream    The input stream.
- * @param length    The length of the stream.
  */
-void Map::load(std::ifstream& stream, size_t length)
+void Map::load(std::ifstream& stream)
 {
-    std::array<char, 3> header{ 0 };  // The map type (either FLD or DUN).
-    stream.read(header.data(), header.size());
-    std::string type(header.data(), header.size());
+    auto yaml = YAML::Load(stream);
 
-    // Seek back to the beginning of the stream.
-    stream.seekg(std::ios::beg);
-
-    // Parse the map depending on the type
-    if (type == "FLD")
-        parseField(stream);
-    else if (type == "DUN")
-        parseDungeon(stream);
+    // Read the id, and the size
+    id_   = yaml["id"].as<uint16_t>();
+    size_ = yaml["size"].as<size_t>();
 
     // Calculate the cell rows and columns
     // Cells always fit perfectly into a map, and map sizes are only ever 1024x1024 or 2048x2048.
@@ -76,27 +58,93 @@ void Map::load(std::ifstream& stream, size_t length)
 }
 
 /**
- * Parses this map as a field.
+ * Loads an initial npc spawn for this map.
  * @param stream    The input stream.
  */
-void Map::parseField(std::ifstream& stream)
+void Map::loadNpc(std::ifstream& stream)
 {
-    // In a field type map, the size is the 5th byte.
-    char sizeType;
-    stream.seekg(FIELD_MAP_SIZE_OFFSET);
-    stream.read(&sizeType, sizeof(sizeType));
+    auto yaml   = YAML::Load(stream);
+    auto spawns = yaml["npcs"];
 
-    // Set the size  of the map based on the size type
-    size_ = sizeType == STANDARD_SIZE_TYPE ? STANDARD_MAP_SIZE : LARGE_MAP_SIZE;
+    for (auto&& spawn: spawns)
+    {
+        auto data      = spawn["npc"];
+        uint8_t type   = data["type"].as<int>();
+        uint8_t typeId = data["typeid"].as<int>();
+
+        // Loop over the positions
+        for (auto&& position: data["positions"])
+        {
+            auto x   = position["x"].as<float>();
+            auto y   = position["y"].as<float>();
+            auto z   = position["z"].as<float>();
+            auto dir = position["dir"].as<float>(0.00);
+
+            auto pos = Position(id_, x, y, z);
+
+            auto* def   = new NpcDefinition();
+            def->type   = type;
+            def->typeId = typeId;
+
+            auto npc = std::make_shared<Npc>(*def, world_);
+            npc->setPosition(pos);
+            npc->setDirection(dir);
+
+            world_.registerNpc(std::move(npc));
+        }
+    }
 }
 
 /**
- * Parses this map as a dungeon.
- * @param stream    The input stream.
+ * Loads an initial mob spawn for this map.
+ * @param stream    The input stream
  */
-void Map::parseDungeon(std::ifstream& stream)
+void Map::loadMob(std::ifstream& stream)
 {
-    size_ = STANDARD_MAP_SIZE;
+    auto yaml    = YAML::Load(stream);
+    auto entries = yaml["mobs"];
+
+    for (auto&& entry: entries)
+    {
+        auto spawn = entry["spawn"];
+
+        auto areas = spawn["area"];
+        auto area  = areas.begin();
+
+        auto first  = *area++;
+        auto second = *area;
+
+        Position bottomLeft(id_, first["x"].as<float>(), first["y"].as<float>(), first["z"].as<float>());
+        Position topRight(id_, second["x"].as<float>(), second["y"].as<float>(), second["z"].as<float>());
+        Area spawnArea(bottomLeft, topRight);
+
+        auto spawns = spawn["spawns"];
+        for (auto&& mobSpawn: spawns)
+        {
+            auto id       = mobSpawn["id"].as<int>();
+            auto quantity = mobSpawn["quantity"].as<int>();
+
+            auto* def = new client::MobDefinition();
+            def->id   = id;
+
+            for (auto i = 0; i < quantity; i++)
+            {
+                auto mob = std::make_shared<Mob>(*def, spawnArea, world_);
+                mob->setPosition(mob->spawnArea().randomPoint());
+
+                world_.registerMob(mob);
+            }
+        }
+    }
+}
+
+/**
+ * Loads the world file for the map.
+ * @param path  The path to the world
+ */
+void Map::loadWorld(const std::string& path)
+{
+    worldFile_ = client::World(path);
 }
 
 /**
@@ -136,7 +184,7 @@ void Map::remove(std::shared_ptr<Entity> entity) const
  * @param type  The entity type to search for.
  * @return      The entity instance.
  */
-std::shared_ptr<Entity> Map::get(Position& pos, size_t id, EntityType type)
+std::shared_ptr<Entity> Map::get(Position& pos, size_t id, EntityType type) const
 {
     auto neighbours = getNeighbouringCells(pos);
     for (auto&& cell: neighbours)

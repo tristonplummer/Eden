@@ -1,52 +1,83 @@
+#include <shaiya/common/client/map/Heightmap.hpp>
+#include <shaiya/common/client/map/World.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapRepository.hpp>
 
 #include <boost/filesystem.hpp>
+#include <boost/format.hpp>
+#include <boost/range/iterator_range.hpp>
 #include <glog/logging.h>
-
-#include <cassert>
 
 using namespace shaiya::game;
 
 /**
  * Loads the map repository.
  * @param mapPath  The path to the world's map files.
+ * @param world     The game world service.
  */
-void MapRepository::load(const std::string& mapPath)
+void MapRepository::load(const std::string& mapPath, GameWorldService& world)
 {
     using namespace boost::filesystem;
     path p(mapPath);  // The path to the map files
 
-    // A helper function to get a map id for it's path
-    auto idForPath = [](const path& file) -> int {
-        auto name = file.filename().string();
-        return std::stoi(name.substr(0, name.find(".wld")));
-    };
+    // The format for getting a world file by id
+    auto worldFmt = boost::format("%1%.wld");
 
-    // A vector of file paths
-    std::vector<path> paths;
-    std::copy(directory_iterator(p), directory_iterator(), std::back_inserter(paths));
-    std::sort(paths.begin(), paths.end(), [&](const path& lhs, const path& rhs) { return idForPath(lhs) < idForPath(rhs); });
-
-    // Resize the vector to fit all the maps by their id
-    auto lastId = idForPath(paths.back());
-    maps_.resize(lastId + 1);
-
-    // Load all of the maps
-    for (auto&& mapFilePath: paths)
+    // Loop over all the directories in the map path
+    for (auto& directory: boost::make_iterator_range(directory_iterator(p), {}))
     {
-        // The stream to the map file
-        std::ifstream stream(mapFilePath.string(), std::ios::in | std::ios::binary | std::ios::ate);
-        auto size = stream.tellg();
-        stream.seekg(std::ios::beg);
+        auto getPath = [&](const std::string& path) {
+            auto p = directory.path();
+            return p /= path;
+        };
+        auto metadata = getPath("map.yaml");
 
-        // Create and parse the map file
-        auto map = std::make_shared<Map>();
-        map->load(stream, size);
+        if (!exists(metadata))  // If the map metadata file doesn't exist, skip this directory.
+            continue;
+
+        // Initialise the map and parse the metadata file
+        std::ifstream metastream(metadata.c_str(), std::ios::in);
+        auto map = std::make_shared<Map>(world);
+        map->load(metastream);
 
         // Store the map
-        auto id      = idForPath(mapFilePath);
-        maps_.at(id) = std::move(map);
+        maps_[map->id()] = map;
+
+        // Load the world
+        auto worldPath = getPath((worldFmt % map->id()).str());
+        map->loadWorld(worldPath.string());
+
+        // Loop over the npc spawns
+        auto npcPath = getPath("/npcs");
+        if (exists(npcPath))
+        {
+            for (auto& npc: boost::make_iterator_range(recursive_directory_iterator(npcPath), {}))
+            {
+                if (!is_regular_file(npc))
+                    continue;
+                if (npc.path().extension() == ".yaml")
+                {
+                    std::ifstream stream(npc.path().c_str(), std::ios::in);
+                    map->loadNpc(stream);
+                }
+            }
+        }
+
+        // Loop over the mob spawns
+        auto mobPath = getPath("/mobs");
+        if (exists(mobPath))
+        {
+            for (auto& mob: boost::make_iterator_range(recursive_directory_iterator(mobPath), {}))
+            {
+                if (!is_regular_file(mob))
+                    continue;
+                if (mob.path().extension() == ".yaml")
+                {
+                    std::ifstream stream(mob.path().c_str(), std::ios::in);
+                    map->loadMob(stream);
+                }
+            }
+        }
     }
 }
 
@@ -57,6 +88,7 @@ void MapRepository::load(const std::string& mapPath)
  */
 std::shared_ptr<Map> MapRepository::forId(uint16_t id) const
 {
-    assert(maps_.size() > id);
-    return maps_.at(id);
+    if (maps_.count(id))
+        return maps_.at(id);
+    return nullptr;
 }

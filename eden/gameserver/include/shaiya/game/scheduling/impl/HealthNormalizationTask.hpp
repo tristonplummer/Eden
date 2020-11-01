@@ -19,7 +19,7 @@ namespace shaiya::game
         /**
          * Handle the execution of this task.
          */
-        void execute() override;
+        void execute(GameWorldService& world) override;
 
     private:
         /**

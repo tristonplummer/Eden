@@ -1,12 +1,14 @@
 #include <shaiya/common/client/item/ItemSData.hpp>
 #include <shaiya/common/util/Async.hpp>
 #include <shaiya/game/io/impl/DatabasePlayerSerializer.hpp>
-#include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/game/model/actor/mob/Mob.hpp>
 #include <shaiya/game/model/actor/npc/Npc.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/item/GroundItem.hpp>
 #include <shaiya/game/model/map/Map.hpp>
+#include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/scheduling/impl/NpcMovementTask.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/sync/ParallelClientSynchronizer.hpp>
 
 #include <chrono>
@@ -20,9 +22,9 @@ using namespace shaiya::game;
  */
 GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t worldId): db_(db)
 {
-    itemDefs_            = shaiya::client::ItemSData("./data/game/Item.SData");
-    synchronizer_        = std::make_unique<ParallelClientSynchronizer>();
-    playerSerializer_    = std::make_unique<DatabasePlayerSerializer>(db, itemDefs_, worldId);
+    itemDefs_         = shaiya::client::ItemSData("./data/game/Item.SData");
+    synchronizer_     = std::make_unique<ParallelClientSynchronizer>();
+    playerSerializer_ = std::make_unique<DatabasePlayerSerializer>(db, itemDefs_, worldId);
 }
 
 /**
@@ -31,7 +33,10 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t
  */
 void GameWorldService::load(boost::property_tree::ptree& config)
 {
-    mapRepository_.load(config.get<std::string>("World.MapFilePath"));  // Load the game's maps.
+    mapRepository_.load(config.get<std::string>("World.MapFilePath"), *this);  // Load the game's maps.
+
+    // Global tasks
+    schedule(std::make_shared<NpcMovementTask>());
 }
 
 /**
@@ -57,10 +62,10 @@ void GameWorldService::tick(size_t tickRate)
             player->session().processQueue();
 
         // Pulse the game world
-        scheduler_.pulse();
+        scheduler_.pulse(*this);
 
         // Synchronize the characters with the world state
-        synchronizer_->synchronize(players_);
+        synchronizer_->synchronize(players_, npcs_, mobs_);
 
         // The current time
         auto now = steady_clock::now();
@@ -147,7 +152,7 @@ void GameWorldService::registerNpc(std::shared_ptr<Npc> npc)
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
 
-    // Add the item to the ground items container
+    // Add the npc to the npc container
     if (npcs_.add(npc))
     {
         npc->activate();
@@ -172,6 +177,42 @@ void GameWorldService::unregisterNpc(std::shared_ptr<Npc> npc)
     // Remove the entity from their map
     auto map = mapRepository_.forId(npc->position().map());
     map->remove(npc);
+}
+
+/**
+ * Registers a mob to this world.
+ * @param mob   The mob instance.
+ */
+void GameWorldService::registerMob(std::shared_ptr<Mob> mob)
+{
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Add the mob to the mobs container
+    if (mobs_.add(mob))
+    {
+        mob->activate();
+    }
+}
+
+/**
+ * Removes a mob from this world.
+ * @param mob   The mob instance.
+ */
+void GameWorldService::unregisterMob(std::shared_ptr<Mob> mob)
+{
+    // Lock the mutex
+    std::lock_guard lock{ mutex_ };
+
+    // Remove the mob
+    mobs_.remove(mob);
+
+    // Deactivate the mob
+    mob->deactivate();
+
+    // Remove the entity from their map
+    auto map = mapRepository_.forId(mob->position().map());
+    map->remove(mob);
 }
 
 /**

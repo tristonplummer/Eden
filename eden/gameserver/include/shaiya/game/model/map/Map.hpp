@@ -1,4 +1,5 @@
 #pragma once
+#include <shaiya/common/client/map/World.hpp>
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/model/EntityType.hpp>
 
@@ -15,11 +16,34 @@ namespace shaiya::game
     {
     public:
         /**
-         * Loads this map by populating the cells, and parsing the heightmap and objects.
-         * @param stream    The input stream.
-         * @param length    The length of the stream.
+         * Initialises this map.
+         * @param world The world instance.
          */
-        void load(std::ifstream& stream, size_t length);
+        explicit Map(GameWorldService& world);
+
+        /**
+         * Loads this map by populating the cells.
+         * @param stream    The input stream.
+         */
+        void load(std::ifstream& stream);
+
+        /**
+         * Loads an initial npc spawn for this map.
+         * @param stream    The input stream.
+         */
+        void loadNpc(std::ifstream& stream);
+
+        /**
+         * Loads an initial mob spawn for this map.
+         * @param stream    The input stream
+         */
+        void loadMob(std::ifstream& stream);
+
+        /**
+         * Loads the world for the map.
+         * @param path  The path to the world
+         */
+        void loadWorld(const std::string& path);
 
         /**
          * Adds an entity to this map.
@@ -53,7 +77,7 @@ namespace shaiya::game
          * @param type  The entity type to search for.
          * @return      The entity instance.
          */
-        std::shared_ptr<Entity> get(Position& pos, size_t id, EntityType type);
+        std::shared_ptr<Entity> get(Position& pos, size_t id, EntityType type) const;
 
         /**
          * Gets the cells in a neighbouring radius of a position.
@@ -61,6 +85,15 @@ namespace shaiya::game
          * @return          The neighbouring cells.
          */
         [[nodiscard]] std::vector<std::shared_ptr<MapCell>> getNeighbouringCells(Position& position) const;
+
+        /**
+         * Gets the heightmap for this map.
+         * @return  The heightmap.
+         */
+        [[nodiscard]] const client::Heightmap& heightmap() const
+        {
+            return worldFile_.heightmap();
+        }
 
         /**
          * Gets the size of the map.
@@ -71,19 +104,16 @@ namespace shaiya::game
             return size_;
         }
 
+        /**
+         * Gets the id of this map.
+         * @return  The map id.
+         */
+        [[nodiscard]] uint16_t id() const
+        {
+            return id_;
+        }
+
     private:
-        /**
-         * Parses this map as a field.
-         * @param stream    The input stream.
-         */
-        void parseField(std::ifstream& stream);
-
-        /**
-         * Parses this map as a dungeon.
-         * @param stream    The input stream.
-         */
-        void parseDungeon(std::ifstream& stream);
-
         /**
          * Get a cell in the map based on a position.
          * @param position  The position.
@@ -105,6 +135,16 @@ namespace shaiya::game
         void adjustPosition(Position& position) const;
 
         /**
+         * The world service.
+         */
+        GameWorldService& world_;
+
+        /**
+         * The id of this map.
+         */
+        uint16_t id_{ 0 };
+
+        /**
          * The size of the map.
          */
         size_t size_{ 0 };
@@ -123,5 +163,10 @@ namespace shaiya::game
          * The cells of this map.
          */
         std::vector<std::shared_ptr<MapCell>> cells_;
+
+        /**
+         * The world file for this map.
+         */
+        client::World worldFile_;
     };
 }

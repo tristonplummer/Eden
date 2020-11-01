@@ -60,6 +60,12 @@ namespace shaiya::game
 
         /**
          * Sets the direction this entity is facing.
+         * @param radians   The direction to face, in radians.
+         */
+        void setDirection(float radians);
+
+        /**
+         * Sets the direction this entity is facing.
          * @param direction The direction to face.
          */
         void setDirection(uint16_t direction);

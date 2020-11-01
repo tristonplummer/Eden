@@ -15,8 +15,9 @@ namespace shaiya::game
     public:
         /**
          * Pulses the active tasks, and removes those that are no longer running.
+         * @param world The world instance
          */
-        void pulse();
+        void pulse(GameWorldService& world);
 
         /**
          * Schedules a task to be executed in the future.

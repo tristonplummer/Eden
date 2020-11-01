@@ -22,11 +22,11 @@ void ScheduledTask::stop()
 /**
  * Pulses this task, updating the delay and calling ScheduledTask#execute if necessary.
  */
-void ScheduledTask::pulse()
+void ScheduledTask::pulse(GameWorldService& world)
 {
     if (running_ && --pulses_ <= 0)
     {
-        execute();
+        execute(world);
         pulses_ = delay_;
     }
 }

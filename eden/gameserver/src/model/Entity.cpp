@@ -1,7 +1,8 @@
-#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/model/Entity.hpp>
 #include <shaiya/game/model/map/Map.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
+#include <cmath>
 #include <utility>
 
 using namespace shaiya::game;
@@ -65,6 +66,16 @@ void Entity::resetUpdateFlags()
 
 /**
  * Sets the direction this entity is facing.
+ * @param radians   The direction to face, in radians.
+ */
+void Entity::setDirection(float radians)
+{
+    uint16_t direction = -radians * (180.0 / M_PI);
+    setDirection(direction);
+}
+
+/**
+ * Sets the direction this entity is facing.
  * @param direction The direction to face.
  */
 void Entity::setDirection(uint16_t direction)
@@ -97,13 +108,6 @@ void Entity::setPosition(Position position)
     if (position_ == position)
         return;
 
-    // If the new position is just a height change, we wont bother finding a new cell.
-    if (position_.y() == position.y())
-    {
-        position_ = position;
-        return;
-    }
-
     // Get the world maps
     auto& maps = world_.maps();
 
@@ -112,14 +116,16 @@ void Entity::setPosition(Position position)
 
     // Remove the entity from the current map.
     auto current = maps.forId(position_.map());
-    current->remove(entity);
+    if (current != nullptr)
+        current->remove(entity);
 
     // Update the position
     position_ = position;
 
     // Add the entity to the new map
     auto next = maps.forId(position_.map());
-    next->add(entity);
+    if (next != nullptr)
+        next->add(entity);
 
     // Flag this entity for a movement update
     flagUpdate(UpdateFlag::Movement);

@@ -3,7 +3,6 @@
 
 #include <map>
 #include <memory>
-#include <vector>
 
 namespace shaiya::game
 {
@@ -16,8 +15,9 @@ namespace shaiya::game
         /**
          * Loads the map repository.
          * @param path  The path to the world's map files.
+         * @param world The game world service.
          */
-        void load(const std::string& path);
+        void load(const std::string& path, GameWorldService& world);
 
         /**
          * Gets a map for a specified id.
@@ -28,8 +28,8 @@ namespace shaiya::game
 
     private:
         /**
-         * The vector of maps.
+         * The map of maps.
          */
-        std::vector<std::shared_ptr<Map>> maps_;
+        std::map<uint16_t, std::shared_ptr<Map>> maps_;
     };
 }
