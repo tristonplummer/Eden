@@ -14,10 +14,18 @@ namespace shaiya::game
     {
     public:
         /**
+         * Initialises this map cell.
+         * @param map       The map instance.
+         * @param row       The row
+         * @param column    The column
+         */
+        MapCell(Map& map, size_t row, size_t column);
+
+        /**
          * Adds an entity to this cell.
          * @param entity    The entity to add.
          */
-        void addEntity(std::shared_ptr<Entity> entity);
+        void addEntity(const std::shared_ptr<Entity>& entity);
 
         /**
          * Removes an entity from this cell.
@@ -26,10 +34,16 @@ namespace shaiya::game
         void removeEntity(const std::shared_ptr<Entity>& entity);
 
         /**
+         * Gets the neighbouring cells.
+         * @return  The neighbouring cells.
+         */
+        const std::vector<std::shared_ptr<MapCell>>& neighbours();
+
+        /**
          * Gets the entities in this cell.
          * @return  The entities.
          */
-        [[nodiscard]] std::vector<std::shared_ptr<Entity>> entities() const
+        [[nodiscard]] const std::vector<std::shared_ptr<Entity>>& entities() const
         {
             return entities_;
         }
@@ -39,5 +53,25 @@ namespace shaiya::game
          * The entities that exist inside this cell.
          */
         std::vector<std::shared_ptr<Entity>> entities_;
+
+        /**
+         * The vector of neighbouring cells.
+         */
+        std::vector<std::shared_ptr<MapCell>> neighbours_;
+
+        /**
+         * The map instance.
+         */
+        Map& map_;
+
+        /**
+         * The row.
+         */
+        size_t row_{};
+
+        /**
+         * The column
+         */
+        size_t column_{};
     };
 }

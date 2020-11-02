@@ -49,13 +49,13 @@ namespace shaiya::game
          * Adds an entity to this map.
          * @param entity    The entity to add.
          */
-        void add(std::shared_ptr<Entity> entity) const;
+        void add(const std::shared_ptr<Entity>& entity) const;
 
         /**
          * Removes an entity from this map.
          * @param entity    The entity to remove.
          */
-        void remove(std::shared_ptr<Entity> entity) const;
+        void remove(const std::shared_ptr<Entity>& entity) const;
 
         /**
          * Attempts to get an entity with a specified id and type.
@@ -84,7 +84,7 @@ namespace shaiya::game
          * @param position  The position.
          * @return          The neighbouring cells.
          */
-        [[nodiscard]] std::vector<std::shared_ptr<MapCell>> getNeighbouringCells(Position& position) const;
+        [[nodiscard]] const std::vector<std::shared_ptr<MapCell>>& getNeighbouringCells(Position& position) const;
 
         /**
          * Gets the entities that are located in neighbouring cells.
@@ -94,6 +94,21 @@ namespace shaiya::game
          */
         [[nodiscard]] std::vector<std::shared_ptr<Entity>> getNeighbouringEntities(Position& position,
                                                                                    EntityType type) const;
+
+        /**
+         * Get a cell in the map based on a position.
+         * @param position  The position.
+         * @return          The map cell.
+         */
+        [[nodiscard]] std::shared_ptr<MapCell> getCell(Position& position) const;
+
+        /**
+         * Get a cell in the map based on a row and column.
+         * @param row       The cell row.
+         * @param column    The cell column.
+         * @return          The map cell.
+         */
+        [[nodiscard]] std::shared_ptr<MapCell> getCell(size_t row, size_t column) const;
 
         /**
          * Gets the heightmap for this map.
@@ -123,13 +138,6 @@ namespace shaiya::game
         }
 
     private:
-        /**
-         * Get a cell in the map based on a position.
-         * @param position  The position.
-         * @return          The map cell.
-         */
-        [[nodiscard]] std::shared_ptr<MapCell> getCell(Position& position) const;
-
         /**
          * Get a cell index  based on a position.
          * @param position  The position.

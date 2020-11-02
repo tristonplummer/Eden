@@ -19,11 +19,6 @@ using namespace shaiya::game;
 constexpr auto CELL_SIZE = 16;
 
 /**
- * The observable radius from a center cell.
- */
-constexpr auto OBSERVABLE_CELL_RADIUS = 3;
-
-/**
  * Initialises this map.
  * @param world The world instance.
  */
@@ -53,8 +48,14 @@ void Map::load(std::ifstream& stream)
     cells_.resize(totalCells);
 
     // Generate the cells
-    for (auto i = 0; i < totalCells; i++)
-        cells_.at(i) = std::make_shared<MapCell>();
+    for (auto row = 0; row < rowCount_; row++)
+    {
+        for (auto column = 0; column < columnCount_; column++)
+        {
+            auto idx       = row + (column * rowCount_);
+            cells_.at(idx) = std::make_shared<MapCell>(*this, row, column);
+        }
+    }
 }
 
 /**
@@ -151,7 +152,7 @@ void Map::loadWorld(const std::string& path)
  * Adds an entity to this map.
  * @param entity    The entity to add.
  */
-void Map::add(std::shared_ptr<Entity> entity) const
+void Map::add(const std::shared_ptr<Entity>& entity) const
 {
     // Adjust the position where needed
     adjustPosition(entity->position());
@@ -166,7 +167,7 @@ void Map::add(std::shared_ptr<Entity> entity) const
  * Removes an entity from this map.
  * @param entity    The entity to remove.
  */
-void Map::remove(std::shared_ptr<Entity> entity) const
+void Map::remove(const std::shared_ptr<Entity>& entity) const
 {
     // Adjust the position where needed
     adjustPosition(entity->position());
@@ -194,7 +195,7 @@ std::shared_ptr<Entity> Map::get(Position& pos, size_t id, EntityType type) cons
             if (entity->type() != type)
                 continue;
             if (entity->id() == id)
-                return entity;
+                return std::shared_ptr<Entity>(entity);
         }
     }
     return nullptr;
@@ -210,6 +211,18 @@ std::shared_ptr<MapCell> Map::getCell(Position& position) const
     // Adjust the position where needed
     adjustPosition(position);
     return cells_.at(getCellIndex(position));
+}
+
+/**
+ * Get a cell in the map based on a row and column.
+ * @param row       The cell row.
+ * @param column    The cell column.
+ * @return          The map cell.
+ */
+std::shared_ptr<MapCell> Map::getCell(size_t row, size_t column) const
+{
+    auto idx = row + (column * rowCount_);
+    return cells_.at(idx);
 }
 
 /**
@@ -240,7 +253,7 @@ size_t Map::getCellIndex(Position& position) const
  * @param position  The position.
  * @return          The neighbouring cells.
  */
-std::vector<std::shared_ptr<MapCell>> Map::getNeighbouringCells(Position& position) const
+const std::vector<std::shared_ptr<MapCell>>& Map::getNeighbouringCells(Position& position) const
 {
     // Adjust the position where needed
     adjustPosition(position);
@@ -253,26 +266,12 @@ std::vector<std::shared_ptr<MapCell>> Map::getNeighbouringCells(Position& positi
     auto z = std::min(static_cast<size_t>(std::nearbyint(position.z())), size_);
 
     // The position's row and column
-    auto centerRow    = x / CELL_SIZE;
-    auto centerColumn = z / CELL_SIZE;
+    auto row    = x / CELL_SIZE;
+    auto column = z / CELL_SIZE;
 
-    // The maximum row and column
-    auto maxRow    = centerRow + OBSERVABLE_CELL_RADIUS;
-    auto maxColumn = centerColumn + OBSERVABLE_CELL_RADIUS;
-
-    // Loop through the cell rows and columns
-    for (auto row = centerRow - OBSERVABLE_CELL_RADIUS; row < maxRow; row++)
-    {
-        for (auto column = centerColumn - OBSERVABLE_CELL_RADIUS; column < maxColumn; column++)
-        {
-            auto id = row + (column * rowCount_);
-            if (id >= 0 && id < cells_.size())
-            {
-                cells.push_back(cells_.at(id));
-            }
-        }
-    }
-    return cells;
+    // The cell at the specific position
+    auto cell = getCell(row, column);
+    return cell->neighbours();
 }
 
 /**
@@ -284,9 +283,11 @@ std::vector<std::shared_ptr<MapCell>> Map::getNeighbouringCells(Position& positi
 std::vector<std::shared_ptr<Entity>> Map::getNeighbouringEntities(Position& position, EntityType type) const
 {
     std::vector<std::shared_ptr<Entity>> entities;
-    for (auto&& cell: getNeighbouringCells(position))
+    const auto& cells = getNeighbouringCells(position);
+    for (auto&& cell: cells)
     {
-        for (auto&& entity: cell->entities())
+        const auto& neighbours = cell->entities();
+        for (auto&& entity: neighbours)
         {
             if (entity->active() && entity->type() == type)
             {
