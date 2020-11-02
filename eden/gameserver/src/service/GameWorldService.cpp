@@ -12,6 +12,7 @@
 #include <shaiya/game/sync/ParallelClientSynchronizer.hpp>
 
 #include <chrono>
+#include <iostream>
 
 using namespace shaiya::game;
 
@@ -24,7 +25,7 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t
 {
     itemDefs_         = shaiya::client::ItemSData("./data/game/Item.SData");
     synchronizer_     = std::make_unique<ParallelClientSynchronizer>();
-    playerSerializer_ = std::make_unique<DatabasePlayerSerializer>(db, itemDefs_, worldId);
+    playerSerializer_ = std::make_unique<DatabasePlayerSerializer>(db_, itemDefs_, worldId);
 }
 
 /**
@@ -52,7 +53,7 @@ void GameWorldService::tick(size_t tickRate)
     {
         // The time we should sleep until, for the next tick
         auto nextTick = steady_clock::now() + milliseconds(tickRate);
-
+        
         // Finalise the registration and unregistrations for characters
         finaliseRegistrations();
         finaliseUnregistrations();
@@ -60,6 +61,9 @@ void GameWorldService::tick(size_t tickRate)
         // Process all the queued incoming packets
         for (auto&& player: players_)
             player->session().processQueue();
+
+        // Process the map tick
+        mapRepository_.tick();
 
         // Pulse the game world
         scheduler_.pulse(*this);
