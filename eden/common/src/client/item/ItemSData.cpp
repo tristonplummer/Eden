@@ -1,5 +1,7 @@
 #include <shaiya/common/client/item/ItemSData.hpp>
 
+#include <boost/filesystem.hpp>
+
 #include <fstream>
 
 using namespace shaiya::client;
@@ -10,6 +12,9 @@ using namespace shaiya::client;
  */
 ItemSData::ItemSData(const std::string& path)
 {
+    if (!boost::filesystem::exists(path))
+        throw std::invalid_argument("File doesn't exist.");
+
     // Open a stream to the item sdata file
     std::ifstream stream(path, std::ios::in | std::ios::binary);
 
