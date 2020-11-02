@@ -82,6 +82,15 @@ void MapRepository::load(const std::string& mapPath, GameWorldService& world)
 }
 
 /**
+ * Processes the tick for all maps.
+ */
+void MapRepository::tick()
+{
+    for (auto [id, map]: maps_)
+        map->tick();
+}
+
+/**
  * Gets a map for a specified id.
  * @param id    The map id.
  * @return      The map instance.

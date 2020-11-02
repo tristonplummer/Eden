@@ -149,10 +149,25 @@ void Map::loadWorld(const std::string& path)
 }
 
 /**
+ * Processes the tick for this map.
+ */
+void Map::tick() const
+{
+    // Tick all active entities in this map.
+    for (auto& entity: getLiveEntities())
+    {
+        if (entity->type() == EntityType::Mob)
+            (std::dynamic_pointer_cast<Mob>(entity))->tick();
+        else
+            entity->tick();
+    }
+}
+
+/**
  * Adds an entity to this map.
  * @param entity    The entity to add.
  */
-void Map::add(const std::shared_ptr<Entity>& entity) const
+void Map::add(const std::shared_ptr<Entity>& entity)
 {
     // Adjust the position where needed
     adjustPosition(entity->position());
@@ -161,13 +176,21 @@ void Map::add(const std::shared_ptr<Entity>& entity) const
     auto cell = getCell(entity->position());
     assert(cell);
     cell->addEntity(entity);
+
+    // If the added entity was a player
+    if (entity->type() == EntityType::Player)
+    {
+        auto& neighbours = cell->neighbours();
+        for (auto&& neighbour: neighbours)
+            aliveCells_.insert({ neighbour->row(), neighbour->column() });
+    }
 }
 
 /**
  * Removes an entity from this map.
  * @param entity    The entity to remove.
  */
-void Map::remove(const std::shared_ptr<Entity>& entity) const
+void Map::remove(const std::shared_ptr<Entity>& entity)
 {
     // Adjust the position where needed
     adjustPosition(entity->position());
@@ -176,6 +199,17 @@ void Map::remove(const std::shared_ptr<Entity>& entity) const
     auto cell = getCell(entity->position());
     assert(cell);
     cell->removeEntity(entity);
+
+    // If the cell is dead, remove it from the set
+    if (!cell->alive())
+    {
+        auto& neighbours = cell->neighbours();
+        for (auto&& neighbour: neighbours)
+        {
+            if (!neighbour->alive())
+                aliveCells_.erase({ neighbour->row(), neighbour->column() });
+        }
+    }
 }
 
 /**
@@ -295,6 +329,26 @@ std::vector<std::shared_ptr<Entity>> Map::getNeighbouringEntities(Position& posi
             }
         }
     }
+    return entities;
+}
+
+/**
+ * Gets all live entities on this map.
+ * @return  The live entities.
+ */
+std::vector<std::shared_ptr<Entity>> Map::getLiveEntities() const
+{
+    std::vector<std::shared_ptr<Entity>> entities;
+    for (auto [row, column]: aliveCells_)
+    {
+        auto cell = getCell(row, column);
+        if (!cell)
+            continue;
+
+        for (auto& entity: cell->entities())
+            entities.push_back(entity);
+    }
+
     return entities;
 }
 

@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <memory>
+#include <set>
 #include <vector>
 
 namespace shaiya::game
@@ -46,16 +47,21 @@ namespace shaiya::game
         void loadWorld(const std::string& path);
 
         /**
+         * Processes the tick for this map.
+         */
+        void tick() const;
+
+        /**
          * Adds an entity to this map.
          * @param entity    The entity to add.
          */
-        void add(const std::shared_ptr<Entity>& entity) const;
+        void add(const std::shared_ptr<Entity>& entity);
 
         /**
          * Removes an entity from this map.
          * @param entity    The entity to remove.
          */
-        void remove(const std::shared_ptr<Entity>& entity) const;
+        void remove(const std::shared_ptr<Entity>& entity);
 
         /**
          * Attempts to get an entity with a specified id and type.
@@ -94,6 +100,12 @@ namespace shaiya::game
          */
         [[nodiscard]] std::vector<std::shared_ptr<Entity>> getNeighbouringEntities(Position& position,
                                                                                    EntityType type) const;
+
+        /**
+         * Gets all live entities on this map.
+         * @return  The live entities.
+         */
+        std::vector<std::shared_ptr<Entity>> getLiveEntities() const;
 
         /**
          * Get a cell in the map based on a position.
@@ -185,5 +197,10 @@ namespace shaiya::game
          * The world file for this map.
          */
         client::World worldFile_;
+
+        /**
+         * A set containing the row and column of all the alive cells.
+         */
+        std::set<std::tuple<size_t, size_t>> aliveCells_;
     };
 }

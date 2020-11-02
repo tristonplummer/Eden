@@ -1,4 +1,5 @@
 #include <shaiya/game/model/Entity.hpp>
+#include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/model/map/MapCell.hpp>
 
@@ -25,7 +26,15 @@ MapCell::MapCell(Map& map, size_t row, size_t column): map_(map), row_(row), col
  */
 void MapCell::addEntity(const std::shared_ptr<Entity>& entity)
 {
-    entities_.push_back(entity);
+    if (entity->type() == EntityType::Player)
+    {
+        players_.push_back(std::dynamic_pointer_cast<Player>(entity));
+        setAlive(true);
+    }
+    else
+    {
+        entities_.push_back(entity);
+    }
 }
 
 /**
@@ -34,14 +43,43 @@ void MapCell::addEntity(const std::shared_ptr<Entity>& entity)
  */
 void MapCell::removeEntity(const std::shared_ptr<Entity>& entity)
 {
-    auto pred = [&](const std::shared_ptr<Entity>& element) {
-        return element->type() == entity->type() && element->id() == entity->id();
-    };
-    auto pos = std::find_if(entities_.begin(), entities_.end(), pred);
-    if (pos != entities_.end())
+    if (entity->type() == EntityType::Player)
     {
-        entities_.erase(pos);
+        auto player = std::dynamic_pointer_cast<Player>(entity);
+        auto pos    = std::find(players_.begin(), players_.end(), player);
+        if (pos != players_.end())
+            players_.erase(pos);
+
+        // Loop over the neighbours of this cell
+        bool alive = false;
+        for (auto& cell: neighbours())
+        {
+            auto& players = cell->players();
+            if (!players.empty())
+            {
+                alive = true;
+                break;
+            }
+        }
+
+        // Mark this cell as either alive or dead
+        setAlive(alive);
     }
+    else
+    {
+        auto pos = std::find(entities_.begin(), entities_.end(), entity);
+        if (pos != entities_.end())
+            entities_.erase(pos);
+    }
+}
+
+/**
+ * Sets the alive state of this cell.
+ * @param alive The alive state.
+ */
+void MapCell::setAlive(bool alive)
+{
+    alive_ = alive;
 }
 
 /**

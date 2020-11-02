@@ -31,6 +31,11 @@ namespace shaiya::game
         void activate() override;
 
         /**
+         * Processes the tick for this entity.
+         */
+        void tick() override;
+
+        /**
          * Sets the position of this mob.
          * @param position  The new position.
          */

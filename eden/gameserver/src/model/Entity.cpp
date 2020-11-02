@@ -23,6 +23,13 @@ void Entity::init()
 }
 
 /**
+ * Processes the tick for this entity.
+ */
+void Entity::tick()
+{
+}
+
+/**
  * Sets the id for this entity.
  * @param id    The new id.
  */

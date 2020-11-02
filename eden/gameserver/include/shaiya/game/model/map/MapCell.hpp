@@ -40,6 +40,12 @@ namespace shaiya::game
         const std::vector<std::shared_ptr<MapCell>>& neighbours();
 
         /**
+         * Sets the alive state of this cell.
+         * @param alive The alive state.
+         */
+        void setAlive(bool alive);
+
+        /**
          * Gets the entities in this cell.
          * @return  The entities.
          */
@@ -48,11 +54,52 @@ namespace shaiya::game
             return entities_;
         }
 
+        /**
+         * Gets the players in this cell.
+         * @return  The players.
+         */
+        [[nodiscard]] const std::vector<std::shared_ptr<Player>>& players() const
+        {
+            return players_;
+        }
+
+        /**
+         * If this cell is alive.
+         * @return  The alive state.
+         */
+        [[nodiscard]] bool alive() const
+        {
+            return alive_;
+        }
+
+        /**
+         * Gets the row this cell is located at.
+         * @return  The row.
+         */
+        [[nodiscard]] size_t row() const
+        {
+            return row_;
+        }
+
+        /**
+         * Gets the column this cell is located at.
+         * @return  The column.
+         */
+        [[nodiscard]] size_t column() const
+        {
+            return column_;
+        }
+
     private:
         /**
          * The entities that exist inside this cell.
          */
         std::vector<std::shared_ptr<Entity>> entities_;
+
+        /**
+         * That players that exist inside this cell.
+         */
+        std::vector<std::shared_ptr<Player>> players_;
 
         /**
          * The vector of neighbouring cells.
@@ -73,5 +120,10 @@ namespace shaiya::game
          * The column
          */
         size_t column_{};
+
+        /**
+         * If the cell is alive.
+         */
+        bool alive_{ false };
     };
 }

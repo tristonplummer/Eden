@@ -20,6 +20,11 @@ namespace shaiya::game
         void load(const std::string& path, GameWorldService& world);
 
         /**
+         * Processes the tick for all maps.
+         */
+        void tick();
+
+        /**
          * Gets a map for a specified id.
          * @param id    The map id.
          * @return      The map instance.

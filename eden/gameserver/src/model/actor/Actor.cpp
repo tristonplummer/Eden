@@ -39,6 +39,13 @@ void Actor::activate()
 }
 
 /**
+ * Processes the tick for this entity.
+ */
+void Actor::tick()
+{
+}
+
+/**
  * Synchronises this actor's stats, by calculating the bonuses from their
  * active buffs and worn equipment.
  */

@@ -27,6 +27,11 @@ namespace shaiya::game
         void init() override;
 
         /**
+         * Processes the tick for this entity.
+         */
+        void tick() override;
+
+        /**
          * Activates this actor.
          */
         void activate() override;

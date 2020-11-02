@@ -21,9 +21,15 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
  */
 void Mob::activate()
 {
-    world().schedule(std::make_shared<MobAggressionTask>(*this));
-
     Actor::activate();
+}
+
+/**
+ * Processes the tick for this entity.
+ */
+void Mob::tick()
+{
+    Actor::tick();
 }
 
 /**

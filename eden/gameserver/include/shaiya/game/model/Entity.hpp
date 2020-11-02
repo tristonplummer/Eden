@@ -32,6 +32,11 @@ namespace shaiya::game
         virtual void init();
 
         /**
+         * Processes the tick for this entity.
+         */
+        virtual void tick();
+
+        /**
          * Sets the position of this entity.
          * @param position  The position.
          */
