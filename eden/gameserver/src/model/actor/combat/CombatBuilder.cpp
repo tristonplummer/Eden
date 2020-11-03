@@ -33,7 +33,7 @@ bool CombatBuilder::attack(std::shared_ptr<Actor> victim)
  */
 bool CombatBuilder::canAttack(const std::shared_ptr<Actor>& victim)
 {
-    return true;
+    return !victim->hasAttribute(Attribute::Evading);
 }
 
 /**

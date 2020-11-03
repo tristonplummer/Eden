@@ -38,6 +38,13 @@ namespace shaiya::game
          */
         [[nodiscard]] float distanceTo(const Position& other) const;
 
+        /**
+         * Check if this area contains a position.
+         * @param other The position
+         * @return      If the position is inside the area
+         */
+        [[nodiscard]] bool contains(const Position& other) const;
+
     private:
         /**
          * The bottom left position.

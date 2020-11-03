@@ -26,6 +26,11 @@ namespace shaiya::game
         /**
          * The currently active request instance.
          */
-        Request
+        Request,
+
+        /**
+         * If an entity is evading attacks
+         */
+        Evading
     };
 }

@@ -53,3 +53,14 @@ float Area::distanceTo(const Position& other) const
 {
     return bottomLeft_.getDistance(other);
 }
+
+/**
+ * Check if this area contains a position.
+ * @param other The position
+ * @return      If the position is inside the area
+ */
+bool Area::contains(const Position& other) const
+{
+    return (other.map() == bottomLeft_.map()) && (other.x() >= bottomLeft_.x() && other.x() <= topRight_.x()) &&
+           (other.z() >= bottomLeft_.z() && other.z() <= topRight_.z());
+}

@@ -1,24 +1,7 @@
 #include <shaiya/game/model/actor/Actor.hpp>
-#include <shaiya/game/model/actor/mob/Mob.hpp>
-#include <shaiya/game/model/actor/movement/MovementQueue.hpp>
 #include <shaiya/game/model/actor/movement/path/strategy/SimplePathfindingStrategy.hpp>
 
 using namespace shaiya::game;
-
-/**
- * The distance from the spawn point that a mob should reset.
- */
-constexpr auto MobResetDistance = 30.0f;
-
-/**
- * The distance between each waypoint.
- */
-constexpr auto WaypointDistance = 3.0f;
-
-/**
- * The actor should run if the next waypoint is far enough away.
- */
-constexpr auto RunningDistance = 5.0f;
 
 /**
  * Initialises this movement queue.
@@ -33,20 +16,6 @@ MovementQueue::MovementQueue(Actor& actor): actor_(actor)
  */
 void MovementQueue::tick()
 {
-    // If our actor is a mob, we should handle resetting if we move too far from the spawn point
-    if (actor_.type() == EntityType::Mob)
-    {
-        auto& mob = dynamic_cast<Mob&>(actor_);
-        if (mob.spawnArea().distanceTo(mob.position()) > MobResetDistance)
-        {
-            if (mob.combat().inCombat() || target_)
-            {
-                mob.combat().reset();
-                moveTo(mob.spawnArea().randomPoint());
-            }
-        }
-    }
-
     // Handle following
     if (target_)
     {

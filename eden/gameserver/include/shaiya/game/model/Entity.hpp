@@ -136,7 +136,7 @@ namespace shaiya::game
          * @param attribute The attribute key.
          * @param value     The value to set.
          */
-        void setAttribute(Attribute attribute, std::any value);
+        void setAttribute(Attribute attribute, std::any value = {});
 
         /**
          * Clears an attribute.

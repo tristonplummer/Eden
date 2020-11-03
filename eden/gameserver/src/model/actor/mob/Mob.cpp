@@ -6,6 +6,11 @@
 using namespace shaiya::game;
 
 /**
+ * The distance from the spawn point that a mob should reset.
+ */
+constexpr auto MobResetDistance = 30.0f;
+
+/**
  * Initialises a mob with a specified definition.
  * @param def       The mob definition.
  * @param spawnArea The area that this mob can spawn in.
@@ -32,8 +37,22 @@ void Mob::tick()
 {
     Actor::tick();
 
+    // Clear evasion flag
+    if (spawnArea().contains(position()))
+    {
+        clearAttribute(Attribute::Evading);
+    }
+
+    // If the mob is too far from it's spawn point, force it to reset back
+    if (spawnArea().distanceTo(position()) > MobResetDistance && !hasAttribute(Attribute::Evading))
+    {
+        setAttribute(Attribute::Evading);
+        combat().reset();
+        movement().moveTo(spawnArea().randomPoint());
+    }
+
     // If the mob is not in combat, search for a target
-    if (!combat().inCombat())
+    if (!combat().inCombat() && !hasAttribute(Attribute::Evading))
     {
         // Select the closest player target
         ai::MobSelectNearestTarget targeting(*this);
