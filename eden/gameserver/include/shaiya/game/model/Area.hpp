@@ -31,6 +31,13 @@ namespace shaiya::game
          */
         [[nodiscard]] Position randomPoint(float range) const;
 
+        /**
+         * Gets the distance to a position
+         * @param other The position
+         * @return      The distance from this area to the position
+         */
+        [[nodiscard]] float distanceTo(const Position& other) const;
+
     private:
         /**
          * The bottom left position.

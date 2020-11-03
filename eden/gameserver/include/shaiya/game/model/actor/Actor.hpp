@@ -3,6 +3,7 @@
 #include <shaiya/game/model/Entity.hpp>
 #include <shaiya/game/model/actor/StatSet.hpp>
 #include <shaiya/game/model/actor/combat/CombatBuilder.hpp>
+#include <shaiya/game/model/actor/movement/MovementQueue.hpp>
 #include <shaiya/game/model/item/container/EquipmentContainer.hpp>
 #include <shaiya/game/model/item/container/InventoryContainer.hpp>
 
@@ -139,21 +140,30 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the movement queue of the actor.
+         * @return  The movement queue.
+         */
+        [[nodiscard]] MovementQueue& movement()
+        {
+            return movement_;
+        }
+
+        /**
+         * Gets the movement queue of the actor.
+         * @return  The movement queue.
+         */
+        [[nodiscard]] const MovementQueue& movement() const
+        {
+            return movement_;
+        }
+
+        /**
          * Gets the level of this actor.
          * @return  The level of the actor.
          */
         [[nodiscard]] uint16_t level() const
         {
             return level_;
-        }
-
-        /**
-         * If this actor is running.
-         * @return  If the movement is running.
-         */
-        [[nodiscard]] bool running() const
-        {
-            return running_;
         }
 
     protected:
@@ -171,11 +181,6 @@ namespace shaiya::game
          * The level of this actor.
          */
         uint16_t level_{ 0 };
-
-        /**
-         * If this actor is running.
-         */
-        bool running_{ false };
 
         /**
          * The faction of this actor.
@@ -201,5 +206,10 @@ namespace shaiya::game
          * The combat builder of the actor.
          */
         CombatBuilder combat_;
+
+        /**
+         * The movement queue of the actor.
+         */
+        MovementQueue movement_;
     };
 }

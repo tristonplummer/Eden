@@ -1,5 +1,6 @@
 #include <shaiya/game/model/actor/mob/Mob.hpp>
 #include <shaiya/game/model/ai/mob/MobSelectNearestTarget.hpp>
+#include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
 using namespace shaiya::game;
@@ -50,6 +51,14 @@ void Mob::tick()
  */
 void Mob::setPosition(Position position)
 {
-    running_ = this->position().getDistance(position) > 10;
+    auto map = world().maps().forId(position.map());
+
+    if (map)
+    {
+        float y = map->heightmap().y(position.x(), position.z());
+        if (y > position.y())
+            position = Position(position.map(), position.x(), y, position.z());
+    }
+
     Actor::setPosition(position);
 }

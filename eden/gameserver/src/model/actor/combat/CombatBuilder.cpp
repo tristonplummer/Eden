@@ -22,6 +22,7 @@ bool CombatBuilder::attack(std::shared_ptr<Actor> victim)
         return false;
 
     victim_ = std::move(victim);
+    combatant_.movement().follow(victim_);
     return true;
 }
 
@@ -42,8 +43,14 @@ void CombatBuilder::tick()
 {
     if (!inCombat())
         return;
+}
 
-    combatant_.setPosition(victim_->position());
+/**
+ * Resets the state of combat
+ */
+void CombatBuilder::reset()
+{
+    victim_ = nullptr;
 }
 
 /**

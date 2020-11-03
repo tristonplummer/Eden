@@ -9,7 +9,7 @@ using namespace shaiya::game;
  * Initialises this actor.
  * @param world The world instance.
  */
-Actor::Actor(GameWorldService& world): Entity(world), combat_(*this)
+Actor::Actor(GameWorldService& world): Entity(world), combat_(*this), movement_(*this)
 {
 }
 
@@ -44,7 +44,9 @@ void Actor::activate()
 void Actor::tick()
 {
     Entity::tick();
+
     combat().tick();
+    movement().tick();
 }
 
 /**

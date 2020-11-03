@@ -43,3 +43,13 @@ Position Area::randomPoint(float range) const
     // Return a random point in this area
     return Position(bottomLeft_.map(), x, bottomLeft_.y(), z);
 }
+
+/**
+ * Gets the distance to a position
+ * @param other The position
+ * @return      The distance from this area to the position
+ */
+float Area::distanceTo(const Position& other) const
+{
+    return bottomLeft_.getDistance(other);
+}

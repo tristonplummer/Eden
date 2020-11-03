@@ -36,6 +36,11 @@ namespace shaiya::game
         void tick();
 
         /**
+         * Resets the state of combat
+         */
+        void reset();
+
+        /**
          * Checks if our combatant is in combat.
          * @return  If the combatant is in combat.
          */

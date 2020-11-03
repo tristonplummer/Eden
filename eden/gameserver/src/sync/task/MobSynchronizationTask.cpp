@@ -80,7 +80,7 @@ void MobSynchronizationTask::updateMovement(const Mob& other)
 
     MobMovement movement;
     movement.id      = other.id();
-    movement.running = other.running();
+    movement.running = other.movement().running();
     movement.x       = pos.x();
     movement.z       = pos.z();
     character_.session().write(movement);

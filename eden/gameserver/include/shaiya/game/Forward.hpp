@@ -35,6 +35,8 @@ namespace shaiya::game
     class Player;
     class Appearance;
     class ActionBar;
+    class CombatBuilder;
+    class MovementQueue;
 
     // Items
     class Item;

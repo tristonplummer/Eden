@@ -45,7 +45,10 @@ void NpcMovementTask::execute(GameWorldService& world)
             if (!entity || entity->type() != EntityType::Mob)
                 continue;
 
-            auto mob  = std::dynamic_pointer_cast<Mob>(entity);
+            auto mob = std::dynamic_pointer_cast<Mob>(entity);
+            if (mob->combat().inCombat())
+                continue;
+
             auto move = prng.percentage(MovementChance);
             if (move)
                 mob->setPosition(mob->spawnArea().randomPoint(MovementRange));

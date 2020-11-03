@@ -72,10 +72,9 @@ Position Position::translate(float x, float y, float z) const
  */
 bool Position::isWithinDistance(const Position& other, float distance) const
 {
-    auto deltaX = x_ - other.x_;
-    auto deltaY = y_ - other.y_;
-    auto deltaZ = z_ - other.z_;
-    return map_ == other.map_ && deltaX <= distance && deltaY <= distance && deltaZ <= distance;
+    auto deltaX = std::abs(x_ - other.x_);
+    auto deltaZ = std::abs(z_ - other.z_);
+    return map_ == other.map_ && deltaX <= distance && deltaZ <= distance;
 }
 
 /**
