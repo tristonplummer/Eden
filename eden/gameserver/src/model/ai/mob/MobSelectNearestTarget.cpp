@@ -38,10 +38,24 @@ std::shared_ptr<Actor> MobSelectNearestTarget::select()
     {
         for (auto&& player: cell->players())
         {
-            if (player->position().isWithinDistance(pos, AggroDistance))
+            auto levelDifference = mob_.level() - player->level();
+            if (player->level() > mob_.level())
+                levelDifference = 0;
+
+            auto aggroRange = AggroDistance + levelDifference;
+            if (player->position().isWithinDistance(pos, aggroRange))
                 targets.push_back(player);
         }
     }
 
+    // Sort the vector by level first (low levels should be attacked first), and then by distance
+    std::sort(targets.begin(), targets.end(),
+              [&](const std::shared_ptr<Player>& first, const std::shared_ptr<Player>& second) {
+                  if (first->level() != second->level())
+                      return first->level() < second->level();
+                  return first->position().getDistance(pos) < second->position().getDistance(pos);
+              });
+
+    // Return the targetable player
     return targets.empty() ? nullptr : targets.front();
 }
