@@ -10,7 +10,7 @@ using namespace shaiya::game::ai;
 /**
  * The aggression distance.
  */
-constexpr auto AggroDistance = 10;
+constexpr auto AggroDistance = 5;
 
 /**
  * Initialises the AI.
@@ -38,6 +38,9 @@ std::shared_ptr<Actor> MobSelectNearestTarget::select()
     {
         for (auto&& player: cell->players())
         {
+            if (!mob_.combat().canAttack(player))  // If we can't attack the player, skip them entirely
+                continue;
+
             auto levelDifference = mob_.level() - player->level();
             if (player->level() > mob_.level())
                 levelDifference = 0;

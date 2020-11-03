@@ -43,6 +43,8 @@ void Actor::activate()
  */
 void Actor::tick()
 {
+    Entity::tick();
+    combat().tick();
 }
 
 /**

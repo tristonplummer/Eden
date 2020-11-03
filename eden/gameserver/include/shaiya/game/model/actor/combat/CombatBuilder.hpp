@@ -30,10 +30,26 @@ namespace shaiya::game
          */
         bool canAttack(const std::shared_ptr<Actor>& victim);
 
+        /**
+         * Ticks the combat of an actor.
+         */
+        void tick();
+
+        /**
+         * Checks if our combatant is in combat.
+         * @return  If the combatant is in combat.
+         */
+        [[nodiscard]] bool inCombat() const;
+
     private:
         /**
          * The actor that owns this combat builder.
          */
         Actor& combatant_;
+
+        /**
+         * The victim that the target is engaged in
+         */
+        std::shared_ptr<Actor> victim_;
     };
 }

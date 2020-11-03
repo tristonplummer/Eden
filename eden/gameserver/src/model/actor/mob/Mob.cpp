@@ -31,17 +31,16 @@ void Mob::tick()
 {
     Actor::tick();
 
-    // Select the closest player target
-    ai::MobSelectNearestTarget targeting(*this);
-    auto target = targeting.select();
-
-    // Engage the target in combat
-    if (target)
+    // If the mob is not in combat, search for a target
+    if (!combat().inCombat())
     {
-        if (combat().attack(target))
-        {
-            setPosition(target->position());
-        }
+        // Select the closest player target
+        ai::MobSelectNearestTarget targeting(*this);
+        auto target = targeting.select();
+
+        // Engage the target in combat
+        if (target)
+            combat().attack(target);
     }
 }
 
