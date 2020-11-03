@@ -5,6 +5,7 @@
 #include <shaiya/game/model/map/MapCell.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
+#include <algorithm>
 #include <cassert>
 #include <cfenv>
 #include <cmath>
@@ -14,9 +15,9 @@
 using namespace shaiya::game;
 
 /**
- * The size of a cell (16x16).
+ * The size of a cell (32x32).
  */
-constexpr auto CELL_SIZE = 16;
+constexpr auto CELL_SIZE = 32;
 
 /**
  * Initialises this map.
@@ -204,11 +205,19 @@ void Map::remove(const std::shared_ptr<Entity>& entity)
     if (!cell->alive())
     {
         auto& neighbours = cell->neighbours();
+
+        bool alive = false;
         for (auto&& neighbour: neighbours)
         {
-            if (!neighbour->alive())
-                aliveCells_.erase({ neighbour->row(), neighbour->column() });
+            if (neighbour->alive())
+            {
+                alive = true;
+                break;
+            }
         }
+
+        if (!alive)
+            aliveCells_.erase({ cell->row(), cell->column() });
     }
 }
 
@@ -338,15 +347,32 @@ std::vector<std::shared_ptr<Entity>> Map::getNeighbouringEntities(Position& posi
  */
 std::vector<std::shared_ptr<Entity>> Map::getLiveEntities() const
 {
+    // The vectors containing both the cells, and the entities
+    std::vector<std::shared_ptr<MapCell>> cells;
     std::vector<std::shared_ptr<Entity>> entities;
-    for (auto [row, column]: aliveCells_)
-    {
-        auto cell = getCell(row, column);
-        if (!cell)
-            continue;
 
-        for (auto& entity: cell->entities())
-            entities.push_back(entity);
+    // Reserve enough space for the cells
+    cells.reserve(aliveCells_.size());
+
+    // The number of entities present in live cells
+    auto entityCount =
+        std::accumulate(aliveCells_.begin(), aliveCells_.end(), 0, [&](int sum, const std::tuple<size_t, size_t>& entry) {
+            auto [row, column] = entry;
+            auto cell          = getCell(row, column);
+
+            if (!cell)
+                return sum;
+
+            cells.push_back(cell);
+            auto& liveEntities = cell->entities();
+            return static_cast<int>(sum + liveEntities.size());
+        });
+
+    entities.reserve(entityCount);  // Reserve enough space for all the entities
+    for (auto&& cell: cells)
+    {
+        auto& cellEntities = cell->entities();
+        entities.insert(entities.end(), cellEntities.begin(), cellEntities.end());
     }
 
     return entities;
