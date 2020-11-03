@@ -1,5 +1,6 @@
 #include <shaiya/common/util/Prng.hpp>
 #include <shaiya/game/model/actor/mob/Mob.hpp>
+#include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/scheduling/impl/NpcMovementTask.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
@@ -34,15 +35,20 @@ NpcMovementTask::NpcMovementTask(): ScheduledTask(Delay)
 void NpcMovementTask::execute(GameWorldService& world)
 {
     auto& prng = shaiya::Prng::the();
-    auto& mobs = world.mobs();
+    auto maps  = world.maps().maps();
 
-    for (auto&& mob: mobs)
+    // Loop over the maps
+    for (auto& map: maps)
     {
-        if (!mob)
-            continue;
+        for (auto&& entity: map->getLiveEntities())
+        {
+            if (!entity || entity->type() != EntityType::Mob)
+                continue;
 
-        auto move = prng.percentage(MovementChance);  //(rand() % 100) < MovementChance;
-        if (move)
-            mob->setPosition(mob->spawnArea().randomPoint(MovementRange));
+            auto mob  = std::dynamic_pointer_cast<Mob>(entity);
+            auto move = prng.percentage(MovementChance);
+            if (move)
+                mob->setPosition(mob->spawnArea().randomPoint(MovementRange));
+        }
     }
 }
