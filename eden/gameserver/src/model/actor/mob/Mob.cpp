@@ -1,14 +1,10 @@
 #include <shaiya/game/model/actor/mob/Mob.hpp>
+#include <shaiya/game/model/ai/mob/MobResetEvade.hpp>
 #include <shaiya/game/model/ai/mob/MobSelectNearestTarget.hpp>
 #include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
 using namespace shaiya::game;
-
-/**
- * The distance from the spawn point that a mob should reset.
- */
-constexpr auto MobResetDistance = 30.0f;
 
 /**
  * Initialises a mob with a specified definition.
@@ -37,19 +33,9 @@ void Mob::tick()
 {
     Actor::tick();
 
-    // Clear evasion flag
-    if (spawnArea().contains(position()))
-    {
-        clearAttribute(Attribute::Evading);
-    }
-
-    // If the mob is too far from it's spawn point, force it to reset back
-    if (spawnArea().distanceTo(position()) > MobResetDistance && !hasAttribute(Attribute::Evading))
-    {
-        setAttribute(Attribute::Evading);
-        combat().reset();
-        movement().moveTo(spawnArea().randomPoint());
-    }
+    // Perform any evading and resetting mob to spawn point if the mob gets too far
+    ai::MobResetEvade evade(*this);
+    evade.execute();
 
     // If the mob is not in combat, search for a target
     if (!combat().inCombat() && !hasAttribute(Attribute::Evading))
