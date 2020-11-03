@@ -31,6 +31,18 @@ namespace shaiya::game
          */
         [[nodiscard]] std::shared_ptr<Map> forId(uint16_t id) const;
 
+        /**
+         * Gets a vector of each map.
+         * @return  The maps
+         */
+        [[nodiscard]] std::vector<std::shared_ptr<Map>> maps() const
+        {
+            std::vector<std::shared_ptr<Map>> maps;
+            for (auto [id, map]: maps_)
+                maps.push_back(map);
+            return maps;
+        }
+
     private:
         /**
          * The map of maps.

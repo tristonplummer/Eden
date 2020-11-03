@@ -1,5 +1,5 @@
 #include <shaiya/game/model/actor/mob/Mob.hpp>
-#include <shaiya/game/scheduling/impl/MobAggressionTask.hpp>
+#include <shaiya/game/model/ai/mob/MobSelectNearestTarget.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
 using namespace shaiya::game;
@@ -30,6 +30,19 @@ void Mob::activate()
 void Mob::tick()
 {
     Actor::tick();
+
+    // Select the closest player target
+    ai::MobSelectNearestTarget targeting(*this);
+    auto target = targeting.select();
+
+    // Engage the target in combat
+    if (target)
+    {
+        if (combat().attack(target))
+        {
+            setPosition(target->position());
+        }
+    }
 }
 
 /**
