@@ -3,16 +3,6 @@
 using namespace shaiya::game;
 
 /**
- * The amount that each waypoint can modify the position by
- */
-constexpr auto MovementDelta = 5.0f;
-
-/**
- * The minimum distance to start calculating waypoints for.
- */
-constexpr auto MinDistance = 5.0f;
-
-/**
  * Calculates a route for a given path request. Here we use a very simple raycasting algorithm
  * @param request   The path request.
  * @return          The route of waypoints to traverse.
@@ -26,10 +16,14 @@ Route SimplePathfindingStrategy::calculateRoute(const PathRequest& request)
     // The start and destination
     auto& start = request.start;
     auto& dest  = request.destination;
+    auto& speed = request.speed;
+
+    // The number of steps between each waypoint
+    float steps = request.running ? speed.runningSteps : speed.walkingSteps;
 
     // The distance between the two positions
     auto distance = start.getDistance(dest);
-    if (distance < MinDistance)
+    if (distance < steps)
     {
         waypoints.push_back(dest);
         return { waypoints };
@@ -52,8 +46,8 @@ Route SimplePathfindingStrategy::calculateRoute(const PathRequest& request)
     auto z = start.z();
 
     // The amount to move each waypoint
-    auto sx = (x1 < x2) ? MovementDelta : -MovementDelta;
-    auto sz = (z1 < z2) ? MovementDelta : -MovementDelta;
+    auto sx = (x1 < x2) ? steps : -steps;
+    auto sz = (z1 < z2) ? steps : -steps;
 
     // The previous position
     while (dx2 < dx || dz2 < dz)

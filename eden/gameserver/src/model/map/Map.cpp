@@ -15,9 +15,9 @@
 using namespace shaiya::game;
 
 /**
- * The size of a cell (32x32).
+ * The size of a cell (64x64).
  */
-constexpr auto CELL_SIZE = 32;
+constexpr auto CELL_SIZE = 64;
 
 /**
  * Initialises this map.
@@ -103,6 +103,8 @@ void Map::loadNpc(std::ifstream& stream)
  */
 void Map::loadMob(std::ifstream& stream)
 {
+    auto& defs = world_.mobDefs();
+
     auto yaml    = YAML::Load(stream);
     auto entries = yaml["mobs"];
 
@@ -126,8 +128,9 @@ void Map::loadMob(std::ifstream& stream)
             auto id       = mobSpawn["id"].as<int>();
             auto quantity = mobSpawn["quantity"].as<int>();
 
-            auto* def = new client::MobDefinition();
-            def->id   = id;
+            auto* def = defs.forId(id);
+            if (def == nullptr)
+                continue;
 
             for (auto i = 0; i < quantity; i++)
             {

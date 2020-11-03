@@ -10,7 +10,7 @@ using namespace shaiya::game::ai;
 /**
  * The aggression distance.
  */
-constexpr auto AggroDistance = 5;
+constexpr auto AggroDistance = 10;
 
 /**
  * Initialises the AI.
@@ -26,6 +26,10 @@ MobSelectNearestTarget::MobSelectNearestTarget(Mob& mob): mob_(mob)
  */
 std::shared_ptr<Actor> MobSelectNearestTarget::select()
 {
+    // If the mob is in an evasion state, don't even bother
+    if (mob_.hasAttribute(Attribute::Evading))
+        return nullptr;
+
     // The vector of valid targets
     std::vector<std::shared_ptr<Player>> targets;
 
@@ -41,11 +45,7 @@ std::shared_ptr<Actor> MobSelectNearestTarget::select()
             if (!mob_.combat().canAttack(player))  // If we can't attack the player, skip them entirely
                 continue;
 
-            auto levelDifference = mob_.level() - player->level();
-            if (player->level() > mob_.level())
-                levelDifference = 0;
-
-            auto aggroRange = AggroDistance + levelDifference;
+            auto aggroRange = AggroDistance;
             if (player->position().isWithinDistance(pos, aggroRange))
                 targets.push_back(player);
         }

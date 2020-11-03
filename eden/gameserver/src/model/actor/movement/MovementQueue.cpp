@@ -16,6 +16,13 @@ MovementQueue::MovementQueue(Actor& actor): actor_(actor)
  */
 void MovementQueue::tick()
 {
+    using namespace std::chrono;
+
+    // Check if it's time to process a movement tick
+    auto now = steady_clock::now();
+    if (now <= nextMovementTime)
+        return;
+
     // Handle following
     if (target_)
     {
@@ -45,6 +52,11 @@ void MovementQueue::tick()
 
     // Move to the waypoint
     actor_.setPosition(waypoint);
+
+    // Set the next movement time
+    auto interval = running() ? milliseconds(speed_.runningInterval) : milliseconds(speed_.walkingInterval);
+    interval /= 2;
+    nextMovementTime = now + interval;
 }
 
 /**
@@ -70,6 +82,8 @@ void MovementQueue::createRoute(const Position& destination)
     PathRequest request;
     request.start       = start;
     request.destination = destination;
+    request.speed       = speed_;
+    request.running     = running_;
 
     // Calculate the route to take.
     auto strategy = std::make_unique<SimplePathfindingStrategy>();
@@ -98,7 +112,17 @@ void MovementQueue::follow(std::shared_ptr<Actor> target)
     reset();
     target_ = std::move(target);
 
-    createRoute(target_->position());
+    auto& dest = target_->position();
+    createRoute(dest);
+}
+
+/**
+ * Sets the movement speed of this movement queue.
+ * @param speed The new speed.
+ */
+void MovementQueue::setMovementSpeed(MovementSpeed speed)
+{
+    speed_ = speed;
 }
 
 /**
@@ -106,7 +130,8 @@ void MovementQueue::follow(std::shared_ptr<Actor> target)
  */
 void MovementQueue::reset()
 {
-    target_    = nullptr;                 // Reset the follow target.
-    waypoints_ = std::deque<Position>();  // Clear the queue of waypoints.
-    running_   = false;
+    target_          = nullptr;                           // Reset the follow target.
+    waypoints_       = std::deque<Position>();            // Clear the queue of waypoints.
+    nextMovementTime = std::chrono::steady_clock::now();  // Allow the next movement to process straight away
+    running_         = true;
 }

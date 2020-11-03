@@ -16,6 +16,20 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
     : Actor(world), def_(def), spawnArea_(spawnArea)
 {
     type_ = EntityType::Mob;
+
+    // Initialise the movement speed
+    MovementSpeed speed{};
+    speed.walkingInterval = def.walkingInterval;
+    speed.walkingSteps    = def.walkingStep;
+    speed.runningInterval = def.runningInterval;
+    speed.runningSteps    = def.runningStep;
+    movement().setMovementSpeed(speed);
+
+    // Initialise the size
+    size_ = def.size;
+
+    // Initialise the level
+    level_ = def.level;
 }
 
 /**

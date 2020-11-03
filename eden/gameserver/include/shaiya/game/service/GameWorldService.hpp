@@ -1,9 +1,12 @@
 #pragma once
 #include <shaiya/common/client/item/ItemSData.hpp>
-#include <shaiya/game/Forward.hpp>
+#include <shaiya/common/client/mob/MobSData.hpp>
+#include <shaiya/common/db/DatabaseService.hpp>
+#include <shaiya/game/io/PlayerSerializer.hpp>
 #include <shaiya/game/model/commands/CommandManager.hpp>
 #include <shaiya/game/model/map/MapRepository.hpp>
 #include <shaiya/game/scheduling/Scheduler.hpp>
+#include <shaiya/game/sync/ClientSynchronizer.hpp>
 #include <shaiya/game/util/EntityContainer.hpp>
 
 #include <boost/property_tree/ptree.hpp>
@@ -129,6 +132,15 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the mob data.
+         * @return  The mob data.
+         */
+        [[nodiscard]] const shaiya::client::MobSData& mobDefs() const
+        {
+            return mobDefs_;
+        }
+
+        /**
          * Gets the mobs that are active in the game world.
          * @return  The mobs.
          */
@@ -152,6 +164,11 @@ namespace shaiya::game
          * The item data.
          */
         shaiya::client::ItemSData itemDefs_;
+
+        /**
+         * The mob definitions.
+         */
+        shaiya::client::MobSData mobDefs_;
 
         /**
          * A vector containing the players that are connected to this game world.

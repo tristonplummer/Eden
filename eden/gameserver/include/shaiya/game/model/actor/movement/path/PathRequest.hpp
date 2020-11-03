@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/game/model/Position.hpp>
+#include <shaiya/game/model/actor/movement/MovementSpeed.hpp>
 
 namespace shaiya::game
 {
@@ -17,6 +18,11 @@ namespace shaiya::game
          * The destination
          */
         Position destination;
+
+        /**
+         * The movement speed
+         */
+        MovementSpeed speed;
 
         /**
          * If we should run to the destination

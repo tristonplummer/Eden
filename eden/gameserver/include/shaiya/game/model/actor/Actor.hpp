@@ -166,6 +166,15 @@ namespace shaiya::game
             return level_;
         }
 
+        /**
+         * Gets the size of this actor.
+         * @return  The size of the actor.
+         */
+        [[nodiscard]] size_t size() const
+        {
+            return size_;
+        }
+
     protected:
         /**
          * The name of this actor.
@@ -181,6 +190,11 @@ namespace shaiya::game
          * The level of this actor.
          */
         uint16_t level_{ 0 };
+
+        /**
+         * The size of this actor.
+         */
+        size_t size_{ 1 };
 
         /**
          * The faction of this actor.
