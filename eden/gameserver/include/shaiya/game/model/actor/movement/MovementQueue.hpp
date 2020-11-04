@@ -71,6 +71,13 @@ namespace shaiya::game
         void createRoute(const Position& destination);
 
         /**
+         * Gets the movement delay for moving to a specific waypoint.
+         * @param waypoint  The waypoint.
+         * @return          The delay, in milliseconds
+         */
+        std::chrono::milliseconds movementDelay(const Position& waypoint);
+
+        /**
          * The actor to handle movement for.
          */
         Actor& actor_;

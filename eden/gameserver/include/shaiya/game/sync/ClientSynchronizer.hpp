@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/game/Forward.hpp>
+#include <shaiya/game/util/EntityContainer.hpp>
 
 #include <vector>
 

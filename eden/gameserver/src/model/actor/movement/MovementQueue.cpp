@@ -1,6 +1,8 @@
 #include <shaiya/game/model/actor/Actor.hpp>
 #include <shaiya/game/model/actor/movement/path/strategy/SimplePathfindingStrategy.hpp>
 
+#include <cmath>
+
 using namespace shaiya::game;
 
 /**
@@ -50,13 +52,14 @@ void MovementQueue::tick()
         waypoints_.pop_front();
     }
 
+    // The movement delay
+    auto delay = movementDelay(waypoint);
+    
     // Move to the waypoint
     actor_.setPosition(waypoint);
 
     // Set the next movement time
-    auto interval = running() ? milliseconds(speed_.runningInterval) : milliseconds(speed_.walkingInterval);
-    interval /= 2;
-    nextMovementTime = now + interval;
+    nextMovementTime = now + milliseconds(delay);
 }
 
 /**
@@ -92,6 +95,26 @@ void MovementQueue::createRoute(const Position& destination)
     // Add the route waypoints
     for (auto&& waypoint: route.waypoints)
         addWaypoint(waypoint);
+}
+
+/**
+ * Gets the movement delay for moving to a specific waypoint.
+ * @param waypoint  The waypoint.
+ * @return          The delay, in milliseconds
+ */
+std::chrono::milliseconds MovementQueue::movementDelay(const Position& waypoint)
+{
+    // Calculate the distance between the previous position and the waypoint
+    auto prev     = actor_.position();
+    auto distance = std::ceil(prev.getDistance(waypoint));
+
+    // The movement interval and steps
+    float interval = running() ? speed_.runningInterval : speed_.walkingInterval;
+    float steps    = running() ? speed_.runningSteps : speed_.walkingSteps;
+
+    // Calculate how long until the next movement cycle
+    float factor = distance / steps;
+    return std::chrono::milliseconds(std::floor(factor * interval));
 }
 
 /**
