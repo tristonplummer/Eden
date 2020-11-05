@@ -37,6 +37,15 @@ bool CombatBuilder::canAttack(const std::shared_ptr<Actor>& victim)
 }
 
 /**
+ * Targets an actor.
+ * @param victim    The actor to target.
+ */
+void CombatBuilder::target(const std::shared_ptr<Actor>& victim)
+{
+    victim_ = victim;
+}
+
+/**
  * Ticks the combat of an actor.
  */
 void CombatBuilder::tick()

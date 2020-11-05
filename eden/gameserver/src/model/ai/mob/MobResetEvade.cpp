@@ -38,6 +38,6 @@ void MobResetEvade::execute()
     {
         mob_.setAttribute(Attribute::Evading);
         mob_.combat().reset();
-        mob_.movement().moveTo(spawn.randomPoint());
+        mob_.movement().runTo(spawn.randomPoint());
     }
 }

@@ -25,6 +25,16 @@ namespace shaiya::game
         MovementSpeed speed;
 
         /**
+         * The radius of the source actor
+         */
+        size_t sourceRadius{ 1 };
+
+        /**
+         * The radius of the destination actor
+         */
+        size_t destinationRadius{ 1 };
+
+        /**
          * If we should run to the destination
          */
         bool running{ false };

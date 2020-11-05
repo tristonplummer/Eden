@@ -32,6 +32,20 @@ namespace shaiya::game
         void moveTo(const Position& destination);
 
         /**
+         * Add a destination to move to.
+         * @param destination   The destination.
+         * @param radius        The radius to stop before the destination
+         */
+        void runTo(const Position& destination, size_t radius = 1);
+
+        /**
+         * Add a destination to move to.
+         * @param destination   The destination.
+         * @param radius        The radius to stop before the destination
+         */
+        void walkTo(const Position& destination, size_t radius = 1);
+
+        /**
          * Adds a waypoint.
          * @param waypoint  The waypoint.
          */
@@ -48,6 +62,24 @@ namespace shaiya::game
          * @param speed The new speed.
          */
         void setMovementSpeed(MovementSpeed speed);
+
+        /**
+         * Gets the movement speed of this movement queue.
+         * @return  The movement speed.
+         */
+        [[nodiscard]] const MovementSpeed& speed()
+        {
+            return speed_;
+        }
+
+        /**
+         * If this movement queue is processing waypoints.
+         * @return  If the waypoints queue is populated.
+         */
+        [[nodiscard]] bool hasWaypoints() const
+        {
+            return waypoints_.empty();
+        }
 
         /**
          * If the actor is currently running.
@@ -67,8 +99,9 @@ namespace shaiya::game
         /**
          * Creates the route to a destination.
          * @param destination   The destination
+         * @param radius        The radius to stop before the destination
          */
-        void createRoute(const Position& destination);
+        void createRoute(const Position& destination, size_t radius = 1);
 
         /**
          * Gets the movement delay for moving to a specific waypoint.

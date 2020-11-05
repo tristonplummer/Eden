@@ -14,6 +14,7 @@
 #include <shaiya/common/net/packet/game/CharacterTradeGold.hpp>
 #include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
 #include <shaiya/common/net/packet/game/GameHandshake.hpp>
+#include <shaiya/common/net/packet/game/TargetSelectMob.hpp>
 #include <shaiya/common/net/packet/game/XorEncryptionSignal.hpp>
 #include <shaiya/common/net/packet/login/AccountLoginRequest.hpp>
 #include <shaiya/common/net/packet/login/LoginHandshake.hpp>
@@ -58,6 +59,7 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<TradeAddGoldOpcode>();
     registerPacketHandler<TradeOfferItemOpcode>();
     registerPacketHandler<TradeRemoveItemOpcode>();
+    registerPacketHandler<TargetSelectMobOpcode>();
 }
 
 /**

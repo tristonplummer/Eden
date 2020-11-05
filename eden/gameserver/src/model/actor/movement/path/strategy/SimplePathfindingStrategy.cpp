@@ -3,7 +3,8 @@
 using namespace shaiya::game;
 
 /**
- * Calculates a route for a given path request. Here we use a very simple raycasting algorithm
+ * Calculates a route for a given path request. Here we use a very simple raycasting algorithm to construct a line
+ * between two points, and then split the line into a series of waypoints based on the movement distance of the actor.
  * @param request   The path request.
  * @return          The route of waypoints to traverse.
  */

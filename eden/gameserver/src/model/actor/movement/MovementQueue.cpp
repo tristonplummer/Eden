@@ -54,12 +54,12 @@ void MovementQueue::tick()
 
     // The movement delay
     auto delay = movementDelay(waypoint);
-    
+
     // Move to the waypoint
     actor_.setPosition(waypoint);
 
     // Set the next movement time
-    nextMovementTime = now + milliseconds(delay);
+    nextMovementTime = now + delay;
 }
 
 /**
@@ -68,25 +68,57 @@ void MovementQueue::tick()
  */
 void MovementQueue::moveTo(const Position& destination)
 {
+    auto isRunning = running();
     reset();
+
+    running_ = isRunning;
     createRoute(destination);
+}
+
+/**
+ * Add a destination to move to.
+ * @param destination   The destination.
+ * @param radius        The radius to stop before the destination
+ */
+void MovementQueue::runTo(const Position& destination, size_t radius)
+{
+    reset();
+    running_ = true;
+
+    createRoute(destination, radius);
+}
+
+/**
+ * Add a destination to move to.
+ * @param destination   The destination.
+ * @param radius        The radius to stop before the destination
+ */
+void MovementQueue::walkTo(const Position& destination, size_t radius)
+{
+    reset();
+    running_ = false;
+
+    createRoute(destination, radius);
 }
 
 /**
  * Creates the route to a destination.
  * @param destination   The destination
+ * @param radius        The radius to stop before the destination
  */
-void MovementQueue::createRoute(const Position& destination)
+void MovementQueue::createRoute(const Position& destination, size_t radius)
 {
     // The start position
     auto& start = actor_.position();
 
     // The path request
     PathRequest request;
-    request.start       = start;
-    request.destination = destination;
-    request.speed       = speed_;
-    request.running     = running_;
+    request.start             = start;
+    request.destination       = destination;
+    request.speed             = speed_;
+    request.running           = running_;
+    request.sourceRadius      = actor_.size();
+    request.destinationRadius = radius;
 
     // Calculate the route to take.
     auto strategy = std::make_unique<SimplePathfindingStrategy>();
@@ -114,7 +146,8 @@ std::chrono::milliseconds MovementQueue::movementDelay(const Position& waypoint)
 
     // Calculate how long until the next movement cycle
     float factor = distance / steps;
-    return std::chrono::milliseconds(std::floor(factor * interval));
+    auto delay   = (int)std::floor(factor * interval);
+    return std::chrono::milliseconds(delay);
 }
 
 /**
@@ -133,10 +166,10 @@ void MovementQueue::addWaypoint(const Position& waypoint)
 void MovementQueue::follow(std::shared_ptr<Actor> target)
 {
     reset();
-    target_ = std::move(target);
+    auto& dest = target->position();
+    runTo(dest, target->size());
 
-    auto& dest = target_->position();
-    createRoute(dest);
+    target_ = std::move(target);
 }
 
 /**

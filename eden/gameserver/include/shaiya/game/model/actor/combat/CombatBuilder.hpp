@@ -31,6 +31,12 @@ namespace shaiya::game
         bool canAttack(const std::shared_ptr<Actor>& victim);
 
         /**
+         * Targets an actor.
+         * @param victim    The actor to target.
+         */
+        void target(const std::shared_ptr<Actor>& victim);
+
+        /**
          * Ticks the combat of an actor.
          */
         void tick();
