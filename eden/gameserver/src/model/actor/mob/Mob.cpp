@@ -30,6 +30,12 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
 
     // Initialise the level
     level_ = def.level;
+
+    // Set the current and max health of the mob
+    stats().setBase(Stat::MaxHealth, def.hitpoints);
+    stats().sync();
+
+    stats().setHitpoints(def.hitpoints);
 }
 
 /**
