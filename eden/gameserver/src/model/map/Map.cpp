@@ -162,8 +162,6 @@ void Map::tick() const
     {
         if (entity->type() == EntityType::Mob)
             (std::dynamic_pointer_cast<Mob>(entity))->tick();
-        else
-            entity->tick();
     }
 }
 
@@ -268,6 +266,8 @@ std::shared_ptr<MapCell> Map::getCell(Position& position) const
 std::shared_ptr<MapCell> Map::getCell(size_t row, size_t column) const
 {
     auto idx = row + (column * rowCount_);
+    if (idx >= cells_.size())
+        return nullptr;
     return cells_.at(idx);
 }
 

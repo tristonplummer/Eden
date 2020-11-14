@@ -14,6 +14,13 @@
 void convertNpcs(shaiya::client::ServerMap& map, std::ofstream& out);
 
 /**
+ * Converts the mob spawns.
+ * @param map   The map.
+ * @param out   The output stream.
+ */
+void convertMobs(shaiya::client::ServerMap& map, std::ofstream& out);
+
+/**
  * The entry point for the servermap conversion tool.
  * @param argc  The number of command-line arguments.
  * @param argv  The command-line values.
@@ -32,6 +39,7 @@ int main(int argc, char** argv)
 
     ServerMap map(argv[1]);
     convertNpcs(map, out);
+    convertMobs(map, out);
 
     out.close();
     return 0;
@@ -79,5 +87,57 @@ void convertNpcs(shaiya::client::ServerMap& map, std::ofstream& file)
         out << EndMap;
     }
 
-    file.write(out.c_str(), out.size());
+    std::cout << out.c_str();
+}
+
+/**
+ * Converts the mob spawns.
+ * @param map   The map.
+ * @param out   The output stream.
+ */
+void convertMobs(shaiya::client::ServerMap& map, std::ofstream& file)
+{
+    using namespace YAML;
+    Emitter out;
+
+    out << BeginMap;
+    out << Key << "mobs" << Value;
+    out << BeginSeq;
+
+    auto& spawns = map.monsters();
+    for (auto&& spawn: spawns)
+    {
+        // Start the mob spawn
+        out << BeginMap << Key << "spawn" << Value;
+        out << BeginMap;
+
+        // Write the spawn area
+        out << Key << "area" << Value << BeginSeq << Block;
+        out << Flow << BeginMap;
+        out << Key << "x" << spawn.bottomLeft.x;
+        out << Key << "y" << spawn.bottomLeft.y;
+        out << Key << "z" << spawn.bottomLeft.z;
+        out << EndMap << Block;
+        out << Flow << BeginMap;
+        out << Key << "x" << spawn.topRight.x;
+        out << Key << "y" << spawn.topRight.y;
+        out << Key << "z" << spawn.topRight.z;
+        out << EndMap << Block;
+        out << EndSeq;
+
+        // Write the mob spawns
+        out << Key << "spawns" << Value << BeginSeq << Block;
+        for (auto&& mob: spawn.spawns)
+        {
+            out << Flow << BeginMap;
+            out << Key << "id" << mob.id;
+            out << Key << "quantity" << mob.count;
+            out << EndMap << Block;
+        }
+        out << EndSeq;
+
+        // End the spawn
+        out << EndMap;
+        out << EndMap;
+    }
 }

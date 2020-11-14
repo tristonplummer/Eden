@@ -22,11 +22,12 @@ void handleTargetMob(Session& session, const TargetSelectMob& request)
 
     auto& pos = player->position();
     auto map  = player->map();
-    auto mob  = map->get<Actor>(pos, request.id, EntityType::Mob);
+    auto mob  = map->get<Mob>(pos, request.id, EntityType::Mob);
 
     if (!mob)
         return;
 
+    game.write(mob->state());
     player->combat().target(mob);
 }
 

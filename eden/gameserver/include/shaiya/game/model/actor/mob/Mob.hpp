@@ -1,5 +1,6 @@
 #pragma once
 #include <shaiya/common/client/mob/MobDefinition.hpp>
+#include <shaiya/common/net/packet/game/MobState.hpp>
 #include <shaiya/game/model/Area.hpp>
 #include <shaiya/game/model/actor/Actor.hpp>
 
@@ -57,6 +58,18 @@ namespace shaiya::game
         [[nodiscard]] const Area& spawnArea() const
         {
             return spawnArea_;
+        }
+
+        /**
+         * Gets the state of this mob.
+         * @return  The mob state.
+         */
+        [[nodiscard]] shaiya::net::MobState state() const
+        {
+            shaiya::net::MobState state;
+            state.id        = id();
+            state.hitpoints = stats_.currentHitpoints();
+            return state;
         }
 
     private:

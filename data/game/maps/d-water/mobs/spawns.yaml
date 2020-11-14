@@ -1,0 +1,2063 @@
+mobs:
+  - spawn:
+      area:
+        - { x: 1645.549, y: 21.03746, z: 522.878 }
+        - { x: 1676.999, y: 23.03746, z: 537.287 }
+      spawns:
+        - { id: 1, quantity: 2 }
+        - { id: 2, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1564.871, y: 25.38526, z: 635.702 }
+        - { x: 1596.473, y: 27.38526, z: 658.596 }
+      spawns:
+        - { id: 1, quantity: 2 }
+        - { id: 2, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1496.693, y: 13.21358, z: 591.469 }
+        - { x: 1522.258, y: 15.21358, z: 615.046 }
+      spawns:
+        - { id: 1, quantity: 2 }
+        - { id: 2, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1501.666, y: 14.76416, z: 566.511 }
+        - { x: 1526.063, y: 16.76416, z: 590.516 }
+      spawns:
+        - { id: 1, quantity: 2 }
+        - { id: 2, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1485.541, y: 11.93313, z: 650.324 }
+        - { x: 1510.027, y: 13.93313, z: 673.572 }
+      spawns:
+        - { id: 1, quantity: 1 }
+        - { id: 2, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1446.703, y: 3.467026, z: 688.66 }
+        - { x: 1461.06, y: 5.467025, z: 699.197 }
+      spawns:
+        - { id: 1, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1481.004, y: 6.119834, z: 706.681 }
+        - { x: 1495.171, y: 8.119835, z: 719.255 }
+      spawns:
+        - { id: 2, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1455.827, y: 3.835607, z: 713.084 }
+        - { x: 1470.259, y: 5.835608, z: 729.302 }
+      spawns:
+        - { id: 1, quantity: 1 }
+        - { id: 2, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1432.614, y: 2.284514, z: 721.323 }
+        - { x: 1442.35, y: 4.284514, z: 729.132 }
+      spawns:
+        - { id: 2, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1410.412, y: 9.048289, z: 765.767 }
+        - { x: 1434.127, y: 11.04829, z: 785.523 }
+      spawns:
+        - { id: 2, quantity: 2 }
+        - { id: 3, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1443.725, y: 7.171588, z: 793.703 }
+        - { x: 1462.894, y: 9.171588, z: 811.987 }
+      spawns:
+        - { id: 2, quantity: 2 }
+        - { id: 3, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1410.845, y: 10.49696, z: 790.573 }
+        - { x: 1432.516, y: 12.49696, z: 810.963 }
+      spawns:
+        - { id: 2, quantity: 2 }
+        - { id: 3, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1404.292, y: 12.78538, z: 818.027 }
+        - { x: 1437.497, y: 14.78538, z: 832.093 }
+      spawns:
+        - { id: 2, quantity: 2 }
+        - { id: 3, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1366.574, y: 8.699996, z: 780.749 }
+        - { x: 1398.608, y: 10.7, z: 807.966 }
+      spawns:
+        - { id: 2, quantity: 3 }
+        - { id: 3, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1526.14, y: 17.67245, z: 647.174 }
+        - { x: 1549.87, y: 19.67245, z: 669.861 }
+      spawns:
+        - { id: 1, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1545.802, y: 23.26412, z: 590.8 }
+        - { x: 1558.852, y: 25.26412, z: 605.743 }
+      spawns:
+        - { id: 1, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1543.199, y: 17.75309, z: 548.549 }
+        - { x: 1560.373, y: 19.75309, z: 566.436 }
+      spawns:
+        - { id: 1, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1525.527, y: 4.502917, z: 540.118 }
+        - { x: 1540.838, y: 6.502917, z: 559.81 }
+      spawns:
+        - { id: 1, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1525.489, y: 15.49251, z: 619.213 }
+        - { x: 1540.851, y: 17.49251, z: 635.236 }
+      spawns:
+        - { id: 1, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1532.386, y: 13.07872, z: 805.743 }
+        - { x: 1561.276, y: 15.07872, z: 834.585 }
+      spawns:
+        - { id: 2002, quantity: 2 }
+        - { id: 2003, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1495.54, y: 11.5267, z: 827.765 }
+        - { x: 1513.663, y: 13.5267, z: 844.506 }
+      spawns:
+        - { id: 2002, quantity: 2 }
+        - { id: 2005, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1505.08, y: 11.98614, z: 778.307 }
+        - { x: 1522.342, y: 13.98614, z: 797.162 }
+      spawns:
+        - { id: 2002, quantity: 2 }
+        - { id: 2005, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1497.772, y: 5.859055, z: 806.9434 }
+        - { x: 1529.028, y: 7.859055, z: 818.3715 }
+      spawns:
+        - { id: 2002, quantity: 2 }
+        - { id: 2003, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1496.155, y: 7.963974, z: 754.6874 }
+        - { x: 1509.98, y: 9.963974, z: 767.6924 }
+      spawns:
+        - { id: 2002, quantity: 2 }
+        - { id: 2003, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1536.485, y: 10.95694, z: 778.195 }
+        - { x: 1549.001, y: 12.95694, z: 790.213 }
+      spawns:
+        - { id: 2002, quantity: 1 }
+        - { id: 2003, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1471.845, y: 5.964417, z: 900.9501 }
+        - { x: 1495.707, y: 7.964417, z: 924.295 }
+      spawns:
+        - { id: 2002, quantity: 2 }
+        - { id: 2005, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1455.73, y: 17.91554, z: 927.133 }
+        - { x: 1492.003, y: 19.91554, z: 951.394 }
+      spawns:
+        - { id: 2002, quantity: 3 }
+        - { id: 2003, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1483.804, y: 9.406906, z: 865.62 }
+        - { x: 1509.52, y: 11.40691, z: 886.046 }
+      spawns:
+        - { id: 2002, quantity: 2 }
+        - { id: 2003, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1532.805, y: 12.21753, z: 859.0127 }
+        - { x: 1547.813, y: 14.21753, z: 871.0037 }
+      spawns:
+        - { id: 2002, quantity: 1 }
+        - { id: 2005, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1477.855, y: 30.22593, z: 1011.117 }
+        - { x: 1499.908, y: 32.22594, z: 1025.35 }
+      spawns:
+        - { id: 6, quantity: 4 }
+  - spawn:
+      area:
+        - { x: 1482.354, y: 36.70451, z: 1033.998 }
+        - { x: 1498.343, y: 38.70451, z: 1052.494 }
+      spawns:
+        - { id: 6, quantity: 4 }
+  - spawn:
+      area:
+        - { x: 1462.501, y: 31.56567, z: 1012.722 }
+        - { x: 1473.533, y: 33.56567, z: 1024.446 }
+      spawns:
+        - { id: 3, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1346.255, y: 22.10684, z: 852.795 }
+        - { x: 1367.885, y: 24.10684, z: 870.251 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1302.719, y: 17.16606, z: 850.128 }
+        - { x: 1331.564, y: 19.16606, z: 873.622 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+        - { id: 0, quantity: 0 }
+  - spawn:
+      area:
+        - { x: 1256.91, y: 19.06595, z: 893.993 }
+        - { x: 1273.644, y: 21.06595, z: 910.051 }
+      spawns:
+        - { id: 5, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1136.576, y: 9.802866, z: 911.73 }
+        - { x: 1156.71, y: 11.80287, z: 932.474 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1118.086, y: 9.494141, z: 935.1842 }
+        - { x: 1144.413, y: 11.49414, z: 959.6472 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1223.59, y: 11.12343, z: 912.0266 }
+        - { x: 1250.841, y: 13.12343, z: 934.7906 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1151.953, y: 14.92229, z: 935.3118 }
+        - { x: 1221.153, y: 16.92229, z: 945.8278 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+        - { id: 0, quantity: 0 }
+  - spawn:
+      area:
+        - { x: 1168.278, y: 9.119814, z: 907.506 }
+        - { x: 1195.869, y: 11.11981, z: 928.404 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1248.024, y: 36.28844, z: 1001.378 }
+        - { x: 1266.368, y: 38.28844, z: 1022.498 }
+      spawns:
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1249.854, y: 43.59187, z: 1048.601 }
+        - { x: 1272.59, y: 45.59187, z: 1068.149 }
+      spawns:
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1376.231, y: 19.60675, z: 907.362 }
+        - { x: 1398.791, y: 21.60675, z: 931.761 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1383.86, y: 21.66924, z: 933.867 }
+        - { x: 1405.937, y: 23.66924, z: 951.369 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1359.983, y: 36.46499, z: 1051.475 }
+        - { x: 1378.466, y: 38.46499, z: 1068.619 }
+      spawns:
+        - { id: 6, quantity: 2 }
+        - { id: 5, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1366.033, y: 37.74649, z: 1020.305 }
+        - { x: 1384.158, y: 39.74649, z: 1036.653 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1379.831, y: 31.03622, z: 991.787 }
+        - { x: 1404.065, y: 33.03622, z: 1010.157 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1262.382, y: 46.30876, z: 1135.039 }
+        - { x: 1279.308, y: 48.30876, z: 1156.745 }
+      spawns:
+        - { id: 10, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1270.31, y: 44.1297, z: 1197.25 }
+        - { x: 1286.723, y: 46.1297, z: 1213.031 }
+      spawns:
+        - { id: 10, quantity: 3 }
+        - { id: 12, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1276.604, y: 43.54293, z: 1215.588 }
+        - { x: 1295.867, y: 45.54293, z: 1233.244 }
+      spawns:
+        - { id: 10, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1220.665, y: 41.0382, z: 1227.264 }
+        - { x: 1234.982, y: 43.0382, z: 1241.476 }
+      spawns:
+        - { id: 10, quantity: 1 }
+        - { id: 12, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1188.587, y: 39.26759, z: 1259.255 }
+        - { x: 1208.906, y: 41.26759, z: 1276.661 }
+      spawns:
+        - { id: 10, quantity: 1 }
+        - { id: 12, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1344.191, y: 48.99387, z: 1191.543 }
+        - { x: 1361.053, y: 50.99387, z: 1211.158 }
+      spawns:
+        - { id: 10, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1340.531, y: 35.95277, z: 1269.928 }
+        - { x: 1347.345, y: 37.95277, z: 1294.102 }
+      spawns:
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1383.003, y: 50.06029, z: 1168.258 }
+        - { x: 1401.372, y: 52.06029, z: 1183.926 }
+      spawns:
+        - { id: 10, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1308.765, y: 39.32018, z: 1323.163 }
+        - { x: 1323.404, y: 41.32018, z: 1334.447 }
+      spawns:
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1257.479, y: 39.05127, z: 1283.806 }
+        - { x: 1263.931, y: 41.05127, z: 1303.772 }
+      spawns:
+        - { id: 13, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1201.039, y: 53.00129, z: 1307.457 }
+        - { x: 1217.089, y: 55.00129, z: 1319.96 }
+      spawns:
+        - { id: 13, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1220.811, y: 48.54065, z: 1364.977 }
+        - { x: 1225.739, y: 50.54065, z: 1397.666 }
+      spawns:
+        - { id: 13, quantity: 2 }
+        - { id: 20, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1310.466, y: 39.08628, z: 1385.373 }
+        - { x: 1325.903, y: 41.08628, z: 1398.995 }
+      spawns:
+        - { id: 13, quantity: 1 }
+        - { id: 20, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1300.502, y: 40.64488, z: 1416.383 }
+        - { x: 1319.048, y: 42.64488, z: 1434.141 }
+      spawns:
+        - { id: 13, quantity: 2 }
+        - { id: 20, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1265.687, y: 53.27978, z: 1363.861 }
+        - { x: 1279.214, y: 55.27978, z: 1377.249 }
+      spawns:
+        - { id: 13, quantity: 2 }
+        - { id: 20, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1262.151, y: 52.34328, z: 1383.46 }
+        - { x: 1277.936, y: 54.34328, z: 1395.606 }
+      spawns:
+        - { id: 13, quantity: 2 }
+        - { id: 20, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1271.346, y: 39.51759, z: 1459.712 }
+        - { x: 1275.362, y: 41.51759, z: 1492.676 }
+      spawns:
+        - { id: 20, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1263.141, y: 51.80148, z: 1410.81 }
+        - { x: 1278.275, y: 53.80148, z: 1428.425 }
+      spawns:
+        - { id: 13, quantity: 2 }
+        - { id: 20, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1280.741, y: 45.46818, z: 1500.206 }
+        - { x: 1294.004, y: 47.46818, z: 1520.113 }
+      spawns:
+        - { id: 13, quantity: 2 }
+        - { id: 20, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1251.628, y: 50.67366, z: 1428.516 }
+        - { x: 1265.504, y: 52.67366, z: 1438.42 }
+      spawns:
+        - { id: 13, quantity: 1 }
+        - { id: 20, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1224.034, y: 42.74091, z: 1550.905 }
+        - { x: 1245.499, y: 44.74091, z: 1565.996 }
+      spawns:
+        - { id: 25, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1171.991, y: 46.40365, z: 1566.355 }
+        - { x: 1197.212, y: 48.40365, z: 1587.143 }
+      spawns:
+        - { id: 25, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1219.463, y: 44.85551, z: 1579.64 }
+        - { x: 1242.215, y: 46.85551, z: 1597.849 }
+      spawns:
+        - { id: 31, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1261.213, y: 44.64669, z: 1606.689 }
+        - { x: 1282.233, y: 46.64669, z: 1621.508 }
+      spawns:
+        - { id: 25, quantity: 2 }
+        - { id: 31, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1282.229, y: 44.34, z: 1586.991 }
+        - { x: 1309.907, y: 46.34, z: 1598.398 }
+      spawns:
+        - { id: 25, quantity: 2 }
+        - { id: 31, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1326.745, y: 44.34, z: 1569.989 }
+        - { x: 1343.454, y: 46.34, z: 1598.478 }
+      spawns:
+        - { id: 25, quantity: 2 }
+        - { id: 31, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1357.396, y: 44.34, z: 1553.442 }
+        - { x: 1371.886, y: 46.34, z: 1579.307 }
+      spawns:
+        - { id: 25, quantity: 2 }
+        - { id: 31, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1159.859, y: 45.83167, z: 1529.812 }
+        - { x: 1181.947, y: 47.83167, z: 1550.238 }
+      spawns:
+        - { id: 25, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1120.651, y: 45.48259, z: 1511.248 }
+        - { x: 1130.615, y: 47.48259, z: 1520.786 }
+      spawns:
+        - { id: 31, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1123.727, y: 44.14664, z: 1497.464 }
+        - { x: 1151.959, y: 46.14664, z: 1509.795 }
+      spawns:
+        - { id: 25, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1074.22, y: 45.38305, z: 1511.374 }
+        - { x: 1094.116, y: 47.38305, z: 1527.63 }
+      spawns:
+        - { id: 32, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1074.08, y: 45.35999, z: 1540.086 }
+        - { x: 1089.182, y: 47.35999, z: 1554.833 }
+      spawns:
+        - { id: 32, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1063.943, y: 45.3914, z: 1555.101 }
+        - { x: 1070.8, y: 47.3914, z: 1572.291 }
+      spawns:
+        - { id: 32, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1086.363, y: 45.37541, z: 1559.802 }
+        - { x: 1099.543, y: 47.37541, z: 1569.342 }
+      spawns:
+        - { id: 32, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1079.056, y: 45.35999, z: 1594.696 }
+        - { x: 1096.141, y: 47.35999, z: 1608.696 }
+      spawns:
+        - { id: 32, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 939.4847, y: 24.39836, z: 1758.988 }
+        - { x: 960.5208, y: 26.39836, z: 1770.516 }
+      spawns:
+        - { id: 8, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 900.5545, y: 19.39502, z: 1863.852 }
+        - { x: 917.2125, y: 21.39502, z: 1885.133 }
+      spawns:
+        - { id: 8, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 924.259, y: 16.88282, z: 1913.474 }
+        - { x: 944.147, y: 18.88282, z: 1933.169 }
+      spawns:
+        - { id: 8, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 962.939, y: 16.83999, z: 1925.811 }
+        - { x: 991.068, y: 18.83999, z: 1945.93 }
+      spawns:
+        - { id: 11, quantity: 2 }
+        - { id: 17, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 938.1509, y: 29.223, z: 1872.142 }
+        - { x: 963.6119, y: 31.223, z: 1892.232 }
+      spawns:
+        - { id: 11, quantity: 2 }
+        - { id: 17, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 882.736, y: 21.6813, z: 1925.978 }
+        - { x: 899.529, y: 23.6813, z: 1946.518 }
+      spawns:
+        - { id: 18, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 841.031, y: 27.38755, z: 1931.066 }
+        - { x: 865.047, y: 29.38755, z: 1941.373 }
+      spawns:
+        - { id: 18, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 796.992, y: 32.74923, z: 1956.409 }
+        - { x: 815.515, y: 34.74923, z: 1972.404 }
+      spawns:
+        - { id: 18, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 793.52, y: 30.45126, z: 1929.653 }
+        - { x: 814.517, y: 32.45126, z: 1944.99 }
+      spawns:
+        - { id: 18, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 762.658, y: 32.05101, z: 1905.777 }
+        - { x: 778.665, y: 34.05101, z: 1919.109 }
+      spawns:
+        - { id: 29, quantity: 2 }
+        - { id: 30, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 785.645, y: 31.17585, z: 1909.212 }
+        - { x: 798.391, y: 33.17585, z: 1921.063 }
+      spawns:
+        - { id: 29, quantity: 1 }
+        - { id: 30, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 763.467, y: 33.27999, z: 1963.025 }
+        - { x: 793.317, y: 35.27999, z: 1978.676 }
+      spawns:
+        - { id: 29, quantity: 2 }
+        - { id: 30, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 726.267, y: 33.10448, z: 1960.716 }
+        - { x: 753.848, y: 35.10448, z: 1978.109 }
+      spawns:
+        - { id: 29, quantity: 2 }
+        - { id: 30, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 285.832, y: 15.29683, z: 1591.521 }
+        - { x: 311.262, y: 17.29683, z: 1605.795 }
+      spawns:
+        - { id: 1, quantity: 2 }
+        - { id: 2, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 328.688, y: 15.50938, z: 1570.502 }
+        - { x: 350.32, y: 17.50938, z: 1587.695 }
+      spawns:
+        - { id: 2, quantity: 1 }
+        - { id: 3, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 369.12, y: 24.3334, z: 1683.351 }
+        - { x: 385.893, y: 26.3334, z: 1698.482 }
+      spawns:
+        - { id: 1, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 400.279, y: 23.5465, z: 1676.192 }
+        - { x: 417.08, y: 25.5465, z: 1693.231 }
+      spawns:
+        - { id: 2, quantity: 1 }
+        - { id: 3, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 185.955, y: 13.39958, z: 1431.492 }
+        - { x: 195.36, y: 15.39958, z: 1445.54 }
+      spawns:
+        - { id: 2, quantity: 2 }
+        - { id: 3, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 162.601, y: 7.10871, z: 1492.858 }
+        - { x: 174.615, y: 9.10871, z: 1502.909 }
+      spawns:
+        - { id: 3, quantity: 2 }
+        - { id: 2, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 179.714, y: 15.10524, z: 1402.389 }
+        - { x: 196.977, y: 17.10524, z: 1418.813 }
+      spawns:
+        - { id: 2, quantity: 2 }
+        - { id: 3, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 137.648, y: 14.05926, z: 1388.249 }
+        - { x: 155.854, y: 16.05927, z: 1404.233 }
+      spawns:
+        - { id: 3, quantity: 2 }
+        - { id: 2, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 138.537, y: 7.119996, z: 1492.959 }
+        - { x: 156.443, y: 9.119995, z: 1504.068 }
+      spawns:
+        - { id: 2, quantity: 2 }
+        - { id: 3, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 186.151, y: 11.02422, z: 1456.349 }
+        - { x: 193.41, y: 13.02422, z: 1489.532 }
+      spawns:
+        - { id: 3, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 178.149, y: 18.69625, z: 1373.552 }
+        - { x: 199.28, y: 20.69625, z: 1392.355 }
+      spawns:
+        - { id: 2, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 127.039, y: 16.15899, z: 1546.323 }
+        - { x: 152.162, y: 18.15899, z: 1565.04 }
+      spawns:
+        - { id: 1, quantity: 4 }
+  - spawn:
+      area:
+        - { x: 408.895, y: 30.11578, z: 1492.753 }
+        - { x: 429.637, y: 32.11578, z: 1510.305 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 375.551, y: 26.83999, z: 1492.203 }
+        - { x: 391.716, y: 28.83999, z: 1506.562 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 405.708, y: 26.79654, z: 1451.33 }
+        - { x: 422.712, y: 28.79654, z: 1470.123 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 394.957, y: 26.85032, z: 1422.076 }
+        - { x: 409.489, y: 28.85032, z: 1440.033 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 408.569, y: 27.0672, z: 1370.298 }
+        - { x: 431.321, y: 29.0672, z: 1392.106 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 331.624, y: 26.9563, z: 1346.167 }
+        - { x: 348.057, y: 28.9563, z: 1364.389 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 320.467, y: 27.0318, z: 1367.852 }
+        - { x: 339.525, y: 29.0318, z: 1385.354 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 368.338, y: 27.23941, z: 1355.224 }
+        - { x: 389.593, y: 29.23941, z: 1376.464 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 400.703, y: 27.90173, z: 1337.228 }
+        - { x: 418.107, y: 29.90173, z: 1349.781 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 448.995, y: 27.88417, z: 1321.672 }
+        - { x: 472.475, y: 29.88417, z: 1337.688 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 444.609, y: 27.03102, z: 1363.35 }
+        - { x: 469.744, y: 29.03102, z: 1380.85 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 400.822, y: 23.91999, z: 1645.062 }
+        - { x: 415.661, y: 25.91999, z: 1657.307 }
+      spawns:
+        - { id: 2, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 503.778, y: 23.17404, z: 1514.473 }
+        - { x: 519.386, y: 25.17404, z: 1526.991 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 506.267, y: 23.73054, z: 1487.346 }
+        - { x: 524.239, y: 25.73054, z: 1503.833 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 511.163, y: 22.05337, z: 1444.115 }
+        - { x: 526.592, y: 24.05337, z: 1476.99 }
+      spawns:
+        - { id: 5, quantity: 2 }
+        - { id: 6, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 587.613, y: 21.03604, z: 1446.319 }
+        - { x: 611.716, y: 23.03604, z: 1460.23 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 541.013, y: 18.17232, z: 1426.335 }
+        - { x: 557.942, y: 20.17232, z: 1445.154 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 547.664, y: 16.9948, z: 1469.157 }
+        - { x: 573.39, y: 18.9948, z: 1485.431 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 647.233, y: 29.29043, z: 1448.108 }
+        - { x: 683.334, y: 31.29043, z: 1452.959 }
+      spawns:
+        - { id: 2004, quantity: 2 }
+        - { id: 2006, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 716.093, y: 32.99211, z: 1436.162 }
+        - { x: 735.543, y: 34.99211, z: 1454.335 }
+      spawns:
+        - { id: 2004, quantity: 2 }
+        - { id: 2006, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 600.545, y: 15.63791, z: 1415.275 }
+        - { x: 616.61, y: 17.63791, z: 1440.502 }
+      spawns:
+        - { id: 2001, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 579.454, y: 18.56264, z: 1398.911 }
+        - { x: 605.301, y: 20.56264, z: 1412.047 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 553.86, y: 11.48436, z: 1396.792 }
+        - { x: 574.552, y: 13.48436, z: 1413.714 }
+      spawns:
+        - { id: 2001, quantity: 1 }
+        - { id: 7, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 725.743, y: 34.56227, z: 1395.91 }
+        - { x: 736.582, y: 36.56227, z: 1413.57 }
+      spawns:
+        - { id: 2004, quantity: 2 }
+        - { id: 2006, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 673.799, y: 18.4282, z: 1384.726 }
+        - { x: 693.282, y: 20.4282, z: 1402.682 }
+      spawns:
+        - { id: 2004, quantity: 2 }
+        - { id: 2006, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 731.784, y: 34.19433, z: 1374.345 }
+        - { x: 749.879, y: 36.19433, z: 1390.753 }
+      spawns:
+        - { id: 2004, quantity: 2 }
+        - { id: 2006, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 731.57, y: 34.98984, z: 1350.202 }
+        - { x: 753.108, y: 36.98984, z: 1364.166 }
+      spawns:
+        - { id: 2004, quantity: 2 }
+        - { id: 2006, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 673.548, y: 23.42719, z: 1363.411 }
+        - { x: 695.68, y: 25.42719, z: 1381.852 }
+      spawns:
+        - { id: 2006, quantity: 2 }
+        - { id: 2004, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 592.687, y: 10.73887, z: 1372.369 }
+        - { x: 605.328, y: 12.73887, z: 1384.534 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 558.5275, y: 11.26572, z: 1368.613 }
+        - { x: 583.0055, y: 13.26572, z: 1389.283 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 601.788, y: 20.5047, z: 1353.038 }
+        - { x: 615.723, y: 22.5047, z: 1368.851 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 635.923, y: 16.85447, z: 1344.566 }
+        - { x: 658.834, y: 18.85447, z: 1360.098 }
+      spawns:
+        - { id: 2001, quantity: 2 }
+        - { id: 7, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 466.462, y: 19.76308, z: 1263.714 }
+        - { x: 497.845, y: 21.76308, z: 1285.888 }
+      spawns:
+        - { id: 9, quantity: 1 }
+        - { id: 12, quantity: 1 }
+        - { id: 0, quantity: 0 }
+  - spawn:
+      area:
+        - { x: 575.209, y: 10.07178, z: 1319.202 }
+        - { x: 590.735, y: 12.07178, z: 1335.837 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 588.572, y: 18.2169, z: 1282.997 }
+        - { x: 619.768, y: 20.2169, z: 1304.608 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 526.378, y: 21.41972, z: 1249.499 }
+        - { x: 557.758, y: 23.41972, z: 1269.479 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 573.558, y: 23.18401, z: 1253.191 }
+        - { x: 614.385, y: 25.18401, z: 1271.701 }
+      spawns:
+        - { id: 12, quantity: 2 }
+        - { id: 9, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 729.538, y: 32.31569, z: 1293.764 }
+        - { x: 754.421, y: 34.31569, z: 1310.865 }
+      spawns:
+        - { id: 9, quantity: 1 }
+        - { id: 12, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 697.294, y: 26.81336, z: 1278.32 }
+        - { x: 722.632, y: 28.81336, z: 1295.966 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 738.098, y: 35.56065, z: 1215.863 }
+        - { x: 766.009, y: 37.56065, z: 1239.092 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 636.773, y: 22.51975, z: 1272.791 }
+        - { x: 657.268, y: 24.51975, z: 1293.938 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 687.63, y: 30.37335, z: 1303.159 }
+        - { x: 710.573, y: 32.37335, z: 1322.857 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 12, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 492.405, y: 23.2107, z: 1384.623 }
+        - { x: 508.993, y: 25.2107, z: 1401.271 }
+      spawns:
+        - { id: 5, quantity: 1 }
+        - { id: 6, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 558.832, y: 13.90204, z: 1218.688 }
+        - { x: 575.409, y: 15.90204, z: 1233.182 }
+      spawns:
+        - { id: 15, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 526.011, y: 21.27062, z: 1219.253 }
+        - { x: 538.686, y: 23.27062, z: 1233.109 }
+      spawns:
+        - { id: 15, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 604.667, y: 7.584516, z: 1196.027 }
+        - { x: 625.595, y: 9.584516, z: 1211.88 }
+      spawns:
+        - { id: 15, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 624.892, y: 20.28775, z: 1224.918 }
+        - { x: 654.032, y: 22.28775, z: 1243.624 }
+      spawns:
+        - { id: 15, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 633.125, y: 6.755373, z: 1190.275 }
+        - { x: 653.866, y: 8.755373, z: 1204.589 }
+      spawns:
+        - { id: 15, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 665.932, y: 3.464854, z: 1179.705 }
+        - { x: 688.617, y: 5.464854, z: 1193.836 }
+      spawns:
+        - { id: 15, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 521.832, y: 9.95408, z: 1179.488 }
+        - { x: 540.052, y: 11.95408, z: 1194.56 }
+      spawns:
+        - { id: 22, quantity: 2 }
+        - { id: 23, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 564.789, y: 5.925605, z: 1176.073 }
+        - { x: 583.808, y: 7.925605, z: 1192.262 }
+      spawns:
+        - { id: 22, quantity: 2 }
+        - { id: 23, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 597.674, y: 5.106791, z: 1177.456 }
+        - { x: 614.336, y: 7.106791, z: 1191.193 }
+      spawns:
+        - { id: 22, quantity: 1 }
+        - { id: 23, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 560.949, y: 10.34381, z: 1159.453 }
+        - { x: 574.954, y: 12.34381, z: 1173.226 }
+      spawns:
+        - { id: 22, quantity: 1 }
+        - { id: 23, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 537.767, y: 7.953628, z: 1162.673 }
+        - { x: 548.567, y: 9.953628, z: 1174.528 }
+      spawns:
+        - { id: 22, quantity: 1 }
+        - { id: 23, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 504.209, y: 11.22518, z: 1185.036 }
+        - { x: 515.645, y: 13.22518, z: 1194.238 }
+      spawns:
+        - { id: 15, quantity: 1 }
+        - { id: 22, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 509.429, y: 12.52701, z: 1167.636 }
+        - { x: 533.074, y: 14.52701, z: 1177.075 }
+      spawns:
+        - { id: 15, quantity: 1 }
+        - { id: 22, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 641.798, y: 1.408316, z: 1142.562 }
+        - { x: 654.03, y: 3.408315, z: 1151.309 }
+      spawns:
+        - { id: 22, quantity: 1 }
+        - { id: 23, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 593.619, y: 0.01158855, z: 1107.134 }
+        - { x: 618.715, y: 2.011589, z: 1113.883 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 525.676, y: 3.689871, z: 1100.416 }
+        - { x: 541.505, y: 5.689871, z: 1112.27 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 544.646, y: 1.576229, z: 1103.222 }
+        - { x: 566.072, y: 3.576229, z: 1109.677 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 543.901, y: 5.085656, z: 1077.675 }
+        - { x: 560.66, y: 7.085656, z: 1093.209 }
+      spawns:
+        - { id: 23, quantity: 2 }
+        - { id: 26, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 563.754, y: 1.655661, z: 1089.496 }
+        - { x: 575.551, y: 3.655661, z: 1098.906 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 639.674, y: 1.862505, z: 1043.795 }
+        - { x: 658.459, y: 3.862505, z: 1061.278 }
+      spawns:
+        - { id: 23, quantity: 2 }
+        - { id: 26, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 610.357, y: 3.931398, z: 1043.811 }
+        - { x: 629.378, y: 5.931398, z: 1061.557 }
+      spawns:
+        - { id: 23, quantity: 2 }
+        - { id: 26, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 614.97, y: 4.437648, z: 1023.132 }
+        - { x: 631.083, y: 6.437648, z: 1036.096 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 658.6, y: 3.250168, z: 1015.077 }
+        - { x: 675.054, y: 5.250167, z: 1027.818 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 637.506, y: 2.726388, z: 1020.159 }
+        - { x: 650.099, y: 4.726388, z: 1031.81 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 685.046, y: 2.470834, z: 1012.969 }
+        - { x: 700.448, y: 4.470834, z: 1023.487 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 716.484, y: 0.6981351, z: 1083.266 }
+        - { x: 728.467, y: 2.698135, z: 1096.376 }
+      spawns:
+        - { id: 23, quantity: 1 }
+        - { id: 26, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 547.755, y: 22.46554, z: 1514.693 }
+        - { x: 574.899, y: 24.46554, z: 1529.436 }
+      spawns:
+        - { id: 9, quantity: 1 }
+        - { id: 12, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 590.493, y: 18.24654, z: 1513.093 }
+        - { x: 622.658, y: 20.24654, z: 1524.106 }
+      spawns:
+        - { id: 9, quantity: 1 }
+        - { id: 12, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 761.315, y: 44.75369, z: 1493.652 }
+        - { x: 798.774, y: 46.75369, z: 1501.388 }
+      spawns:
+        - { id: 9, quantity: 1 }
+        - { id: 12, quantity: 1 }
+        - { id: 0, quantity: 0 }
+  - spawn:
+      area:
+        - { x: 820.487, y: 46.40545, z: 1448.464 }
+        - { x: 836.539, y: 48.40545, z: 1459.963 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 853.63, y: 46.48261, z: 1448.036 }
+        - { x: 874.605, y: 48.48261, z: 1458.173 }
+      spawns:
+        - { id: 19, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 883.774, y: 45.38787, z: 1444.553 }
+        - { x: 908.366, y: 47.38787, z: 1454.727 }
+      spawns:
+        - { id: 19, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 786.422, y: 27.35893, z: 1169.922 }
+        - { x: 806.495, y: 29.35893, z: 1188.535 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 748.883, y: 33.51255, z: 1183.212 }
+        - { x: 772.791, y: 35.51255, z: 1203.37 }
+      spawns:
+        - { id: 19, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 773.41, y: 32.90874, z: 1133.456 }
+        - { x: 793.411, y: 34.90874, z: 1153.111 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 853.57, y: 18.88, z: 1042.788 }
+        - { x: 871.261, y: 20.88, z: 1058.894 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 886.469, y: 31.69201, z: 1014.564 }
+        - { x: 905.98, y: 33.69201, z: 1030.258 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 894.934, y: 40.93634, z: 1270.127 }
+        - { x: 911.928, y: 42.93634, z: 1287.183 }
+      spawns:
+        - { id: 19, quantity: 4 }
+  - spawn:
+      area:
+        - { x: 874.774, y: 38.80814, z: 1349.506 }
+        - { x: 893.841, y: 40.80814, z: 1364.765 }
+      spawns:
+        - { id: 19, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 860.186, y: 43.05116, z: 1302.732 }
+        - { x: 874.195, y: 45.05116, z: 1319.184 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 883.801, y: 41.54849, z: 1250.19 }
+        - { x: 898.606, y: 43.54849, z: 1262.41 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 862.563, y: 42.57969, z: 1213.969 }
+        - { x: 876.513, y: 44.57969, z: 1233.033 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 865.105, y: 41.32854, z: 1179.796 }
+        - { x: 879.845, y: 43.32854, z: 1201.789 }
+      spawns:
+        - { id: 19, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 902.9006, y: 44.88919, z: 1415.572 }
+        - { x: 918.4326, y: 46.88919, z: 1429.319 }
+      spawns:
+        - { id: 24, quantity: 1 }
+        - { id: 2007, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 873.945, y: 43.29747, z: 1397.547 }
+        - { x: 894.926, y: 45.29747, z: 1413.353 }
+      spawns:
+        - { id: 24, quantity: 2 }
+        - { id: 2007, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 864.397, y: 44.9839, z: 1376.416 }
+        - { x: 888.9, y: 46.9839, z: 1389.929 }
+      spawns:
+        - { id: 2007, quantity: 2 }
+        - { id: 24, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 834.666, y: 48.456, z: 1367.323 }
+        - { x: 852.403, y: 50.456, z: 1384.175 }
+      spawns:
+        - { id: 24, quantity: 2 }
+        - { id: 2007, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 821.517, y: 47.24542, z: 1417.708 }
+        - { x: 837.496, y: 49.24542, z: 1429.409 }
+      spawns:
+        - { id: 24, quantity: 2 }
+        - { id: 2007, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 827.007, y: 47.5679, z: 1394.59 }
+        - { x: 852.064, y: 49.5679, z: 1399.202 }
+      spawns:
+        - { id: 24, quantity: 1 }
+        - { id: 2007, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 857.524, y: 46.99, z: 1425.644 }
+        - { x: 871.791, y: 48.99, z: 1435.327 }
+      spawns:
+        - { id: 2007, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 850.774, y: 47.48999, z: 1404.8 }
+        - { x: 861.632, y: 49.48999, z: 1415.396 }
+      spawns:
+        - { id: 2007, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 984.43, y: 45.32375, z: 1434.336 }
+        - { x: 1002.564, y: 47.32375, z: 1450.479 }
+      spawns:
+        - { id: 33, quantity: 1 }
+        - { id: 34, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 960.231, y: 43.84939, z: 1426.038 }
+        - { x: 977.246, y: 45.84939, z: 1441.276 }
+      spawns:
+        - { id: 33, quantity: 1 }
+        - { id: 34, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 968.3, y: 45.00089, z: 1409.855 }
+        - { x: 980.727, y: 47.00089, z: 1421.131 }
+      spawns:
+        - { id: 33, quantity: 1 }
+        - { id: 34, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1003.889, y: 45.38501, z: 1417.882 }
+        - { x: 1018.066, y: 47.38501, z: 1430.572 }
+      spawns:
+        - { id: 33, quantity: 1 }
+        - { id: 34, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1025.619, y: 45.60723, z: 1432.557 }
+        - { x: 1048.346, y: 47.60723, z: 1438.395 }
+      spawns:
+        - { id: 33, quantity: 1 }
+        - { id: 34, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1029.442, y: 47.13003, z: 1403.281 }
+        - { x: 1041.764, y: 49.13003, z: 1418.955 }
+      spawns:
+        - { id: 33, quantity: 2 }
+        - { id: 34, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1038.27, y: 47.3443, z: 1387.138 }
+        - { x: 1055.64, y: 49.3443, z: 1394.486 }
+      spawns:
+        - { id: 33, quantity: 2 }
+        - { id: 34, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 992.824, y: 45.74818, z: 1400.966 }
+        - { x: 1009.735, y: 47.74818, z: 1411.401 }
+      spawns:
+        - { id: 33, quantity: 2 }
+        - { id: 34, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 982.5, y: 46.07418, z: 1387.556 }
+        - { x: 1010.352, y: 48.07418, z: 1397.028 }
+      spawns:
+        - { id: 33, quantity: 2 }
+        - { id: 34, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1015.351, y: 47.01865, z: 1365.813 }
+        - { x: 1040.045, y: 49.01865, z: 1374.022 }
+      spawns:
+        - { id: 33, quantity: 2 }
+        - { id: 34, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 959.7816, y: 45.23999, z: 1363.078 }
+        - { x: 979.0327, y: 47.23999, z: 1376.722 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 934.0009, y: 42.42432, z: 1374.024 }
+        - { x: 951.2119, y: 44.42432, z: 1388.651 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 939.6846, y: 42.84351, z: 1337.739 }
+        - { x: 958.7016, y: 44.84351, z: 1351.945 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 950.5002, y: 42.76871, z: 1308.538 }
+        - { x: 966.5932, y: 44.76871, z: 1323.151 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 972.4719, y: 45.98518, z: 1330.336 }
+        - { x: 988.7409, y: 47.98518, z: 1345.457 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 926.3975, y: 40.60637, z: 1311.585 }
+        - { x: 936.6475, y: 42.60637, z: 1323.905 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 974.7896, y: 44.42773, z: 1303.702 }
+        - { x: 997.5665, y: 46.42773, z: 1317.794 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1003.152, y: 44.53685, z: 1321.912 }
+        - { x: 1022.046, y: 46.53685, z: 1335.562 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 1040.664, y: 41.55594, z: 1298.21 }
+        - { x: 1062.718, y: 43.55594, z: 1315.772 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1049.115, y: 45.04189, z: 1347.298 }
+        - { x: 1072.296, y: 47.04189, z: 1357.303 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 986.6252, y: 45.20921, z: 1355.969 }
+        - { x: 1001.168, y: 47.20921, z: 1368.55 }
+      spawns:
+        - { id: 35, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1022.072, y: 46.36476, z: 1340.448 }
+        - { x: 1039.86, y: 48.36476, z: 1355.309 }
+      spawns:
+        - { id: 35, quantity: 1 }
+        - { id: 36, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1111.137, y: 52.59472, z: 1433.243 }
+        - { x: 1135.348, y: 54.59472, z: 1440.99 }
+      spawns:
+        - { id: 36, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1124.305, y: 53.62478, z: 1405.16 }
+        - { x: 1138.435, y: 55.62478, z: 1416.558 }
+      spawns:
+        - { id: 36, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1104.692, y: 52.32457, z: 1421.709 }
+        - { x: 1138.112, y: 54.32457, z: 1429.792 }
+      spawns:
+        - { id: 36, quantity: 4 }
+  - spawn:
+      area:
+        - { x: 981.399, y: 36.91999, z: 1690.974 }
+        - { x: 994.7, y: 38.91999, z: 1706.998 }
+      spawns:
+        - { id: 9, quantity: 1 }
+        - { id: 16, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 981.568, y: 33.03836, z: 1741.469 }
+        - { x: 1001.806, y: 35.03836, z: 1757.411 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 962.704, y: 36.89166, z: 1649.518 }
+        - { x: 975.315, y: 38.89166, z: 1668.041 }
+      spawns:
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 967.053, y: 38.20579, z: 1566.104 }
+        - { x: 976.71, y: 40.20579, z: 1585.817 }
+      spawns:
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 999.204, y: 44.80861, z: 1532.037 }
+        - { x: 1019.337, y: 46.80861, z: 1548.534 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 994.047, y: 41.87167, z: 1562.456 }
+        - { x: 1012.74, y: 43.87167, z: 1577.791 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 991.889, y: 39.31748, z: 1587.417 }
+        - { x: 1006.821, y: 41.31748, z: 1604.781 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1003.784, y: 44.48396, z: 1499.421 }
+        - { x: 1026.362, y: 46.48396, z: 1517.037 }
+      spawns:
+        - { id: 9, quantity: 2 }
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1033.578, y: 43.10152, z: 1473.622 }
+        - { x: 1064.431, y: 45.10152, z: 1484.759 }
+      spawns:
+        - { id: 10, quantity: 2 }
+        - { id: 16, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 935.077, y: 38.06635, z: 1268.498 }
+        - { x: 956.2199, y: 40.06635, z: 1286.526 }
+      spawns:
+        - { id: 27, quantity: 2 }
+        - { id: 28, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1007.647, y: 41.78482, z: 1293.532 }
+        - { x: 1027.558, y: 43.78482, z: 1308.846 }
+      spawns:
+        - { id: 36, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 967.0298, y: 38.95267, z: 1252.816 }
+        - { x: 988.8808, y: 40.95267, z: 1267.772 }
+      spawns:
+        - { id: 27, quantity: 2 }
+        - { id: 28, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1003.579, y: 39.01304, z: 1259.541 }
+        - { x: 1033.871, y: 41.01304, z: 1265.88 }
+      spawns:
+        - { id: 27, quantity: 2 }
+        - { id: 28, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1058.045, y: 39.16866, z: 1266.078 }
+        - { x: 1078.901, y: 41.16866, z: 1283.257 }
+      spawns:
+        - { id: 27, quantity: 2 }
+        - { id: 28, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1097.032, y: 38.67526, z: 1290.559 }
+        - { x: 1114.73, y: 40.67526, z: 1307.683 }
+      spawns:
+        - { id: 27, quantity: 2 }
+        - { id: 28, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1135.745, y: 40.90389, z: 1285.416 }
+        - { x: 1161.276, y: 42.90389, z: 1307.53 }
+      spawns:
+        - { id: 27, quantity: 2 }
+        - { id: 28, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 962.241, y: 38.08755, z: 992.774 }
+        - { x: 986.581, y: 40.08755, z: 1014.164 }
+      spawns:
+        - { id: 14, quantity: 2 }
+        - { id: 21, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1047.395, y: 20.09306, z: 945.016 }
+        - { x: 1098.64, y: 22.09306, z: 958.471 }
+      spawns:
+        - { id: 14, quantity: 2 }
+        - { id: 21, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1024.019, y: 20.00096, z: 967.868 }
+        - { x: 1048.993, y: 22.00096, z: 989.907 }
+      spawns:
+        - { id: 14, quantity: 2 }
+        - { id: 21, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 994.883, y: 18.01957, z: 941.305 }
+        - { x: 1020.714, y: 20.01957, z: 962.522 }
+      spawns:
+        - { id: 14, quantity: 2 }
+        - { id: 21, quantity: 2 }
+        - { id: 0, quantity: 0 }
+  - spawn:
+      area:
+        - { x: 964.586, y: 31.91335, z: 942.867 }
+        - { x: 990.391, y: 33.91335, z: 961.258 }
+      spawns:
+        - { id: 14, quantity: 2 }
+        - { id: 21, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 937.697, y: 39.55497, z: 970.947 }
+        - { x: 957.107, y: 41.55497, z: 987.647 }
+      spawns:
+        - { id: 14, quantity: 1 }
+        - { id: 21, quantity: 1 }
+        - { id: 0, quantity: 0 }
+  - spawn:
+      area:
+        - { x: 1808.222, y: 17.04, z: 514.605 }
+        - { x: 1827.522, y: 19.04, z: 522.608 }
+      spawns:
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1802.039, y: 17.72, z: 533.476 }
+        - { x: 1813.844, y: 19.72, z: 544.68 }
+      spawns:
+        - { id: 42, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1799.414, y: 13.79646, z: 431.48 }
+        - { x: 1809.612, y: 15.79646, z: 442.633 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1783.693, y: 14.78453, z: 404.781 }
+        - { x: 1793.969, y: 16.78453, z: 415.885 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1769.62, y: 15.3909, z: 433.158 }
+        - { x: 1780.147, y: 17.3909, z: 444.702 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1811.123, y: 13.77999, z: 407.281 }
+        - { x: 1820.717, y: 15.77999, z: 417.497 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1683.066, y: 16.52009, z: 321.167 }
+        - { x: 1695.703, y: 18.52009, z: 333.087 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1707.96, y: 16.4, z: 320.549 }
+        - { x: 1717.575, y: 18.4, z: 328.128 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1681.436, y: 16.37436, z: 341.029 }
+        - { x: 1691.467, y: 18.37436, z: 350.102 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1753.951, y: 16.48, z: 343.885 }
+        - { x: 1765.763, y: 18.48, z: 354.496 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1716.246, y: 16.3718, z: 358.82 }
+        - { x: 1728.55, y: 18.3718, z: 368.872 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1693.78, y: 18.72973, z: 502.326 }
+        - { x: 1701.235, y: 20.72973, z: 510.172 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1706.552, y: 18.31231, z: 518.561 }
+        - { x: 1715.078, y: 20.31231, z: 527.166 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1715.322, y: 18.22005, z: 496.674 }
+        - { x: 1724.597, y: 20.22005, z: 505.791 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1730.01, y: 17.84247, z: 477.482 }
+        - { x: 1742.307, y: 19.84247, z: 489.28 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1616.268, y: 19.90662, z: 545.272 }
+        - { x: 1625.126, y: 21.90662, z: 554.396 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1621.188, y: 20.26248, z: 579.183 }
+        - { x: 1629.814, y: 22.26248, z: 588.586 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1591.865, y: 19.60337, z: 548.692 }
+        - { x: 1601.466, y: 21.60337, z: 558.459 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1596.6, y: 20.04899, z: 581.12 }
+        - { x: 1606.766, y: 22.04899, z: 591.894 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 1824.639, y: 15.61733, z: 329.844 }
+        - { x: 1835.288, y: 17.61733, z: 340.291 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1838.27, y: 16.68864, z: 310.227 }
+        - { x: 1849.427, y: 18.68864, z: 323.33 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1807.601, y: 17.4528, z: 316.76 }
+        - { x: 1816.885, y: 19.4528, z: 326.676 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1941.906, y: 14.2, z: 338.602 }
+        - { x: 1948.753, y: 16.2, z: 346.828 }
+      spawns:
+        - { id: 45, quantity: 3 }
+  - spawn:
+      area:
+        - { x: 1956.117, y: 14.2, z: 330.508 }
+        - { x: 1961.568, y: 16.2, z: 336.686 }
+      spawns:
+        - { id: 42, quantity: 2 }
+        - { id: 43, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 474.36, y: 24.47819, z: 1571.094 }
+        - { x: 486.243, y: 26.47819, z: 1584.79 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 457.232, y: 24.40922, z: 1616.307 }
+        - { x: 467.052, y: 26.40922, z: 1625.176 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 440.073, y: 24.4493, z: 1589.155 }
+        - { x: 451.181, y: 26.4493, z: 1601.398 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 385.917, y: 23.46503, z: 1837.342 }
+        - { x: 395.532, y: 25.46503, z: 1848.355 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 393.059, y: 23.93999, z: 1863.888 }
+        - { x: 402.047, y: 25.93999, z: 1873.837 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 374.289, y: 23.65461, z: 1856.476 }
+        - { x: 382.999, y: 25.65461, z: 1866.266 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 323.193, y: 23.89026, z: 1848.046 }
+        - { x: 330.46, y: 25.89026, z: 1856.079 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 336.973, y: 23.93999, z: 1883.1 }
+        - { x: 346.271, y: 25.93999, z: 1893.164 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 315.056, y: 22.94639, z: 1868.478 }
+        - { x: 322.912, y: 24.94639, z: 1878.134 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 343.735, y: 23.93999, z: 1746.806 }
+        - { x: 354.189, y: 25.93999, z: 1756.561 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 307.984, y: 23.93999, z: 1742.25 }
+        - { x: 318.16, y: 25.93999, z: 1751.158 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 319.177, y: 23.93759, z: 1761.784 }
+        - { x: 329.308, y: 25.93759, z: 1770.973 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 322.718, y: 23.90631, z: 1722.074 }
+        - { x: 331.046, y: 25.90631, z: 1731.671 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 261.747, y: 24.65301, z: 1797.047 }
+        - { x: 266.19, y: 26.65301, z: 1800.702 }
+      spawns:
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 196.18, y: 23.52593, z: 1690.125 }
+        - { x: 204.906, y: 25.52593, z: 1697.942 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 217.786, y: 23.41999, z: 1702.166 }
+        - { x: 225.229, y: 25.41999, z: 1710.388 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 228.036, y: 23.32187, z: 1666.296 }
+        - { x: 239.384, y: 25.32187, z: 1676.359 }
+      spawns:
+        - { id: 40, quantity: 2 }
+        - { id: 41, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 434.245, y: 23.87697, z: 1835.078 }
+        - { x: 442.2259, y: 25.87697, z: 1841.366 }
+      spawns:
+        - { id: 2000, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 456.6424, y: 23.32663, z: 1820.183 }
+        - { x: 464.2471, y: 25.32663, z: 1826.004 }
+      spawns:
+        - { id: 2000, quantity: 1 }
+        - { id: 4, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 476.4686, y: 23.92857, z: 1831.815 }
+        - { x: 485.1602, y: 25.92857, z: 1837.843 }
+      spawns:
+        - { id: 2000, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 491.6705, y: 23.36748, z: 1818.836 }
+        - { x: 498.0918, y: 25.36748, z: 1824.014 }
+      spawns:
+        - { id: 4, quantity: 1 }
+        - { id: 2000, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 512.1675, y: 23.67215, z: 1829.369 }
+        - { x: 520.1312, y: 25.67215, z: 1833.638 }
+      spawns:
+        - { id: 2000, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 513.3116, y: 23.73712, z: 1810.342 }
+        - { x: 521.2686, y: 25.73712, z: 1815.213 }
+      spawns:
+        - { id: 2000, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 534.7587, y: 23.75894, z: 1826.306 }
+        - { x: 541.642, y: 25.75894, z: 1831.378 }
+      spawns:
+        - { id: 4, quantity: 1 }
+        - { id: 2000, quantity: 1 }
+  - spawn:
+      area:
+        - { x: 548.2712, y: 23.76012, z: 1805.902 }
+        - { x: 554.7856, y: 25.76012, z: 1811.692 }
+      spawns:
+        - { id: 2000, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 564.133, y: 23.90431, z: 1822.466 }
+        - { x: 573.5936, y: 25.90431, z: 1828.434 }
+      spawns:
+        - { id: 2000, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 786.0823, y: 18.13805, z: 1789.924 }
+        - { x: 793.1956, y: 20.13805, z: 1794.918 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 780.6275, y: 17.69881, z: 1772.764 }
+        - { x: 788.1427, y: 19.69881, z: 1777.849 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 810.1852, y: 20.78265, z: 1791.435 }
+        - { x: 819, y: 22.78265, z: 1798.894 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 811.6489, y: 18.19368, z: 1772.253 }
+        - { x: 819.6192, y: 20.19368, z: 1777.579 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 837.4327, y: 22.14636, z: 1791.794 }
+        - { x: 845.1498, y: 24.14636, z: 1798.859 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 843.6982, y: 19.64027, z: 1768.794 }
+        - { x: 853.97, y: 21.64027, z: 1775.954 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 867.945, y: 19.08246, z: 1761.178 }
+        - { x: 876.1232, y: 21.08246, z: 1766.832 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 870.5576, y: 18.95285, z: 1784.459 }
+        - { x: 879.7011, y: 20.95285, z: 1790.703 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 904.4678, y: 19.09698, z: 1784.124 }
+        - { x: 912.5686, y: 21.09698, z: 1790.311 }
+      spawns:
+        - { id: 4, quantity: 2 }
+  - spawn:
+      area:
+        - { x: 897.5891, y: 21.41334, z: 1761.794 }
+        - { x: 907.351, y: 23.41334, z: 1768.043 }
+      spawns:
+        - { id: 4, quantity: 2 }

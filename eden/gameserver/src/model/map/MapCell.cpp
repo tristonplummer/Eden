@@ -104,7 +104,11 @@ const std::vector<std::shared_ptr<MapCell>>& MapCell::neighbours()
     {
         for (auto column = minColumn; column < maxColumn; column++)
         {
-            neighbours_.push_back(map_.getCell(row, column));
+            auto cell = map_.getCell(row, column);
+            if (cell)
+            {
+                neighbours_.push_back(cell);
+            }
         }
     }
 

@@ -1,5 +1,10 @@
 #pragma once
 #include <shaiya/game/Forward.hpp>
+#include <shaiya/game/model/actor/combat/hit/Hit.hpp>
+#include <shaiya/game/model/actor/combat/strategy/CombatStrategy.hpp>
+
+#include <chrono>
+#include <vector>
 
 namespace shaiya::game
 {
@@ -21,7 +26,7 @@ namespace shaiya::game
          * @param victim    The victim actor.
          * @return          If an attack was attempted.
          */
-        bool attack(std::shared_ptr<Actor> victim);
+        bool attack(const std::shared_ptr<Actor>& victim);
 
         /**
          * Checks if our combatant can attack a victim.
@@ -47,10 +52,28 @@ namespace shaiya::game
         void reset();
 
         /**
+         * Get the hit queue of this combat builder.
+         * @return  The hits.
+         */
+        [[nodiscard]] const std::vector<Hit>& hits() const
+        {
+            return hitQueue_;
+        }
+
+        /**
          * Checks if our combatant is in combat.
          * @return  If the combatant is in combat.
          */
         [[nodiscard]] bool inCombat() const;
+
+        /**
+         * Gets the victim of this combat builder.
+         * @return  The victim.
+         */
+        [[nodiscard]] const std::shared_ptr<Actor>& victim() const
+        {
+            return victim_;
+        }
 
     private:
         /**
@@ -59,8 +82,23 @@ namespace shaiya::game
         Actor& combatant_;
 
         /**
-         * The victim that the target is engaged in
+         * The victim that the target is engaged in.
          */
         std::shared_ptr<Actor> victim_;
+
+        /**
+         * The combat strategy used by this combat builder.
+         */
+        std::unique_ptr<CombatStrategy> strategy_;
+
+        /**
+         * The vector of hits that were performed
+         */
+        std::vector<Hit> hitQueue_;
+
+        /**
+         * The next time that an actor can perform an attack.
+         */
+        std::chrono::steady_clock::time_point nextAttackTime_{ std::chrono::steady_clock::now() };
     };
 }

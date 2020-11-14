@@ -24,6 +24,10 @@ using namespace shaiya::game;
 void ParallelClientSynchronizer::synchronize(std::vector<std::shared_ptr<Player>> players, const EntityContainer<Npc>& npcs,
                                              const EntityContainer<Mob>& mobs)
 {
+    // Tick each character
+    std::for_each(std::execution::par_unseq, players.begin(), players.end(),
+                  [&](std::shared_ptr<Player>& player) { player->tick(); });
+
     // Run the synchroniser for each character, in parallel.
     std::for_each(std::execution::par_unseq, players.begin(), players.end(),
                   [&](std::shared_ptr<Player>& character) { syncCharacter(*character); });

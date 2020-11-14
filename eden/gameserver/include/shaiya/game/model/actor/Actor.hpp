@@ -2,6 +2,7 @@
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/model/Entity.hpp>
 #include <shaiya/game/model/actor/StatSet.hpp>
+#include <shaiya/game/model/actor/combat/AttackSpeed.hpp>
 #include <shaiya/game/model/actor/combat/CombatBuilder.hpp>
 #include <shaiya/game/model/actor/movement/MovementQueue.hpp>
 #include <shaiya/game/model/item/container/EquipmentContainer.hpp>
@@ -66,6 +67,15 @@ namespace shaiya::game
          * active buffs and worn equipment.
          */
         void syncStats();
+
+        /**
+         * Gets the attack speed of this actor.
+         * @return  The attack speed.
+         */
+        AttackSpeed attackSpeed() const
+        {
+            return attackSpeed_;
+        }
 
         /**
          * Gets the stats for this actor.
@@ -135,6 +145,15 @@ namespace shaiya::game
          * @return  The combat builder.
          */
         [[nodiscard]] CombatBuilder& combat()
+        {
+            return combat_;
+        }
+
+        /**
+         * Gets the combat builder of the actor.
+         * @return  The combat builder.
+         */
+        [[nodiscard]] const CombatBuilder& combat() const
         {
             return combat_;
         }
@@ -220,6 +239,11 @@ namespace shaiya::game
          * The combat builder of the actor.
          */
         CombatBuilder combat_;
+
+        /**
+         * The attack speed of the actor.
+         */
+        AttackSpeed attackSpeed_{ AttackSpeed::Normal };
 
         /**
          * The movement queue of the actor.

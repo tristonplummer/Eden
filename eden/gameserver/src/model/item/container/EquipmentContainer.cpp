@@ -16,6 +16,17 @@ EquipmentContainer::EquipmentContainer(): ItemContainer(EquipmentCapacity)
 }
 
 /**
+ * Gets the item at a specific page and slot
+ * @param page  The page
+ * @param slot  The slot
+ * @return      The item at the requested position
+ */
+std::shared_ptr<Item> EquipmentContainer::at(EquipmentSlot slot) const
+{
+    return ItemContainer::at(static_cast<size_t>(slot));
+}
+
+/**
  * Adds an item to this container.
  * @param item  The item to add.
  * @return      If the item was successfully added.

@@ -46,11 +46,6 @@ namespace shaiya::net
         uint16_t durability{ 0 };
 
         /**
-         * TODO: Refactor this
-         */
-        VariableString<23> unknown;
-
-        /**
          * If this item is dyed.
          */
         bool dyed{ false };
@@ -58,7 +53,13 @@ namespace shaiya::net
         /**
          * TODO: Refactor this.
          */
-        VariableString<26> unk;
+        uint16_t unknown1{};
+        uint32_t unknown2{};
+        uint32_t unknown3{};
+        uint32_t unknown4{};
+        uint32_t unknown5{};
+        uint32_t unknown6{};
+        VariableString<27> unk;
 
         /**
          * The type ids of the lapis that are socketed into this item.
@@ -121,5 +122,7 @@ namespace shaiya::net
          * The item at the destination position.
          */
         CharacterMoveItemUnit destination;
+
+        uint32_t unknown{};
     } PACKED;
 }

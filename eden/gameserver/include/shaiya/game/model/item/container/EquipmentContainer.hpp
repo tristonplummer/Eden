@@ -16,6 +16,14 @@ namespace shaiya::game
         explicit EquipmentContainer();
 
         /**
+         * Gets the item at a specific page and slot
+         * @param page  The page
+         * @param slot  The slot
+         * @return      The item at the requested position
+         */
+        [[nodiscard]] std::shared_ptr<Item> at(EquipmentSlot slot) const;
+
+        /**
          * Adds an item to this container.
          * @param item  The item to add.
          * @return      If the item was successfully added.

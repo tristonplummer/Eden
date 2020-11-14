@@ -60,6 +60,12 @@ namespace shaiya::game
         void updateMovementState(const Player& other);
 
         /**
+         * Updates the combat state of a player.
+         * @param other The player to update.
+         */
+        void updateCombat(const Player& other);
+
+        /**
          * Updates the chat of a character, for the other character.
          * @param other The character to update.
          */

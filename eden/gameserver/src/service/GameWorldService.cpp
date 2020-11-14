@@ -54,7 +54,8 @@ void GameWorldService::tick(size_t tickRate)
     {
         // The time we should sleep until, for the next tick
         auto nextTick = steady_clock::now() + milliseconds(tickRate);
-        
+        auto start    = steady_clock::now();
+
         // Finalise the registration and unregistrations for characters
         finaliseRegistrations();
         finaliseUnregistrations();
@@ -73,7 +74,10 @@ void GameWorldService::tick(size_t tickRate)
         synchronizer_->synchronize(players_, npcs_, mobs_);
 
         // The current time
-        auto now = steady_clock::now();
+        auto now  = steady_clock::now();
+        auto diff = (now - start);
+        // LOG(INFO) << "Tick took " << duration_cast<milliseconds>(diff).count();
+
         if (now >= nextTick)
         {
             auto difference = duration_cast<milliseconds>(now - nextTick);

@@ -34,7 +34,6 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
     // Set the current and max health of the mob
     stats().setBase(Stat::MaxHealth, def.hitpoints);
     stats().sync();
-
     stats().setHitpoints(def.hitpoints);
 }
 
@@ -66,7 +65,10 @@ void Mob::tick()
 
         // Engage the target in combat
         if (target)
+        {
             combat().attack(target);
+            movement().follow(target);
+        }
     }
 }
 

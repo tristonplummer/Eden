@@ -1,4 +1,5 @@
 #include <shaiya/common/net/packet/Packet.hpp>
+#include <shaiya/common/net/packet/game/MobAutoAttack.hpp>
 #include <shaiya/common/net/packet/game/MobEnteredViewport.hpp>
 #include <shaiya/common/net/packet/game/MobLeftViewport.hpp>
 #include <shaiya/common/net/packet/game/MobMovement.hpp>
@@ -68,6 +69,10 @@ void MobSynchronizationTask::processUpdateFlags(const Mob& other)
     // Update movement
     if (other.hasUpdateFlag(UpdateFlag::Movement))
         updateMovement(other);
+
+    // Update combat
+    if (other.hasUpdateFlag(UpdateFlag::Combat))
+        updateCombat(other);
 }
 
 /**
@@ -84,4 +89,30 @@ void MobSynchronizationTask::updateMovement(const Mob& other)
     movement.x       = pos.x();
     movement.z       = pos.z();
     character_.session().write(movement);
+}
+
+/**
+ * Updates the combat state of a mob.
+ * @param other The mob to update.
+ */
+void MobSynchronizationTask::updateCombat(const Mob& other)
+{
+    auto& hits = other.combat().hits();
+
+    for (auto&& hit: hits)
+    {
+        auto& victim                   = hit.victim();
+        auto [hitpoint, mana, stamina] = hit.damage();  // Get the damage values of the hit
+
+        MobAutoAttack attack;
+        attack.status         = hit.missed()
+                                    ? AttackStatus::Miss
+                                    : AttackStatus::Normal;  //(hit.critical() ? AttackStatus::Critical : AttackStatus::Normal);
+        attack.id             = other.id();
+        attack.target         = victim.id();
+        attack.hitpointDamage = hitpoint + 1;
+        attack.manaDamage     = mana;
+        attack.staminaDamage  = stamina;
+        character_.session().write(attack);
+    }
 }

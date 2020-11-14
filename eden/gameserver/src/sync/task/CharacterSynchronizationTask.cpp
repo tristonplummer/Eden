@@ -4,10 +4,11 @@
 #include <shaiya/common/net/packet/game/CharacterEnteredViewport.hpp>
 #include <shaiya/common/net/packet/game/CharacterLeftViewport.hpp>
 #include <shaiya/common/net/packet/game/CharacterMovement.hpp>
-#include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/common/net/packet/game/PlayerAutoAttack.hpp>
 #include <shaiya/game/model/EntityType.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/item/Item.hpp>
+#include <shaiya/game/net/GameSession.hpp>
 #include <shaiya/game/sync/task/CharacterSynchronizationTask.hpp>
 
 using namespace shaiya::game;
@@ -97,6 +98,10 @@ void CharacterSynchronizationTask::processUpdateFlags(const Player& other)
     // Update movement for other characters (no reason to update for the current character).
     if (other.hasUpdateFlag(UpdateFlag::Movement) && other.id() != character_.id())
         updateMovement(other);
+
+    // Update combat
+    if (other.hasUpdateFlag(UpdateFlag::Combat))
+        updateCombat(other);
 }
 
 /**
@@ -166,6 +171,31 @@ void CharacterSynchronizationTask::updateMovementState(const Player& other)
     update.id    = other.id();
     update.state = other.movementState();
     character_.session().write(update);
+}
+
+/**
+ * Updates the combat state of a player.
+ * @param other The player to update.
+ */
+void CharacterSynchronizationTask::updateCombat(const Player& other)
+{
+    auto& hits = other.combat().hits();
+
+    for (auto&& hit: hits)
+    {
+        auto& victim                   = hit.victim();
+        auto [hitpoint, mana, stamina] = hit.damage();  // Get the damage values of the hit
+
+        PlayerAutoAttack attack;
+        attack.opcode = victim.type() == EntityType::Mob ? PlayerAutoAttackMobOpcode : PlayerAutoAttackPlayerOpcode;
+        attack.status = hit.missed() ? AttackStatus::Miss : (hit.critical() ? AttackStatus::Critical : AttackStatus::Normal);
+        attack.id     = other.id();
+        attack.target = victim.id();
+        attack.hitpointDamage = hitpoint;
+        attack.manaDamage     = mana;
+        attack.staminaDamage  = stamina;
+        character_.session().write(attack);
+    }
 }
 
 /**

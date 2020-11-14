@@ -47,6 +47,12 @@ namespace shaiya::game
         void updateMovement(const Mob& other);
 
         /**
+         * Updates the combat state of a mob.
+         * @param other The mob to update.
+         */
+        void updateCombat(const Mob& other);
+
+        /**
          * The character we're currently synchronizing.
          */
         Player& character_;

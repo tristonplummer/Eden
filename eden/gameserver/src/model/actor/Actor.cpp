@@ -11,6 +11,7 @@ using namespace shaiya::game;
  */
 Actor::Actor(GameWorldService& world): Entity(world), combat_(*this), movement_(*this)
 {
+    attackSpeed_ = AttackSpeed::Normal;
 }
 
 /**
@@ -44,9 +45,10 @@ void Actor::activate()
 void Actor::tick()
 {
     Entity::tick();
-
     combat().tick();
-    movement().tick();
+
+    if (type() != EntityType::Player)
+        movement().tick();
 }
 
 /**

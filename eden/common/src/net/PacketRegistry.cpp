@@ -15,6 +15,7 @@
 #include <shaiya/common/net/packet/game/CharacterTradeItem.hpp>
 #include <shaiya/common/net/packet/game/GameHandshake.hpp>
 #include <shaiya/common/net/packet/game/MobState.hpp>
+#include <shaiya/common/net/packet/game/PlayerAutoAttack.hpp>
 #include <shaiya/common/net/packet/game/TargetSelectMob.hpp>
 #include <shaiya/common/net/packet/game/XorEncryptionSignal.hpp>
 #include <shaiya/common/net/packet/login/AccountLoginRequest.hpp>
@@ -62,6 +63,8 @@ PacketRegistry::PacketRegistry()
     registerPacketHandler<TradeRemoveItemOpcode>();
     registerPacketHandler<TargetSelectMobOpcode>();
     registerPacketHandler<MobStateOpcode>();
+    registerPacketHandler<PlayerAutoAttackPlayerOpcode>();
+    registerPacketHandler<PlayerAutoAttackMobOpcode>();
 }
 
 /**
