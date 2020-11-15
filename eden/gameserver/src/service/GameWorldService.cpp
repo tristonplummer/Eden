@@ -28,6 +28,9 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t
     mobDefs_          = shaiya::client::MobSData("./data/game/Monster.SData");
     synchronizer_     = std::make_unique<ParallelClientSynchronizer>();
     playerSerializer_ = std::make_unique<DatabasePlayerSerializer>(db_, itemDefs_, worldId);
+
+    // Initialise the mobs container
+    mobs_ = EntityContainer<Mob>(16384);
 }
 
 /**

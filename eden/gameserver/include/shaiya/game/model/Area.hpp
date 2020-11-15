@@ -12,6 +12,11 @@ namespace shaiya::game
     {
     public:
         /**
+         * Default constructor
+         */
+        Area() = default;
+
+        /**
          * Constructs the area.
          * @param bottomLeft    The bottom left position.
          * @param topRight      The top right position.
