@@ -3,6 +3,7 @@
 #include <shaiya/game/io/impl/DatabasePlayerSerializer.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/item/Item.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 
 using namespace shaiya::database;
 using namespace shaiya::game;
@@ -100,11 +101,18 @@ bool DatabasePlayerSerializer::load(Player& player)
         stats.setBase(Stat::Intelligence, row["intelligence"].as<size_t>());
         stats.setBase(Stat::Wisdom, row["wisdom"].as<size_t>());
         stats.setBase(Stat::Luck, row["luck"].as<size_t>());
-        stats.sync();
+
+        // Set the base definition values
+        auto [hitpoints, mana, stamina] = player.world().getBasePlayerDefinition(player.job(), player.level());
+        stats.setBase(Stat::MaxHealth, hitpoints);
+        stats.setBase(Stat::MaxMana, mana);
+        stats.setBase(Stat::MaxStamina, stamina);
+        player.syncStats();
+
+        // Set the current hitpoints/mana/stamina values
         stats.setHitpoints(row["hitpoints"].as<size_t>());
         stats.setMana(row["mana"].as<size_t>());
         stats.setStamina(row["stamina"].as<size_t>());
-
         return true;
     }
     catch (const std::exception& e)

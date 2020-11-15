@@ -40,12 +40,6 @@ Player::Player(GameSession& session, size_t id)
  */
 void Player::init()
 {
-    // Set the base definition values
-    auto [hitpoints, mana, stamina] = world().getBasePlayerDefinition(job(), level());
-    stats().setBase(Stat::MaxHealth, hitpoints);
-    stats().setBase(Stat::MaxMana, mana);
-    stats().setBase(Stat::MaxStamina, stamina);
-
     // Initialise the base actor
     Actor::init();
 
