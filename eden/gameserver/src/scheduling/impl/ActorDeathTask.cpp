@@ -28,7 +28,7 @@ void ActorDeathTask::execute(GameWorldService& world)
     if (actor_.type() == EntityType::Mob)
     {
         Mob& mob = dynamic_cast<Mob&>(actor_);
-        world.schedule(std::make_shared<MobRespawnTask>(mob, 100));
+        world.schedule(std::make_shared<MobRespawnTask>(mob, 200));
     }
 
     stop();

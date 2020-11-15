@@ -126,9 +126,6 @@ void ParallelClientSynchronizer::syncCharacter(Player& player)
             if (std::find_if(observed.begin(), observed.end(), pred) != observed.end())
                 continue;
 
-            // Add the entity to the list of observed entities
-            observed.push_back(entity);
-
             // Inform the relevant task
             if (entity->type() == EntityType::Player)
                 charsTask.addCharacter(dynamic_cast<Player&>(*entity));
@@ -137,7 +134,15 @@ void ParallelClientSynchronizer::syncCharacter(Player& player)
             else if (entity->type() == EntityType::Npc)
                 npcTask.addNpc(dynamic_cast<Npc&>(*entity));
             else if (entity->type() == EntityType::Mob)
-                mobTask.addMob(dynamic_cast<Mob&>(*entity));
+            {
+                auto& mob = dynamic_cast<Mob&>(*entity);
+                if (mob.dead())
+                    continue;
+                mobTask.addMob(mob);
+            }
+
+            // Add the entity to the list of observed entities
+            observed.push_back(entity);
         }
     }
 
