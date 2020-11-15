@@ -3,6 +3,7 @@
 #include <shaiya/common/client/mob/MobSData.hpp>
 #include <shaiya/common/db/DatabaseService.hpp>
 #include <shaiya/game/io/PlayerSerializer.hpp>
+#include <shaiya/game/model/actor/player/definition/BasePlayerDefinition.hpp>
 #include <shaiya/game/model/commands/CommandManager.hpp>
 #include <shaiya/game/model/map/MapRepository.hpp>
 #include <shaiya/game/scheduling/Scheduler.hpp>
@@ -11,6 +12,7 @@
 
 #include <boost/property_tree/ptree.hpp>
 
+#include <map>
 #include <memory>
 #include <mutex>
 #include <queue>
@@ -105,6 +107,14 @@ namespace shaiya::game
         void schedule(std::shared_ptr<ScheduledTask> task);
 
         /**
+         * Gets the base player definition.
+         * @param job   The class.
+         * @param level The level.
+         * @return      The base definition values.
+         */
+        std::tuple<int, int, int> getBasePlayerDefinition(shaiya::ShaiyaClass job, int16_t level) const;
+
+        /**
          * Gets the map repository
          * @return  The map repository
          */
@@ -150,6 +160,12 @@ namespace shaiya::game
         }
 
     private:
+        /**
+         * Loads the base player definitions.
+         * @param path  The path to the config file.
+         */
+        void loadBasePlayerDefinitions(const std::string& path);
+
         /**
          * If this service is running.
          */
@@ -229,5 +245,10 @@ namespace shaiya::game
          * The mutex to be used for locking access to the actor vectors.
          */
         std::mutex mutex_;
+
+        /**
+         * A map of the base player definitions.
+         */
+        std::map<ShaiyaClass, BasePlayerDefinition> basePlayerDefs_;
     };
 }

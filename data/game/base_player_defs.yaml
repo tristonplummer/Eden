@@ -1,0 +1,75 @@
+# The base stats of a class are calculated as (base + (level * delta))
+# For example, a Fighter has a base hitpoints of 178, and a delta of 27
+# To find the health of a Level 60 Fighter, we do: (178 + (60 * 27)) = 1798
+definitions:
+  - definition:
+      class: "Fighter"
+      hitpoints:
+        base: 178
+        delta: 27
+      mana:
+        base: 49
+        delta: 1
+      stamina:
+        base: 117
+        delta: 8
+
+  - definition:
+      class: "Defender"
+      hitpoints:
+        base: 221
+        delta: 29
+      mana:
+        base: 63
+        delta: 2
+      stamina:
+        base: 62
+        delta: 3
+
+  - definition:
+      class: "Ranger"
+      hitpoints:
+        base: 147
+        delta: 23
+      mana:
+        base: 59
+        delta: 1
+      stamina:
+        base: 136
+        delta: 14
+
+  - definition:
+      class: "Archer"
+      hitpoints:
+        base: 153
+        delta: 22
+      mana:
+        base: 66
+        delta: 4
+      stamina:
+        base: 123
+        delta: 12
+
+  - definition:
+      class: "Mage"
+      hitpoints:
+        base: 137
+        delta: 13
+      mana:
+        base: 155
+        delta: 15
+      stamina:
+        base: 58
+        delta: 2
+
+  - definition:
+      class: "Priest"
+      hitpoints:
+        base: 145
+        delta: 15
+      mana:
+        base: 137
+        delta: 13
+      stamina:
+        base: 67
+        delta: 3

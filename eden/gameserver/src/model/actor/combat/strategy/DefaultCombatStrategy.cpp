@@ -28,16 +28,15 @@ constexpr auto DexterityChance = 15.0;
  */
 bool DefaultCombatStrategy::isWithinRange(Actor& combatant, Actor& victim)
 {
-    auto weapon      = combatant.equipment().at(EquipmentSlot::Weapon);
-    auto weaponRange = 0;
+    auto weapon = combatant.equipment().at(EquipmentSlot::Weapon);
+    auto range  = combatant.size();
 
     if (weapon)
     {
-        auto& def   = weapon->definition();
-        weaponRange = def.attackRange;
+        auto& def = weapon->definition();
+        range += def.attackRange;
     }
 
-    auto range = victim.size() + weaponRange;
     return combatant.position().isWithinDistance(victim.position(), range);
 }
 
@@ -49,8 +48,7 @@ bool DefaultCombatStrategy::isWithinRange(Actor& combatant, Actor& victim)
  */
 double DefaultCombatStrategy::calculateDamage(Actor& combatant, Actor& victim)
 {
-    auto& prng = shaiya::Prng::the();
-
+    auto& prng           = shaiya::Prng::the();
     auto& combatantStats = combatant.stats();
     auto& victimStats    = victim.stats();
 

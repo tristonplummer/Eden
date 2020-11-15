@@ -3,12 +3,13 @@
 #include <shaiya/common/net/packet/game/CharacterDetails.hpp>
 #include <shaiya/common/net/packet/game/CharacterMaxHitpoints.hpp>
 #include <shaiya/common/net/packet/game/WorldTime.hpp>
-#include <shaiya/game/net/GameSession.hpp>
-#include <shaiya/game/service/ServiceContext.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/actor/player/request/trade/TradeRequest.hpp>
 #include <shaiya/game/model/item/container/event/EquipmentEventListener.hpp>
 #include <shaiya/game/model/item/container/event/InventoryEventListener.hpp>
+#include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
+#include <shaiya/game/service/ServiceContext.hpp>
 
 using namespace shaiya;
 using namespace shaiya::net;
@@ -39,6 +40,12 @@ Player::Player(GameSession& session, size_t id)
  */
 void Player::init()
 {
+    // Set the base definition values
+    auto [hitpoints, mana, stamina] = world().getBasePlayerDefinition(job(), level());
+    stats().setBase(Stat::MaxHealth, hitpoints);
+    stats().setBase(Stat::MaxMana, mana);
+    stats().setBase(Stat::MaxStamina, stamina);
+
     // Initialise the base actor
     Actor::init();
 

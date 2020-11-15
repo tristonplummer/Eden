@@ -71,6 +71,7 @@ bool DatabasePlayerSerializer::load(Player& player)
         player.setRace(static_cast<ShaiyaRace>(row["race"].as<size_t>()));
         player.setJob(static_cast<ShaiyaClass>(row["class"].as<size_t>()));
         player.setStatpoints(row["statpoints"].as<size_t>());
+        player.setLevel(row["level"].as<size_t>());
 
         // Set the character appearance
         auto& appearance = player.appearance();

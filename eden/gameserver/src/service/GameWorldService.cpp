@@ -13,6 +13,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <yaml-cpp/yaml.h>
 
 using namespace shaiya::game;
 
@@ -36,9 +37,69 @@ GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t
 void GameWorldService::load(boost::property_tree::ptree& config)
 {
     mapRepository_.load(config.get<std::string>("World.MapFilePath"), *this);  // Load the game's maps.
+    loadBasePlayerDefinitions(config.get<std::string>("World.BasePlayerDefsPath"));
 
     // Global tasks
     schedule(std::make_shared<NpcMovementTask>());
+}
+
+/**
+ * Loads the base player definitions.
+ * @param path  The path to the config file.
+ */
+void GameWorldService::loadBasePlayerDefinitions(const std::string& path)
+{
+    auto yaml = YAML::LoadFile(path);
+    for (const auto& node: yaml["definitions"])
+    {
+        auto def = node["definition"];
+        auto job = def["class"].as<std::string>();
+
+        auto hitpoints      = def["hitpoints"];
+        auto baseHitpoints  = hitpoints["base"].as<int>();
+        auto deltaHitpoints = hitpoints["delta"].as<int>();
+
+        auto mana      = def["mana"];
+        auto baseMana  = mana["base"].as<int>();
+        auto deltaMana = mana["delta"].as<int>();
+
+        auto stamina      = def["stamina"];
+        auto baseStamina  = stamina["base"].as<int>();
+        auto deltaStamina = stamina["delta"].as<int>();
+
+        ShaiyaClass jobValue = ShaiyaClass::Fighter;
+        if (job == "Fighter")
+            jobValue = ShaiyaClass::Fighter;
+        else if (job == "Defender")
+            jobValue = ShaiyaClass::Defender;
+        else if (job == "Ranger")
+            jobValue = ShaiyaClass::Ranger;
+        else if (job == "Archer")
+            jobValue = ShaiyaClass::Archer;
+        else if (job == "Mage")
+            jobValue = ShaiyaClass::Mage;
+        else if (job == "Priest")
+            jobValue = ShaiyaClass::Priest;
+        basePlayerDefs_[jobValue] = BasePlayerDefinition{ .hitpoints      = baseHitpoints,
+                                                          .hitpointsDelta = deltaHitpoints,
+                                                          .mana           = baseMana,
+                                                          .manaDelta      = deltaMana,
+                                                          .stamina        = baseStamina,
+                                                          .staminaDelta   = deltaStamina };
+    }
+}
+
+/**
+ * Gets the base player definition.
+ * @param job   The class.
+ * @param level The level.
+ * @return      The base definition.
+ */
+std::tuple<int, int, int> GameWorldService::getBasePlayerDefinition(shaiya::ShaiyaClass job, int16_t level) const
+{
+    auto base = basePlayerDefs_.at(job);
+    return { (base.hitpoints + (base.hitpointsDelta * level)), (base.mana + (base.manaDelta * level)),
+             (base.stamina + (base.staminaDelta * level)) };
 }
 
 /**
