@@ -64,6 +64,11 @@ namespace shaiya::game
         void setMovementSpeed(MovementSpeed speed);
 
         /**
+         * Resets the movement queue.
+         */
+        void reset();
+
+        /**
          * Gets the movement speed of this movement queue.
          * @return  The movement speed.
          */
@@ -91,11 +96,6 @@ namespace shaiya::game
         }
 
     private:
-        /**
-         * Resets the movement queue.
-         */
-        void reset();
-
         /**
          * Creates the route to a destination.
          * @param destination   The destination

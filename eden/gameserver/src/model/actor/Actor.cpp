@@ -1,5 +1,6 @@
 #include <shaiya/game/model/actor/Actor.hpp>
 #include <shaiya/game/model/item/Item.hpp>
+#include <shaiya/game/scheduling/impl/ActorDeathTask.hpp>
 #include <shaiya/game/scheduling/impl/HealthNormalizationTask.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
@@ -24,6 +25,9 @@ void Actor::init()
 
     // Synchronise our stats
     syncStats();
+
+    // Add listeners
+    stats().onSync([&](const StatSet& stats, StatUpdateType type) { onHitpointsStatSync(stats, type); });
 }
 
 /**
@@ -32,6 +36,10 @@ void Actor::init()
 void Actor::activate()
 {
     Entity::activate();
+
+    setDead(false);
+    combat().reset();
+    movement().reset();
 
     // Schedule a health normalization task.
     // What do we do in the event that an actor is deactivated and re-activated before this task executes? Perhaps we need
@@ -45,10 +53,13 @@ void Actor::activate()
 void Actor::tick()
 {
     Entity::tick();
-    combat().tick();
 
-    if (type() != EntityType::Player)
-        movement().tick();
+    if (!dead())
+    {
+        combat().tick();
+        if (type() != EntityType::Player)
+            movement().tick();
+    }
 }
 
 /**
@@ -113,6 +124,19 @@ void Actor::syncStats()
 }
 
 /**
+ * Gets executed when the stats for this character are synchronized.
+ * @param stats     The stats for this character.
+ */
+void Actor::onHitpointsStatSync(const StatSet& stats, StatUpdateType type)
+{
+    if (stats.currentHitpoints() == 0)
+    {
+        setDead(true);
+        world().schedule(std::make_shared<ActorDeathTask>(*this));
+    }
+}
+
+/**
  * Sets the position of this entity.
  * @param position  The position.
  */
@@ -152,4 +176,13 @@ void Actor::setJob(shaiya::ShaiyaClass job)
 void Actor::setLevel(uint16_t level)
 {
     level_ = level;
+}
+
+/**
+ * Sets the death state of this actor.
+ * @param dead  The death state.
+ */
+void Actor::setDead(bool dead)
+{
+    dead_ = dead;
 }

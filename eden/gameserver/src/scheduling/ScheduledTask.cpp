@@ -8,7 +8,8 @@ using namespace shaiya::game;
  */
 ScheduledTask::ScheduledTask(size_t delay)
 {
-    delay_ = delay;
+    delay_  = delay;
+    pulses_ = delay;
 }
 
 /**

@@ -53,6 +53,12 @@ namespace shaiya::game
         void updateCombat(const Mob& other);
 
         /**
+         * Handles the death of a mob.
+         * @param other The mob to update.
+         */
+        void updateDeath(const Mob& other);
+
+        /**
          * The character we're currently synchronizing.
          */
         Player& character_;

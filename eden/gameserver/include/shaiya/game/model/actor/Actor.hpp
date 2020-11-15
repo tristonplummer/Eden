@@ -69,6 +69,12 @@ namespace shaiya::game
         void syncStats();
 
         /**
+         * Sets the death state of this actor.
+         * @param dead  The death state.
+         */
+        void setDead(bool dead);
+
+        /**
          * Gets the attack speed of this actor.
          * @return  The attack speed.
          */
@@ -194,7 +200,22 @@ namespace shaiya::game
             return size_;
         }
 
+        /**
+         * If this actor is dead.
+         * @return  If the actor is dead.
+         */
+        [[nodiscard]] bool dead() const
+        {
+            return dead_;
+        }
+
     protected:
+        /**
+         * Gets executed when the stats for this actor are synchronized.
+         * @param stats     The stats for this actor.
+         */
+        void onHitpointsStatSync(const StatSet& stats, StatUpdateType type);
+
         /**
          * The name of this actor.
          */
@@ -214,6 +235,11 @@ namespace shaiya::game
          * The size of this actor.
          */
         size_t size_{ 1 };
+
+        /**
+         * If this actor is dead.
+         */
+        bool dead_{ false };
 
         /**
          * The faction of this actor.

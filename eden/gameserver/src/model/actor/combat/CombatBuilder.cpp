@@ -39,6 +39,9 @@ bool CombatBuilder::attack(const std::shared_ptr<Actor>& victim)
  */
 bool CombatBuilder::canAttack(const std::shared_ptr<Actor>& victim)
 {
+    if (victim->dead())
+        return false;
+
     if (combatant_.type() == EntityType::Player)
     {
         auto wep = combatant_.equipment().at(EquipmentSlot::Weapon);
@@ -102,15 +105,6 @@ void CombatBuilder::tick()
         }
         else
         {
-            if (combatant_.type() == EntityType::Player)
-            {
-                shaiya::net::PlayerAutoAttack attack;
-                attack.status = shaiya::net::AttackStatus::CannotAttack;
-                attack.id     = combatant_.id();
-                attack.target = victim_ == nullptr ? 0 : victim_->id();
-                dynamic_cast<Player&>(combatant_).session().write(attack);
-            }
-
             reset();
         }
     }

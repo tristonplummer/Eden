@@ -225,6 +225,7 @@ void GameWorldService::registerNpc(std::shared_ptr<Npc> npc)
     // Add the npc to the npc container
     if (npcs_.add(npc))
     {
+        npc->init();
         npc->activate();
     }
 }
@@ -261,6 +262,7 @@ void GameWorldService::registerMob(std::shared_ptr<Mob> mob)
     // Add the mob to the mobs container
     if (mobs_.add(mob))
     {
+        mob->init();
         mob->activate();
     }
 }

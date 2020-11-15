@@ -46,7 +46,7 @@ void NpcMovementTask::execute(GameWorldService& world)
                 continue;
 
             auto mob = std::dynamic_pointer_cast<Mob>(entity);
-            if (mob->combat().inCombat())
+            if (mob->combat().inCombat() || mob->dead())
                 continue;
 
             auto move = prng.percentage(MovementChance);

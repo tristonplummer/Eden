@@ -35,6 +35,8 @@ void HealthNormalizationTask::execute(GameWorldService& world)
     // If the actor is not active, stop this task
     if (!actor_.active())
         return stop();
+    if (actor_.dead())
+        return;
 
     // The actor's stats
     auto& stats = actor_.stats();

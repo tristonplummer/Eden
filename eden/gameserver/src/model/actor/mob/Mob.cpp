@@ -30,11 +30,12 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
 
     // Initialise the level
     level_ = def.level;
+    name_  = def.name.str();
 
     // Set the current and max health of the mob
-    stats().setBase(Stat::MaxHealth, def.hitpoints);
+    stats().setBase(Stat::MaxHealth, def_.hitpoints);
+    stats().setHitpoints(def_.hitpoints);
     stats().sync();
-    stats().setHitpoints(def.hitpoints);
 }
 
 /**
@@ -43,6 +44,11 @@ Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& wor
 void Mob::activate()
 {
     Actor::activate();
+
+    // Set the current and max health of the mob
+    stats().setBase(Stat::MaxHealth, def_.hitpoints);
+    stats().setHitpoints(def_.hitpoints);
+    stats().sync();
 }
 
 /**
@@ -51,6 +57,10 @@ void Mob::activate()
 void Mob::tick()
 {
     Actor::tick();
+
+    // If the mob is dead, don't continue
+    if (dead())
+        return;
 
     // Perform any evading and resetting mob to spawn point if the mob gets too far
     ai::MobResetEvade evade(*this);

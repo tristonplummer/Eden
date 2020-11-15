@@ -1,5 +1,6 @@
 #include <shaiya/common/net/packet/Packet.hpp>
 #include <shaiya/common/net/packet/game/MobAutoAttack.hpp>
+#include <shaiya/common/net/packet/game/MobDeath.hpp>
 #include <shaiya/common/net/packet/game/MobEnteredViewport.hpp>
 #include <shaiya/common/net/packet/game/MobLeftViewport.hpp>
 #include <shaiya/common/net/packet/game/MobMovement.hpp>
@@ -44,10 +45,11 @@ void MobSynchronizationTask::addMob(const Mob& other)
     auto& pos = other.position();
 
     MobEnteredViewport viewport;
-    viewport.id    = other.id();
-    viewport.mobId = other.definition().id;
-    viewport.x     = pos.x();
-    viewport.z     = pos.z();
+    viewport.id        = other.id();
+    viewport.mobId     = other.definition().id;
+    viewport.isRespawn = other.hasUpdateFlag(UpdateFlag::Respawn);
+    viewport.x         = pos.x();
+    viewport.z         = pos.z();
     character_.session().write(viewport);
 }
 
@@ -73,6 +75,10 @@ void MobSynchronizationTask::processUpdateFlags(const Mob& other)
     // Update combat
     if (other.hasUpdateFlag(UpdateFlag::Combat))
         updateCombat(other);
+
+    // Update death
+    if (other.hasUpdateFlag(UpdateFlag::Death))
+        updateDeath(other);
 }
 
 /**
@@ -105,14 +111,23 @@ void MobSynchronizationTask::updateCombat(const Mob& other)
         auto [hitpoint, mana, stamina] = hit.damage();  // Get the damage values of the hit
 
         MobAutoAttack attack;
-        attack.status         = hit.missed()
-                                    ? AttackStatus::Miss
-                                    : AttackStatus::Normal;  //(hit.critical() ? AttackStatus::Critical : AttackStatus::Normal);
-        attack.id             = other.id();
-        attack.target         = victim.id();
-        attack.hitpointDamage = hitpoint + 1;
+        attack.status = hit.missed() ? AttackStatus::Miss : (hit.critical() ? AttackStatus::Critical : AttackStatus::Normal);
+        attack.id     = other.id();
+        attack.target = victim.id();
+        attack.hitpointDamage = hitpoint;
         attack.manaDamage     = mana;
         attack.staminaDamage  = stamina;
         character_.session().write(attack);
     }
+}
+
+/**
+ * Handles the death of a mob.
+ * @param other The mob to update.
+ */
+void MobSynchronizationTask::updateDeath(const Mob& other)
+{
+    MobDeath death;
+    death.id = other.id();
+    character_.session().write(death);
 }
