@@ -98,14 +98,6 @@ void CombatBuilder::tick()
                     combatant_.flagUpdate(UpdateFlag::Combat);
                 }
             }
-            else
-            {
-                reset();
-            }
-        }
-        else
-        {
-            reset();
         }
     }
 
