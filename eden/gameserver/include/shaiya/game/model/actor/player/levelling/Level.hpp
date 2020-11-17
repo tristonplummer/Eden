@@ -26,8 +26,9 @@ namespace shaiya::game
         /**
          * Sets the experience of a player.
          * @param experience    The new experience value.
+         * @returns             If the experience was set.
          */
-        void setExperience(size_t experience);
+        bool setExperience(size_t experience);
 
         /**
          * Adds experience to the player.

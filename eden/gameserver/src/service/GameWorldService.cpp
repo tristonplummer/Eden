@@ -197,6 +197,9 @@ int GameWorldService::getRequiredExperience(shaiya::ShaiyaGameMode mode, uint16_
 int GameWorldService::getTotalExperience(shaiya::ShaiyaGameMode mode, uint16_t level) const
 {
     int sum = 0;
+    if (level <= 0)
+        return sum;
+
     for (auto lvl = 1; lvl <= level; lvl++)
     {
         sum += getRequiredExperience(mode, lvl);

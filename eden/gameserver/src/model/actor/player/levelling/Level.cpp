@@ -37,14 +37,16 @@ void Level::init(ShaiyaGameMode mode, uint16_t level, uint16_t experience)
  * Sets the experience of a player.
  * @param experience    The new experience value.
  */
-void Level::setExperience(size_t experience)
+bool Level::setExperience(size_t experience)
 {
     if (level_ >= maxLevel_)
-        return;
+        return false;
     experience_ = experience;
 
     if (experience_ >= requiredExperience_)
         setLevel(level_ + 1, false);
+
+    return true;
 }
 
 /**
@@ -53,11 +55,12 @@ void Level::setExperience(size_t experience)
  */
 void Level::addExperience(size_t experience)
 {
-    setExperience(experience_ + experience);
-
-    PlayerAddExperience add;
-    add.experience = experience;
-    player_.session().write(add);
+    if (setExperience(experience_ + experience))
+    {
+        PlayerAddExperience add;
+        add.experience = experience;
+        player_.session().write(add);
+    }
 }
 
 /**
@@ -84,15 +87,28 @@ void Level::setLevel(uint16_t level, bool adjustExperience)
 
         player_.setStatpoints(player_.statpoints() + additionalStatpoints);
         player_.setSkillpoints(player_.skillpoints() + additionalSkillpoints);
-
-        baseExperience_     = world_.getTotalExperience(mode_, level_ - 1);
-        requiredExperience_ = world_.getTotalExperience(mode_, level_);
     }
+
+    baseExperience_     = world_.getTotalExperience(mode_, level_ - 1);
+    requiredExperience_ = world_.getTotalExperience(mode_, level_);
 
     if (adjustExperience)
     {
-        experience_ = world_.getTotalExperience(mode_, level_);
+        experience_ = world_.getTotalExperience(mode_, level_ - 1);
     }
+
+    // Set the base definition values
+    auto [hitpoints, mana, stamina] = player_.world().getBasePlayerDefinition(player_.job(), player_.level());
+    auto& stats                     = player_.stats();
+    stats.setBase(Stat::MaxHealth, hitpoints);
+    stats.setBase(Stat::MaxMana, mana);
+    stats.setBase(Stat::MaxStamina, stamina);
+    player_.syncStats();
+
+    // Bring the player to full health/mana/stamina
+    stats.setHitpoints(stats.getTotal(Stat::MaxHealth));
+    stats.setMana(stats.getTotal(Stat::MaxMana));
+    stats.setStamina(stats.getTotal(Stat::MaxStamina));
 
     player_.flagUpdate(UpdateFlag::LevelUp);
 }
