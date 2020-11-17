@@ -1,0 +1,480 @@
+definitions:
+  - definition:
+      level: 1
+      values:
+        - { mode: "Easy",     experience: 70 }
+        - { mode: "Normal",   experience: 100 }
+        - { mode: "Hard",     experience: 200 }
+        - { mode: "Ultimate", experience: 200 }
+
+  - definition:
+      level: 2
+      values:
+        - { mode: "Easy",     experience: 130 }
+        - { mode: "Normal",   experience: 200 }
+        - { mode: "Hard",     experience: 400 }
+        - { mode: "Ultimate", experience: 400 }
+
+  - definition:
+      level: 3
+      values:
+        - { mode: "Easy",     experience: 330 }
+        - { mode: "Normal",   experience: 500 }
+        - { mode: "Hard",     experience: 1000 }
+        - { mode: "Ultimate", experience: 1000 }
+
+  - definition:
+      level: 4
+      values:
+        - { mode: "Easy",     experience: 600 }
+        - { mode: "Normal",   experience: 900 }
+        - { mode: "Hard",     experience: 1800 }
+        - { mode: "Ultimate", experience: 1800 }
+
+  - definition:
+      level: 5
+      values:
+        - { mode: "Easy",     experience: 1000 }
+        - { mode: "Normal",   experience: 1500 }
+        - { mode: "Hard",     experience: 3000 }
+        - { mode: "Ultimate", experience: 3000 }
+
+  - definition:
+      level: 6
+      values:
+        - { mode: "Easy",     experience: 1470 }
+        - { mode: "Normal",   experience: 2200 }
+        - { mode: "Hard",     experience: 4400 }
+        - { mode: "Ultimate", experience: 4400 }
+
+  - definition:
+      level: 7
+      values:
+        - { mode: "Easy",     experience: 2130 }
+        - { mode: "Normal",   experience: 3200 }
+        - { mode: "Hard",     experience: 6400 }
+        - { mode: "Ultimate", experience: 6400 }
+
+  - definition:
+      level: 8
+      values:
+        - { mode: "Easy",     experience: 2930 }
+        - { mode: "Normal",   experience: 4400 }
+        - { mode: "Hard",     experience: 8800 }
+        - { mode: "Ultimate", experience: 8800 }
+
+  - definition:
+      level: 9
+      values:
+        - { mode: "Easy",     experience: 3930 }
+        - { mode: "Normal",   experience: 5900 }
+        - { mode: "Hard",     experience: 11800 }
+        - { mode: "Ultimate", experience: 11800 }
+
+  - definition:
+      level: 10
+      values:
+        - { mode: "Easy",     experience: 5130 }
+        - { mode: "Normal",   experience: 7700 }
+        - { mode: "Hard",     experience: 15400 }
+        - { mode: "Ultimate", experience: 15400 }
+
+  - definition:
+      level: 11
+      values:
+        - { mode: "Easy",     experience: 6600 }
+        - { mode: "Normal",   experience: 9900 }
+        - { mode: "Hard",     experience: 19800 }
+        - { mode: "Ultimate", experience: 19800 }
+
+  - definition:
+      level: 12
+      values:
+        - { mode: "Easy",     experience: 8270 }
+        - { mode: "Normal",   experience: 12400 }
+        - { mode: "Hard",     experience: 24800 }
+        - { mode: "Ultimate", experience: 24800 }
+
+  - definition:
+      level: 13
+      values:
+        - { mode: "Easy",     experience: 10400 }
+        - { mode: "Normal",   experience: 15600 }
+        - { mode: "Hard",     experience: 31200 }
+        - { mode: "Ultimate", experience: 31200 }
+
+  - definition:
+      level: 14
+      values:
+        - { mode: "Easy",     experience: 12870 }
+        - { mode: "Normal",   experience: 19300 }
+        - { mode: "Hard",     experience: 38600 }
+        - { mode: "Ultimate", experience: 38600 }
+
+  - definition:
+      level: 15
+      values:
+        - { mode: "Easy",     experience: 15800 }
+        - { mode: "Normal",   experience: 23700 }
+        - { mode: "Hard",     experience: 47400 }
+        - { mode: "Ultimate", experience: 47400 }
+
+  - definition:
+      level: 16
+      values:
+        - { mode: "Easy",     experience: 19200 }
+        - { mode: "Normal",   experience: 28800 }
+        - { mode: "Hard",     experience: 86400 }
+        - { mode: "Ultimate", experience: 86400 }
+
+  - definition:
+      level: 17
+      values:
+        - { mode: "Easy",     experience: 23070 }
+        - { mode: "Normal",   experience: 34600 }
+        - { mode: "Hard",     experience: 103800 }
+        - { mode: "Ultimate", experience: 103800 }
+
+  - definition:
+      level: 18
+      values:
+        - { mode: "Easy",     experience: 27600 }
+        - { mode: "Normal",   experience: 41400 }
+        - { mode: "Hard",     experience: 124200 }
+        - { mode: "Ultimate", experience: 124200 }
+
+  - definition:
+      level: 19
+      values:
+        - { mode: "Easy",     experience: 32670 }
+        - { mode: "Normal",   experience: 49000 }
+        - { mode: "Hard",     experience: 147000 }
+        - { mode: "Ultimate", experience: 147000 }
+
+  - definition:
+      level: 20
+      values:
+        - { mode: "Easy",     experience: 38400 }
+        - { mode: "Normal",   experience: 57600 }
+        - { mode: "Hard",     experience: 172800 }
+        - { mode: "Ultimate", experience: 172800 }
+
+  - definition:
+      level: 21
+      values:
+        - { mode: "Easy",     experience: 46930 }
+        - { mode: "Normal",   experience: 70400 }
+        - { mode: "Hard",     experience: 211200 }
+        - { mode: "Ultimate", experience: 211200 }
+
+  - definition:
+      level: 22
+      values:
+        - { mode: "Easy",     experience: 56600 }
+        - { mode: "Normal",   experience: 84900 }
+        - { mode: "Hard",     experience: 254700 }
+        - { mode: "Ultimate", experience: 254700 }
+
+  - definition:
+      level: 23
+      values:
+        - { mode: "Easy",     experience: 67730 }
+        - { mode: "Normal",   experience: 101600 }
+        - { mode: "Hard",     experience: 304800 }
+        - { mode: "Ultimate", experience: 304800 }
+
+  - definition:
+      level: 24
+      values:
+        - { mode: "Easy",     experience: 80400 }
+        - { mode: "Normal",   experience: 120600 }
+        - { mode: "Hard",     experience: 361800 }
+        - { mode: "Ultimate", experience: 361800 }
+
+  - definition:
+      level: 25
+      values:
+        - { mode: "Easy",     experience: 94800 }
+        - { mode: "Normal",   experience: 142200 }
+        - { mode: "Hard",     experience: 426600 }
+        - { mode: "Ultimate", experience: 426600 }
+
+  - definition:
+      level: 26
+      values:
+        - { mode: "Easy",     experience: 110930 }
+        - { mode: "Normal",   experience: 166400 }
+        - { mode: "Hard",     experience: 499200 }
+        - { mode: "Ultimate", experience: 499200 }
+
+  - definition:
+      level: 27
+      values:
+        - { mode: "Easy",     experience: 128930 }
+        - { mode: "Normal",   experience: 193400 }
+        - { mode: "Hard",     experience: 580200 }
+        - { mode: "Ultimate", experience: 580200 }
+
+  - definition:
+      level: 28
+      values:
+        - { mode: "Easy",     experience: 149000 }
+        - { mode: "Normal",   experience: 223500 }
+        - { mode: "Hard",     experience: 670500 }
+        - { mode: "Ultimate", experience: 670500 }
+
+  - definition:
+      level: 29
+      values:
+        - { mode: "Easy",     experience: 171200 }
+        - { mode: "Normal",   experience: 256800 }
+        - { mode: "Hard",     experience: 770400 }
+        - { mode: "Ultimate", experience: 770400 }
+
+  - definition:
+      level: 30
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 293600 }
+        - { mode: "Hard",     experience: 880800 }
+        - { mode: "Ultimate", experience: 880800 }
+
+  - definition:
+      level: 31
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 341800 }
+        - { mode: "Hard",     experience: 1103760 }
+        - { mode: "Ultimate", experience: 1367200 }
+
+  - definition:
+      level: 32
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 395100 }
+        - { mode: "Hard",     experience: 1264320 }
+        - { mode: "Ultimate", experience: 1580400 }
+
+  - definition:
+      level: 33
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 454200 }
+        - { mode: "Hard",     experience: 1453440 }
+        - { mode: "Ultimate", experience: 1816800 }
+
+  - definition:
+      level: 34
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 519400 }
+        - { mode: "Hard",     experience: 1662080 }
+        - { mode: "Ultimate", experience: 2077600 }
+
+  - definition:
+      level: 35
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 591200 }
+        - { mode: "Hard",     experience: 1891840 }
+        - { mode: "Ultimate", experience: 2364800 }
+
+  - definition:
+      level: 36
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 669900 }
+        - { mode: "Hard",     experience: 2143680 }
+        - { mode: "Ultimate", experience: 2679600 }
+
+  - definition:
+      level: 37
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 755700 }
+        - { mode: "Hard",     experience: 2418240 }
+        - { mode: "Ultimate", experience: 3022800 }
+
+  - definition:
+      level: 38
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 849200 }
+        - { mode: "Hard",     experience: 2717440 }
+        - { mode: "Ultimate", experience: 3396800 }
+
+  - definition:
+      level: 39
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 950700 }
+        - { mode: "Hard",     experience: 3042240 }
+        - { mode: "Ultimate", experience: 3802800 }
+
+  - definition:
+      level: 40
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 1060500 }
+        - { mode: "Hard",     experience: 3393600 }
+        - { mode: "Ultimate", experience: 4242000 }
+
+  - definition:
+      level: 41
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 1178900 }
+        - { mode: "Hard",     experience: 3772480 }
+        - { mode: "Ultimate", experience: 4715600 }
+
+  - definition:
+      level: 42
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 1306400 }
+        - { mode: "Hard",     experience: 4180480 }
+        - { mode: "Ultimate", experience: 5225600 }
+
+  - definition:
+      level: 43
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 1444100 }
+        - { mode: "Hard",     experience: 4621120 }
+        - { mode: "Ultimate", experience: 5776400 }
+
+  - definition:
+      level: 44
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 1592400 }
+        - { mode: "Hard",     experience: 5095680 }
+        - { mode: "Ultimate", experience: 6369600 }
+
+  - definition:
+      level: 45
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 1751800 }
+        - { mode: "Hard",     experience: 5605760 }
+        - { mode: "Ultimate", experience: 7007200 }
+
+  - definition:
+      level: 46
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 1922800 }
+        - { mode: "Hard",     experience: 7691200 }
+        - { mode: "Ultimate", experience: 9614000 }
+
+  - definition:
+      level: 47
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 2105700 }
+        - { mode: "Hard",     experience: 8422800 }
+        - { mode: "Ultimate", experience: 10528500 }
+
+  - definition:
+      level: 48
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 2301100 }
+        - { mode: "Hard",     experience: 9204400 }
+        - { mode: "Ultimate", experience: 11505500 }
+
+  - definition:
+      level: 49
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 2509300 }
+        - { mode: "Hard",     experience: 10037200 }
+        - { mode: "Ultimate", experience: 12546500 }
+
+  - definition:
+      level: 50
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 5000000 }
+        - { mode: "Hard",     experience: 20000000 }
+        - { mode: "Ultimate", experience: 25000000 }
+
+  - definition:
+      level: 51
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 7650000 }
+        - { mode: "Hard",     experience: 30600000 }
+        - { mode: "Ultimate", experience: 38250000 }
+
+  - definition:
+      level: 52
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 10400000 }
+        - { mode: "Hard",     experience: 41600000 }
+        - { mode: "Ultimate", experience: 52000000 }
+
+  - definition:
+      level: 53
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 14310000 }
+        - { mode: "Hard",     experience: 57240000 }
+        - { mode: "Ultimate", experience: 71550000 }
+
+  - definition:
+      level: 54
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 18900000 }
+        - { mode: "Hard",     experience: 75600000 }
+        - { mode: "Ultimate", experience: 94500000 }
+
+  - definition:
+      level: 55
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 24750000 }
+        - { mode: "Hard",     experience: 99000000 }
+        - { mode: "Ultimate", experience: 123750000 }
+
+  - definition:
+      level: 56
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 31360000 }
+        - { mode: "Hard",     experience: 125440000 }
+        - { mode: "Ultimate", experience: 156800000 }
+
+  - definition:
+      level: 57
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 39900000 }
+        - { mode: "Hard",     experience: 159600000 }
+        - { mode: "Ultimate", experience: 199500000 }
+
+  - definition:
+      level: 58
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 48720000 }
+        - { mode: "Hard",     experience: 194880000 }
+        - { mode: "Ultimate", experience: 243600000 }
+
+  - definition:
+      level: 59
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 59000000 }
+        - { mode: "Hard",     experience: 236000000 }
+        - { mode: "Ultimate", experience: 295000000 }
+
+  - definition:
+      level: 60
+      values:
+        - { mode: "Easy",     experience: 195730 }
+        - { mode: "Normal",   experience: 59000000 }
+        - { mode: "Hard",     experience: 236000000 }
+        - { mode: "Ultimate", experience: 295000000 }

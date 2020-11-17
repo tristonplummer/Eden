@@ -43,7 +43,7 @@ DatabasePlayerSerializer::DatabasePlayerSerializer(DatabaseService& db, shaiya::
     db.prepare(SAVE_CHARACTER_DETAILS,
                "UPDATE gamedata.characters SET map = $3, posX = $4, posY = $5, posZ = $6, statpoints = $7, strength = $8, "
                "dexterity = $9, reaction = $10, intelligence = $11, wisdom = $12, luck = $13, hitpoints = $14, mana = $15, "
-               "stamina = $16 WHERE world = $1 "
+               "stamina = $16, level = $17, experience = $18 WHERE world = $1 "
                "AND charid = $2;");
 }
 
@@ -72,7 +72,13 @@ bool DatabasePlayerSerializer::load(Player& player)
         player.setRace(static_cast<ShaiyaRace>(row["race"].as<size_t>()));
         player.setJob(static_cast<ShaiyaClass>(row["class"].as<size_t>()));
         player.setStatpoints(row["statpoints"].as<size_t>());
-        player.setLevel(row["level"].as<size_t>());
+
+        // Set the player's level and experience
+        auto mode       = static_cast<ShaiyaGameMode>(row["mode"].as<size_t>());
+        auto level      = row["level"].as<size_t>();
+        auto experience = row["experience"].as<size_t>();
+        player.setMode(mode);
+        player.levelling().init(mode, level, experience);
 
         // Set the character appearance
         auto& appearance = player.appearance();
@@ -233,13 +239,15 @@ void DatabasePlayerSerializer::save(Player& player)
         auto& pos = player.position();
 
         // The character's stats
-        auto& stats = player.stats();
+        auto& stats     = player.stats();
+        auto& levelling = player.levelling();
 
         // Save the details
         tx.exec_prepared(SAVE_CHARACTER_DETAILS, worldId_, player.id(), pos.map(), pos.x(), pos.y(), pos.z(),
                          player.statpoints(), stats.getBase(Stat::Strength), stats.getBase(Stat::Dexterity),
                          stats.getBase(Stat::Reaction), stats.getBase(Stat::Intelligence), stats.getBase(Stat::Wisdom),
-                         stats.getBase(Stat::Luck), stats.currentHitpoints(), stats.currentMana(), stats.currentStamina());
+                         stats.getBase(Stat::Luck), stats.currentHitpoints(), stats.currentMana(), stats.currentStamina(),
+                         levelling.level(), levelling.experience());
         tx.commit();
     }
     catch (const std::exception& e)

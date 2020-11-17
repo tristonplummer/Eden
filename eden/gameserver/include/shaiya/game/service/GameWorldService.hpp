@@ -112,7 +112,22 @@ namespace shaiya::game
          * @param level The level.
          * @return      The base definition values.
          */
-        std::tuple<int, int, int> getBasePlayerDefinition(shaiya::ShaiyaClass job, int16_t level) const;
+        [[nodiscard]] std::tuple<int, int, int> getBasePlayerDefinition(shaiya::ShaiyaClass job, int16_t level) const;
+
+        /**
+         * Gets the level definition for a player of a given mode.
+         * @param mode  The game mode.
+         * @return      The max level, the statpoints to add per level, and the skillpoints to add per level.
+         */
+        [[nodiscard]] std::tuple<int, int, int> getPlayerLevelDefinition(shaiya::ShaiyaGameMode mode) const;
+
+        /**
+         * Gets the required experience for a specific game mode and level
+         * @param mode      The game mode.
+         * @param level     The level.
+         * @return          The required experience.
+         */
+        [[nodiscard]] int getRequiredExperience(shaiya::ShaiyaGameMode mode, uint16_t level) const;
 
         /**
          * Gets the map repository
@@ -165,6 +180,18 @@ namespace shaiya::game
          * @param path  The path to the config file.
          */
         void loadBasePlayerDefinitions(const std::string& path);
+
+        /**
+         * Loads the level definitions for players.
+         * @param path  The path to the config file.
+         */
+        void loadPlayerLevelDefinitions(const std::string& path);
+
+        /**
+         * Loads the experience definitions for players.
+         * @param path  The path to the config file.
+         */
+        void loadPlayerExperienceDefinitions(const std::string& path);
 
         /**
          * If this service is running.
@@ -250,5 +277,15 @@ namespace shaiya::game
          * A map of the base player definitions.
          */
         std::map<ShaiyaClass, BasePlayerDefinition> basePlayerDefs_;
+
+        /**
+         * A map of the level definitions.
+         */
+        std::map<ShaiyaGameMode, std::tuple<int, int, int>> playerLevelDefs_;
+
+        /**
+         * A map of the experience definitions.
+         */
+        std::map<int, int> playerExperienceDefs_;
     };
 }

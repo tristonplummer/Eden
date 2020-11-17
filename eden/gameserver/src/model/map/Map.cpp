@@ -234,12 +234,23 @@ std::shared_ptr<Entity> Map::get(Position& pos, size_t id, EntityType type) cons
     auto neighbours = getNeighbouringCells(pos);
     for (auto&& cell: neighbours)
     {
-        for (auto&& entity: cell->entities())
+        if (type == EntityType::Player)
         {
-            if (entity->type() != type)
-                continue;
-            if (entity->id() == id)
-                return std::shared_ptr<Entity>(entity);
+            for (auto&& player: cell->players())
+            {
+                if (player->id() == id)
+                    return std::shared_ptr<Entity>(player);
+            }
+        }
+        else
+        {
+            for (auto&& entity: cell->entities())
+            {
+                if (entity->type() != type)
+                    continue;
+                if (entity->id() == id)
+                    return std::shared_ptr<Entity>(entity);
+            }
         }
     }
     return nullptr;

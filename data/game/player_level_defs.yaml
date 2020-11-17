@@ -1,0 +1,24 @@
+definitions:
+  - definition:
+      mode: "Easy"
+      maxlevel: 30
+      statpoints: 5
+      skillpoints: 3
+
+  - definition:
+      mode: "Normal"
+      maxlevel: 60
+      statpoints: 5
+      skillpoints: 3
+
+  - definition:
+      mode: "Hard"
+      maxlevel: 60
+      statpoints: 7
+      skillpoints: 4
+
+  - definition:
+      mode: "Ultimate"
+      maxlevel: 60
+      statpoints: 9
+      skillpoints: 5

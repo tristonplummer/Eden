@@ -48,7 +48,7 @@ void handleAutoAttack(Session& session, const PlayerAutoAttackRequest& request)
     PlayerAttackStart start;
     game.write(start);
 
-    player->combat().attack(std::move(target));
+    player->combat().attack(target);
 }
 
 /**

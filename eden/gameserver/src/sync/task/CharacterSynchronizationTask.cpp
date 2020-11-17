@@ -4,7 +4,9 @@
 #include <shaiya/common/net/packet/game/CharacterEnteredViewport.hpp>
 #include <shaiya/common/net/packet/game/CharacterLeftViewport.hpp>
 #include <shaiya/common/net/packet/game/CharacterMovement.hpp>
+#include <shaiya/common/net/packet/game/PlayerAddExperience.hpp>
 #include <shaiya/common/net/packet/game/PlayerAutoAttack.hpp>
+#include <shaiya/common/net/packet/game/PlayerLevelUp.hpp>
 #include <shaiya/game/model/EntityType.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/item/Item.hpp>
@@ -102,6 +104,10 @@ void CharacterSynchronizationTask::processUpdateFlags(const Player& other)
     // Update combat
     if (other.hasUpdateFlag(UpdateFlag::Combat))
         updateCombat(other);
+
+    // Update level ups
+    if (other.hasUpdateFlag(UpdateFlag::LevelUp))
+        updateLevelUp(other);
 }
 
 /**
@@ -212,4 +218,27 @@ void CharacterSynchronizationTask::updateChat(const Player& other)
     update.length  = chatMessage.length();
     update.message = chatMessage;
     character_.session().write(update);
+}
+
+/**
+ * Updates a player that has levelled up.
+ * @param other The player to update.
+ */
+void CharacterSynchronizationTask::updateLevelUp(const Player& other)
+{
+    PlayerLevelUp levelup;
+    levelup.id    = other.id();
+    levelup.level = other.level();
+
+    if (other.id() != character_.id())
+    {
+        character_.session().write(levelup);
+        return;
+    }
+
+    levelup.statpoints  = other.statpoints();
+    levelup.skillpoints = other.skillpoints();
+    levelup.prevExp     = other.levelling().experience() - other.levelling().baseExperience();
+    levelup.nextExp     = other.levelling().requiredExperience() + levelup.prevExp;
+    character_.session().write(levelup);
 }

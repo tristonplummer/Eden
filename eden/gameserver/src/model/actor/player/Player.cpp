@@ -25,6 +25,7 @@ Player::Player(GameSession& session, size_t id)
       actionBar_(*this),
       appearance_(*this),
       requestManager_(*this),
+      level_(*this),
       Actor(session.context().getGameWorld())
 {
     // Set this entity type
@@ -56,6 +57,11 @@ void Player::init()
     CharacterDetails details;
     details.statpoints  = statpoints_;
     details.skillpoints = skillpoints_;
+
+    // Write the experience values
+    details.prevExp    = level_.baseExperience();
+    details.currentExp = level_.experience() + details.prevExp;
+    details.nextExp    = level_.requiredExperience() + details.prevExp;
 
     // Write the character's position
     details.x = position().x();
@@ -150,6 +156,15 @@ void Player::onStatSync(const StatSet& stats, StatUpdateType type)
 void Player::setStatpoints(size_t statpoints)
 {
     statpoints_ = statpoints;
+}
+
+/**
+ * Sets the amount of skillpoints for this character.
+ * @param skillpoints    The character's skillpoints.
+ */
+void Player::setSkillpoints(size_t skillpoints)
+{
+    skillpoints_ = skillpoints;
 }
 
 /**

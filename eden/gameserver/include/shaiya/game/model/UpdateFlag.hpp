@@ -16,5 +16,6 @@ namespace shaiya::game
         Combat        = (1u << 6u),
         Death         = (1u << 7u),
         Respawn       = (1u << 8u),
+        LevelUp       = (1u << 9u)
     };
 }

@@ -72,6 +72,12 @@ namespace shaiya::game
         void updateChat(const Player& other);
 
         /**
+         * Updates a player that has levelled up.
+         * @param other The player to update.
+         */
+        void updateLevelUp(const Player& other);
+
+        /**
          * The character we're currently synchronizing.
          */
         Player& character_;

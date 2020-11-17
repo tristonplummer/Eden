@@ -5,6 +5,7 @@
 #include <shaiya/game/model/actor/StatSet.hpp>
 #include <shaiya/game/model/actor/player/ActionBar.hpp>
 #include <shaiya/game/model/actor/player/Appearance.hpp>
+#include <shaiya/game/model/actor/player/levelling/Level.hpp>
 #include <shaiya/game/model/actor/player/request/RequestManager.hpp>
 
 #include <vector>
@@ -52,6 +53,12 @@ namespace shaiya::game
         void setStatpoints(size_t statpoints);
 
         /**
+         * Sets the amount of skillpoints for this character.
+         * @param skillpoints    The character's skillpoints.
+         */
+        void setSkillpoints(size_t skillpoints);
+
+        /**
          * Sets the race for this character.
          * @param race  The race for this character.
          */
@@ -62,6 +69,24 @@ namespace shaiya::game
          * @param position  The position.
          */
         void setPosition(Position position) override;
+
+        /**
+         * Sets the level of the actor.
+         * @param level The level value.
+         */
+        void setLevel(uint16_t level) override
+        {
+            level_.setLevel(level);
+        }
+
+        /**
+         * Sets the game mode of this player.
+         * @param mode  The game mode
+         */
+        void setMode(ShaiyaGameMode mode)
+        {
+            mode_ = mode;
+        }
 
         /**
          * Gets the race of this character.
@@ -136,12 +161,57 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the number of available skill points this character has.
+         * @return  The total available skill points.
+         */
+        [[nodiscard]] uint32_t skillpoints() const
+        {
+            return skillpoints_;
+        }
+
+        /**
          * Gets the request manager for this character.
          * @return  The request manager.
          */
         [[nodiscard]] RequestManager& requests()
         {
             return requestManager_;
+        }
+
+        /**
+         * Gets the game mode of the character.
+         * @return  The game mode.
+         */
+        [[nodiscard]] ShaiyaGameMode mode() const
+        {
+            return mode_;
+        }
+
+        /**
+         * Gets the level of this actor.
+         * @return  The level of the actor.
+         */
+        [[nodiscard]] uint16_t level() const override
+        {
+            return level_.level();
+        }
+
+        /**
+         * Gets the levelling of this player.
+         * @return  The levelling.
+         */
+        Level& levelling()
+        {
+            return level_;
+        }
+
+        /**
+         * Gets the levelling of this player.
+         * @return  The levelling.
+         */
+        [[nodiscard]] const Level& levelling() const
+        {
+            return level_;
         }
 
     private:
@@ -201,6 +271,11 @@ namespace shaiya::game
         ShaiyaRace race_{ ShaiyaRace::Human };
 
         /**
+         * The game mode of this character.
+         */
+        ShaiyaGameMode mode_{ ShaiyaGameMode::Easy };
+
+        /**
          * The appearance of this character.
          */
         Appearance appearance_;
@@ -209,6 +284,11 @@ namespace shaiya::game
          * The request manager for this character.
          */
         RequestManager requestManager_;
+
+        /**
+         * The level of the player.
+         */
+        Level level_;
 
         /**
          * Gets executed when the stats for this character are synchronized.

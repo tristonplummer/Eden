@@ -60,7 +60,7 @@ namespace shaiya::game
          * Sets the level of the actor.
          * @param level The level value.
          */
-        void setLevel(uint16_t level);
+        virtual void setLevel(uint16_t level);
 
         /**
          * Synchronises this actor's stats, by calculating the bonuses from their
@@ -186,7 +186,7 @@ namespace shaiya::game
          * Gets the level of this actor.
          * @return  The level of the actor.
          */
-        [[nodiscard]] uint16_t level() const
+        [[nodiscard]] virtual uint16_t level() const
         {
             return level_;
         }

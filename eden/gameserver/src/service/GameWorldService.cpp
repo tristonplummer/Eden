@@ -41,6 +41,8 @@ void GameWorldService::load(boost::property_tree::ptree& config)
 {
     mapRepository_.load(config.get<std::string>("World.MapFilePath"), *this);  // Load the game's maps.
     loadBasePlayerDefinitions(config.get<std::string>("World.BasePlayerDefsPath"));
+    loadPlayerLevelDefinitions(config.get<std::string>("World.LevelDefsPath"));
+    loadPlayerExperienceDefinitions(config.get<std::string>("World.ExpDefsPath"));
 
     // Global tasks
     schedule(std::make_shared<NpcMovementTask>());
@@ -103,6 +105,88 @@ std::tuple<int, int, int> GameWorldService::getBasePlayerDefinition(shaiya::Shai
     auto base = basePlayerDefs_.at(job);
     return { (base.hitpoints + (base.hitpointsDelta * level)), (base.mana + (base.manaDelta * level)),
              (base.stamina + (base.staminaDelta * level)) };
+}
+
+/**
+ * Loads the level definitions for players.
+ * @param path  The path to the config file.
+ */
+void GameWorldService::loadPlayerLevelDefinitions(const std::string& path)
+{
+    auto yaml = YAML::LoadFile(path);
+    for (const auto& node: yaml["definitions"])
+    {
+        auto def         = node["definition"];
+        auto gameMode    = def["mode"].as<std::string>();
+        auto maxLevel    = def["maxlevel"].as<int>();
+        auto statpoints  = def["statpoints"].as<int>();
+        auto skillpoints = def["skillpoints"].as<int>();
+
+        auto mode = ShaiyaGameMode::Easy;
+        if (gameMode == "Normal")
+            mode = ShaiyaGameMode::Normal;
+        else if (gameMode == "Hard")
+            mode = ShaiyaGameMode::Hard;
+        else if (gameMode == "Ultimate")
+            mode = ShaiyaGameMode::Ultimate;
+
+        playerLevelDefs_[mode] = { maxLevel, statpoints, skillpoints };
+    }
+}
+
+/**
+ * Gets the level definition for a player of a given mode.
+ * @param mode  The game mode.
+ * @return      The max level, the statpoints to add per level, and the skillpoints to add per level.
+ */
+std::tuple<int, int, int> GameWorldService::getPlayerLevelDefinition(shaiya::ShaiyaGameMode mode) const
+{
+    return playerLevelDefs_.at(mode);
+}
+
+/**
+ * Loads the experience definitions for players.
+ * @param path  The path to the config file.
+ */
+void GameWorldService::loadPlayerExperienceDefinitions(const std::string& path)
+{
+    auto yaml = YAML::LoadFile(path);
+    for (const auto& node: yaml["definitions"])
+    {
+        auto def   = node["definition"];
+        auto level = def["level"].as<int>();
+
+        for (const auto& levelDef: def["values"])
+        {
+            auto gameMode   = levelDef["mode"].as<std::string>();
+            auto experience = levelDef["experience"].as<int>();
+
+            auto mode = ShaiyaGameMode::Easy;
+            if (gameMode == "Normal")
+                mode = ShaiyaGameMode::Normal;
+            else if (gameMode == "Hard")
+                mode = ShaiyaGameMode::Hard;
+            else if (gameMode == "Ultimate")
+                mode = ShaiyaGameMode::Ultimate;
+
+            auto idx                   = (level * 1000) + static_cast<int>(mode);
+            playerExperienceDefs_[idx] = experience;
+        }
+    }
+}
+
+/**
+ * Gets the required experience for a specific game mode and level
+ * @param mode      The game mode.
+ * @param level     The level.
+ * @return          The required experience.
+ */
+int GameWorldService::getRequiredExperience(shaiya::ShaiyaGameMode mode, uint16_t level) const
+{
+    auto idx = (level * 1000) + static_cast<int>(mode);
+    if (playerExperienceDefs_.contains(idx))
+        return playerExperienceDefs_.at(idx);
+    return 0;
 }
 
 /**
