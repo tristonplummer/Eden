@@ -89,6 +89,12 @@ namespace shaiya::game
         }
 
         /**
+         * Sends a notice to this player.
+         * @param message   The notice message.
+         */
+        void notice(const std::string& message);
+
+        /**
          * Gets the race of this character.
          * @return  The character's race.
          */

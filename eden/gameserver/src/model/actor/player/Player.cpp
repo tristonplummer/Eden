@@ -2,6 +2,7 @@
 #include <shaiya/common/net/packet/game/CharacterCurrentHitpoints.hpp>
 #include <shaiya/common/net/packet/game/CharacterDetails.hpp>
 #include <shaiya/common/net/packet/game/CharacterMaxHitpoints.hpp>
+#include <shaiya/common/net/packet/game/Notice.hpp>
 #include <shaiya/common/net/packet/game/WorldTime.hpp>
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/actor/player/request/trade/TradeRequest.hpp>
@@ -165,6 +166,19 @@ void Player::setStatpoints(size_t statpoints)
 void Player::setSkillpoints(size_t skillpoints)
 {
     skillpoints_ = skillpoints;
+}
+
+/**
+ * Sends a notice to this player.
+ * @param message   The notice message.
+ */
+void Player::notice(const std::string& message)
+{
+    Notice notice;
+    notice.length  = message.length();
+    notice.message = message;
+
+    session().write(notice);
 }
 
 /**
