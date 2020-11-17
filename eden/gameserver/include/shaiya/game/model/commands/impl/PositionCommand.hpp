@@ -6,7 +6,7 @@ namespace shaiya::game
     /**
      * Represents a command that can be executed by a player.
      */
-    class HeightmapCommand: public Command
+    class PositionCommand: public Command
     {
     public:
         /**
