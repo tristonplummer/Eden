@@ -64,31 +64,31 @@ namespace shaiya::game
          * Removes a ground item from this world.
          * @param item  The ground item instance.
          */
-        void unregisterItem(std::shared_ptr<GroundItem> item);
+        void unregisterItem(const std::shared_ptr<GroundItem>& item);
 
         /**
          * Registers an npc to this world.
          * @param npc  The npc instance.
          */
-        void registerNpc(std::shared_ptr<Npc> npc);
+        void registerNpc(const std::shared_ptr<Npc>& npc);
 
         /**
          * Removes an npc from this world.
          * @param npc  The npc instance.
          */
-        void unregisterNpc(std::shared_ptr<Npc> npc);
+        void unregisterNpc(const std::shared_ptr<Npc>& npc);
 
         /**
          * Registers a mob to this world.
          * @param mob   The mob instance.
          */
-        void registerMob(std::shared_ptr<Mob> mob);
+        void registerMob(const std::shared_ptr<Mob>& mob);
 
         /**
          * Removes a mob from this world.
          * @param mob   The mob instance.
          */
-        void unregisterMob(std::shared_ptr<Mob> mob);
+        void unregisterMob(const std::shared_ptr<Mob>& mob);
 
         /**
          * Finalises the registration of players that are queued to be registered.

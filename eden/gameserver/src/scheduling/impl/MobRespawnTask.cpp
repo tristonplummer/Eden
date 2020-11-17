@@ -1,4 +1,5 @@
 #include <shaiya/game/model/actor/mob/Mob.hpp>
+#include <shaiya/game/model/map/Map.hpp>
 #include <shaiya/game/scheduling/impl/MobRespawnTask.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
@@ -25,10 +26,21 @@ void MobRespawnTask::execute(GameWorldService& world)
 
     if (cycles_ >= 4)
     {
-        mob_.activate();
-        mob_.setDead(false);
-        mob_.flagUpdate(UpdateFlag::Respawn);
-        mob_.setPosition(mob_.spawnArea().randomPoint());
+        auto map = mob_.map();
+        auto pos = mob_.position();
+
+        if (mob_.respawns())
+        {
+            mob_.activate();
+            mob_.setDead(false);
+            mob_.flagUpdate(UpdateFlag::Respawn);
+            mob_.setPosition(mob_.spawnArea().randomPoint());
+        }
+        else
+        {
+            auto mobPtr = map->get<Mob>(pos, mob_.id(), EntityType::Mob);
+            world.unregisterMob(mobPtr);  // I really don't like how I'm doing this right now.
+        }
 
         stop();
     }

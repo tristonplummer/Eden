@@ -302,7 +302,7 @@ void GameWorldService::registerItem(std::shared_ptr<GroundItem> item)
  * Removes a ground item from this world.
  * @param item  The ground item instance.
  */
-void GameWorldService::unregisterItem(std::shared_ptr<GroundItem> item)
+void GameWorldService::unregisterItem(const std::shared_ptr<GroundItem>& item)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
@@ -322,7 +322,7 @@ void GameWorldService::unregisterItem(std::shared_ptr<GroundItem> item)
  * Registers an npc to this world.
  * @param npc  The npc instance.
  */
-void GameWorldService::registerNpc(std::shared_ptr<Npc> npc)
+void GameWorldService::registerNpc(const std::shared_ptr<Npc>& npc)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
@@ -339,7 +339,7 @@ void GameWorldService::registerNpc(std::shared_ptr<Npc> npc)
  * Removes an npc from this world.
  * @param item  The npc instance.
  */
-void GameWorldService::unregisterNpc(std::shared_ptr<Npc> npc)
+void GameWorldService::unregisterNpc(const std::shared_ptr<Npc>& npc)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
@@ -359,7 +359,7 @@ void GameWorldService::unregisterNpc(std::shared_ptr<Npc> npc)
  * Registers a mob to this world.
  * @param mob   The mob instance.
  */
-void GameWorldService::registerMob(std::shared_ptr<Mob> mob)
+void GameWorldService::registerMob(const std::shared_ptr<Mob>& mob)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };
@@ -376,7 +376,7 @@ void GameWorldService::registerMob(std::shared_ptr<Mob> mob)
  * Removes a mob from this world.
  * @param mob   The mob instance.
  */
-void GameWorldService::unregisterMob(std::shared_ptr<Mob> mob)
+void GameWorldService::unregisterMob(const std::shared_ptr<Mob>& mob)
 {
     // Lock the mutex
     std::lock_guard lock{ mutex_ };

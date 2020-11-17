@@ -6,8 +6,6 @@
 #include <shaiya/game/scheduling/impl/MobRespawnTask.hpp>
 #include <shaiya/game/service/GameWorldService.hpp>
 
-#include <glog/logging.h>
-
 using namespace shaiya::game;
 
 /**
@@ -36,10 +34,7 @@ void ActorDeathTask::execute(GameWorldService& world)
         auto player = map->get<Player>(pos, 2, EntityType::Player);
         player->levelling().addExperience(3);
 
-        if (mob.respawns())
-        {
-            world.schedule(std::make_shared<MobRespawnTask>(mob, 200));
-        }
+        world.schedule(std::make_shared<MobRespawnTask>(mob, 200));
     }
 
     stop();
