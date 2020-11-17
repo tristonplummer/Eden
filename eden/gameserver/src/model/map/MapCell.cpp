@@ -92,8 +92,8 @@ const std::vector<std::shared_ptr<MapCell>>& MapCell::neighbours()
         return neighbours_;
 
     // The minimum row and column
-    auto minRow    = row_ - OBSERVABLE_CELL_RADIUS;
-    auto minColumn = column_ - OBSERVABLE_CELL_RADIUS;
+    auto minRow    = std::max(0, (int)row_ - OBSERVABLE_CELL_RADIUS);
+    auto minColumn = std::max(0, (int)column_ - OBSERVABLE_CELL_RADIUS);
 
     // The max row and column
     auto maxRow    = row_ + OBSERVABLE_CELL_RADIUS;
