@@ -3,6 +3,7 @@
 #include <shaiya/game/model/commands/impl/HeightmapCommand.hpp>
 #include <shaiya/game/model/commands/impl/MoveMobCommand.hpp>
 #include <shaiya/game/model/commands/impl/MoveNpcCommand.hpp>
+#include <shaiya/game/model/commands/impl/SetLevelCommand.hpp>
 #include <shaiya/game/model/commands/impl/SpawnItemCommand.hpp>
 #include <shaiya/game/model/commands/impl/SpawnMobCommand.hpp>
 #include <shaiya/game/model/commands/impl/SpawnNpcCommand.hpp>
@@ -26,6 +27,7 @@ CommandManager::CommandManager()
     registerCommand(std::make_shared<MoveNpcCommand>());
     registerCommand(std::make_shared<HeightmapCommand>());
     registerCommand(std::make_shared<MoveMobCommand>());
+    registerCommand(std::make_shared<SetLevelCommand>());
 }
 
 /**
