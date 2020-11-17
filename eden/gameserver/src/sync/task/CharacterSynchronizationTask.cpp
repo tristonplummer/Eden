@@ -11,6 +11,7 @@
 #include <shaiya/game/model/actor/player/Player.hpp>
 #include <shaiya/game/model/item/Item.hpp>
 #include <shaiya/game/net/GameSession.hpp>
+#include <shaiya/game/service/GameWorldService.hpp>
 #include <shaiya/game/sync/task/CharacterSynchronizationTask.hpp>
 
 using namespace shaiya::game;
@@ -238,7 +239,8 @@ void CharacterSynchronizationTask::updateLevelUp(const Player& other)
 
     levelup.statpoints  = other.statpoints();
     levelup.skillpoints = other.skillpoints();
-    levelup.prevExp     = other.levelling().experience() - other.levelling().baseExperience();
-    levelup.nextExp     = other.levelling().requiredExperience() + levelup.prevExp;
+    levelup.prevExp     = other.levelling().experience();
+    levelup.nextExp     = other.levelling().requiredExperience();
+
     character_.session().write(levelup);
 }

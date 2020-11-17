@@ -130,6 +130,13 @@ namespace shaiya::game
         [[nodiscard]] int getRequiredExperience(shaiya::ShaiyaGameMode mode, uint16_t level) const;
 
         /**
+         * Gets the total experience required for a specific game mode's level.
+         * @param level     The level.
+         * @return          The sum of all experience values.
+         */
+        [[nodiscard]] int getTotalExperience(shaiya::ShaiyaGameMode mode, uint16_t level) const;
+
+        /**
          * Gets the map repository
          * @return  The map repository
          */

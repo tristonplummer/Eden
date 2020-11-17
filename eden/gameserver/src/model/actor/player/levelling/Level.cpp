@@ -29,8 +29,8 @@ void Level::init(ShaiyaGameMode mode, uint16_t level, uint16_t experience)
 
     auto [maxLevel, statpoints, skillpoints] = world_.getPlayerLevelDefinition(mode_);
     maxLevel_                                = maxLevel;
-    baseExperience_                          = world_.getRequiredExperience(mode_, level_ - 1);
-    requiredExperience_                      = world_.getRequiredExperience(mode_, level_);
+    baseExperience_                          = world_.getTotalExperience(mode_, level_ - 1);
+    requiredExperience_                      = world_.getTotalExperience(mode_, level_);
 }
 
 /**
@@ -85,13 +85,13 @@ void Level::setLevel(uint16_t level, bool adjustExperience)
         player_.setStatpoints(player_.statpoints() + additionalStatpoints);
         player_.setSkillpoints(player_.skillpoints() + additionalSkillpoints);
 
-        baseExperience_     = world_.getRequiredExperience(mode_, level_ - 1);
-        requiredExperience_ = world_.getRequiredExperience(mode_, level_);
+        baseExperience_     = world_.getTotalExperience(mode_, level_ - 1);
+        requiredExperience_ = world_.getTotalExperience(mode_, level_);
     }
 
     if (adjustExperience)
     {
-        experience_ = world_.getRequiredExperience(mode_, level_);
+        experience_ = world_.getTotalExperience(mode_, level_);
     }
 
     player_.flagUpdate(UpdateFlag::LevelUp);

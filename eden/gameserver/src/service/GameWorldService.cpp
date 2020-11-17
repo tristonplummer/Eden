@@ -190,6 +190,21 @@ int GameWorldService::getRequiredExperience(shaiya::ShaiyaGameMode mode, uint16_
 }
 
 /**
+ * Gets the total experience required for a specific game mode's level.
+ * @param level     The level.
+ * @return          The sum of all experience values.
+ */
+int GameWorldService::getTotalExperience(shaiya::ShaiyaGameMode mode, uint16_t level) const
+{
+    int sum = 0;
+    for (auto lvl = 1; lvl <= level; lvl++)
+    {
+        sum += getRequiredExperience(mode, lvl);
+    }
+    return sum;
+}
+
+/**
  * Handles the main tick of the world.
  * @param tickRate  The tick frequency
  */

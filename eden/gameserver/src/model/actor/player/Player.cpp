@@ -60,8 +60,8 @@ void Player::init()
 
     // Write the experience values
     details.prevExp    = level_.baseExperience();
-    details.currentExp = level_.experience() + details.prevExp;
-    details.nextExp    = level_.requiredExperience() + details.prevExp;
+    details.currentExp = level_.experience();
+    details.nextExp    = level_.requiredExperience();
 
     // Write the character's position
     details.x = position().x();
