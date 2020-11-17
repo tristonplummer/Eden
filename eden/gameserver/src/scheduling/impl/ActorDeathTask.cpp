@@ -36,7 +36,10 @@ void ActorDeathTask::execute(GameWorldService& world)
         auto player = map->get<Player>(pos, 2, EntityType::Player);
         player->levelling().addExperience(3);
 
-        world.schedule(std::make_shared<MobRespawnTask>(mob, 200));
+        if (mob.respawns())
+        {
+            world.schedule(std::make_shared<MobRespawnTask>(mob, 200));
+        }
     }
 
     stop();

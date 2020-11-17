@@ -23,8 +23,9 @@ namespace shaiya::game
          * @param def       The mob definition.
          * @param spawnArea The area that this mob can spawn in.
          * @param world     The game world instance.
+         * @param respawns  If this mob should respawn on death
          */
-        Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world);
+        Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world, bool respawns = true);
 
         /**
          * Activates this actor.
@@ -72,6 +73,15 @@ namespace shaiya::game
             return state;
         }
 
+        /**
+         * If this mob should respawn on death.
+         * @return  If the mob should respawn.
+         */
+        [[nodiscard]] bool respawns() const
+        {
+            return respawns_;
+        }
+
     private:
         /**
          * The definition of this mob.
@@ -82,5 +92,10 @@ namespace shaiya::game
          * The area that this mob can spawn in.
          */
         Area spawnArea_;
+
+        /**
+         * If this mob should respawn on death.
+         */
+        bool respawns_{ true };
     };
 }

@@ -26,7 +26,7 @@ void SpawnMobCommand::execute(Player& player, const std::vector<std::string>& ar
     if (!def)
         return;
 
-    auto mob = std::make_shared<Mob>(*def, Area{ player.position(), player.position() }, world);
+    auto mob = std::make_shared<Mob>(*def, Area{ player.position(), player.position() }, world, false);
     mob->setPosition(player.position());
 
     world.registerMob(mob);

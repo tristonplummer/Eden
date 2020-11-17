@@ -11,9 +11,10 @@ using namespace shaiya::game;
  * @param def       The mob definition.
  * @param spawnArea The area that this mob can spawn in.
  * @param world     The game world instance.
+ * @param respawns  If this mob should respawn on death
  */
-Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world)
-    : Actor(world), def_(def), spawnArea_(spawnArea)
+Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world, bool respawns)
+    : Actor(world), def_(def), spawnArea_(spawnArea), respawns_(respawns)
 {
     type_ = EntityType::Mob;
 
