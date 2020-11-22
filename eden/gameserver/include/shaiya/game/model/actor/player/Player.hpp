@@ -36,6 +36,12 @@ namespace shaiya::game
         void activate() override;
 
         /**
+         * Sets the position for this player.
+         * @param position  The destination.
+         */
+        void setPosition(Position position) override;
+
+        /**
          * Sets the movement state of a character.
          * @param movementState The new movement state.
          */

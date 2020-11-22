@@ -133,9 +133,6 @@ void Entity::setPosition(Position position)
     auto next = maps.forId(position_.map());
     if (next != nullptr)
         next->add(entity);
-
-    // Flag this entity for a movement update
-    flagUpdate(UpdateFlag::Movement);
 }
 
 /**
