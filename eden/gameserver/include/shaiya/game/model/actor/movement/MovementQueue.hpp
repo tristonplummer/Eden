@@ -1,7 +1,6 @@
 #pragma once
 #include <shaiya/game/Forward.hpp>
 #include <shaiya/game/model/actor/Actor.hpp>
-#include <shaiya/game/model/actor/movement/MovementSpeed.hpp>
 
 #include <chrono>
 #include <queue>
@@ -58,24 +57,9 @@ namespace shaiya::game
         void follow(std::shared_ptr<Actor> target);
 
         /**
-         * Sets the movement speed of this movement queue.
-         * @param speed The new speed.
-         */
-        void setMovementSpeed(MovementSpeed speed);
-
-        /**
          * Resets the movement queue.
          */
         void reset();
-
-        /**
-         * Gets the movement speed of this movement queue.
-         * @return  The movement speed.
-         */
-        [[nodiscard]] const MovementSpeed& speed()
-        {
-            return speed_;
-        }
 
         /**
          * If this movement queue is processing waypoints.
@@ -124,11 +108,6 @@ namespace shaiya::game
          * The queue of waypoints.
          */
         std::deque<Position> waypoints_;
-
-        /**
-         * The movement speed
-         */
-        MovementSpeed speed_{};
 
         /**
          * The next time a movement can be made.

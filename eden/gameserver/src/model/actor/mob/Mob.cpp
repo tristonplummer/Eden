@@ -13,25 +13,17 @@ using namespace shaiya::game;
  * @param world     The game world instance.
  * @param respawns  If this mob should respawn on death
  */
-Mob::Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world, bool respawns)
+Mob::Mob(const MobDefinition& def, Area spawnArea, GameWorldService& world, bool respawns)
     : Actor(world), def_(def), spawnArea_(spawnArea), respawns_(respawns)
 {
     type_ = EntityType::Mob;
-
-    // Initialise the movement speed
-    MovementSpeed speed{};
-    speed.walkingInterval = def.walkingInterval;
-    speed.walkingSteps    = def.walkingStep;
-    speed.runningInterval = def.runningInterval;
-    speed.runningSteps    = def.runningStep;
-    movement().setMovementSpeed(speed);
 
     // Initialise the size
     size_ = def.size;
 
     // Initialise the level
     level_ = def.level;
-    name_  = def.name.str();
+    name_  = def.name;
 
     // Set the current and max health of the mob
     stats().setBase(Stat::MaxHealth, def_.hitpoints);

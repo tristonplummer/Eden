@@ -37,6 +37,8 @@ void HealthNormalizationTask::execute(GameWorldService& world)
         return stop();
     if (actor_.dead())
         return;
+    if (actor_.type() != EntityType::Player)
+        return;
 
     // The actor's stats
     auto& stats = actor_.stats();

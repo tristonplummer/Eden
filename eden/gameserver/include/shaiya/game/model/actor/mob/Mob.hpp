@@ -1,8 +1,8 @@
 #pragma once
-#include <shaiya/common/client/mob/MobDefinition.hpp>
 #include <shaiya/common/net/packet/game/MobState.hpp>
 #include <shaiya/game/model/Area.hpp>
 #include <shaiya/game/model/actor/Actor.hpp>
+#include <shaiya/game/model/actor/mob/MobDefinition.hpp>
 
 namespace shaiya::game
 {
@@ -25,7 +25,7 @@ namespace shaiya::game
          * @param world     The game world instance.
          * @param respawns  If this mob should respawn on death
          */
-        Mob(const client::MobDefinition& def, Area spawnArea, GameWorldService& world, bool respawns = true);
+        Mob(const MobDefinition& def, Area spawnArea, GameWorldService& world, bool respawns = true);
 
         /**
          * Activates this actor.
@@ -47,7 +47,7 @@ namespace shaiya::game
          * Gets the definition for this mob.
          * @return  The definition.
          */
-        [[nodiscard]] const client::MobDefinition& definition() const
+        [[nodiscard]] const MobDefinition& definition() const
         {
             return def_;
         }
@@ -86,7 +86,7 @@ namespace shaiya::game
         /**
          * The definition of this mob.
          */
-        const client::MobDefinition& def_;
+        const MobDefinition& def_;
 
         /**
          * The area that this mob can spawn in.

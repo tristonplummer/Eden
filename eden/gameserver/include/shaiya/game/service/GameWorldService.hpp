@@ -7,6 +7,7 @@
 #include <shaiya/game/model/commands/CommandManager.hpp>
 #include <shaiya/game/model/map/MapRepository.hpp>
 #include <shaiya/game/scheduling/Scheduler.hpp>
+#include <shaiya/game/service/MobDefinitionService.hpp>
 #include <shaiya/game/sync/ClientSynchronizer.hpp>
 #include <shaiya/game/util/EntityContainer.hpp>
 
@@ -167,9 +168,9 @@ namespace shaiya::game
          * Gets the mob data.
          * @return  The mob data.
          */
-        [[nodiscard]] const shaiya::client::MobSData& mobDefs() const
+        [[nodiscard]] const MobDefinitionService& mobDefs() const
         {
-            return mobDefs_;
+            return *mobDefs_;
         }
 
         /**
@@ -218,7 +219,7 @@ namespace shaiya::game
         /**
          * The mob definitions.
          */
-        shaiya::client::MobSData mobDefs_;
+        std::unique_ptr<MobDefinitionService> mobDefs_;
 
         /**
          * A vector containing the players that are connected to this game world.

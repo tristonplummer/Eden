@@ -115,7 +115,6 @@ void MovementQueue::createRoute(const Position& destination, size_t radius)
     PathRequest request;
     request.start             = start;
     request.destination       = destination;
-    request.speed             = speed_;
     request.running           = running_;
     request.sourceRadius      = actor_.size();
     request.destinationRadius = radius;
@@ -136,18 +135,7 @@ void MovementQueue::createRoute(const Position& destination, size_t radius)
  */
 std::chrono::milliseconds MovementQueue::movementDelay(const Position& waypoint)
 {
-    // Calculate the distance between the previous position and the waypoint
-    auto prev     = actor_.position();
-    auto distance = std::ceil(prev.getDistance(waypoint));
-
-    // The movement interval and steps
-    float interval = running() ? speed_.runningInterval : speed_.walkingInterval;
-    float steps    = running() ? speed_.runningSteps : speed_.walkingSteps;
-
-    // Calculate how long until the next movement cycle
-    float factor = distance / steps;
-    auto delay   = (int)std::floor(factor * interval);
-    return std::chrono::milliseconds(delay);
+    return std::chrono::milliseconds(1000);
 }
 
 /**
@@ -170,15 +158,6 @@ void MovementQueue::follow(std::shared_ptr<Actor> target)
     runTo(dest, target->size());
 
     target_ = std::move(target);
-}
-
-/**
- * Sets the movement speed of this movement queue.
- * @param speed The new speed.
- */
-void MovementQueue::setMovementSpeed(MovementSpeed speed)
-{
-    speed_ = speed;
 }
 
 /**

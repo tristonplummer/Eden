@@ -8,11 +8,6 @@ using namespace shaiya::game;
 using namespace shaiya::game::ai;
 
 /**
- * The aggression distance.
- */
-constexpr auto AggroDistance = 10;
-
-/**
  * Initialises the AI.
  * @param mob   The mob to operate on.
  */
@@ -45,7 +40,7 @@ std::shared_ptr<Actor> MobSelectNearestTarget::select()
             if (!mob_.combat().canAttack(player))  // If we can't attack the player, skip them entirely
                 continue;
 
-            auto aggroRange = AggroDistance;
+            auto aggroRange = player->size() + mob_.size() + mob_.definition().aggressionRadius;
             if (player->position().isWithinDistance(pos, aggroRange))
                 targets.push_back(player);
         }

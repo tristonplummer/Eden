@@ -1,6 +1,7 @@
 #pragma once
 #include <shaiya/game/model/Position.hpp>
-#include <shaiya/game/model/actor/movement/MovementSpeed.hpp>
+
+#include <cstddef>
 
 namespace shaiya::game
 {
@@ -18,11 +19,6 @@ namespace shaiya::game
          * The destination
          */
         Position destination;
-
-        /**
-         * The movement speed
-         */
-        MovementSpeed speed;
 
         /**
          * The radius of the source actor

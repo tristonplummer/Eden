@@ -25,7 +25,7 @@ using namespace shaiya::game;
 GameWorldService::GameWorldService(shaiya::database::DatabaseService& db, size_t worldId): db_(db)
 {
     itemDefs_         = shaiya::client::ItemSData("./data/game/Item.SData");
-    mobDefs_          = shaiya::client::MobSData("./data/game/Monster.SData");
+    mobDefs_          = std::make_unique<MobDefinitionService>(db_);
     synchronizer_     = std::make_unique<ParallelClientSynchronizer>();
     playerSerializer_ = std::make_unique<DatabasePlayerSerializer>(db_, itemDefs_, worldId);
 
