@@ -101,16 +101,6 @@ void Player::activate()
 }
 
 /**
- * Sets the position for this player.
- * @param position  The destination.
- */
-void Player::setPosition(Position position)
-{
-    Actor::setPosition(position);
-    flagUpdate(UpdateFlag::Movement);
-}
-
-/**
  * Gets executed when the stats for this character are synchronized.
  * @param stats     The stats for this character.
  * @param type      The update type.

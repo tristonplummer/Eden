@@ -19,7 +19,7 @@ Route SimplePathfindingStrategy::calculateRoute(const PathRequest& request)
     auto& dest  = request.destination;
 
     // The number of steps between each waypoint
-    float steps = 3;
+    float steps = 1;
 
     // The distance between the two positions
     auto distance = start.getDistance(dest);

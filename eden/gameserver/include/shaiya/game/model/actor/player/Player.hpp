@@ -71,12 +71,6 @@ namespace shaiya::game
         void setRace(shaiya::ShaiyaRace race);
 
         /**
-         * Sets the position of this entity.
-         * @param position  The position.
-         */
-        void setPosition(Position position) override;
-
-        /**
          * Sets the level of the actor.
          * @param level The level value.
          */

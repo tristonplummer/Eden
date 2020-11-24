@@ -18,13 +18,6 @@ MovementQueue::MovementQueue(Actor& actor): actor_(actor)
  */
 void MovementQueue::tick()
 {
-    using namespace std::chrono;
-
-    // Check if it's time to process a movement tick
-    auto now = steady_clock::now();
-    if (now <= nextMovementTime)
-        return;
-
     // Handle following
     if (target_)
     {
@@ -52,14 +45,8 @@ void MovementQueue::tick()
         waypoints_.pop_front();
     }
 
-    // The movement delay
-    auto delay = movementDelay(waypoint);
-
     // Move to the waypoint
     actor_.setPosition(waypoint);
-
-    // Set the next movement time
-    nextMovementTime = now + delay;
 }
 
 /**

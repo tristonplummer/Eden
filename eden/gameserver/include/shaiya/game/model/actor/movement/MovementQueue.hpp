@@ -71,6 +71,15 @@ namespace shaiya::game
         }
 
         /**
+         * Gets the current waypoint to move to.
+         * @return  The current waypoint.
+         */
+        [[nodiscard]] const Position& currentWaypoint() const
+        {
+            return waypoints_.front();
+        }
+
+        /**
          * If the actor is currently running.
          * @return  If the actor is running
          */
